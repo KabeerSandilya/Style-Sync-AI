@@ -31,7 +31,7 @@ export function EditorNavbar({
           variant="outline"
           size="icon"
           onClick={onSidebarToggle}
-          className="rounded-full border border-border/60 bg-card/60 hover:bg-accent/40 text-foreground transition-all duration-300 flex items-center justify-center shadow-sm"
+          className="rounded-none border border-border/60 bg-card/60 hover:bg-accent/40 text-foreground transition-all duration-300 flex items-center justify-center shadow-sm"
           aria-label={isSidebarOpen ? "Close wardrobe sidebar" : "Open wardrobe sidebar"}
         >
           {isSidebarOpen ? (
@@ -49,7 +49,7 @@ export function EditorNavbar({
             {title}
           </span>
         ) : (
-          <div className="w-16 h-1 bg-border/20 rounded-full" /> /* Visually balanced minimal placeholder */
+          <div className="w-16 h-1 bg-border/20 rounded-none" /> /* Visually balanced minimal placeholder */
         )}
       </div>
 

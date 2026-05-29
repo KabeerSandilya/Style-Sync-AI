@@ -68,7 +68,7 @@
     --border: #ebdcd0;           /* Soft elegant sand border */
     --input: #e8ded6;
     --ring: #849685;             /* Sage ring */
-    --radius: 1.25rem;           /* Premium rounded look */
+    --radius: 0px;           /* Premium sharp look */
     
     --chart-1: #708272;
     --chart-2: #849685;
@@ -106,7 +106,7 @@
     --border: #2c2c27;
     --input: #2c2c27;
     --ring: #9fb2a1;
-    --radius: 1.25rem;
+    --radius: 0px;
     
     --chart-1: #9fb2a1;
     --chart-2: #849685;

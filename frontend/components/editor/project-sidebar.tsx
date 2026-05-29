@@ -52,7 +52,7 @@ export function ProjectSidebar({ isOpen, onClose, onAddClothing }: ProjectSideba
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/80 size-8 transition-colors flex items-center justify-center"
+            className="rounded-none text-muted-foreground hover:text-foreground hover:bg-muted/80 size-8 transition-colors flex items-center justify-center"
             aria-label="Close sidebar"
           >
             <X className="w-4 h-4" />
@@ -62,16 +62,16 @@ export function ProjectSidebar({ isOpen, onClose, onAddClothing }: ProjectSideba
         {/* Navigation Tabs and Content */}
         <div className="flex-1 overflow-hidden p-6 flex flex-col">
           <Tabs defaultValue="wardrobe" className="flex flex-col h-full w-full">
-            <TabsList className="bg-muted/40 border border-border/20 p-1 rounded-full mb-6 w-full grid grid-cols-2">
+            <TabsList className="bg-muted/40 border border-border/20 p-0 rounded-none mb-6 w-full grid grid-cols-2">
               <TabsTrigger
                 value="wardrobe"
-                className="rounded-full text-xs font-medium py-2.5 transition-all data-active:bg-card data-active:text-foreground data-active:shadow-sm"
+                className="rounded-none text-xs font-medium py-3 h-full transition-all data-active:bg-card data-active:text-foreground data-active:shadow-sm"
               >
                 My Wardrobe
               </TabsTrigger>
               <TabsTrigger
                 value="outfits"
-                className="rounded-full text-xs font-medium py-2.5 transition-all data-active:bg-card data-active:text-foreground data-active:shadow-sm"
+                className="rounded-none text-xs font-medium py-3 h-full transition-all data-active:bg-card data-active:text-foreground data-active:shadow-sm"
               >
                 Saved Outfits
               </TabsTrigger>
@@ -82,7 +82,7 @@ export function ProjectSidebar({ isOpen, onClose, onAddClothing }: ProjectSideba
               <TabsContent value="wardrobe" className="h-full flex flex-col outline-none">
                 <ScrollArea className="h-full pr-1">
                   <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
-                    <div className="bg-accent/40 text-primary p-4 rounded-full mb-4">
+                    <div className="bg-accent/40 text-primary p-4 rounded-none mb-4">
                       <Shirt className="w-6 h-6 stroke-[1.5]" />
                     </div>
                     <h3 className="font-serif text-lg font-medium text-foreground tracking-tight">
@@ -98,7 +98,7 @@ export function ProjectSidebar({ isOpen, onClose, onAddClothing }: ProjectSideba
               <TabsContent value="outfits" className="h-full flex flex-col outline-none">
                 <ScrollArea className="h-full pr-1">
                   <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
-                    <div className="bg-accent/40 text-primary p-4 rounded-full mb-4">
+                    <div className="bg-accent/40 text-primary p-4 rounded-none mb-4">
                       <Sparkles className="w-6 h-6 stroke-[1.5]" />
                     </div>
                     <h3 className="font-serif text-lg font-medium text-foreground tracking-tight">
@@ -118,7 +118,7 @@ export function ProjectSidebar({ isOpen, onClose, onAddClothing }: ProjectSideba
         <div className="p-6 border-t border-border/20 bg-card/60 backdrop-blur-xs">
           <Button
             onClick={onAddClothing}
-            className="w-full py-6 rounded-2xl bg-primary text-primary-foreground font-medium tracking-wide flex items-center justify-center gap-2 group shadow-sm hover:shadow transition-all duration-300"
+            className="w-full py-6 rounded-none bg-primary text-primary-foreground font-medium tracking-wide flex items-center justify-center gap-2 group shadow-sm hover:shadow transition-all duration-300"
           >
             <Plus className="w-4 h-4 transition-transform group-hover:rotate-90 duration-300" />
             Add Clothing

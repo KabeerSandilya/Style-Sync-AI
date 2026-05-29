@@ -35,7 +35,7 @@ export function EditorialDialog({
       {trigger && <DialogTrigger render={trigger} />}
       <DialogContent
         className={cn(
-          "bg-card border border-border/40 rounded-3xl p-8 max-w-[calc(100%-2rem)] sm:max-w-[480px] shadow-xl outline-none ring-0 [&_[data-slot=dialog-close]]:rounded-full [&_[data-slot=dialog-close]]:size-8 [&_[data-slot=dialog-close]]:top-4 [&_[data-slot=dialog-close]]:right-4 [&_[data-slot=dialog-close]]:text-muted-foreground [&_[data-slot=dialog-close]]:hover:text-foreground",
+          "bg-card border border-border/40 rounded-none p-8 max-w-[calc(100%-2rem)] sm:max-w-[480px] shadow-xl outline-none ring-0 [&_[data-slot=dialog-close]]:rounded-none [&_[data-slot=dialog-close]]:size-8 [&_[data-slot=dialog-close]]:top-4 [&_[data-slot=dialog-close]]:right-4 [&_[data-slot=dialog-close]]:text-muted-foreground [&_[data-slot=dialog-close]]:hover:text-foreground",
           "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95"
         )}
       >
