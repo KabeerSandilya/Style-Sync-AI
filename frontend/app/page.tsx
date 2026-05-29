@@ -5,52 +5,47 @@ import {
   Sparkles, 
   Upload, 
   Heart, 
-  User, 
-  Settings, 
   Sun, 
   CloudRain, 
   ArrowRight,
-  Search,
   ChevronRight,
   Info
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { EditorNavbar } from "@/components/editor/editor-navbar";
+import { ProjectSidebar } from "@/components/editor/project-sidebar";
+import { EditorialDialog } from "@/components/editor/editorial-dialog";
 
 export default function Home() {
-  const [activeTab, setActiveTab] = React.useState("wardrobe");
   const [inputText, setInputText] = React.useState("");
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  const [isUploadOpen, setIsUploadOpen] = React.useState(false);
+
+  const handleAddClothing = () => {
+    setIsSidebarOpen(false);
+    setIsUploadOpen(true);
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground selection:bg-accent/50">
-      {/* Editorial Header */}
-      <header className="border-b border-border/60 py-8 px-6 md:px-16 flex justify-between items-center bg-card/40 backdrop-blur-md sticky top-0 z-50">
-        <div className="flex flex-col">
-          <span className="font-serif text-3xl font-semibold tracking-tight text-foreground select-none">
-            StyleSync <span className="italic font-light text-primary">AI</span>
-          </span>
-          <span className="text-[10px] tracking-[0.2em] uppercase font-sans text-muted-foreground mt-0.5">
-            Your Digital Stylist
-          </span>
-        </div>
+      {/* Editor Navbar Chrome */}
+      <EditorNavbar
+        isSidebarOpen={isSidebarOpen}
+        onSidebarToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+        title="StyleSync AI"
+      />
 
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="rounded-full text-foreground/80 hover:text-foreground">
-            <Search className="w-4 h-4" />
-          </Button>
-          <Button variant="ghost" size="icon" className="rounded-full text-foreground/80 hover:text-foreground">
-            <User className="w-4 h-4" />
-          </Button>
-          <Button variant="ghost" size="icon" className="rounded-full text-foreground/80 hover:text-foreground">
-            <Settings className="w-4 h-4" />
-          </Button>
-        </div>
-      </header>
+      {/* Wardrobe Drawer Sidebar Overlay */}
+      <ProjectSidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        onAddClothing={handleAddClothing}
+      />
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-6 md:px-16 py-12 flex flex-col gap-12">
@@ -66,49 +61,67 @@ export default function Home() {
               to your <span className="italic font-light text-primary">daily silhouette</span>.
             </h1>
           </div>
-          <Dialog>
-            <DialogTrigger render={
-              <Button className="rounded-full px-6 py-6 text-sm font-medium tracking-wide shadow-md group">
-                Upload Garment
-                <Upload className="w-4 h-4 ml-2 transition-transform group-hover:-translate-y-0.5" />
-              </Button>
-            } />
-            <DialogContent className="sm:max-w-[480px] rounded-3xl p-6 bg-card border-border">
-              <DialogHeader className="gap-2">
-                <DialogTitle className="font-serif text-2xl font-semibold">Add New Piece</DialogTitle>
-                <DialogDescription className="font-sans text-sm text-muted-foreground">
-                  Upload an image of your garment. Our AI will automatically remove the background and extract the metadata tags.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-6 py-6 font-sans">
-                <div className="border border-dashed border-border/80 rounded-2xl p-8 flex flex-col items-center justify-center bg-background/50 hover:bg-background/80 transition-colors cursor-pointer group">
-                  <div className="bg-accent/40 text-primary p-3 rounded-full mb-3 group-hover:scale-105 transition-transform">
-                    <Upload className="w-5 h-5" />
-                  </div>
-                  <p className="text-sm font-medium text-foreground">Click to upload or drag image</p>
-                  <p className="text-xs text-muted-foreground mt-1">PNG, JPG or WEBP up to 10MB</p>
+          <Button
+            onClick={() => setIsUploadOpen(true)}
+            className="rounded-none px-6 py-6 text-sm font-medium tracking-wide shadow-md group animate-none"
+          >
+            Upload Garment
+            <Upload className="w-4 h-4 ml-2 transition-transform group-hover:-translate-y-0.5" />
+          </Button>
+
+          {/* Luxury Editorial Dialog Pattern */}
+          <EditorialDialog
+            open={isUploadOpen}
+            onOpenChange={setIsUploadOpen}
+            title="Add New Piece"
+            description="Upload an image of your garment. Our AI will automatically remove the background and extract the metadata tags."
+            footerActions={
+              <>
+                <Button
+                  variant="outline"
+                  className="rounded-none px-5"
+                  onClick={() => setIsUploadOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  className="rounded-none px-6 bg-primary text-primary-foreground hover:bg-primary/90"
+                  onClick={() => setIsUploadOpen(false)}
+                >
+                  Process Upload
+                </Button>
+              </>
+            }
+          >
+            <div className="grid gap-6 font-sans">
+              <div className="border border-dashed border-border/80 rounded-none p-8 flex flex-col items-center justify-center bg-background/50 hover:bg-background/80 transition-colors cursor-pointer group">
+                <div className="bg-accent/40 text-primary p-3 rounded-none mb-3 group-hover:scale-105 transition-transform">
+                  <Upload className="w-5 h-5" />
                 </div>
-                <div className="grid gap-2">
-                  <label htmlFor="notes" className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Additional Notes</label>
-                  <Textarea 
-                    id="notes" 
-                    placeholder="e.g. Bought in Milan, vintage linen fabric, fits slightly oversized..." 
-                    className="resize-none h-24 rounded-xl bg-background/40 border-border/80 focus-visible:ring-primary/40 focus-visible:border-primary/60"
-                  />
-                </div>
+                <p className="text-sm font-medium text-foreground">Click to upload or drag image</p>
+                <p className="text-xs text-muted-foreground mt-1">PNG, JPG or WEBP up to 10MB</p>
               </div>
-              <div className="flex justify-end gap-3 font-sans">
-                <Button variant="outline" className="rounded-full px-5">Cancel</Button>
-                <Button className="rounded-full px-6">Process Upload</Button>
+              <div className="grid gap-2">
+                <label
+                  htmlFor="notes"
+                  className="text-xs font-semibold text-muted-foreground uppercase tracking-wider"
+                >
+                  Additional Notes
+                </label>
+                <Textarea
+                  id="notes"
+                  placeholder="e.g. Bought in Milan, vintage linen fabric, fits slightly oversized..."
+                  className="resize-none h-24 rounded-none bg-background/40 border-border/80 focus-visible:ring-primary/40 focus-visible:border-primary/60"
+                />
               </div>
-            </DialogContent>
-          </Dialog>
+            </div>
+          </EditorialDialog>
         </section>
 
         {/* Core Design System Showcase Grid */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card Left: Weather Widget */}
-          <Card className="rounded-3xl border-border bg-card shadow-sm hover:shadow-md transition-shadow">
+          <Card className="rounded-none border-border bg-card shadow-sm hover:shadow-md transition-shadow">
             <CardHeader>
               <div className="flex justify-between items-start">
                 <div className="flex items-center gap-1.5 text-primary">
@@ -121,14 +134,14 @@ export default function Home() {
               <CardDescription className="font-sans text-xs">Partly Cloudy · 21°C · Humidity 55%</CardDescription>
             </CardHeader>
             <CardContent className="font-sans flex flex-col gap-4 py-2">
-              <div className="bg-background/60 rounded-2xl p-4 border border-border/30 flex items-start gap-3">
-                <div className="bg-primary/10 text-primary p-2 rounded-full mt-0.5">
+              <div className="bg-background/60 rounded-none p-4 border border-border/30 flex items-start gap-3">
+                <div className="bg-primary/10 text-primary p-2 rounded-none mt-0.5">
                   <CloudRain className="w-4 h-4" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs font-semibold text-foreground uppercase tracking-wide">Stylist Suggestion</span>
                   <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
-                    Light, breathable linen fabrics will suit today's mild humidity. A soft layer for the evening breeze is recommended.
+                    Light, breathable linen fabrics will suit today&apos;s mild humidity. A soft layer for the evening breeze is recommended.
                   </p>
                 </div>
               </div>
@@ -140,11 +153,11 @@ export default function Home() {
           </Card>
 
           {/* Card Center: Tabs & Storefront Feed */}
-          <Card className="rounded-3xl border-border bg-card shadow-sm md:col-span-2">
+          <Card className="rounded-none border-border bg-card shadow-sm md:col-span-2">
             <CardHeader className="border-b border-border/30 pb-4">
               <div className="flex justify-between items-center">
                 <CardTitle className="font-serif text-2xl font-medium">Boutique Feed</CardTitle>
-                <div className="bg-accent/40 text-primary px-3 py-1 rounded-full text-xs font-medium font-sans flex items-center gap-1">
+                <div className="bg-accent/40 text-primary px-3 py-1 rounded-none text-xs font-medium font-sans flex items-center gap-1">
                   <Heart className="w-3 h-3" />
                   <span>24 Favorites</span>
                 </div>
@@ -152,11 +165,11 @@ export default function Home() {
             </CardHeader>
             <CardContent className="pt-6 font-sans">
               <Tabs defaultValue="wardrobe" className="w-full">
-                <TabsList className="bg-muted/40 border border-border/30 p-1 rounded-full mb-6 max-w-xs grid grid-cols-2">
-                  <TabsTrigger value="wardrobe" className="rounded-full text-xs font-medium py-2 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm">
+                <TabsList className="bg-muted/40 border border-border/30 p-0 rounded-none mb-6 max-w-xs grid grid-cols-2">
+                  <TabsTrigger value="wardrobe" className="rounded-none text-xs font-medium py-2.5 h-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm">
                     My Wardrobe
                   </TabsTrigger>
-                  <TabsTrigger value="outfits" className="rounded-full text-xs font-medium py-2 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm">
+                  <TabsTrigger value="outfits" className="rounded-none text-xs font-medium py-2.5 h-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm">
                     Saved Outfits
                   </TabsTrigger>
                 </TabsList>
@@ -173,7 +186,7 @@ export default function Home() {
                         { name: "Washed Cotton Shirt", cat: "Tops", bg: "bg-[#f3f4f6]" }
                       ].map((item, idx) => (
                         <div key={idx} className="group/item flex flex-col gap-2 cursor-pointer">
-                          <div className={`aspect-[4/5] ${item.bg} rounded-2xl flex items-center justify-center p-4 transition-all duration-300 group-hover/item:scale-[1.02] group-hover/item:shadow-sm`}>
+                          <div className={`aspect-[4/5] ${item.bg} rounded-none flex items-center justify-center p-4 transition-all duration-300 group-hover/item:scale-[1.02] group-hover/item:shadow-sm`}>
                             <span className="text-xs uppercase tracking-wider font-semibold text-primary/70">{item.cat}</span>
                           </div>
                           <div className="flex flex-col px-1">
@@ -193,7 +206,7 @@ export default function Home() {
                         { title: "Sage Spring Silhouette", pieces: 3, desc: "Beige Linen Blazer + Olive Sage Trousers + Cream Silk Camisole" },
                         { title: "Autumn Rainy Evening", pieces: 4, desc: "Trench Coat + Chestnut Leather Boots + Olive Sage Trousers" }
                       ].map((outfit, idx) => (
-                        <div key={idx} className="border border-border/30 rounded-2xl p-4 bg-background/30 hover:bg-background/60 transition-colors flex justify-between items-center cursor-pointer group">
+                        <div key={idx} className="border border-border/30 rounded-none p-4 bg-background/30 hover:bg-background/60 transition-colors flex justify-between items-center cursor-pointer group">
                           <div className="flex flex-col gap-1">
                             <span className="font-serif text-lg font-medium text-foreground group-hover:text-primary transition-colors">{outfit.title}</span>
                             <span className="text-xs text-muted-foreground">{outfit.desc}</span>
@@ -213,7 +226,7 @@ export default function Home() {
         </section>
 
         {/* Input Controls & Test Section */}
-        <section className="bg-card border border-border/40 rounded-3xl p-8 flex flex-col gap-6">
+        <section className="bg-card border border-border/40 rounded-none p-8 flex flex-col gap-6">
           <div className="flex items-center gap-2 text-primary border-b border-border/30 pb-4">
             <Info className="w-5 h-5" />
             <h2 className="font-serif text-2xl font-medium">Design Tokens Testbed</h2>
@@ -227,15 +240,15 @@ export default function Home() {
                 placeholder="Enter text here..." 
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                className="rounded-full bg-background/50 border-border/80 focus-visible:ring-primary/40 focus-visible:border-primary/60"
+                className="rounded-none bg-background/50 border-border/80 focus-visible:ring-primary/40 focus-visible:border-primary/60"
               />
               <span className="text-[11px] text-muted-foreground italic">Try focusing the input. The focus ring is a soft, elegant sage outline instead of standard SaaS blue.</span>
             </div>
             
-            <div className="flex flex-col gap-3 justify-center bg-background/40 border border-border/30 p-5 rounded-2xl">
+            <div className="flex flex-col gap-3 justify-center bg-background/40 border border-border/30 p-5 rounded-none">
               <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Dynamic Preview</span>
               <p className="text-base text-foreground font-serif italic">
-                "{inputText || "Your style is defined by your expression."}"
+                &ldquo;{inputText || "Your style is defined by your expression."}&rdquo;
               </p>
             </div>
           </div>

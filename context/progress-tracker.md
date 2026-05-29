@@ -74,6 +74,13 @@ Success criteria:
 * Installed core UI primitives: `Button`, `Card`, `Dialog`, `Input`, `Textarea`, `Tabs`, and `ScrollArea`.
 * Created `lib/utils.ts` with the `cn()` class utility for conditional class merging.
 
+### Foundational Application Chrome (Editor Shell)
+
+* Created reusable, sticky, and translucent `EditorNavbar` with sidebar toggle, dynamic center title, and right layout spacing.
+* Created floating overlay `ProjectSidebar` with slide-in transition, close action, Tab navigation ("My Wardrobe", "Saved Outfits"), empty placeholders with premium editorial styling, and bottom-anchored "Add Clothing" button.
+* Created reusable luxury `EditorialDialog` pattern matching warm sand/cream tokens, featuring serif typography and generous spacing.
+* Integrated the shell components and linked states into `page.tsx` for complete interactivity.
+
 ---
 
 ## In Progress
