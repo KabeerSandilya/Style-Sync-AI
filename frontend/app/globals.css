@@ -138,3 +138,46 @@
     font-family: var(--font-serif), serif;
   }
 }
+
+/* Clerk UserButton Custom Styling Overrides */
+.cl-userButtonPopoverCard {
+  border: 1px solid var(--border) !important;
+  background-color: var(--card) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.cl-userButtonPopoverActionButton {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  padding: 14px 20px !important;
+  width: 100% !important;
+  color: var(--foreground) !important;
+  background-color: transparent !important;
+  transition: all 0.2s ease-in-out !important;
+  border-radius: var(--radius) !important;
+}
+
+.cl-userButtonPopoverActionButton:hover {
+  background-color: var(--accent) !important;
+}
+
+.cl-userButtonPopoverActionButtonText {
+  color: var(--foreground) !important;
+  font-family: var(--font-sans), sans-serif !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+}
+
+.cl-userButtonPopoverActionButtonIcon {
+  color: var(--foreground) !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.cl-userButtonPopoverFooter {
+  background-color: var(--muted) !important;
+  border-top: 1px solid var(--border) !important;
+}

@@ -81,6 +81,15 @@ Success criteria:
 * Created reusable luxury `EditorialDialog` pattern matching warm sand/cream tokens, featuring serif typography and generous spacing.
 * Integrated the shell components and linked states into `page.tsx` for complete interactivity.
 
+### Unit 1 — Authentication
+
+* Integrated Clerk authentication with the Next.js 16 application.
+* Designed custom, minimal two-panel editorial layouts for `/sign-in` and `/sign-up` pages.
+* Styled Clerk components to perfectly inherit StyleSync theme variables (sand backgrounds, cream card surfaces, sage green accent primary, and zero-border-radius corners).
+* Protected all routes by default using Next.js 16 `proxy.ts` middleware configuration, making only `/sign-in` and `/sign-up` public.
+* Updated root route (`/`) to redirect authenticated users to `/editor` and unauthenticated users to `/sign-in`.
+* Restructured the editor shell to `/editor/page.tsx` and integrated the Clerk `<UserButton />` into the `EditorNavbar`.
+
 ---
 
 ## In Progress
@@ -94,7 +103,6 @@ Current implementation focus:
 * NestJS backend setup
 * Prisma schema initialization
 * PostgreSQL connection
-* Clerk authentication
 * Shared packages structure
 
 Blockers:
@@ -104,16 +112,6 @@ Blockers:
 ---
 
 ## Next Up
-
-### Unit 1 — Authentication
-
-Scope:
-
-* Clerk integration
-* Google authentication
-* User session handling
-* Protected routes
-* User onboarding flow
 
 ### Unit 2 — Wardrobe Upload Pipeline
 

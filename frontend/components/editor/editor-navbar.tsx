@@ -4,6 +4,7 @@ import * as React from "react";
 import { PanelLeftOpen, PanelLeftClose } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { UserButton } from "@clerk/nextjs";
 
 interface EditorNavbarProps {
   isSidebarOpen: boolean;
@@ -55,8 +56,13 @@ export function EditorNavbar({
 
       {/* Right Section - Reserved for future action placeholders */}
       <div className="flex items-center w-1/3 justify-end">
-        {/* Preserves layout spacing, empty for now */}
-        <div className="w-9 h-9" />
+        <UserButton 
+          appearance={{
+            elements: {
+              avatarBox: "w-8 h-8 rounded-none border border-border/60 hover:scale-105 transition-transform"
+            }
+          }}
+        />
       </div>
     </header>
   );
