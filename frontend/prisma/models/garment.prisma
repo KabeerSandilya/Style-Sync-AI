@@ -17,6 +17,13 @@ model Garment {
   occasion         String?
   clothingType     String?
 
+  subcategory      String?
+  primaryColor     String?
+  secondaryColor   String?
+  style            String?
+  material         String?
+  confidence       Int?
+
   isFavorite      Boolean  @default(false)
   isProcessed      Boolean  @default(false)
 

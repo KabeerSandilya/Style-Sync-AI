@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 
 export async function GET(req: Request) {
   try {
@@ -19,7 +20,7 @@ export async function GET(req: Request) {
     const search = url.searchParams.get("search");
 
     // 3. Build query conditions
-    const where: any = {
+    const where: Prisma.GarmentWhereInput = {
       userId,
     };
 
