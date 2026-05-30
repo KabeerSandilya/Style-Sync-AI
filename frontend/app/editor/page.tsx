@@ -9,22 +9,52 @@ import {
   CloudRain, 
   ArrowRight,
   ChevronRight,
-  Info
+  Info,
+  X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { EditorNavbar } from "@/components/editor/editor-navbar";
 import { ProjectSidebar } from "@/components/editor/project-sidebar";
-import { EditorialDialog } from "@/components/editor/editorial-dialog";
+import { UploadGarmentDialog } from "@/components/editor/upload-garment-dialog";
 
 export default function Home() {
   const [inputText, setInputText] = React.useState("");
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   const [isUploadOpen, setIsUploadOpen] = React.useState(false);
+
+  // Wardrobe state management
+  const [garments, setGarments] = React.useState<any[]>([]);
+  const [fetchingGarments, setFetchingGarments] = React.useState(true);
+  const [toastMessage, setToastMessage] = React.useState<string | null>(null);
+
+  const triggerToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 4000);
+  };
+
+  const fetchGarments = async () => {
+    try {
+      const res = await fetch("/api/garments");
+      const data = await res.json();
+      if (data.success) {
+        setGarments(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching garments:", error);
+    } finally {
+      setFetchingGarments(false);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchGarments();
+  }, []);
 
   const handleAddClothing = () => {
     setIsSidebarOpen(false);
@@ -45,6 +75,8 @@ export default function Home() {
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
         onAddClothing={handleAddClothing}
+        garments={garments}
+        loading={fetchingGarments}
       />
 
       {/* Main Content Area */}
@@ -69,53 +101,15 @@ export default function Home() {
             <Upload className="w-4 h-4 ml-2 transition-transform group-hover:-translate-y-0.5" />
           </Button>
 
-          {/* Luxury Editorial Dialog Pattern */}
-          <EditorialDialog
+          {/* Premium Garment Upload Dialog */}
+          <UploadGarmentDialog
             open={isUploadOpen}
             onOpenChange={setIsUploadOpen}
-            title="Add New Piece"
-            description="Upload an image of your garment. Our AI will automatically remove the background and extract the metadata tags."
-            footerActions={
-              <>
-                <Button
-                  variant="outline"
-                  className="rounded-none px-5"
-                  onClick={() => setIsUploadOpen(false)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  className="rounded-none px-6 bg-primary text-primary-foreground hover:bg-primary/90"
-                  onClick={() => setIsUploadOpen(false)}
-                >
-                  Process Upload
-                </Button>
-              </>
-            }
-          >
-            <div className="grid gap-6 font-sans">
-              <div className="border border-dashed border-border/80 rounded-none p-8 flex flex-col items-center justify-center bg-background/50 hover:bg-background/80 transition-colors cursor-pointer group">
-                <div className="bg-accent/40 text-primary p-3 rounded-none mb-3 group-hover:scale-105 transition-transform">
-                  <Upload className="w-5 h-5" />
-                </div>
-                <p className="text-sm font-medium text-foreground">Click to upload or drag image</p>
-                <p className="text-xs text-muted-foreground mt-1">PNG, JPG or WEBP up to 10MB</p>
-              </div>
-              <div className="grid gap-2">
-                <label
-                  htmlFor="notes"
-                  className="text-xs font-semibold text-muted-foreground uppercase tracking-wider"
-                >
-                  Additional Notes
-                </label>
-                <Textarea
-                  id="notes"
-                  placeholder="e.g. Bought in Milan, vintage linen fabric, fits slightly oversized..."
-                  className="resize-none h-24 rounded-none bg-background/40 border-border/80 focus-visible:ring-primary/40 focus-visible:border-primary/60"
-                />
-              </div>
-            </div>
-          </EditorialDialog>
+            onSuccess={(msg) => {
+              triggerToast(msg || "Garment uploaded successfully.");
+              fetchGarments();
+            }}
+          />
         </section>
 
         {/* Core Design System Showcase Grid */}
@@ -176,26 +170,61 @@ export default function Home() {
                 
                 <TabsContent value="wardrobe" className="outline-none">
                   <ScrollArea className="h-60 pr-4">
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                      {[
-                        { name: "Beige Linen Blazer", cat: "Outerwear", bg: "bg-[#f5ece3]" },
-                        { name: "Olive Sage Trousers", cat: "Bottoms", bg: "bg-[#e3e8e4]" },
-                        { name: "Cream Silk Camisole", cat: "Tops", bg: "bg-[#fffefb] border border-border/40" },
-                        { name: "Chestnut Leather Boots", cat: "Footwear", bg: "bg-[#eae3db]" },
-                        { name: "Trench Coat", cat: "Outerwear", bg: "bg-[#eddccb]" },
-                        { name: "Washed Cotton Shirt", cat: "Tops", bg: "bg-[#f3f4f6]" }
-                      ].map((item, idx) => (
-                        <div key={idx} className="group/item flex flex-col gap-2 cursor-pointer">
-                          <div className={`aspect-[4/5] ${item.bg} rounded-none flex items-center justify-center p-4 transition-all duration-300 group-hover/item:scale-[1.02] group-hover/item:shadow-sm`}>
-                            <span className="text-xs uppercase tracking-wider font-semibold text-primary/70">{item.cat}</span>
+                    {fetchingGarments ? (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 animate-pulse">
+                        {[1, 2, 3].map((n) => (
+                          <div key={n} className="flex flex-col gap-2">
+                            <div className="aspect-[4/5] bg-accent/30 rounded-none w-full" />
+                            <div className="h-3.5 bg-accent/30 w-3/4 rounded-none mt-1" />
+                            <div className="h-2.5 bg-accent/30 w-1/2 rounded-none mt-1" />
                           </div>
-                          <div className="flex flex-col px-1">
-                            <span className="text-sm font-semibold text-foreground leading-snug">{item.name}</span>
-                            <span className="text-xs text-muted-foreground mt-0.5">{item.cat}</span>
+                        ))}
+                      </div>
+                    ) : garments.length > 0 ? (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        {garments.map((garment) => (
+                          <div key={garment.id} className="group/item flex flex-col gap-2 cursor-pointer">
+                            <div className="aspect-[4/5] bg-[#fcf9f5] border border-border/30 rounded-none flex items-center justify-center p-4 transition-all duration-300 group-hover/item:scale-[1.02] group-hover/item:shadow-sm relative overflow-hidden">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                src={garment.imageUrl}
+                                alt={garment.name}
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+                            <div className="flex flex-col px-1">
+                              <span className="text-sm font-semibold text-foreground leading-snug truncate">
+                                {garment.name}
+                              </span>
+                              <span className="text-xs text-muted-foreground mt-0.5">
+                                {garment.category}
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        {[
+                          { name: "Beige Linen Blazer", cat: "Outerwear", bg: "bg-[#f5ece3]" },
+                          { name: "Olive Sage Trousers", cat: "Bottoms", bg: "bg-[#e3e8e4]" },
+                          { name: "Cream Silk Camisole", cat: "Tops", bg: "bg-[#fffefb] border border-border/40" },
+                          { name: "Chestnut Leather Boots", cat: "Footwear", bg: "bg-[#eae3db]" },
+                          { name: "Trench Coat", cat: "Outerwear", bg: "bg-[#eddccb]" },
+                          { name: "Washed Cotton Shirt", cat: "Tops", bg: "bg-[#f3f4f6]" }
+                        ].map((item, idx) => (
+                          <div key={idx} className="group/item flex flex-col gap-2 cursor-pointer">
+                            <div className={`aspect-[4/5] ${item.bg} rounded-none flex items-center justify-center p-4 transition-all duration-300 group-hover/item:scale-[1.02] group-hover/item:shadow-sm`}>
+                              <span className="text-xs uppercase tracking-wider font-semibold text-primary/70">{item.cat}</span>
+                            </div>
+                            <div className="flex flex-col px-1">
+                              <span className="text-sm font-semibold text-foreground leading-snug">{item.name}</span>
+                              <span className="text-xs text-muted-foreground mt-0.5">{item.cat}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </ScrollArea>
                 </TabsContent>
 
@@ -259,6 +288,20 @@ export default function Home() {
       <footer className="border-t border-border/30 py-12 px-6 bg-card/10 text-center font-sans text-xs text-muted-foreground">
         <p>© 2026 StyleSync AI. Crafted with an editorial fashion perspective.</p>
       </footer>
+      {/* Premium Minimal Toast Notification */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 bg-primary text-primary-foreground border border-border/20 px-6 py-4 shadow-xl select-none animate-slide-in font-sans font-medium text-xs flex items-center gap-2 transition-all">
+          <Sparkles className="w-4 h-4 text-primary-foreground/90" />
+          <span>{toastMessage}</span>
+          <button
+            onClick={() => setToastMessage(null)}
+            className="ml-4 hover:opacity-80 transition-opacity p-0.5"
+            aria-label="Dismiss toast"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

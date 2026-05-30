@@ -1,0 +1,14 @@
+model UserPreference {
+  id                 String   @id @default(cuid())
+
+  userId             String   @unique
+
+  preferredStyles    String[]
+  dislikedColors     String[]
+  favoriteCategories String[]
+
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([userId])
+}

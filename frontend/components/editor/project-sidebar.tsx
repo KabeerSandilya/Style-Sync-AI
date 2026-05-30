@@ -11,9 +11,11 @@ interface ProjectSidebarProps {
   isOpen: boolean;
   onClose: () => void;
   onAddClothing?: () => void;
+  garments?: any[];
+  loading?: boolean;
 }
 
-export function ProjectSidebar({ isOpen, onClose, onAddClothing }: ProjectSidebarProps) {
+export function ProjectSidebar({ isOpen, onClose, onAddClothing, garments = [], loading = false }: ProjectSidebarProps) {
   // Close sidebar on Escape key press
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -81,17 +83,59 @@ export function ProjectSidebar({ isOpen, onClose, onAddClothing }: ProjectSideba
             <div className="flex-1 overflow-hidden">
               <TabsContent value="wardrobe" className="h-full flex flex-col outline-none">
                 <ScrollArea className="h-full pr-1">
-                  <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
-                    <div className="bg-accent/40 text-primary p-4 rounded-none mb-4">
-                      <Shirt className="w-6 h-6 stroke-[1.5]" />
+                  {loading ? (
+                    <div className="flex flex-col gap-4 p-2 animate-pulse">
+                      {[1, 2, 3].map((n) => (
+                        <div key={n} className="flex gap-3 items-center border border-border/20 p-3 bg-background/40">
+                          <div className="w-12 h-15 bg-accent/30" />
+                          <div className="flex-1 flex flex-col gap-2">
+                            <div className="h-3.5 bg-accent/30 w-3/4" />
+                            <div className="h-2.5 bg-accent/30 w-1/2" />
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                    <h3 className="font-serif text-lg font-medium text-foreground tracking-tight">
-                      Your wardrobe is empty
-                    </h3>
-                    <p className="font-sans text-xs text-muted-foreground max-w-[240px] mx-auto mt-2 leading-relaxed">
-                      Upload your clothes to curate combinations and construct your signature style.
-                    </p>
-                  </div>
+                  ) : garments.length > 0 ? (
+                    <div className="grid grid-cols-2 gap-4 p-2">
+                      {garments.map((garment) => (
+                        <div key={garment.id} className="group flex flex-col gap-2 cursor-pointer">
+                          <div className="aspect-[4/5] bg-[#fcf9f5] border border-border/30 rounded-none flex items-center justify-center p-3 relative overflow-hidden transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-sm">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={garment.imageUrl}
+                              alt={garment.name}
+                              className="w-full h-full object-contain"
+                            />
+                            <span className="absolute bottom-2 left-2 bg-background/80 text-[9px] uppercase tracking-wider font-semibold text-primary/70 px-1.5 py-0.5 border border-border/30">
+                              {garment.category}
+                            </span>
+                          </div>
+                          <div className="flex flex-col px-1">
+                            <span className="text-xs font-semibold text-foreground truncate leading-snug">
+                              {garment.name}
+                            </span>
+                            {garment.notes && (
+                              <span className="text-[10px] text-muted-foreground truncate">
+                                {garment.notes}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
+                      <div className="bg-accent/40 text-primary p-4 rounded-none mb-4">
+                        <Shirt className="w-6 h-6 stroke-[1.5]" />
+                      </div>
+                      <h3 className="font-serif text-lg font-medium text-foreground tracking-tight">
+                        Your wardrobe is empty
+                      </h3>
+                      <p className="font-sans text-xs text-muted-foreground max-w-[240px] mx-auto mt-2 leading-relaxed">
+                        Upload your clothes to curate combinations and construct your signature style.
+                      </p>
+                    </div>
+                  )}
                 </ScrollArea>
               </TabsContent>
 

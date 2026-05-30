@@ -90,6 +90,22 @@ Success criteria:
 * Updated root route (`/`) to redirect authenticated users to `/editor` and unauthenticated users to `/sign-in`.
 * Restructured the editor shell to `/editor/page.tsx` and integrated the Clerk `<UserButton />` into the `EditorNavbar`.
 
+### Database Integration & Schema
+
+* Configured Prisma 7 with PostgreSQL database connection using a custom driver adapter.
+* Created the PostgreSQL database schema model for wardrobe items (`Garment`).
+* Split Prisma schema into modular files under `prisma/models/` (`garment.prisma`, `outfit.prisma`, `user-preference.prisma`, and `recommendation.prisma`) to keep models clean and extensible.
+* Configured database branching in `lib/prisma.ts` to support both Prisma Accelerate (`prisma+postgres://` URLs) and PostgreSQL driver adapter (`@prisma/adapter-pg`).
+* Pushed schema changes to synchronize with the local database and successfully generated the Prisma Client.
+
+
+### Unit 2 — Wardrobe Upload & Storage (Partially Completed)
+
+* Created secure server-side Upload API endpoint (`/api/upload`) using Cloudinary storage integration.
+* Created Wardrobe Retrieval API endpoint (`/api/garments`) to query wardrobe items for the logged-in user.
+* Built `<UploadGarmentDialog />` with premium drag-and-drop zone, file size/type validation, client-side preview, optional notes input, and loading states.
+* Integrated the dialog and connected dynamic list state in `/editor/page.tsx` and `project-sidebar.tsx` to automatically refresh without full-page reloads.
+
 ---
 
 ## In Progress
@@ -101,8 +117,6 @@ Current implementation focus:
 * Monorepo initialization
 * Next.js app setup
 * NestJS backend setup
-* Prisma schema initialization
-* PostgreSQL connection
 * Shared packages structure
 
 Blockers:
@@ -113,15 +127,12 @@ Blockers:
 
 ## Next Up
 
-### Unit 2 — Wardrobe Upload Pipeline
+### Unit 2 — Wardrobe Upload Pipeline (Remaining)
 
 Scope:
 
-* Clothing upload UI
-* Image upload to Cloudinary
 * Background removal
-* Metadata extraction
-* Wardrobe persistence
+* Metadata extraction (AI Vision classification)
 
 ### Unit 3 — Wardrobe Management
 
