@@ -1,11 +1,15 @@
 import { Outfit, Garment } from "@/types";
 import { WeatherContext } from "../weather/types";
+import { FeedbackType } from "@prisma/client";
 
 // Keep this type definition simple to avoid Prisma dependency mismatches
 export interface UserPreferenceInput {
-  preferredStyles?: string[];
-  dislikedColors?: string[];
+  favoriteColors?: string[];
+  favoriteStyles?: string[];
   favoriteCategories?: string[];
+  favoriteSeasons?: string[];
+  favoriteTypes?: string[];
+  preferenceScore?: any;
 }
 
 export function getCurrentSeason(): string {
@@ -42,7 +46,9 @@ function checkGarmentMatch(garment: Garment, keywords: string[]): boolean {
 export function scoreOutfit(
   outfit: Outfit,
   weather: WeatherContext,
-  userPreference?: UserPreferenceInput
+  userPreference?: UserPreferenceInput,
+  lastWornAt?: Date | null,
+  feedbackType?: FeedbackType | null
 ): number {
   const garments = outfit.garments.map((g) => g.garment).filter(Boolean);
   if (garments.length === 0) return 0;
@@ -152,8 +158,8 @@ export function scoreOutfit(
   // 3. Style Fit (0 to 30 points)
   let styleScore = 15; // Baseline default style fit
 
-  if (userPreference?.preferredStyles && userPreference.preferredStyles.length > 0) {
-    const prefs = userPreference.preferredStyles.map((s) => s.toLowerCase());
+  if (userPreference?.favoriteStyles && userPreference.favoriteStyles.length > 0) {
+    const prefs = userPreference.favoriteStyles.map((s) => s.toLowerCase());
     let totalStyleScore = 0;
 
     garments.forEach((g) => {
@@ -181,7 +187,88 @@ export function scoreOutfit(
   // Cap the metadata penalty at 25 points
   metadataPenalty = Math.min(25, metadataPenalty);
 
-  // Calculate final combined score
-  const finalScore = Math.max(0, Math.min(100, weatherScore + seasonScore + styleScore - metadataPenalty));
+  // 5. Feedback Score (+10 for LIKE, -30 for DISLIKE)
+  let feedbackScore = 0;
+  if (feedbackType === "LIKE") {
+    feedbackScore = 10;
+  } else if (feedbackType === "DISLIKE") {
+    feedbackScore = -30;
+  }
+
+  // 5.5. Preference Match Bonus (up to +25 points)
+  let preferenceMatchBonus = 0;
+  if (userPreference) {
+    const favColors = userPreference.favoriteColors || [];
+    const favStyles = userPreference.favoriteStyles || [];
+    const favCategories = userPreference.favoriteCategories || [];
+    const favSeasons = userPreference.favoriteSeasons || [];
+    const favTypes = userPreference.favoriteTypes || [];
+
+    garments.forEach((g) => {
+      // Color bonus
+      const colors = [g.primaryColor, g.secondaryColor, g.dominantColor].filter(Boolean);
+      colors.forEach((c) => {
+        if (matches(c, favColors)) preferenceMatchBonus += 3;
+      });
+      // Style bonus
+      if (matches(g.style, favStyles)) preferenceMatchBonus += 4;
+      // Category bonus
+      if (matches(g.category, favCategories)) preferenceMatchBonus += 3;
+      // Season bonus
+      if (matches(g.season, favSeasons)) preferenceMatchBonus += 2;
+      // Clothing Type bonus
+      if (matches(g.clothingType, favTypes)) preferenceMatchBonus += 4;
+    });
+
+    preferenceMatchBonus = Math.min(25, preferenceMatchBonus);
+  }
+
+  // 5.6. Preference Match Penalty (up to -30 points) based on negative raw scores in preferenceScore JSON
+  let preferenceMatchPenalty = 0;
+  if (userPreference?.preferenceScore) {
+    const rawScores = userPreference.preferenceScore as any;
+    garments.forEach((g) => {
+      // Check style
+      if (g.style) {
+        const styleKey = g.style.charAt(0).toUpperCase() + g.style.slice(1);
+        const score = rawScores.styles?.[styleKey];
+        if (score && score < 0) preferenceMatchPenalty += Math.abs(score);
+      }
+      // Check colors
+      const colors = [g.primaryColor, g.secondaryColor, g.dominantColor].filter(Boolean);
+      colors.forEach((c) => {
+        const colorKey = c!.charAt(0).toUpperCase() + c!.slice(1);
+        const score = rawScores.colors?.[colorKey];
+        if (score && score < 0) preferenceMatchPenalty += Math.abs(score);
+      });
+      // Check category
+      if (g.category) {
+        const catKey = g.category.charAt(0).toUpperCase() + g.category.slice(1);
+        const score = rawScores.categories?.[catKey];
+        if (score && score < 0) preferenceMatchPenalty += Math.abs(score);
+      }
+    });
+
+    preferenceMatchPenalty = Math.min(30, preferenceMatchPenalty);
+  }
+
+  // 6. Recent Wear Penalty
+  let wearPenalty = 0;
+  if (lastWornAt) {
+    const diffMs = Date.now() - new Date(lastWornAt).getTime();
+    const diffHours = diffMs / (1000 * 60 * 60);
+
+    if (diffHours < 24) {
+      wearPenalty = 50; // Worn Today -> Heavy Penalty
+    } else if (diffHours < 48) {
+      wearPenalty = 25; // Worn Yesterday -> Medium Penalty
+    } else if (diffHours < 24 * 7) {
+      wearPenalty = 10; // Worn Last Week -> Small Penalty
+    }
+  }
+
+  // Calculate final combined score (clamped between 0 and 100)
+  const baseScore = weatherScore + seasonScore + styleScore - metadataPenalty + preferenceMatchBonus - preferenceMatchPenalty;
+  const finalScore = Math.max(0, Math.min(100, baseScore + feedbackScore - wearPenalty));
   return finalScore;
 }

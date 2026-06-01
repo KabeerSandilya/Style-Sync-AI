@@ -111,6 +111,11 @@ export async function PATCH(
       data: dataToUpdate,
     });
 
+    if (body.isFavorite !== undefined) {
+      const { updatePreferenceProfile } = await import("@/services/preferences/update-profile");
+      await updatePreferenceProfile(userId);
+    }
+
     return NextResponse.json({
       success: true,
       data: updatedGarment,

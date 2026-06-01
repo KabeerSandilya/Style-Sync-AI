@@ -18,8 +18,11 @@ export interface Garment {
   confidence?: number | null;
   isFavorite: boolean;
   isProcessed: boolean;
+  processedImageUrl?: string | null;
+  bgRemovedAt?: string | null;
   createdAt: string;
   updatedAt: string;
+  lastWornAt?: string | null;
 }
 
 export interface OutfitGarment {
@@ -39,4 +42,13 @@ export interface Outfit {
   createdAt: string;
   updatedAt: string;
   garments: OutfitGarment[];
+  wears?: OutfitWear[];
 }
+
+export interface OutfitWear {
+  id: string;
+  userId: string;
+  outfitId: string;
+  wornAt: string;
+}
+

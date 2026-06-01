@@ -13,7 +13,7 @@ export async function GET() {
       );
     }
 
-    // 2. Retrieve outfits ordered by newest first, including linked garments
+    // 2. Retrieve outfits ordered by newest first, including linked garments and most recent wear
     const outfits = await prisma.outfit.findMany({
       where: {
         userId,
@@ -23,6 +23,12 @@ export async function GET() {
           include: {
             garment: true,
           },
+        },
+        wears: {
+          orderBy: {
+            wornAt: "desc",
+          },
+          take: 1,
         },
       },
       orderBy: {
@@ -65,18 +71,43 @@ export async function POST(req: Request) {
       );
     }
 
-    // 3. Verify garment ownership (all selected garments must exist and belong to this user)
-    const ownedGarmentsCount = await prisma.garment.count({
+    // 3. Verify garment ownership and retrieve details for category checks
+    const ownedGarments = await prisma.garment.findMany({
       where: {
         id: { in: garmentIds },
         userId,
       },
     });
 
-    if (ownedGarmentsCount !== garmentIds.length) {
+    if (ownedGarments.length !== garmentIds.length) {
       return NextResponse.json(
         { success: false, error: "Invalid garment selection or ownership." },
         { status: 403 }
+      );
+    }
+
+    // Enforce wardrobe rules: max 1 footwear, max 1 lower body garment
+    const footwearCount = ownedGarments.filter((g) => {
+      const cat = g.category.toLowerCase();
+      return cat.includes("foot") || cat === "footwear";
+    }).length;
+
+    if (footwearCount > 1) {
+      return NextResponse.json(
+        { success: false, error: "An outfit can only include at most one footwear garment." },
+        { status: 400 }
+      );
+    }
+
+    const lowerCount = ownedGarments.filter((g) => {
+      const cat = g.category.toLowerCase();
+      return cat.includes("bottom") || cat === "lower" || cat === "bottomwear" || cat === "bottoms";
+    }).length;
+
+    if (lowerCount > 1) {
+      return NextResponse.json(
+        { success: false, error: "An outfit can only include at most one lower body garment (bottomwear)." },
+        { status: 400 }
       );
     }
 

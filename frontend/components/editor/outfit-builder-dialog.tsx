@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
+import { cn, getDisplayImageUrl } from "@/lib/utils";
 import { Garment, Outfit } from "@/types";
 
 interface OutfitBuilderDialogProps {
@@ -213,6 +213,27 @@ export function OutfitBuilderDialog({
       .filter((g): g is Garment => !!g);
   }, [selectedGarmentIds, garments]);
 
+  // Enforce wardrobe rules: max 1 footwear, max 1 lower body garment
+  const validationError = React.useMemo(() => {
+    const footwears = selectedGarments.filter((g) => {
+      const cat = g.category.toLowerCase();
+      return cat.includes("foot") || cat === "footwear";
+    });
+    if (footwears.length > 1) {
+      return "An outfit can only include at most one footwear garment.";
+    }
+
+    const lowers = selectedGarments.filter((g) => {
+      const cat = g.category.toLowerCase();
+      return cat.includes("bottom") || cat === "lower" || cat === "bottomwear" || cat === "bottoms";
+    });
+    if (lowers.length > 1) {
+      return "An outfit can only include at most one lower body garment (bottomwear).";
+    }
+
+    return null;
+  }, [selectedGarments]);
+
   return (
     <Dialog open={open} onOpenChange={(val) => !saving && !deleting && onOpenChange(val)}>
       <DialogContent className="w-full max-w-[calc(100%-2rem)] sm:max-w-[760px] md:max-w-[850px] lg:max-w-4xl p-0 overflow-hidden bg-card border border-border/40 rounded-none shadow-2xl h-[90vh] md:h-[80vh] max-h-[850px] flex flex-col focus:outline-none ring-0 [&_[data-slot=dialog-close]]:rounded-none [&_[data-slot=dialog-close]]:size-8 [&_[data-slot=dialog-close]]:top-4 [&_[data-slot=dialog-close]]:right-4 [&_[data-slot=dialog-close]]:text-muted-foreground [&_[data-slot=dialog-close]]:hover:text-foreground">
@@ -319,7 +340,7 @@ export function OutfitBuilderDialog({
                           <div className="aspect-[4/5] bg-card border border-border/20 rounded-none flex items-center justify-center p-2 overflow-hidden relative">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                              src={garment.imageUrl}
+                              src={getDisplayImageUrl(garment)}
                               alt={garment.name}
                               className="max-h-full max-w-full object-contain filter drop-shadow-xs transition-transform duration-300 group-hover:scale-102"
                             />
@@ -386,7 +407,7 @@ export function OutfitBuilderDialog({
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={g.imageUrl}
+                          src={getDisplayImageUrl(g)}
                           alt={g.name}
                           className="max-h-full max-w-full object-contain filter drop-shadow-lg"
                         />
@@ -485,10 +506,10 @@ export function OutfitBuilderDialog({
                   )}
 
                   {/* Error Notification */}
-                  {errorMessage && (
+                  {(validationError || errorMessage) && (
                     <div className="bg-destructive/10 border border-destructive/20 text-destructive text-xs p-3 rounded-none flex items-start gap-2 mt-2">
                       <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
-                      <span className="leading-relaxed font-sans">{errorMessage}</span>
+                      <span className="leading-relaxed font-sans">{validationError || errorMessage}</span>
                     </div>
                   )}
 
@@ -538,7 +559,7 @@ export function OutfitBuilderDialog({
                     )}
                     <Button
                       onClick={handleSave}
-                      disabled={saving}
+                      disabled={saving || !!validationError}
                       className={cn(
                         "flex-1 rounded-none text-xs tracking-wider h-11",
                         isEditMode ? "" : "w-full"

@@ -1,14 +1,19 @@
 model UserPreference {
-  id                 String   @id @default(cuid())
+  id                  String   @id @default(cuid())
 
-  userId             String   @unique
+  userId              String   @unique
 
-  preferredStyles    String[]
-  dislikedColors     String[]
-  favoriteCategories String[]
+  favoriteColors      String[]
+  favoriteStyles      String[]
+  favoriteCategories  String[]
+  favoriteSeasons     String[]
+  favoriteTypes       String[]
 
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  threshold           Int      @default(5)
+  preferenceScore     Json?
+
+  updatedAt           DateTime @updatedAt
+  createdAt           DateTime @default(now())
 
   @@index([userId])
 }

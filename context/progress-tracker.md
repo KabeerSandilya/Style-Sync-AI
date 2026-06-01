@@ -150,6 +150,57 @@ Success criteria:
 * Centered the styling recommendations on the main dashboard (`/editor`) and added a dedicated CTA redirecting to a full-width Wardrobe Studio page (`/editor/wardrobe`) for collection management and outfit creation.
 * Enabled query parameter deep-linking on `/editor/wardrobe` so sidebar clicks and "Add Clothing" actions automatically trigger dialogs.
 
+### Unit 11 — Recommendation Feedback & Wear History (Completed)
+
+* Created modular `RecommendationFeedback` and `OutfitWear` models in `prisma/models/recommendation-feedback.prisma` and synchronized database schema.
+* Created `RecommendationHistoryService` in `services/recommendation-history/index.ts` to map user wear and feedback history.
+* Updated recommendation scoring system to integrate Feedback Score (+10 for LIKE, -30 for DISLIKE) and Recent Wear Penalty (up to -50 points for outfits worn recently) for repetition avoidance.
+* Implemented Clerk-authenticated endpoints `POST /api/recommendations/[outfitId]/wear`, `POST /api/recommendations/[outfitId]/like`, and `POST /api/recommendations/[outfitId]/dislike` with strict ownership checks and duplicate prevention.
+* Added minimal, elegant "Wear This", "Like", and "Dislike" buttons on `<TodaysRecommendations />` spotlight cards with dynamic active state highlighting and automatic query refresh.
+
+### Unit 12 — Wear History & Outfit Timeline (Completed)
+
+* Created backend `GET /api/wear-history` API endpoint with Clerk authentication to retrieve the logged-in user's wear history.
+* Created Wear Statistics Service in `services/wear-history/index.ts` to retrieve recent wears, count wears, and find last worn date.
+* Updated `GET /api/outfits` to fetch and include the most recent wear record for each outfit.
+* Created `<HistoryItem />` component to render timeline items with thumbnails, relative worn date, and piece count.
+* Created read-only `<HistoryDetailDialog />` to view previously worn outfits, preview garments, and styling notes.
+* Created Wear History page (`app/history/page.tsx`) with editorial chronological grouping, pulse skeleton loaders, and empty states.
+* Updated `<OutfitCard />` to display dynamic last worn information (`Last worn 3 days ago` or `Never worn`).
+* Integrated navigation links (`Wardrobe`, `Outfits`, `History`) into `<EditorNavbar />`.
+* Implemented clearing capabilities: Added DELETE endpoints for clearing all history and individual history entries, integrated "Clear All History" button on the timeline page, and "Remove Entry" button in the history detail modal dialog.
+
+### Unit 13 — Wardrobe Insights & Wear Analytics (Completed)
+
+* Created backend `GET /api/insights` API endpoint with Clerk authentication to retrieve aggregated wardrobe analytics for the user.
+* Created Wardrobe Insights services (`services/insights/get-most-worn-garments.ts`, `get-least-worn-garments.ts`, `get-never-worn-garments.ts`, `get-most-worn-outfits.ts`) to calculate usage statistics and return presentation-ready data.
+* Updated `GET /api/garments` to compute and return `lastWornAt` metadata for garments based on containing outfit wear history.
+* Updated `types/index.ts` and `components/editor/garment-card.tsx` to display dynamic last worn information (`Last worn 4 days ago` or `Never worn`) on garment cards.
+* Created Wardrobe Insights page (`app/insights/page.tsx`) displaying Most Worn, Most Worn Outfits, Least Worn, and Never Worn sections in a spacious, editorial layout matching the sand/cream boutique aesthetic.
+* Integrated the `Insights` page into the `EditorNavbar` navigation header.
+
+### Unit 15 — Background Removal Pipeline (Completed)
+
+* Created modular `removeBackground(imageUrl)` service in `services/background-removal/remove-background.ts` using the remove.bg API with graceful degradation when `REMOVE_BG_API_KEY` is missing or the API call fails.
+* Added `processedImageUrl` (nullable string) and `bgRemovedAt` (nullable DateTime) fields to the `Garment` Prisma model and synced the database schema with `prisma db push`.
+* Updated `types/index.ts` to include the two new fields on the `Garment` interface.
+* Added `getDisplayImageUrl(garment)` utility to `lib/utils.ts` implementing the `processedImageUrl ?? imageUrl` resolution rule.
+* Wired fire-and-forget background removal into `POST /api/upload` — runs after the upload response is returned and only when both Cloudinary and `REMOVE_BG_API_KEY` are configured.
+* Created synchronous `POST /api/garments/[id]/remove-background` endpoint for manual re-triggering with full Clerk auth and ownership validation.
+* Updated all five image surfaces to use `getDisplayImageUrl()`: `GarmentCard`, `GarmentDetailsDialog`, `OutfitCard`, `OutfitBuilderDialog`, `HistoryDetailDialog`, and `TodaysRecommendations`.
+* Added a subtle pulsing "Processing" badge on `GarmentCard` when `processedImageUrl` is null and `bgRemovedAt` is null.
+* Added a "Background Processing" section inside the `GarmentDetailsDialog` AI Insights panel showing status and a manual "Remove Background" trigger button.
+* Fixed `bgRemovedAt` date serialization (`Date → ISO string`) in all four insight services to maintain TypeScript type safety.
+
+### Unit 14 — Preference Learning (Completed)
+
+* Implemented `UserPreference` schema model to store favorite colors, styles, categories, seasons, and clothing types, along with raw JSON preference scores.
+* Created modular deterministic preference calculation services (`calculate-scores.ts`, `build-profile.ts`, `update-profile.ts`) that evaluate user wear history, feedbacks, and favorites in background.
+* Created Clerk-authenticated preference retrieval API endpoint at `GET /api/preferences`.
+* Integrated preference profiles directly into recommendation scoring logic (`scoreOutfit`) using a Preference Match Bonus (up to +25 points) and a Preference Match Penalty (up to -30 points).
+* Designed and built the read-only editorial Style Preferences page (`app/preferences/page.tsx`) rendering favorite colors, styles, categories, and clothing types lists.
+* Integrated Preferences page navigation links in the dashboard header layout, resolving container click collisions.
+
 ---
 
 ## In Progress
@@ -171,11 +222,9 @@ Blockers:
 
 ## Next Up
 
-### Unit 2 — Wardrobe Upload Pipeline (Remaining)
+### Avatar / Virtual Try-On (Phase 3)
 
-Scope:
-
-* Background removal
+Or a build + QA pass before starting Phase 3.
 
 ---
 

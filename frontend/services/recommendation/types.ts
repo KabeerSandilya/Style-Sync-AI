@@ -5,4 +5,7 @@ export interface ScoredOutfit {
   score: number;
   explanation: string;
   outfit: Outfit;
+  feedbackType?: 'LIKE' | 'DISLIKE' | null;
+  wornToday?: boolean;
+  lastWorn?: string | Date | null;
 }

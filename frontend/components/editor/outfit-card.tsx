@@ -4,13 +4,44 @@
 
 import * as React from "react";
 import { Heart, Sparkles } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getDisplayImageUrl } from "@/lib/utils";
 import { Outfit } from "@/types";
 
 interface OutfitCardProps {
   outfit: Outfit;
   onFavoriteToggle?: (id: string, isFavorite: boolean) => void;
   onOutfitClick?: (outfit: Outfit) => void;
+}
+
+function formatLastWorn(wears?: { id: string; wornAt: string }[]) {
+  if (!wears || wears.length === 0) {
+    return "Never worn";
+  }
+
+  const lastWornDate = new Date(wears[0].wornAt);
+  const now = new Date();
+
+  // Strip time parts to compare dates only
+  const dDate = new Date(lastWornDate.getFullYear(), lastWornDate.getMonth(), lastWornDate.getDate());
+  const dNow = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  const diffTime = dNow.getTime() - dDate.getTime();
+  const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) {
+    return "Last worn Today";
+  } else if (diffDays === 1) {
+    return "Last worn Yesterday";
+  } else if (diffDays > 1 && diffDays <= 7) {
+    return `Last worn ${diffDays} days ago`;
+  } else {
+    const formatted = lastWornDate.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+    return `Last worn ${formatted}`;
+  }
 }
 
 export function OutfitCard({
@@ -41,7 +72,7 @@ export function OutfitCard({
       return (
         <div className="w-full h-full p-4 flex items-center justify-center bg-[#fcf9f5] dark:bg-[#151513]">
           <img
-            src={garmentsList[0].imageUrl}
+            src={getDisplayImageUrl(garmentsList[0])}
             alt={garmentsList[0].name}
             className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
           />
@@ -54,14 +85,14 @@ export function OutfitCard({
         <div className="w-full h-full relative overflow-hidden bg-[#fcf9f5] dark:bg-[#151513] flex items-center justify-center p-4">
           <div className="absolute left-[15%] w-[45%] h-[80%] flex items-center justify-center transform -rotate-6 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-[1.02]">
             <img
-              src={garmentsList[0].imageUrl}
+              src={getDisplayImageUrl(garmentsList[0])}
               alt={garmentsList[0].name}
               className="max-h-full max-w-full object-contain filter drop-shadow-md"
             />
           </div>
           <div className="absolute right-[15%] w-[45%] h-[80%] flex items-center justify-center transform rotate-6 z-10 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-[1.04]">
             <img
-              src={garmentsList[1].imageUrl}
+              src={getDisplayImageUrl(garmentsList[1])}
               alt={garmentsList[1].name}
               className="max-h-full max-w-full object-contain filter drop-shadow-md"
             />
@@ -77,7 +108,7 @@ export function OutfitCard({
         {/* First Garment - Bottom Layer Left */}
         <div className="absolute left-[10%] w-[40%] h-[70%] flex items-center justify-center transform -rotate-12 translate-y-4 opacity-80 transition-transform duration-300 group-hover:-rotate-18 group-hover:translate-x-[-4px]">
           <img
-            src={displayGarments[0].imageUrl}
+            src={getDisplayImageUrl(displayGarments[0])}
             alt={displayGarments[0].name}
             className="max-h-full max-w-full object-contain filter drop-shadow-sm"
           />
@@ -85,7 +116,7 @@ export function OutfitCard({
         {/* Second Garment - Bottom Layer Right */}
         <div className="absolute right-[10%] w-[40%] h-[70%] flex items-center justify-center transform rotate-12 translate-y-4 opacity-80 transition-transform duration-300 group-hover:rotate-18 group-hover:translate-x-[4px]">
           <img
-            src={displayGarments[1].imageUrl}
+            src={getDisplayImageUrl(displayGarments[1])}
             alt={displayGarments[1].name}
             className="max-h-full max-w-full object-contain filter drop-shadow-sm"
           />
@@ -93,7 +124,7 @@ export function OutfitCard({
         {/* Third Garment - Top Layer Centered */}
         <div className="absolute w-[50%] h-[80%] flex items-center justify-center transform -translate-y-2 z-10 transition-all duration-300 group-hover:scale-[1.05] group-hover:-translate-y-4">
           <img
-            src={displayGarments[2].imageUrl}
+            src={getDisplayImageUrl(displayGarments[2])}
             alt={displayGarments[2].name}
             className="max-h-full max-w-full object-contain filter drop-shadow-xl"
           />
@@ -137,14 +168,17 @@ export function OutfitCard({
           {outfit.name}
         </h3>
         {outfit.notes ? (
-          <p className="text-xs text-muted-foreground line-clamp-1 font-sans italic">
+          <p className="text-xs text-muted-foreground line-clamp-1 font-sans italic mb-1">
             {outfit.notes}
           </p>
         ) : (
-          <p className="text-xs text-muted-foreground/60 font-sans tracking-wide">
+          <p className="text-xs text-muted-foreground/60 font-sans tracking-wide mb-1">
             Manual Curation
           </p>
         )}
+        <div className="text-[10px] text-muted-foreground/80 font-sans uppercase tracking-wider font-semibold mt-0.5 border-t border-border/10 pt-1.5">
+          {formatLastWorn(outfit.wears)}
+        </div>
       </div>
     </div>
   );

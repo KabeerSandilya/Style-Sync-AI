@@ -77,8 +77,8 @@ export function explainRecommendation(
   }
 
   // 5. Preferred Style logic
-  if (userPreference?.preferredStyles && userPreference.preferredStyles.length > 0) {
-    const prefs = userPreference.preferredStyles.map((s) => s.toLowerCase());
+  if (userPreference?.favoriteStyles && userPreference.favoriteStyles.length > 0) {
+    const prefs = userPreference.favoriteStyles.map((s) => s.toLowerCase());
     const matchesStyle = garments.some((g) => {
       const gs = g.style ? g.style.toLowerCase() : "";
       return gs && prefs.some((p) => gs.includes(p) || p.includes(gs));

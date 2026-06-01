@@ -112,7 +112,6 @@ export default function Home() {
         <section className="w-full">
           <TodaysRecommendations
             onCreateOutfitClick={() => router.push("/editor/wardrobe?view=outfits")}
-            onOutfitClick={(o) => router.push(`/editor/wardrobe?selectedOutfitId=${o.id}&view=outfits`)}
           />
         </section>
 

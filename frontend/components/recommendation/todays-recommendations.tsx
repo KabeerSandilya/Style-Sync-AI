@@ -12,11 +12,14 @@ import {
   Plus, 
   HelpCircle,
   RotateCw,
-  Shuffle
+  Shuffle,
+  Check,
+  ThumbsUp,
+  ThumbsDown
 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, getDisplayImageUrl } from "@/lib/utils";
 import { ScoredOutfit } from "@/services/recommendation/types";
 import { WeatherContext } from "@/services/weather/types";
 
@@ -38,6 +41,70 @@ export function TodaysRecommendations({
   
   // Track currently featured recommended outfit
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const [actionLoading, setActionLoading] = React.useState<string | null>(null);
+
+  const handleWear = async (e: React.MouseEvent, outfitId: string) => {
+    e.stopPropagation();
+    if (actionLoading) return;
+    setActionLoading(`wear-${outfitId}`);
+    try {
+      const res = await fetch(`/api/recommendations/${outfitId}/wear`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.success) {
+        triggerRefresh();
+      } else {
+        console.error("Failed to record wear:", data.error);
+      }
+    } catch (err) {
+      console.error("Error recording wear:", err);
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
+  const handleLike = async (e: React.MouseEvent, outfitId: string) => {
+    e.stopPropagation();
+    if (actionLoading) return;
+    setActionLoading(`like-${outfitId}`);
+    try {
+      const res = await fetch(`/api/recommendations/${outfitId}/like`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.success) {
+        triggerRefresh();
+      } else {
+        console.error("Failed to record like:", data.error);
+      }
+    } catch (err) {
+      console.error("Error recording like:", err);
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
+  const handleDislike = async (e: React.MouseEvent, outfitId: string) => {
+    e.stopPropagation();
+    if (actionLoading) return;
+    setActionLoading(`dislike-${outfitId}`);
+    try {
+      const res = await fetch(`/api/recommendations/${outfitId}/dislike`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.success) {
+        triggerRefresh();
+      } else {
+        console.error("Failed to record dislike:", data.error);
+      }
+    } catch (err) {
+      console.error("Error recording dislike:", err);
+    } finally {
+      setActionLoading(null);
+    }
+  };
 
   const fetchRecommendations = React.useCallback(async (lat?: number, lon?: number) => {
     setLoading(true);
@@ -115,7 +182,7 @@ export function TodaysRecommendations({
       return (
         <div className="w-full h-full p-2 flex items-center justify-center bg-[#fcf9f5] dark:bg-[#151513]">
           <img
-            src={garmentsList[0].imageUrl}
+            src={getDisplayImageUrl(garmentsList[0])}
             alt={garmentsList[0].name}
             className="max-h-full max-w-full object-contain"
           />
@@ -128,14 +195,14 @@ export function TodaysRecommendations({
         <div className="w-full h-full relative overflow-hidden bg-[#fcf9f5] dark:bg-[#151513] flex items-center justify-center p-2">
           <div className="absolute left-[10%] w-[50%] h-[80%] flex items-center justify-center transform -rotate-6">
             <img
-              src={garmentsList[0].imageUrl}
+              src={getDisplayImageUrl(garmentsList[0])}
               alt={garmentsList[0].name}
               className="max-h-full max-w-full object-contain filter drop-shadow-sm"
             />
           </div>
           <div className="absolute right-[10%] w-[50%] h-[80%] flex items-center justify-center transform rotate-6 z-10">
             <img
-              src={garmentsList[1].imageUrl}
+              src={getDisplayImageUrl(garmentsList[1])}
               alt={garmentsList[1].name}
               className="max-h-full max-w-full object-contain filter drop-shadow-sm"
             />
@@ -153,7 +220,7 @@ export function TodaysRecommendations({
           isMini ? "translate-y-2 opacity-60" : "translate-y-3 opacity-70"
         )}>
           <img
-            src={displayGarments[0].imageUrl}
+            src={getDisplayImageUrl(displayGarments[0])}
             alt={displayGarments[0].name}
             className="max-h-full max-w-full object-contain"
           />
@@ -163,7 +230,7 @@ export function TodaysRecommendations({
           isMini ? "translate-y-2 opacity-60" : "translate-y-3 opacity-70"
         )}>
           <img
-            src={displayGarments[1].imageUrl}
+            src={getDisplayImageUrl(displayGarments[1])}
             alt={displayGarments[1].name}
             className="max-h-full max-w-full object-contain"
           />
@@ -173,7 +240,7 @@ export function TodaysRecommendations({
           isMini ? "-translate-y-1" : "-translate-y-2"
         )}>
           <img
-            src={displayGarments[2].imageUrl}
+            src={getDisplayImageUrl(displayGarments[2])}
             alt={displayGarments[2].name}
             className="max-h-full max-w-full object-contain filter drop-shadow-md"
           />
@@ -304,8 +371,11 @@ export function TodaysRecommendations({
         </div>
 
         <Card 
-          onClick={() => onOutfitClick?.(primary.outfit)}
-          className="group relative rounded-none border-border bg-card hover:border-border/80 transition-all duration-300 cursor-pointer shadow-xs hover:shadow-md overflow-hidden"
+          onClick={onOutfitClick ? () => onOutfitClick(primary.outfit) : undefined}
+          className={cn(
+            "group relative rounded-none border-border bg-card overflow-hidden",
+            onOutfitClick ? "transition-all duration-300 cursor-pointer shadow-xs hover:shadow-md hover:border-border/80" : ""
+          )}
         >
           {/* Reduced height horizontal design */}
           <div className="flex flex-col sm:flex-row w-full">
@@ -328,6 +398,59 @@ export function TodaysRecommendations({
                 <p className="text-[11px] text-muted-foreground leading-normal line-clamp-3 italic">
                   {primary.explanation}
                 </p>
+              </div>
+
+              {/* Action Buttons Row */}
+              <div 
+                className="flex items-center gap-3 mt-4 pt-3 border-t border-border/10"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Button
+                  size="sm"
+                  onClick={(e) => handleWear(e, primary.outfit.id)}
+                  disabled={actionLoading !== null || primary.wornToday}
+                  className="rounded-none h-8 px-4 text-xs font-sans font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Check className="w-3.5 h-3.5" />
+                  {actionLoading === `wear-${primary.outfit.id}`
+                    ? "Wearing..."
+                    : primary.wornToday
+                    ? "Worn Today"
+                    : "Wear This"}
+                </Button>
+                
+                <div className="flex items-center gap-1.5 ml-auto">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={(e) => handleLike(e, primary.outfit.id)}
+                    disabled={actionLoading !== null}
+                    className={cn(
+                      "rounded-none h-8 w-8 p-0 border-border/30 flex items-center justify-center cursor-pointer transition-colors",
+                      primary.feedbackType === "LIKE"
+                        ? "bg-primary/10 text-primary border-primary/30"
+                        : "text-muted-foreground hover:text-primary hover:bg-accent/10"
+                    )}
+                    title="Like recommendation"
+                  >
+                    <ThumbsUp className="w-3.5 h-3.5" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={(e) => handleDislike(e, primary.outfit.id)}
+                    disabled={actionLoading !== null}
+                    className={cn(
+                      "rounded-none h-8 w-8 p-0 border-border/30 flex items-center justify-center cursor-pointer transition-colors",
+                      primary.feedbackType === "DISLIKE"
+                        ? "bg-destructive/10 text-destructive border-destructive/20"
+                        : "text-muted-foreground hover:text-destructive hover:bg-destructive/5"
+                    )}
+                    title="Dislike recommendation"
+                  >
+                    <ThumbsDown className="w-3.5 h-3.5" />
+                  </Button>
+                </div>
               </div>
 
               {/* Spotlight Pagination / Swap Action */}

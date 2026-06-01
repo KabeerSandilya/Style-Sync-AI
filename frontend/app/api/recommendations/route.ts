@@ -3,11 +3,22 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { fetchWeather } from "@/services/weather";
 import { rankOutfits } from "@/services/recommendation/rank-outfits";
+import { getRecentWearsMap, getFeedbackHistoryMap } from "@/services/recommendation-history";
+
+import fs from "fs";
+import path from "path";
 
 export async function GET(req: Request) {
   try {
     // 1. Enforce Clerk authentication
     const { userId } = await auth();
+    try {
+      fs.appendFileSync(
+        path.join(process.cwd(), "api_debug.log"),
+        `${new Date().toISOString()} - GET /api/recommendations - userId: ${userId}\n`
+      );
+    } catch (e) {}
+
     if (!userId) {
       return NextResponse.json(
         { success: false, error: "Unauthorized" },
@@ -43,6 +54,13 @@ export async function GET(req: Request) {
       },
     });
 
+    try {
+      fs.appendFileSync(
+        path.join(process.cwd(), "api_debug.log"),
+        `${new Date().toISOString()} - fetched ${outfits.length} outfits for user ${userId}\n`
+      );
+    } catch (e) {}
+
     // 5. Retrieve user's preferences if they exist
     const userPreference = await prisma.userPreference.findUnique({
       where: {
@@ -50,26 +68,52 @@ export async function GET(req: Request) {
       },
     });
 
+    // 5.5. Retrieve wear and feedback history
+    const [wearsMap, feedbackMap] = await Promise.all([
+      getRecentWearsMap(userId),
+      getFeedbackHistoryMap(userId),
+    ]);
+
     // 6. Rank outfits based on scoring rules
     const rankedRecommendations = rankOutfits(
       outfits as any, // Cast to handle JSON dates/Prisma client types matching the Outfit interface
       weather,
-      userPreference || undefined
+      userPreference || undefined,
+      wearsMap,
+      feedbackMap
     );
 
     // Return the response containing the ranked outfit configurations and weather context
     return NextResponse.json({
       success: true,
-      data: rankedRecommendations.map((item) => ({
-        outfitId: item.outfitId,
-        score: item.score,
-        explanation: item.explanation,
-        outfit: item.outfit, // Embedded outfit object for high-performance frontend rendering
-      })),
+      data: rankedRecommendations.map((item) => {
+        const lastWorn = wearsMap[item.outfitId] || null;
+        let wornToday = false;
+        if (lastWorn) {
+          const startOfToday = new Date();
+          startOfToday.setHours(0, 0, 0, 0);
+          wornToday = new Date(lastWorn) >= startOfToday;
+        }
+        return {
+          outfitId: item.outfitId,
+          score: item.score,
+          explanation: item.explanation,
+          outfit: item.outfit, // Embedded outfit object for high-performance frontend rendering
+          feedbackType: feedbackMap[item.outfitId] || null,
+          lastWorn,
+          wornToday,
+        };
+      }),
       weather, // Exposing weather metadata to display in the contextual widget
     });
   } catch (error) {
     console.error("API error during recommendations generation:", error);
+    try {
+      fs.appendFileSync(
+        path.join(process.cwd(), "api_debug.log"),
+        `${new Date().toISOString()} - ERROR: ${error instanceof Error ? error.stack || error.message : String(error)}\n`
+      );
+    } catch (e) {}
     return NextResponse.json(
       { success: false, error: "Failed to generate outfit recommendations." },
       { status: 500 }

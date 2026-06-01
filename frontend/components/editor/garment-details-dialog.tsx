@@ -3,7 +3,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 
 import * as React from "react";
-import { Heart, X, Loader2, Trash2, Sparkles, AlertCircle } from "lucide-react";
+import { Heart, X, Loader2, Trash2, Sparkles, AlertCircle, ImageOff } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
+import { cn, getDisplayImageUrl } from "@/lib/utils";
 import { Garment } from "./garment-card";
 
 interface GarmentDetailsDialogProps {
@@ -65,8 +65,33 @@ export function GarmentDetailsDialog({
   const [saving, setSaving] = React.useState(false);
   const [deleting, setDeleting] = React.useState(false);
   const [classifying, setClassifying] = React.useState(false);
+  const [removingBg, setRemovingBg] = React.useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+
+  const handleRemoveBackground = async () => {
+    if (!garment || removingBg || saving || deleting) return;
+
+    setRemovingBg(true);
+    setError(null);
+
+    try {
+      const res = await fetch(`/api/garments/${garment.id}/remove-background`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Background removal failed.");
+      }
+      onSuccess("Background removed successfully.");
+      onClose();
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "Background removal failed.";
+      setError(errorMessage);
+    } finally {
+      setRemovingBg(false);
+    }
+  };
 
   const handleClassify = async () => {
     if (!garment || classifying || saving || deleting) return;
@@ -272,7 +297,7 @@ export function GarmentDetailsDialog({
                 <div className="w-full aspect-[4/5] bg-[#fcf9f5] dark:bg-[#151513] border border-border/30 rounded-2xl overflow-hidden flex items-center justify-center p-6 relative select-none">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={garment.imageUrl}
+                    src={getDisplayImageUrl(garment)}
                     alt={name || "Garment preview"}
                     className="w-full h-full object-contain transition-transform duration-300"
                   />
@@ -352,6 +377,45 @@ export function GarmentDetailsDialog({
                       </>
                     )}
                   </Button>
+
+                  {/* Background Processing Section */}
+                  <div className="pt-3 mt-1 border-t border-border/10 flex flex-col gap-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[9px] text-muted-foreground uppercase tracking-wider font-semibold">Background</span>
+                      {garment.processedImageUrl ? (
+                        <span className="text-[9px] text-primary font-semibold uppercase tracking-wider">Removed</span>
+                      ) : (
+                        <span className="text-[9px] text-muted-foreground/60 font-semibold uppercase tracking-wider animate-pulse">Pending</span>
+                      )}
+                    </div>
+                    {garment.bgRemovedAt && (
+                      <span className="text-[9px] text-muted-foreground/60">
+                        {new Date(garment.bgRemovedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                      </span>
+                    )}
+                    {!garment.processedImageUrl && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={handleRemoveBackground}
+                        disabled={removingBg || saving || deleting || classifying}
+                        className="w-full text-[10px] py-1.5 h-8 rounded-none border-border/80 hover:bg-accent/40 uppercase tracking-wider font-semibold"
+                      >
+                        {removingBg ? (
+                          <>
+                            <Loader2 className="w-3 animate-spin mr-1.5" />
+                            Processing...
+                          </>
+                        ) : (
+                          <>
+                            <ImageOff className="w-3 mr-1.5 text-primary" />
+                            Remove Background
+                          </>
+                        )}
+                      </Button>
+                    )}
+                  </div>
                 </div>
               </div>
 

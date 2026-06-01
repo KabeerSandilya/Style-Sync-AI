@@ -2,10 +2,41 @@
 
 import * as React from "react";
 import { Heart, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getDisplayImageUrl } from "@/lib/utils";
 
 import { Garment } from "@/types";
 export type { Garment };
+
+function formatLastWorn(lastWornAt?: string | null) {
+  if (!lastWornAt) {
+    return "Never worn";
+  }
+
+  const lastWornDate = new Date(lastWornAt);
+  const now = new Date();
+
+  // Strip time parts to compare dates only
+  const dDate = new Date(lastWornDate.getFullYear(), lastWornDate.getMonth(), lastWornDate.getDate());
+  const dNow = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  const diffTime = dNow.getTime() - dDate.getTime();
+  const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) {
+    return "Last worn Today";
+  } else if (diffDays === 1) {
+    return "Last worn Yesterday";
+  } else if (diffDays > 1 && diffDays <= 7) {
+    return `Last worn ${diffDays} days ago`;
+  } else {
+    const formatted = lastWornDate.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+    return `Last worn ${formatted}`;
+  }
+}
 
 interface GarmentCardProps {
   garment: Garment;
@@ -43,11 +74,19 @@ export function GarmentCard({ garment, onFavoriteToggle, onCardClick }: GarmentC
       <div className="aspect-[4/5] bg-[#fcf9f5] dark:bg-[#151513] relative flex items-center justify-center p-6 border-b border-border/10 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={garment.imageUrl}
+          src={getDisplayImageUrl(garment)}
           alt={garment.name}
           className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-102"
           loading="lazy"
         />
+
+        {/* Processing indicator — shown while background removal is pending */}
+        {!garment.processedImageUrl && !garment.bgRemovedAt && (
+          <span className="absolute bottom-4 right-4 flex items-center gap-1 bg-background/80 backdrop-blur-xs border border-border/30 px-2 py-0.5 rounded-sm select-none animate-pulse">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary/60" />
+            <span className="text-[9px] uppercase tracking-wider font-semibold text-muted-foreground">Processing</span>
+          </span>
+        )}
 
         {/* Favorite Icon Button */}
         <button
@@ -101,7 +140,7 @@ export function GarmentCard({ garment, onFavoriteToggle, onCardClick }: GarmentC
 
         {/* Metadata & Tags Block */}
         {(garment.isProcessed || (garment.tags && garment.tags.length > 0)) && (
-          <div className="flex flex-col gap-2 mt-auto pt-2 border-t border-border/10">
+          <div className="flex flex-col gap-2 mt-2 pt-2 border-t border-border/10">
             {/* AI Metadata Tags */}
             {garment.isProcessed && (
               <div className="flex flex-wrap gap-1">
@@ -143,6 +182,11 @@ export function GarmentCard({ garment, onFavoriteToggle, onCardClick }: GarmentC
             )}
           </div>
         )}
+
+        {/* Last Worn Metadata */}
+        <div className="text-[10px] text-muted-foreground/80 font-sans uppercase tracking-wider font-semibold mt-auto pt-2.5 border-t border-border/10">
+          {formatLastWorn(garment.lastWornAt)}
+        </div>
       </div>
     </div>
   );

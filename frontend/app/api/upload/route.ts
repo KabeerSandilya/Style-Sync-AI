@@ -2,6 +2,8 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { cloudinary } from "@/lib/cloudinary";
 import { prisma } from "@/lib/prisma";
+import { classifyGarment } from "@/services/garment-classification/classify-garment";
+import { removeBackground } from "@/services/background-removal/remove-background";
 
 export async function POST(req: Request) {
   try {
@@ -52,9 +54,9 @@ export async function POST(req: Request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const hasCloudinaryCreds = 
-      process.env.CLOUDINARY_CLOUD_NAME && 
-      process.env.CLOUDINARY_API_KEY && 
+    const hasCloudinaryCreds =
+      process.env.CLOUDINARY_CLOUD_NAME &&
+      process.env.CLOUDINARY_API_KEY &&
       process.env.CLOUDINARY_API_SECRET;
 
     let imageUrl = "";
@@ -105,7 +107,7 @@ export async function POST(req: Request) {
 
     const garmentName = name && name.trim() !== "" ? name.trim().substring(0, 100) : "New Garment";
     const garmentCategory = category && VALID_CATEGORIES.includes(category) ? category : "Uncategorized";
-    const garmentTags = tagsString 
+    const garmentTags = tagsString
       ? tagsString.split(",").map(t => t.trim().toLowerCase()).filter(t => t.length > 0)
       : [];
     const isFavorite = isFavoriteString === "true";
@@ -124,8 +126,68 @@ export async function POST(req: Request) {
       },
     });
 
-    // 7. Background classification is no longer automatically triggered on upload.
-    // Classification will only run when the user explicitly clicks the "classify" button in the UI.
+    // 7. Fire-and-forget background classification
+    if (process.env.GEMINI_API_KEY) {
+      classifyGarment(imageUrl)
+        .then(async (metadata) => {
+          await prisma.garment.update({
+            where: { id: garment.id },
+            data: {
+              category: metadata.category,
+              subcategory: metadata.subcategory,
+              primaryColor: metadata.primaryColor,
+              secondaryColor: metadata.secondaryColor,
+              season: metadata.season,
+              style: metadata.style,
+              material: metadata.material,
+              confidence: metadata.confidence,
+              isProcessed: true,
+            },
+          });
+          console.log(`Auto-classification completed for garment ${garment.id}`);
+        })
+        .catch((error) => {
+          console.error(`Auto-classification failed for garment ${garment.id}:`, error);
+        });
+    }
+
+    // 8. Fire-and-forget background removal (self-hosted model, no API key required)
+    if (hasCloudinaryCreds) {
+      removeBackground(imageUrl)
+        .then(async (processedBuffer) => {
+          if (!processedBuffer) return;
+
+          const uploadProcessed = (): Promise<{ secure_url: string }> => {
+            return new Promise((resolve, reject) => {
+              const stream = cloudinary.uploader.upload_stream(
+                {
+                  folder: `stylesync/wardrobe/${userId}/processed`,
+                  resource_type: "image",
+                  format: "png",
+                },
+                (error, result) => {
+                  if (error) reject(error);
+                  else resolve(result as { secure_url: string });
+                }
+              );
+              stream.end(processedBuffer);
+            });
+          };
+
+          const uploadResult = await uploadProcessed();
+          await prisma.garment.update({
+            where: { id: garment.id },
+            data: {
+              processedImageUrl: uploadResult.secure_url,
+              bgRemovedAt: new Date(),
+            },
+          });
+          console.log(`Background removal completed for garment ${garment.id}`);
+        })
+        .catch((error) => {
+          console.error(`Background removal failed for garment ${garment.id}:`, error);
+        });
+    }
 
     return NextResponse.json({
       success: true,

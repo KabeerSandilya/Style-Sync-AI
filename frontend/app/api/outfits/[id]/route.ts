@@ -69,17 +69,42 @@ export async function PATCH(
       }
 
       // Verify that all new garments belong to this user
-      const ownedGarmentsCount = await prisma.garment.count({
+      const ownedGarments = await prisma.garment.findMany({
         where: {
           id: { in: body.garmentIds },
           userId,
         },
       });
 
-      if (ownedGarmentsCount !== body.garmentIds.length) {
+      if (ownedGarments.length !== body.garmentIds.length) {
         return NextResponse.json(
           { success: false, error: "Invalid garment selection or ownership." },
           { status: 403 }
+        );
+      }
+
+      // Enforce wardrobe rules: max 1 footwear, max 1 lower body garment
+      const footwearCount = ownedGarments.filter((g) => {
+        const cat = g.category.toLowerCase();
+        return cat.includes("foot") || cat === "footwear";
+      }).length;
+
+      if (footwearCount > 1) {
+        return NextResponse.json(
+          { success: false, error: "An outfit can only include at most one footwear garment." },
+          { status: 400 }
+        );
+      }
+
+      const lowerCount = ownedGarments.filter((g) => {
+        const cat = g.category.toLowerCase();
+        return cat.includes("bottom") || cat === "lower" || cat === "bottomwear" || cat === "bottoms";
+      }).length;
+
+      if (lowerCount > 1) {
+        return NextResponse.json(
+          { success: false, error: "An outfit can only include at most one lower body garment (bottomwear)." },
+          { status: 400 }
         );
       }
 
@@ -119,6 +144,11 @@ export async function PATCH(
         },
       },
     });
+
+    if (body.isFavorite !== undefined) {
+      const { updatePreferenceProfile } = await import("@/services/preferences/update-profile");
+      await updatePreferenceProfile(userId);
+    }
 
     return NextResponse.json({
       success: true,

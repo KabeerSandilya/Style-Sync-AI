@@ -3,7 +3,9 @@ model Garment {
 
   userId          String
 
-  imageUrl        String
+  imageUrl          String
+  processedImageUrl String?
+  bgRemovedAt       DateTime?
 
   name            String
   category        String
