@@ -5,6 +5,8 @@ import { PanelLeftOpen, PanelLeftClose } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { UserButton } from "@clerk/nextjs";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface EditorNavbarProps {
   isSidebarOpen: boolean;
@@ -19,6 +21,8 @@ export function EditorNavbar({
   title,
   className,
 }: EditorNavbarProps) {
+  const pathname = usePathname();
+
   return (
     <header
       className={cn(
@@ -26,13 +30,13 @@ export function EditorNavbar({
         className
       )}
     >
-      {/* Left Section - Sidebar Toggle */}
-      <div className="flex items-center w-1/3 justify-start">
+      {/* Left Section - Sidebar Toggle & Nav Links */}
+      <div className="flex items-center gap-6 justify-start flex-1 min-w-0">
         <Button
           variant="outline"
           size="icon"
           onClick={onSidebarToggle}
-          className="rounded-none border border-border/60 bg-card/60 hover:bg-accent/40 text-foreground transition-all duration-300 flex items-center justify-center shadow-sm"
+          className="rounded-none border border-border/60 bg-card/60 hover:bg-accent/40 text-foreground transition-all duration-300 flex items-center justify-center shadow-sm shrink-0"
           aria-label={isSidebarOpen ? "Close wardrobe sidebar" : "Open wardrobe sidebar"}
         >
           {isSidebarOpen ? (
@@ -41,21 +45,72 @@ export function EditorNavbar({
             <PanelLeftOpen className="w-4 h-4 text-foreground/80" />
           )}
         </Button>
+
+        <nav className="hidden md:flex items-center gap-5 text-xs font-semibold uppercase tracking-wider text-muted-foreground select-none">
+          <Link
+            href="/editor/wardrobe"
+            className={cn(
+              "hover:text-foreground transition-colors",
+              pathname === "/editor/wardrobe" ? "text-foreground font-bold" : ""
+            )}
+          >
+            Wardrobe
+          </Link>
+          <Link
+            href="/editor/wardrobe?view=outfits"
+            className={cn(
+              "hover:text-foreground transition-colors",
+              pathname === "/editor/wardrobe" ? "text-foreground font-bold" : ""
+            )}
+          >
+            Outfits
+          </Link>
+          <Link
+            href="/history"
+            className={cn(
+              "hover:text-foreground transition-colors",
+              pathname === "/history" ? "text-foreground font-bold" : ""
+            )}
+          >
+            History
+          </Link>
+          <Link
+            href="/insights"
+            className={cn(
+              "hover:text-foreground transition-colors",
+              pathname === "/insights" ? "text-foreground font-bold" : ""
+            )}
+          >
+            Insights
+          </Link>
+          <Link
+            href="/preferences"
+            className={cn(
+              "hover:text-foreground transition-colors",
+              pathname === "/preferences" ? "text-foreground font-bold" : ""
+            )}
+          >
+            Preferences
+          </Link>
+        </nav>
       </div>
 
       {/* Center Section - Contextual Information */}
-      <div className="flex items-center w-1/3 justify-center text-center">
+      <div className="flex items-center justify-center text-center shrink-0 mx-4">
         {title ? (
-          <span className="font-serif text-lg md:text-xl font-medium tracking-tight text-foreground transition-all duration-300">
+          <Link 
+            href="/editor" 
+            className="font-serif text-lg md:text-xl font-medium tracking-tight text-foreground transition-all duration-300 hover:text-primary"
+          >
             {title}
-          </span>
+          </Link>
         ) : (
           <div className="w-16 h-1 bg-border/20 rounded-none" /> /* Visually balanced minimal placeholder */
         )}
       </div>
 
-      {/* Right Section - Reserved for future action placeholders */}
-      <div className="flex items-center w-1/3 justify-end">
+      {/* Right Section - Clerk User Profile Button */}
+      <div className="flex items-center justify-end flex-1">
         <UserButton 
           appearance={{
             elements: {

@@ -1,0 +1,18 @@
+model Recommendation {
+  id              String   @id @default(cuid())
+
+  userId          String
+
+  explanation     String?
+
+  weatherContext  Json?
+
+  createdAt       DateTime @default(now())
+
+  outfitId        String?
+
+  outfit          Outfit? @relation(fields: [outfitId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([createdAt])
+}

@@ -10,29 +10,3 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
-
-model Garment {
-  id              String   @id @default(cuid())
-
-  userId          String
-  imageUrl        String
-
-  name            String
-  category        String
-
-  notes           String?
-
-  tags            String[]
-
-  dominantColor   String?
-  season          String?
-  occasion         String?
-  clothingType     String?
-
-  isProcessed      Boolean  @default(false)
-
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-
-  @@index([userId])
-}

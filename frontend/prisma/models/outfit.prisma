@@ -1,0 +1,41 @@
+model Outfit {
+  id            String   @id @default(cuid())
+
+  userId        String
+
+  name          String
+
+  notes         String?
+
+  isFavorite    Boolean @default(false)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  garments      OutfitGarment[]
+
+  recommendations Recommendation[]
+  feedbacks       RecommendationFeedback[]
+  wears           OutfitWear[]
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model OutfitGarment {
+  id           String   @id @default(cuid())
+
+  outfitId     String
+  garmentId    String
+
+  outfit       Outfit @relation(fields: [outfitId], references: [id], onDelete: Cascade)
+
+  garment      Garment @relation(fields: [garmentId], references: [id], onDelete: Cascade)
+
+  createdAt    DateTime @default(now())
+
+  @@unique([outfitId, garmentId])
+
+  @@index([outfitId])
+  @@index([garmentId])
+}
