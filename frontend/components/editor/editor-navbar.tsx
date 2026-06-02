@@ -111,10 +111,46 @@ export function EditorNavbar({
 
       {/* Right Section - Clerk User Profile Button */}
       <div className="flex items-center justify-end flex-1">
-        <UserButton 
+        <UserButton
           appearance={{
+            variables: {
+              colorBackground: "#fffefb",
+              colorNeutral: "#1c1917",
+              colorForeground: "#1c1917",
+              colorMutedForeground: "#78716c",
+              colorPrimary: "#708272",
+              colorPrimaryForeground: "#fffefb",
+              colorBorder: "#ebdcd0",
+              colorInput: "#faf6f0",
+              colorInputForeground: "#1c1917",
+              borderRadius: "0px",
+            },
             elements: {
-              avatarBox: "w-8 h-8 rounded-none border border-border/60 hover:scale-105 transition-transform"
+              avatarBox: "w-8 h-8 rounded-none border border-border/60 hover:scale-105 transition-transform",
+              userButtonPopoverCard: {
+                background: "#fffefb",
+                border: "1px solid #ebdcd0",
+                borderRadius: "0px",
+                boxShadow: "0 4px 24px rgba(28,25,23,0.12)",
+              },
+              userButtonPopoverActions: {
+                background: "#fffefb",
+              },
+              userButtonPopoverActionButton: {
+                background: "#fffefb",
+                color: "#1c1917",
+                borderRadius: "0px",
+              },
+              userButtonPopoverActionButtonText: {
+                color: "#1c1917",
+              },
+              userButtonPopoverActionButtonIcon: {
+                color: "#708272",
+              },
+              userButtonPopoverFooter: {
+                background: "#f5ece3",
+                borderTop: "1px solid #ebdcd0",
+              },
             }
           }}
         />

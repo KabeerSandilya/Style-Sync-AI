@@ -139,45 +139,66 @@
   }
 }
 
-/* Clerk UserButton Custom Styling Overrides */
+/* Clerk UserButton Popover — always light warm palette */
 .cl-userButtonPopoverCard {
-  border: 1px solid var(--border) !important;
-  background-color: var(--card) !important;
-  border-radius: var(--radius) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid #ebdcd0 !important;
+  background-color: #fffefb !important;
+  border-radius: 0px !important;
+  box-shadow: 0 4px 24px rgba(28, 25, 23, 0.12) !important;
+}
+
+.cl-userButtonPopoverUserInfo {
+  background-color: #fffefb !important;
+  border-bottom: 1px solid #ebdcd0 !important;
+}
+
+.cl-userButtonPopoverUserInfoName {
+  color: #1c1917 !important;
+  font-weight: 600 !important;
+}
+
+.cl-userButtonPopoverUserInfoEmail {
+  color: #78716c !important;
+}
+
+.cl-userButtonPopoverActions {
+  background-color: #fffefb !important;
 }
 
 .cl-userButtonPopoverActionButton {
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
   gap: 10px !important;
-  padding: 14px 20px !important;
+  padding: 12px 20px !important;
   width: 100% !important;
-  color: var(--foreground) !important;
-  background-color: transparent !important;
-  transition: all 0.2s ease-in-out !important;
-  border-radius: var(--radius) !important;
+  color: #1c1917 !important;
+  background-color: #fffefb !important;
+  transition: background-color 0.15s ease !important;
+  border-radius: 0px !important;
 }
 
 .cl-userButtonPopoverActionButton:hover {
-  background-color: var(--accent) !important;
+  background-color: #f5ece3 !important;
 }
 
 .cl-userButtonPopoverActionButtonText {
-  color: var(--foreground) !important;
-  font-family: var(--font-sans), sans-serif !important;
-  font-size: 13.5px !important;
+  color: #1c1917 !important;
+  font-size: 13px !important;
   font-weight: 500 !important;
 }
 
 .cl-userButtonPopoverActionButtonIcon {
-  color: var(--foreground) !important;
-  width: 16px !important;
-  height: 16px !important;
+  color: #708272 !important;
+  width: 15px !important;
+  height: 15px !important;
 }
 
 .cl-userButtonPopoverFooter {
-  background-color: var(--muted) !important;
-  border-top: 1px solid var(--border) !important;
+  background-color: #f5ece3 !important;
+  border-top: 1px solid #ebdcd0 !important;
+}
+
+.cl-userButtonPopoverFooter a,
+.cl-userButtonPopoverFooter span {
+  color: #78716c !important;
 }

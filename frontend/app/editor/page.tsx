@@ -92,26 +92,34 @@ export default function Home() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-3xl w-full mx-auto px-6 md:px-8 py-12 flex flex-col gap-10">
-        
         {/* Editorial Centered Hero Block */}
         <section className="flex flex-col items-center text-center gap-2 pb-6 border-b border-border/30">
           <div className="flex items-center gap-2 text-primary">
             <Sparkles className="w-5 h-5" />
-            <span className="text-xs uppercase tracking-wider font-semibold">Seasonal Influx</span>
+            <span className="text-xs uppercase tracking-wider font-semibold">
+              Seasonal Influx
+            </span>
           </div>
           <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight leading-tight mt-1">
             An editorial approach <br />
-            to your <span className="italic font-light text-primary">daily silhouette</span>.
+            to your{" "}
+            <span className="italic font-light text-primary">
+              daily silhouette
+            </span>
+            .
           </h1>
           <p className="text-xs text-muted-foreground max-w-md font-sans mt-2 leading-relaxed">
-            StyleSync AI evaluates your wardrobe collection against current weather conditions to formulate recommendations.
+            StyleSync AI evaluates your wardrobe collection against current
+            weather conditions to formulate recommendations.
           </p>
         </section>
 
         {/* Dynamic weather & outfit recommendations */}
         <section className="w-full">
           <TodaysRecommendations
-            onCreateOutfitClick={() => router.push("/editor/wardrobe?view=outfits")}
+            onCreateOutfitClick={() =>
+              router.push("/editor/wardrobe?view=outfits")
+            }
           />
         </section>
 
@@ -129,7 +137,9 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-border/30 py-12 px-6 bg-card/10 text-center font-sans text-xs text-muted-foreground mt-auto">
-        <p>© 2026 StyleSync AI. Crafted with an editorial fashion perspective.</p>
+        <p>
+          © 2026 StyleSync AI. Crafted with an editorial fashion perspective.
+        </p>
       </footer>
     </div>
   );

@@ -3,7 +3,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 
 import * as React from "react";
-import { Upload, X, Loader2, Sparkles, Heart } from "lucide-react";
+import { Upload, X, Loader2, Sparkles, Heart, Check } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -56,7 +56,16 @@ export function UploadGarmentDialog({
   const [dragActive, setDragActive] = React.useState(false);
   const [file, setFile] = React.useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
-  
+
+  // Client-side background removal state
+  type BgState = "idle" | "processing" | "done" | "failed";
+  const [bgState, setBgState] = React.useState<BgState>("idle");
+  const [bgProgress, setBgProgress] = React.useState(0); // 0-100
+  const [processedBlob, setProcessedBlob] = React.useState<Blob | null>(null);
+  const [processedPreviewUrl, setProcessedPreviewUrl] = React.useState<string | null>(null);
+  // Used to discard stale BG removal results if user swaps file mid-flight
+  const bgJobId = React.useRef(0);
+
   // Clothing Metadata States
   const [name, setName] = React.useState("");
   const [category, setCategory] = React.useState("Uncategorized");
@@ -68,6 +77,42 @@ export function UploadGarmentDialog({
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  // Start client-side background removal as soon as a file is picked.
+  // Runs in parallel while the user fills in name/notes — free and works on Vercel.
+  const startBgRemoval = React.useCallback(async (selectedFile: File) => {
+    const jobId = ++bgJobId.current;
+    setBgState("processing");
+    setBgProgress(0);
+    setProcessedBlob(null);
+    if (processedPreviewUrl) {
+      URL.revokeObjectURL(processedPreviewUrl);
+      setProcessedPreviewUrl(null);
+    }
+
+    try {
+      // Dynamic import keeps the WASM bundle out of the initial page load
+      const { removeBackground } = await import("@imgly/background-removal");
+
+      const result = await removeBackground(selectedFile, {
+        progress: (_key: string, current: number, total: number) => {
+          if (total > 0) setBgProgress(Math.round((current / total) * 100));
+        },
+      });
+
+      // Discard if user picked a different file while this was running
+      if (jobId !== bgJobId.current) return;
+
+      const url = URL.createObjectURL(result);
+      setProcessedBlob(result);
+      setProcessedPreviewUrl(url);
+      setBgState("done");
+    } catch (err) {
+      if (jobId !== bgJobId.current) return;
+      console.warn("[BG removal] client-side failed, server will handle it:", err);
+      setBgState("failed");
+    }
+  }, [processedPreviewUrl]);
 
   // Clean up preview URL when component unmounts or file changes
   React.useEffect(() => {
@@ -81,11 +126,19 @@ export function UploadGarmentDialog({
   // Handle dialog close and reset state
   React.useEffect(() => {
     if (!open) {
+      bgJobId.current++; // invalidate any in-flight BG job
       setFile(null);
       if (previewUrl) {
         URL.revokeObjectURL(previewUrl);
         setPreviewUrl(null);
       }
+      if (processedPreviewUrl) {
+        URL.revokeObjectURL(processedPreviewUrl);
+        setProcessedPreviewUrl(null);
+      }
+      setProcessedBlob(null);
+      setBgState("idle");
+      setBgProgress(0);
       setName("");
       setCategory("Uncategorized");
       setTags([]);
@@ -128,6 +181,13 @@ export function UploadGarmentDialog({
     return true;
   };
 
+  const selectFile = (selectedFile: File) => {
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    setFile(selectedFile);
+    setPreviewUrl(URL.createObjectURL(selectedFile));
+    startBgRemoval(selectedFile);
+  };
+
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -137,10 +197,7 @@ export function UploadGarmentDialog({
 
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const droppedFile = e.dataTransfer.files[0];
-      if (validateFile(droppedFile)) {
-        setFile(droppedFile);
-        setPreviewUrl(URL.createObjectURL(droppedFile));
-      }
+      if (validateFile(droppedFile)) selectFile(droppedFile);
     }
   };
 
@@ -150,10 +207,7 @@ export function UploadGarmentDialog({
 
     if (e.target.files && e.target.files[0]) {
       const selectedFile = e.target.files[0];
-      if (validateFile(selectedFile)) {
-        setFile(selectedFile);
-        setPreviewUrl(URL.createObjectURL(selectedFile));
-      }
+      if (validateFile(selectedFile)) selectFile(selectedFile);
     }
   };
 
@@ -166,11 +220,13 @@ export function UploadGarmentDialog({
     e.stopPropagation();
     if (loading) return;
 
+    bgJobId.current++; // invalidate any in-flight BG job
     setFile(null);
-    if (previewUrl) {
-      URL.revokeObjectURL(previewUrl);
-      setPreviewUrl(null);
-    }
+    if (previewUrl) { URL.revokeObjectURL(previewUrl); setPreviewUrl(null); }
+    if (processedPreviewUrl) { URL.revokeObjectURL(processedPreviewUrl); setProcessedPreviewUrl(null); }
+    setProcessedBlob(null);
+    setBgState("idle");
+    setBgProgress(0);
     setError(null);
   };
 
@@ -198,7 +254,13 @@ export function UploadGarmentDialog({
 
     const formData = new FormData();
     formData.append("file", file);
-    
+
+    // If client-side BG removal succeeded, send the processed PNG.
+    // The server will upload it directly and skip its own BG removal job.
+    if (processedBlob) {
+      formData.append("processedImageFile", processedBlob, "processed.png");
+    }
+
     if (name.trim()) {
       formData.append("name", name.trim());
     }
@@ -280,12 +342,30 @@ export function UploadGarmentDialog({
             {previewUrl ? (
               <div className="w-full flex flex-col items-center gap-3 relative">
                 <div className="aspect-[4/5] w-36 max-w-full bg-[#fcf9f5] border border-border/30 relative flex items-center justify-center overflow-hidden group shadow-sm">
+                  {/* Show processed preview when ready, original otherwise */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={previewUrl}
+                    src={processedPreviewUrl ?? previewUrl}
                     alt="Selected garment preview"
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain transition-opacity duration-300"
                   />
+
+                  {/* BG removal status badge */}
+                  {bgState === "processing" && (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/60 backdrop-blur-xs gap-1.5">
+                      <Loader2 className="w-5 h-5 animate-spin text-primary" />
+                      <span className="text-[9px] font-semibold uppercase tracking-wider text-foreground">
+                        {bgProgress < 100 ? `Loading model ${bgProgress}%` : "Processing…"}
+                      </span>
+                    </div>
+                  )}
+                  {bgState === "done" && (
+                    <div className="absolute bottom-2 left-2 flex items-center gap-1 bg-primary/90 text-primary-foreground px-2 py-0.5">
+                      <Check className="w-2.5 h-2.5" />
+                      <span className="text-[8px] font-bold uppercase tracking-wider">BG Removed</span>
+                    </div>
+                  )}
+
                   {!loading && (
                     <button
                       type="button"
