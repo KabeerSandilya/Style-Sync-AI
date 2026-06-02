@@ -1,8 +1,8 @@
-# StyleSync AI — Your Digital Wardrobe
+# StyleSync AI - Your Digital Wardrobe
 
 > An AI-powered wardrobe platform that evaluates your clothing collection against real-time weather conditions to generate personalized outfit recommendations.
 
-![StyleSync AI Dashboard](./screenshots/dashboard.png)
+![StyleSync AI Dashboard](./screenshots/dashboard.webp)
 
 ---
 
@@ -21,11 +21,11 @@ StyleSync AI replaces the daily "what do I wear" decision with an intelligent re
 
 | Dashboard | Saved Outfits |
 |-----------|---------------|
-| ![Dashboard](./screenshots/dashboard.png) | ![Outfits](./screenshots/outfits.png) |
+| ![Dashboard](./screenshots/dashboard.webp) | ![Outfits](./screenshots/outfits.webp) |
 
 | Style Timeline | Learned Preferences |
 |----------------|---------------------|
-| ![History](./screenshots/history.png) | ![Preferences](./screenshots/preferences.png) |
+| ![History](./screenshots/history.webp) | ![Preferences](./screenshots/preferences.webp) |
 
 ---
 
