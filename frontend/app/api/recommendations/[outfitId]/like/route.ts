@@ -1,7 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { updatePreferenceProfile } from "@/services/preferences/update-profile";
+import { prisma, updatePreferenceProfile } from "@style-sync/backend";
 
 export async function POST(
   req: Request,

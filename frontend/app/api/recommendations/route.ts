@@ -1,23 +1,11 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { fetchWeather } from "@/services/weather";
-import { rankOutfits } from "@/services/recommendation/rank-outfits";
-import { getRecentWearsMap, getFeedbackHistoryMap } from "@/services/recommendation-history";
-
-import fs from "fs";
-import path from "path";
+import { prisma, fetchWeather, rankOutfits, getRecentWearsMap, getFeedbackHistoryMap } from "@style-sync/backend";
 
 export async function GET(req: Request) {
   try {
     // 1. Enforce Clerk authentication
     const { userId } = await auth();
-    try {
-      fs.appendFileSync(
-        path.join(process.cwd(), "api_debug.log"),
-        `${new Date().toISOString()} - GET /api/recommendations - userId: ${userId}\n`
-      );
-    } catch (e) {}
 
     if (!userId) {
       return NextResponse.json(
@@ -54,12 +42,12 @@ export async function GET(req: Request) {
       },
     });
 
-    try {
-      fs.appendFileSync(
-        path.join(process.cwd(), "api_debug.log"),
-        `${new Date().toISOString()} - fetched ${outfits.length} outfits for user ${userId}\n`
-      );
-    } catch (e) {}
+    // 4a. Cold-start detection: determine why recommendations would be empty
+    if (outfits.length === 0) {
+      const garmentCount = await prisma.garment.count({ where: { userId } });
+      const coldStartReason = garmentCount === 0 ? "no_garments" : "no_outfits";
+      return NextResponse.json({ success: true, data: [], weather, coldStartReason });
+    }
 
     // 5. Retrieve user's preferences if they exist
     const userPreference = await prisma.userPreference.findUnique({
@@ -108,12 +96,6 @@ export async function GET(req: Request) {
     });
   } catch (error) {
     console.error("API error during recommendations generation:", error);
-    try {
-      fs.appendFileSync(
-        path.join(process.cwd(), "api_debug.log"),
-        `${new Date().toISOString()} - ERROR: ${error instanceof Error ? error.stack || error.message : String(error)}\n`
-      );
-    } catch (e) {}
     return NextResponse.json(
       { success: false, error: "Failed to generate outfit recommendations." },
       { status: 500 }

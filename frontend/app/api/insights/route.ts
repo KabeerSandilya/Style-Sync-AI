@@ -1,10 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { getMostWornGarments } from "@/services/insights/get-most-worn-garments";
-import { getLeastWornGarments } from "@/services/insights/get-least-worn-garments";
-import { getNeverWornGarments } from "@/services/insights/get-never-worn-garments";
-import { getMostWornOutfits } from "@/services/insights/get-most-worn-outfits";
-import { prisma } from "@/lib/prisma";
+import { getMostWornGarments, getLeastWornGarments, getNeverWornGarments, getMostWornOutfits, prisma } from "@style-sync/backend";
 
 export async function GET() {
   try {
