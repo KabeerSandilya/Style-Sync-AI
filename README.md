@@ -155,4 +155,4 @@ Open [http://localhost:3000](http://localhost:3000)
 ## Built By
 
 **Kabeer Sandilya** — CS undergrad at DTU, New Delhi  
-[GitHub](https://github.com/KabeerSandilya) · [LinkedIn](https://www.linkedin.com/in/kabeersandilya) · [Email](mailto:kabeersandilya20@gmail.com)
+[GitHub](https://github.com/KabeerSandilya) · [LinkedIn]([https://www.linkedin.com/in/kabeersandilya) · [Email](mailto:kabeersandilya20@gmail.com)
