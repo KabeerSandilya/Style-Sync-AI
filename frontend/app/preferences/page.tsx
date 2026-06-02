@@ -1,11 +1,33 @@
 "use client";
 
 import * as React from "react";
-import { Sparkles, ChevronLeft } from "lucide-react";
+import { Sparkles, ChevronLeft, Check, Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import { EditorNavbar } from "@/components/editor/editor-navbar";
 import { ProjectSidebar } from "@/components/editor/project-sidebar";
+import { cn } from "@/lib/utils";
 import { Garment, Outfit } from "@/types";
+
+const MANUAL_COLORS: { label: string; hex: string }[] = [
+  { label: "Black",    hex: "#1a1a1a" },
+  { label: "White",    hex: "#f5f5f5" },
+  { label: "Navy",     hex: "#1b2a4a" },
+  { label: "Beige",    hex: "#d4b896" },
+  { label: "Brown",    hex: "#7c5a3e" },
+  { label: "Grey",     hex: "#8a8a8a" },
+  { label: "Olive",    hex: "#6b7045" },
+  { label: "Burgundy", hex: "#6d1a2e" },
+  { label: "Cream",    hex: "#fffefb" },
+  { label: "Sage",     hex: "#708272" },
+  { label: "Blue",     hex: "#3b6ea5" },
+  { label: "Green",    hex: "#3a7d44" },
+  { label: "Red",      hex: "#c0392b" },
+];
+
+const MANUAL_STYLES = [
+  "Casual", "Formal", "Streetwear", "Minimal", "Athleisure", "Business Casual", "Bohemian",
+];
 
 interface PreferencesProfile {
   favoriteColors: string[];
@@ -51,6 +73,12 @@ export default function PreferencesPage() {
   const [threshold, setThreshold] = React.useState(5);
   const [savingThreshold, setSavingThreshold] = React.useState(false);
 
+  // Manual preference editing state
+  const [editOpen, setEditOpen] = React.useState(false);
+  const [editColors, setEditColors] = React.useState<string[]>([]);
+  const [editStyles, setEditStyles] = React.useState<string[]>([]);
+  const [savingManual, setSavingManual] = React.useState(false);
+
   const fetchPreferences = async () => {
     setLoading(true);
     try {
@@ -59,11 +87,35 @@ export default function PreferencesPage() {
       if (data.success && data.data) {
         setProfile(data.data);
         setThreshold(data.data.threshold ?? 5);
+        setEditColors(data.data.favoriteColors ?? []);
+        setEditStyles(data.data.favoriteStyles ?? []);
       }
     } catch (e) {
       console.error("Failed to fetch preferences:", e);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleManualSave = async () => {
+    setSavingManual(true);
+    try {
+      const res = await fetch("/api/preferences", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ favoriteColors: editColors, favoriteStyles: editStyles }),
+      });
+      const data = await res.json();
+      if (data.success && data.data) {
+        setProfile(data.data);
+        setEditColors(data.data.favoriteColors ?? []);
+        setEditStyles(data.data.favoriteStyles ?? []);
+        setEditOpen(false);
+      }
+    } catch (e) {
+      console.error("Failed to save manual preferences:", e);
+    } finally {
+      setSavingManual(false);
     }
   };
 
@@ -232,6 +284,111 @@ export default function PreferencesPage() {
               <span>30 (Strict)</span>
             </div>
           </div>
+        </section>
+
+        {/* Manual Preference Override Panel */}
+        <section className="border border-border/30 bg-card p-6 flex flex-col gap-5 rounded-none shadow-xs">
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-1">
+              <h3 className="font-serif text-lg font-medium tracking-tight">Edit Style Preferences</h3>
+              <p className="font-sans text-xs text-muted-foreground leading-relaxed">
+                Manually set your preferred colours and aesthetics. These seed recommendations immediately.
+              </p>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setEditOpen((v) => !v)}
+              className="rounded-none border-border/40 text-xs font-semibold uppercase tracking-wider px-4 flex items-center gap-2"
+            >
+              <Pencil className="w-3 h-3" />
+              {editOpen ? "Cancel" : "Edit"}
+            </Button>
+          </div>
+
+          {editOpen && (
+            <div className="flex flex-col gap-6 pt-4 border-t border-border/20">
+              {/* Color picker */}
+              <div className="flex flex-col gap-3">
+                <span className="text-xs font-semibold uppercase tracking-wider font-sans text-muted-foreground">Favourite Colours</span>
+                <div className="flex flex-wrap gap-3">
+                  {MANUAL_COLORS.map(({ label, hex }) => {
+                    const selected = editColors.includes(label);
+                    return (
+                      <button
+                        key={label}
+                        onClick={() =>
+                          setEditColors((prev) =>
+                            prev.includes(label) ? prev.filter((c) => c !== label) : [...prev, label]
+                          )
+                        }
+                        className="flex flex-col items-center gap-1.5 cursor-pointer"
+                      >
+                        <div
+                          className={cn(
+                            "w-8 h-8 border-2 relative transition-all duration-150",
+                            selected ? "border-primary scale-110 shadow-md" : "border-border/30 hover:border-primary/50"
+                          )}
+                          style={{ backgroundColor: hex }}
+                        >
+                          {selected && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <Check
+                                className="w-3 h-3"
+                                style={{ color: ["White", "Cream", "Beige"].includes(label) ? "#1a1a1a" : "#ffffff" }}
+                              />
+                            </div>
+                          )}
+                        </div>
+                        <span className={cn("text-[9px] font-sans font-semibold uppercase tracking-wider", selected ? "text-primary" : "text-muted-foreground")}>
+                          {label}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Style picker */}
+              <div className="flex flex-col gap-3">
+                <span className="text-xs font-semibold uppercase tracking-wider font-sans text-muted-foreground">Preferred Aesthetics</span>
+                <div className="flex flex-wrap gap-2">
+                  {MANUAL_STYLES.map((style) => {
+                    const selected = editStyles.includes(style);
+                    return (
+                      <button
+                        key={style}
+                        onClick={() =>
+                          setEditStyles((prev) =>
+                            prev.includes(style) ? prev.filter((s) => s !== style) : [...prev, style]
+                          )
+                        }
+                        className={cn(
+                          "px-4 py-2 text-xs font-semibold uppercase tracking-wider font-sans border transition-all duration-150 cursor-pointer",
+                          selected
+                            ? "bg-primary text-primary-foreground border-primary"
+                            : "bg-card text-muted-foreground border-border/40 hover:border-primary/50 hover:text-foreground"
+                        )}
+                      >
+                        {style}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="flex justify-end pt-2">
+                <Button
+                  onClick={handleManualSave}
+                  disabled={savingManual}
+                  size="sm"
+                  className="rounded-none px-6 text-xs font-semibold uppercase tracking-wider"
+                >
+                  {savingManual ? "Saving..." : "Save Preferences"}
+                </Button>
+              </div>
+            </div>
+          )}
         </section>
 
         {/* Preferences Presentation Content */}

@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@style-sync/backend";
 
 const VALID_CATEGORIES = [
   "Topwear",
@@ -112,7 +112,7 @@ export async function PATCH(
     });
 
     if (body.isFavorite !== undefined) {
-      const { updatePreferenceProfile } = await import("@/services/preferences/update-profile");
+      const { updatePreferenceProfile } = await import("@style-sync/backend");
       await updatePreferenceProfile(userId);
     }
 

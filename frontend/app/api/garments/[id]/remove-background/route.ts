@@ -1,8 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { cloudinary } from "@/lib/cloudinary";
-import { prisma } from "@/lib/prisma";
-import { removeBackground } from "@/services/background-removal/remove-background";
+import { cloudinary, prisma, removeBackground, withRetry, isRateLimited } from "@style-sync/backend";
+
+const BG_REMOVAL_RATE_LIMIT = { limit: 3, windowMs: 60_000 };
 
 export async function POST(
   req: Request,
@@ -18,6 +18,13 @@ export async function POST(
     }
 
     const { id } = await params;
+
+    if (isRateLimited(`${userId}:remove-background`, BG_REMOVAL_RATE_LIMIT)) {
+      return NextResponse.json(
+        { success: false, error: "Too many background removal requests. Please wait a moment before trying again." },
+        { status: 429 }
+      );
+    }
 
     const garment = await prisma.garment.findUnique({ where: { id } });
 
@@ -35,7 +42,10 @@ export async function POST(
       );
     }
 
-    const processedBuffer = await removeBackground(garment.imageUrl);
+    const processedBuffer = await withRetry(
+      () => removeBackground(garment.imageUrl),
+      `remove background for garment ${id}`
+    );
     if (!processedBuffer) {
       return NextResponse.json(
         { success: false, error: "Background removal failed. Please try again." },
@@ -72,7 +82,7 @@ export async function POST(
       });
     };
 
-    const uploadResult = await uploadProcessed();
+    const uploadResult = await withRetry(uploadProcessed, `upload processed image for garment ${id}`);
 
     const updatedGarment = await prisma.garment.update({
       where: { id },

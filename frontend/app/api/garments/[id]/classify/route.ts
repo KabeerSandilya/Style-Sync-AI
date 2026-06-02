@@ -1,7 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { classifyGarment } from "@/services/garment-classification/classify-garment";
+import { prisma, classifyGarment, withRetry, isRateLimited } from "@style-sync/backend";
+
+const CLASSIFY_RATE_LIMIT = { limit: 5, windowMs: 60_000 };
 
 export async function POST(
   req: Request,
@@ -19,7 +20,15 @@ export async function POST(
 
     const { id } = await params;
 
-    // 2. Verify existence and ownership
+    // 2. Rate limit check
+    if (isRateLimited(`${userId}:classify`, CLASSIFY_RATE_LIMIT)) {
+      return NextResponse.json(
+        { success: false, error: "Too many classification requests. Please wait a moment before trying again." },
+        { status: 429 }
+      );
+    }
+
+    // 3. Verify existence and ownership
     const garment = await prisma.garment.findUnique({
       where: { id },
     });
@@ -38,7 +47,7 @@ export async function POST(
       );
     }
 
-    // 3. Call classification service
+    // 4. Call classification service
     if (!process.env.GEMINI_API_KEY) {
       return NextResponse.json(
         { success: false, error: "AI Classification service is not configured (missing API key)." },
@@ -46,9 +55,12 @@ export async function POST(
       );
     }
 
-    const metadata = await classifyGarment(garment.imageUrl);
+    const metadata = await withRetry(
+      () => classifyGarment(garment.imageUrl),
+      `classify garment ${id}`
+    );
 
-    // 4. Save metadata to database
+    // 5. Save metadata to database
     const updatedGarment = await prisma.garment.update({
       where: { id },
       data: {

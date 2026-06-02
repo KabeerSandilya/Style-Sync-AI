@@ -3,30 +3,101 @@
 /* eslint-disable @next/next/no-img-element */
 
 import * as React from "react";
-import { 
-  Sun, 
-  CloudRain, 
-  Cloud, 
-  CloudSnow, 
-  Sparkles, 
-  Plus, 
+import {
+  Sun,
+  CloudRain,
+  Cloud,
+  CloudSnow,
+  Sparkles,
+  Plus,
   HelpCircle,
   RotateCw,
   Shuffle,
   Check,
   ThumbsUp,
-  ThumbsDown
+  ThumbsDown,
+  Loader2,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn, getDisplayImageUrl } from "@/lib/utils";
-import { ScoredOutfit } from "@/services/recommendation/types";
-import { WeatherContext } from "@/services/weather/types";
+import type { ScoredOutfit, WeatherContext } from "@/types";
 
 interface TodaysRecommendationsProps {
   onCreateOutfitClick?: () => void;
   onOutfitClick?: (outfit: any) => void;
   refreshTrigger?: number; // To trigger refetch from parent
+}
+
+function GenerateLooksButton({ onSuccess }: { onSuccess: () => void }) {
+  const [state, setState] = React.useState<"idle" | "loading" | "done" | "error">("idle");
+  const [message, setMessage] = React.useState<string | null>(null);
+
+  const handleGenerate = async () => {
+    setState("loading");
+    setMessage(null);
+    try {
+      const res = await fetch("/api/outfits/generate", { method: "POST" });
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        if (data.error === "not_enough_garments") {
+          setMessage(`Classify at least 3 garments first (you have ${data.classifiedCount ?? 0}).`);
+        } else if (res.status === 429) {
+          setMessage("Please wait a moment before generating again.");
+        } else if (res.status === 503) {
+          setMessage("AI service is not configured.");
+        } else {
+          setMessage(data.error ?? "Generation failed. Try again.");
+        }
+        setState("error");
+        return;
+      }
+
+      if (data.data?.length === 0) {
+        setMessage(data.message ?? "All possible looks already exist in your wardrobe.");
+        setState("done");
+        return;
+      }
+
+      setState("done");
+      onSuccess();
+    } catch {
+      setMessage("Network error. Please try again.");
+      setState("error");
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <Button
+        onClick={handleGenerate}
+        disabled={state === "loading"}
+        size="sm"
+        className="rounded-none font-sans font-semibold text-xs tracking-wider uppercase px-4 shadow-sm"
+      >
+        {state === "loading" ? (
+          <>
+            <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+            Assembling looks…
+          </>
+        ) : (
+          <>
+            <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+            Generate Looks
+          </>
+        )}
+      </Button>
+      {message && (
+        <p className={cn(
+          "text-[10px] font-sans text-center max-w-52 leading-relaxed",
+          state === "error" ? "text-destructive/80" : "text-muted-foreground"
+        )}>
+          {message}
+        </p>
+      )}
+    </div>
+  );
 }
 
 export function TodaysRecommendations({
@@ -38,6 +109,7 @@ export function TodaysRecommendations({
   const [recommendations, setRecommendations] = React.useState<ScoredOutfit[]>([]);
   const [weather, setWeather] = React.useState<WeatherContext | null>(null);
   const [error, setError] = React.useState<string | null>(null);
+  const [coldStartReason, setColdStartReason] = React.useState<"no_garments" | "no_outfits" | null>(null);
   
   // Track currently featured recommended outfit
   const [activeIndex, setActiveIndex] = React.useState(0);
@@ -109,6 +181,7 @@ export function TodaysRecommendations({
   const fetchRecommendations = React.useCallback(async (lat?: number, lon?: number) => {
     setLoading(true);
     setError(null);
+    setColdStartReason(null);
     try {
       let url = "/api/recommendations?city=Paris";
       if (lat !== undefined && lon !== undefined) {
@@ -119,7 +192,10 @@ export function TodaysRecommendations({
       if (data.success) {
         setRecommendations(data.data);
         setWeather(data.weather);
-        setActiveIndex(0); // Reset featured spotlight index on fresh fetch
+        setActiveIndex(0);
+        if (data.coldStartReason) {
+          setColdStartReason(data.coldStartReason);
+        }
       } else {
         setError(data.error || "Failed to load recommendations.");
       }
@@ -270,7 +346,7 @@ export function TodaysRecommendations({
             <div className="h-4 w-32 bg-muted" />
             <div className="h-6 w-12 bg-muted" />
           </div>
-          <div className="aspect-[16/10] w-full bg-muted/40" />
+          <div className="aspect-16/10 w-full bg-muted/40" />
           <div className="h-5 w-40 bg-muted mt-1" />
           <div className="h-10 bg-muted/55 w-full" />
         </div>
@@ -293,32 +369,45 @@ export function TodaysRecommendations({
     );
   }
 
-  // Render Empty State
+  // Render Cold-Start / Empty State
   if (!loading && recommendations.length === 0) {
+    const isNoGarments = coldStartReason === "no_garments";
+
     return (
       <div className="flex flex-col gap-6 w-full">
-        {/* Empty recommendations card */}
-        <Card className="rounded-none border-border bg-card shadow-sm p-6 text-center flex flex-col items-center justify-center min-h-[300px] gap-4">
+        <Card className="rounded-none border-border bg-card shadow-sm p-6 text-center flex flex-col items-center justify-center min-h-75 gap-4">
           <div className="w-12 h-12 bg-accent/20 flex items-center justify-center text-primary rounded-none">
             <Sparkles className="w-6 h-6 stroke-[1.5]" />
           </div>
           <div className="flex flex-col gap-1.5">
-            <h4 className="font-serif text-lg font-medium">No Recommendations</h4>
-            <p className="text-xs text-muted-foreground max-w-[200px] mx-auto leading-relaxed">
-              Create outfits to receive weather-aware outfit recommendations.
+            <h4 className="font-serif text-lg font-medium">
+              {isNoGarments ? "Your wardrobe is empty" : "No outfits yet"}
+            </h4>
+            <p className="text-xs text-muted-foreground max-w-50 mx-auto leading-relaxed">
+              {isNoGarments
+                ? "Upload your clothes first, then build outfits to start receiving weather-aware recommendations."
+                : "You have garments but no saved outfits. Let AI build your first looks, or create one manually."}
             </p>
           </div>
-          <Button
-            onClick={onCreateOutfitClick}
-            size="sm"
-            className="rounded-none font-sans font-semibold text-xs tracking-wider uppercase mt-2 px-4 shadow-sm"
-          >
-            Create Outfit
-            <Plus className="w-3.5 h-3.5 ml-1.5" />
-          </Button>
+          <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+            <Button
+              onClick={onCreateOutfitClick}
+              size="sm"
+              variant="outline"
+              className="rounded-none font-sans font-semibold text-xs tracking-wider uppercase px-4 border-border/60"
+            >
+              {isNoGarments ? "Go to Wardrobe Studio" : "Build Manually"}
+              <Plus className="w-3.5 h-3.5 ml-1.5" />
+            </Button>
+
+            {/* Generate Looks — only shown when user has garments but no outfits */}
+            {!isNoGarments && (
+              <GenerateLooksButton onSuccess={triggerRefresh} />
+            )}
+          </div>
         </Card>
 
-        {/* Weather Card Context Widget */}
+        {/* Weather context still shown even during cold-start */}
         {weather && (
           <Card className="rounded-none border-border bg-card shadow-sm">
             <CardHeader className="pb-3">
@@ -380,7 +469,7 @@ export function TodaysRecommendations({
           {/* Reduced height horizontal design */}
           <div className="flex flex-col sm:flex-row w-full">
             {/* Collage Section (left) */}
-            <div className="w-full sm:w-[42%] aspect-video sm:aspect-auto sm:min-h-[200px] border-b sm:border-b-0 sm:border-r border-border/20 overflow-hidden relative bg-[#fcf9f5] dark:bg-[#151513] shrink-0">
+            <div className="w-full sm:w-[42%] aspect-video sm:aspect-auto sm:min-h-50 border-b sm:border-b-0 sm:border-r border-border/20 overflow-hidden relative bg-[#fcf9f5] dark:bg-[#151513] shrink-0">
               {renderCollage(primary)}
               
               {/* Piece Count */}

@@ -3,13 +3,14 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 
 import * as React from "react";
-import { 
-  Sparkles, 
-  Upload, 
+import {
+  Sparkles,
+  Upload,
   Heart,
   Plus,
   Menu,
-  ChevronLeft
+  ChevronLeft,
+  Loader2,
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -36,6 +37,9 @@ function WardrobeStudioContent() {
   const [selectedOutfit, setSelectedOutfit] = React.useState<Outfit | null>(null);
   const [outfits, setOutfits] = React.useState<Outfit[]>([]);
   const [fetchingOutfits, setFetchingOutfits] = React.useState(true);
+
+  // AI generation state
+  const [generating, setGenerating] = React.useState(false);
 
   // View Switching State
   const [activeView, setActiveView] = React.useState<"wardrobe" | "outfits">("wardrobe");
@@ -111,6 +115,33 @@ function WardrobeStudioContent() {
       console.error("Error fetching outfits:", error);
     } finally {
       setFetchingOutfits(false);
+    }
+  };
+
+  const handleGenerateLooks = async () => {
+    if (generating) return;
+    setGenerating(true);
+    try {
+      const res = await fetch("/api/outfits/generate", { method: "POST" });
+      const data = await res.json();
+      if (data.success) {
+        const label =
+          data.data?.length === 0
+            ? data.message ?? "All looks already exist in your wardrobe."
+            : `${data.data.length} new look${data.data.length === 1 ? "" : "s"} generated.`;
+        triggerToast(label);
+        fetchOutfits();
+      } else if (res.status === 429) {
+        triggerToast("Please wait before generating again.");
+      } else if (data.error === "not_enough_garments") {
+        triggerToast(`Classify at least 3 garments first (you have ${data.classifiedCount ?? 0}).`);
+      } else {
+        triggerToast(data.error ?? "Generation failed. Please try again.");
+      }
+    } catch {
+      triggerToast("Network error. Please try again.");
+    } finally {
+      setGenerating(false);
     }
   };
 
@@ -446,7 +477,7 @@ function WardrobeStudioContent() {
               </div>
 
               {/* Wardrobe Primary Grid Display */}
-              <div className="min-h-[400px]">
+              <div className="min-h-100">
                 <WardrobeGrid
                   garments={filteredGarments}
                   loading={fetchingGarments}
@@ -464,22 +495,38 @@ function WardrobeStudioContent() {
                   Your Curated Looks
                 </div>
 
-                {/* Favorites Toggle for Outfits */}
-                <button
-                  onClick={() => setShowFavorites(!showFavorites)}
-                  className={`flex items-center gap-2 px-3 py-1.5 font-sans text-[10px] font-semibold uppercase tracking-wider border transition-all rounded-sm cursor-pointer shrink-0 ${
-                    showFavorites
-                      ? "border-primary bg-primary/10 text-primary font-bold"
-                      : "border-border/80 text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <Heart className={`w-3.5 h-3.5 ${showFavorites ? "fill-primary text-primary" : ""}`} />
-                  <span>Favorites</span>
-                </button>
+                <div className="flex items-center gap-3">
+                  {/* Generate Looks */}
+                  <button
+                    onClick={handleGenerateLooks}
+                    disabled={generating}
+                    className="flex items-center gap-1.5 px-3 py-1.5 font-sans text-[10px] font-semibold uppercase tracking-wider border border-primary/40 bg-primary/5 text-primary hover:bg-primary/10 transition-all rounded-sm cursor-pointer shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {generating ? (
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    ) : (
+                      <Sparkles className="w-3.5 h-3.5" />
+                    )}
+                    <span>{generating ? "Generating…" : "Generate Looks"}</span>
+                  </button>
+
+                  {/* Favorites Toggle for Outfits */}
+                  <button
+                    onClick={() => setShowFavorites(!showFavorites)}
+                    className={`flex items-center gap-2 px-3 py-1.5 font-sans text-[10px] font-semibold uppercase tracking-wider border transition-all rounded-sm cursor-pointer shrink-0 ${
+                      showFavorites
+                        ? "border-primary bg-primary/10 text-primary font-bold"
+                        : "border-border/80 text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    <Heart className={`w-3.5 h-3.5 ${showFavorites ? "fill-primary text-primary" : ""}`} />
+                    <span>Favorites</span>
+                  </button>
+                </div>
               </div>
 
               {/* Saved Outfits Grid Display */}
-              <div className="min-h-[400px]">
+              <div className="min-h-100">
                 <OutfitGrid
                   outfits={filteredOutfits}
                   loading={fetchingOutfits}

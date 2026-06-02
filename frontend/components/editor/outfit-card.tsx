@@ -106,7 +106,7 @@ export function OutfitCard({
     return (
       <div className="w-full h-full relative overflow-hidden bg-[#fcf9f5] dark:bg-[#151513] flex items-center justify-center p-4">
         {/* First Garment - Bottom Layer Left */}
-        <div className="absolute left-[10%] w-[40%] h-[70%] flex items-center justify-center transform -rotate-12 translate-y-4 opacity-80 transition-transform duration-300 group-hover:-rotate-18 group-hover:translate-x-[-4px]">
+        <div className="absolute left-[10%] w-[40%] h-[70%] flex items-center justify-center transform -rotate-12 translate-y-4 opacity-80 transition-transform duration-300 group-hover:-rotate-18 group-hover:-translate-x-1">
           <img
             src={getDisplayImageUrl(displayGarments[0])}
             alt={displayGarments[0].name}
@@ -114,7 +114,7 @@ export function OutfitCard({
           />
         </div>
         {/* Second Garment - Bottom Layer Right */}
-        <div className="absolute right-[10%] w-[40%] h-[70%] flex items-center justify-center transform rotate-12 translate-y-4 opacity-80 transition-transform duration-300 group-hover:rotate-18 group-hover:translate-x-[4px]">
+        <div className="absolute right-[10%] w-[40%] h-[70%] flex items-center justify-center transform rotate-12 translate-y-4 opacity-80 transition-transform duration-300 group-hover:rotate-18 group-hover:translate-x-1">
           <img
             src={getDisplayImageUrl(displayGarments[1])}
             alt={displayGarments[1].name}
@@ -139,7 +139,7 @@ export function OutfitCard({
       className="group relative flex flex-col bg-card border border-border/40 hover:border-border/80 transition-all duration-300 cursor-pointer shadow-xs hover:shadow-md select-none rounded-none"
     >
       {/* Visual Collage Area */}
-      <div className="aspect-[4/5] w-full border-b border-border/20 overflow-hidden relative">
+      <div className="aspect-4/5 w-full border-b border-border/20 overflow-hidden relative">
         {renderCollage()}
 
         {/* Favorite Heart Toggle Overlay */}
@@ -160,6 +160,14 @@ export function OutfitCard({
         <div className="absolute bottom-4 left-4 z-20 px-2 py-1 bg-card/90 backdrop-blur-xs border border-border/40 text-[9px] font-sans uppercase font-bold tracking-wider text-muted-foreground">
           {garmentCount} {garmentCount === 1 ? "piece" : "pieces"}
         </div>
+
+        {/* AI Generated badge */}
+        {outfit.isAiGenerated && (
+          <div className="absolute top-4 left-4 z-20 flex items-center gap-1 bg-primary/10 text-primary border border-primary/20 px-2 py-0.5">
+            <Sparkles className="w-2.5 h-2.5" />
+            <span className="text-[8px] font-sans font-bold uppercase tracking-wider">AI</span>
+          </div>
+        )}
       </div>
 
       {/* Outfit Title & Info */}
@@ -173,7 +181,7 @@ export function OutfitCard({
           </p>
         ) : (
           <p className="text-xs text-muted-foreground/60 font-sans tracking-wide mb-1">
-            Manual Curation
+            {outfit.isAiGenerated ? "AI Generated" : "Manual Curation"}
           </p>
         )}
         <div className="text-[10px] text-muted-foreground/80 font-sans uppercase tracking-wider font-semibold mt-0.5 border-t border-border/10 pt-1.5">

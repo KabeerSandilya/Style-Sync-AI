@@ -2,7 +2,7 @@
 
 We are implementing the **Garment Upload & Digital Wardrobe Storage system** for **StyleSync AI**.
 
-This feature enables users to digitize their physical wardrobe by uploading clothing photos, securely storing them in Cloudinary, and saving garment metadata to PostgreSQL for future outfit recommendations and AI classification.
+This feature enables users to digitize their physical wardrobe by uploading clothing photos, securely storing them in Cloudinary, and saving garment metadata to PostgreSQL for future outfit recommendations and AI classification. Additionally, a garment can be deleted at any time; this function is also important and must clean up database records (including outfit associations) and the stored image on Cloudinary.
 
 The implementation must follow:
 
