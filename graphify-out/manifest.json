@@ -1,0 +1,2062 @@
+{
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\settings.json": {
+    "mtime": 1780391815.6384718,
+    "ast_hash": "5d6ecd96cf065b16e8bb9fbf5d7d8f0d",
+    "semantic_hash": "5d6ecd96cf065b16e8bb9fbf5d7d8f0d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\settings.local.json": {
+    "mtime": 1780386420.3218584,
+    "ast_hash": "6429c5c76a6a0877d19da425d3668d73",
+    "semantic_hash": "6429c5c76a6a0877d19da425d3668d73"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\cleanup-deprecated.mjs": {
+    "mtime": 1780346639.2833366,
+    "ast_hash": "fddcc885ed5305df37d966ba654e0eae",
+    "semantic_hash": "fddcc885ed5305df37d966ba654e0eae"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\command-metadata.json": {
+    "mtime": 1780346639.2838829,
+    "ast_hash": "883d1962f87b23b4a0f6229e1aadd484",
+    "semantic_hash": "883d1962f87b23b4a0f6229e1aadd484"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\context-signals.mjs": {
+    "mtime": 1780346639.2838829,
+    "ast_hash": "962c9d4a7608582b1839223eccde1889",
+    "semantic_hash": "962c9d4a7608582b1839223eccde1889"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\context.mjs": {
+    "mtime": 1780346639.2844064,
+    "ast_hash": "5db7930910705545dc776e946c320be9",
+    "semantic_hash": "5db7930910705545dc776e946c320be9"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\critique-storage.mjs": {
+    "mtime": 1780346639.284957,
+    "ast_hash": "2609dfc633db44ef5990ec2376069ce5",
+    "semantic_hash": "2609dfc633db44ef5990ec2376069ce5"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\design-parser.mjs": {
+    "mtime": 1780346639.2854874,
+    "ast_hash": "77bbd8593cdea6e08a0b3e7870e93fc8",
+    "semantic_hash": "77bbd8593cdea6e08a0b3e7870e93fc8"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detect-csp.mjs": {
+    "mtime": 1780346639.2860396,
+    "ast_hash": "02c5a9a8ad69f87d23af72bf580fd3f4",
+    "semantic_hash": "02c5a9a8ad69f87d23af72bf580fd3f4"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detect.mjs": {
+    "mtime": 1780346639.2860396,
+    "ast_hash": "11dbeb9341477d06d1a24c3ad1f37ac9",
+    "semantic_hash": "11dbeb9341477d06d1a24c3ad1f37ac9"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\browser\\injected\\index.mjs": {
+    "mtime": 1780346639.2876582,
+    "ast_hash": "55f1ab947a6146e81958cb0755e1d44b",
+    "semantic_hash": "55f1ab947a6146e81958cb0755e1d44b"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\cli\\main.mjs": {
+    "mtime": 1780346639.2881978,
+    "ast_hash": "5208183c07f839d8ff178d4614b0a5e8",
+    "semantic_hash": "5208183c07f839d8ff178d4614b0a5e8"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\detect-antipatterns-browser.js": {
+    "mtime": 1780346639.2892606,
+    "ast_hash": "037b356e9ee0783ff2377c36cb7c9b49",
+    "semantic_hash": "037b356e9ee0783ff2377c36cb7c9b49"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\detect-antipatterns.mjs": {
+    "mtime": 1780346639.2892606,
+    "ast_hash": "1ee45163c27e086f43af1a3bb6b76504",
+    "semantic_hash": "1ee45163c27e086f43af1a3bb6b76504"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\engines\\browser\\detect-url.mjs": {
+    "mtime": 1780346639.2913795,
+    "ast_hash": "f9a37e92021f13b178b860eb52a33f98",
+    "semantic_hash": "f9a37e92021f13b178b860eb52a33f98"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\engines\\regex\\detect-text.mjs": {
+    "mtime": 1780346639.2913795,
+    "ast_hash": "f99d96047b51dbe3dd24ca272d009a09",
+    "semantic_hash": "f99d96047b51dbe3dd24ca272d009a09"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\engines\\static-html\\css-cascade.mjs": {
+    "mtime": 1780346639.2923815,
+    "ast_hash": "248b84788b792dc75c8a18058a9a6a46",
+    "semantic_hash": "248b84788b792dc75c8a18058a9a6a46"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\engines\\static-html\\detect-html.mjs": {
+    "mtime": 1780346639.2923815,
+    "ast_hash": "48549abcbb3e1fee4f93f07661d77ac0",
+    "semantic_hash": "48549abcbb3e1fee4f93f07661d77ac0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\engines\\visual\\screenshot-contrast.mjs": {
+    "mtime": 1780346639.2943816,
+    "ast_hash": "6312c6dbc048c4445f50e69f167a297d",
+    "semantic_hash": "6312c6dbc048c4445f50e69f167a297d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\findings.mjs": {
+    "mtime": 1780346639.2943816,
+    "ast_hash": "f7f3de6f00121150c4762809df00df9f",
+    "semantic_hash": "f7f3de6f00121150c4762809df00df9f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\node\\file-system.mjs": {
+    "mtime": 1780346639.295392,
+    "ast_hash": "310714c7a308e35e386034999479ff84",
+    "semantic_hash": "310714c7a308e35e386034999479ff84"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\profile\\profiler.mjs": {
+    "mtime": 1780346639.2966619,
+    "ast_hash": "88c5d2027852842be578edf349a0f9c8",
+    "semantic_hash": "88c5d2027852842be578edf349a0f9c8"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\registry\\antipatterns.mjs": {
+    "mtime": 1780346639.2966619,
+    "ast_hash": "30ed4f1a91098bf96a2dd2e0582a8162",
+    "semantic_hash": "30ed4f1a91098bf96a2dd2e0582a8162"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\rules\\checks.mjs": {
+    "mtime": 1780346639.2976747,
+    "ast_hash": "4f8889a5fb5a8137b8c991a22b7cc556",
+    "semantic_hash": "4f8889a5fb5a8137b8c991a22b7cc556"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\shared\\color.mjs": {
+    "mtime": 1780346639.298673,
+    "ast_hash": "2363d500ccf490f9ff285119b613276d",
+    "semantic_hash": "2363d500ccf490f9ff285119b613276d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\shared\\constants.mjs": {
+    "mtime": 1780346639.298673,
+    "ast_hash": "5700477c8a86d876b90de9d6eb63f191",
+    "semantic_hash": "5700477c8a86d876b90de9d6eb63f191"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\detector\\shared\\page.mjs": {
+    "mtime": 1780346639.298673,
+    "ast_hash": "ab3a243b690b4f70c4ef639cdf970d82",
+    "semantic_hash": "ab3a243b690b4f70c4ef639cdf970d82"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\impeccable-paths.mjs": {
+    "mtime": 1780346639.298673,
+    "ast_hash": "2dd4310d900b4e7678f8b3620e634687",
+    "semantic_hash": "2dd4310d900b4e7678f8b3620e634687"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\is-generated.mjs": {
+    "mtime": 1780346639.3001814,
+    "ast_hash": "edd718b1a4737edbf9631ff7f6f512ef",
+    "semantic_hash": "edd718b1a4737edbf9631ff7f6f512ef"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-accept.mjs": {
+    "mtime": 1780346639.3011885,
+    "ast_hash": "f0f91af50bedf451cfd23601c1929217",
+    "semantic_hash": "f0f91af50bedf451cfd23601c1929217"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-browser-session.js": {
+    "mtime": 1780346639.3011885,
+    "ast_hash": "5dec3dae6158050d69762fb79facaf48",
+    "semantic_hash": "5dec3dae6158050d69762fb79facaf48"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-browser.js": {
+    "mtime": 1780346639.3021889,
+    "ast_hash": "77f21616ace1910f7640bf1ebdd34428",
+    "semantic_hash": "77f21616ace1910f7640bf1ebdd34428"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-commit-manual-edits.mjs": {
+    "mtime": 1780346639.3021889,
+    "ast_hash": "fc32b152d40668abfedeb77c6deb2515",
+    "semantic_hash": "fc32b152d40668abfedeb77c6deb2515"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-complete.mjs": {
+    "mtime": 1780346639.3035128,
+    "ast_hash": "ac0ba59701ad5fa70d0dea5b05dc1ac7",
+    "semantic_hash": "ac0ba59701ad5fa70d0dea5b05dc1ac7"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-completion.mjs": {
+    "mtime": 1780346639.3035128,
+    "ast_hash": "10ef700bb4d62ae8548f4940aaa4ddd3",
+    "semantic_hash": "10ef700bb4d62ae8548f4940aaa4ddd3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-copy-edit-agent.mjs": {
+    "mtime": 1780346639.3035128,
+    "ast_hash": "1c4926b56d5442775dab0138bf71a790",
+    "semantic_hash": "1c4926b56d5442775dab0138bf71a790"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-discard-manual-edits.mjs": {
+    "mtime": 1780346639.3045142,
+    "ast_hash": "0efb77b3a97cf2140bff04db767c2b2e",
+    "semantic_hash": "0efb77b3a97cf2140bff04db767c2b2e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-event-validation.mjs": {
+    "mtime": 1780346639.3045142,
+    "ast_hash": "d6942cccc03c889bac3248aa09a7a22f",
+    "semantic_hash": "d6942cccc03c889bac3248aa09a7a22f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-inject.mjs": {
+    "mtime": 1780346639.3055058,
+    "ast_hash": "ab8fbddcc89d451cc96816ebe70e0cf5",
+    "semantic_hash": "ab8fbddcc89d451cc96816ebe70e0cf5"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-insert-ui.mjs": {
+    "mtime": 1780346639.3055058,
+    "ast_hash": "b6c5c82e14218c0c1b1e66f0851bff3f",
+    "semantic_hash": "b6c5c82e14218c0c1b1e66f0851bff3f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-insert.mjs": {
+    "mtime": 1780346639.3055058,
+    "ast_hash": "3a85326aa5ac069c2be838a674c45c5e",
+    "semantic_hash": "3a85326aa5ac069c2be838a674c45c5e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-manual-edit-evidence.mjs": {
+    "mtime": 1780346639.3073542,
+    "ast_hash": "0a5b4c8cadb7f1d9d86a9d481d4a8223",
+    "semantic_hash": "0a5b4c8cadb7f1d9d86a9d481d4a8223"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-manual-edits-buffer.mjs": {
+    "mtime": 1780346639.3073542,
+    "ast_hash": "97db5c92eed8b17e5431a1b0ccd87f01",
+    "semantic_hash": "97db5c92eed8b17e5431a1b0ccd87f01"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-poll.mjs": {
+    "mtime": 1780346639.3073542,
+    "ast_hash": "62a63c49aa2753585b2f93a671238350",
+    "semantic_hash": "62a63c49aa2753585b2f93a671238350"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-resume.mjs": {
+    "mtime": 1780346639.3083656,
+    "ast_hash": "42d7b6774ee440e057bfc6e0b93a3d7e",
+    "semantic_hash": "42d7b6774ee440e057bfc6e0b93a3d7e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-server.mjs": {
+    "mtime": 1780346639.3083656,
+    "ast_hash": "3b4ad919d61679e3e67f087a11ce1de6",
+    "semantic_hash": "3b4ad919d61679e3e67f087a11ce1de6"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-session-store.mjs": {
+    "mtime": 1780346639.3083656,
+    "ast_hash": "a41a34d5703eaf9f9b849b87d0422da0",
+    "semantic_hash": "a41a34d5703eaf9f9b849b87d0422da0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-status.mjs": {
+    "mtime": 1780346639.3099258,
+    "ast_hash": "ef654aa3bfb5c204fd0b9ae8613179d3",
+    "semantic_hash": "ef654aa3bfb5c204fd0b9ae8613179d3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live-wrap.mjs": {
+    "mtime": 1780346639.3099258,
+    "ast_hash": "6f74a0c9a1494cb3d9f5eb17b78f4a34",
+    "semantic_hash": "6f74a0c9a1494cb3d9f5eb17b78f4a34"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\live.mjs": {
+    "mtime": 1780346639.3105812,
+    "ast_hash": "292ae3ec6df11d04939ed36755ce8350",
+    "semantic_hash": "292ae3ec6df11d04939ed36755ce8350"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\modern-screenshot.umd.js": {
+    "mtime": 1780346639.3105812,
+    "ast_hash": "4fe5f9e490ab4f107afc707d7eafc819",
+    "semantic_hash": "4fe5f9e490ab4f107afc707d7eafc819"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\palette.mjs": {
+    "mtime": 1780346639.311164,
+    "ast_hash": "adbc82e1e9021b4948901b21563277a2",
+    "semantic_hash": "adbc82e1e9021b4948901b21563277a2"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\scripts\\pin.mjs": {
+    "mtime": 1780346639.3121734,
+    "ast_hash": "867ca7fdded9987e84a128a3b4fb6bab",
+    "semantic_hash": "867ca7fdded9987e84a128a3b4fb6bab"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.mcp.json": {
+    "mtime": 1780391345.9356108,
+    "ast_hash": "8a80554c91d9fca8acb82f023de02f11",
+    "semantic_hash": "8a80554c91d9fca8acb82f023de02f11"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\__tests__\\services\\recommendation\\score-outfit.test.ts": {
+    "mtime": 1780385629.0744631,
+    "ast_hash": "e76b2d553a6e7d636d4437dc2c46b590",
+    "semantic_hash": "e76b2d553a6e7d636d4437dc2c46b590"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\package.json": {
+    "mtime": 1780385678.870824,
+    "ast_hash": "0f790c5bb58a96c04e70a97ef0c7fc24",
+    "semantic_hash": "0f790c5bb58a96c04e70a97ef0c7fc24"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\prisma.config.ts": {
+    "mtime": 1780385859.7754326,
+    "ast_hash": "53a864dd3a7128c6cfecb7e9cb6fab7a",
+    "semantic_hash": "53a864dd3a7128c6cfecb7e9cb6fab7a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\prisma\\migrations\\0_init\\migration.sql": {
+    "mtime": 1780385620.2692082,
+    "ast_hash": "ff3d8e293f67be1046301e3a966f8c43",
+    "semantic_hash": "ff3d8e293f67be1046301e3a966f8c43"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\index.ts": {
+    "mtime": 1780385708.4947088,
+    "ast_hash": "ef55d7116c0071352c3e4df8ac59554a",
+    "semantic_hash": "ef55d7116c0071352c3e4df8ac59554a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\lib\\cloudinary.ts": {
+    "mtime": 1780141337.04367,
+    "ast_hash": "d3577170f867ee9e5a04402ae7c54d0d",
+    "semantic_hash": "d3577170f867ee9e5a04402ae7c54d0d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\lib\\prisma.ts": {
+    "mtime": 1780142076.2014287,
+    "ast_hash": "59ac2c5cb0ce65430c2e8279d0685586",
+    "semantic_hash": "59ac2c5cb0ce65430c2e8279d0685586"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\lib\\rate-limit.ts": {
+    "mtime": 1780327820.0894973,
+    "ast_hash": "25051a4f7bb6b1a348b4327bd8c0a7fe",
+    "semantic_hash": "25051a4f7bb6b1a348b4327bd8c0a7fe"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\lib\\retry.ts": {
+    "mtime": 1780327697.4777417,
+    "ast_hash": "621c556d9b91b3a8230e421ae07427dd",
+    "semantic_hash": "621c556d9b91b3a8230e421ae07427dd"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\background-removal\\remove-background.ts": {
+    "mtime": 1780329029.4080303,
+    "ast_hash": "c90eabbde7715b3a019f16c935bf61b2",
+    "semantic_hash": "c90eabbde7715b3a019f16c935bf61b2"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\background-removal\\types.ts": {
+    "mtime": 1780326004.5435994,
+    "ast_hash": "235aab6ccf0d67d5689fd42bd581d9d7",
+    "semantic_hash": "235aab6ccf0d67d5689fd42bd581d9d7"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\garment-classification\\classify-garment.ts": {
+    "mtime": 1780326004.544127,
+    "ast_hash": "d651e29b2cbe5e85f47b1965cf98705d",
+    "semantic_hash": "d651e29b2cbe5e85f47b1965cf98705d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\garment-classification\\prompts.ts": {
+    "mtime": 1780326004.544127,
+    "ast_hash": "3515cb46abab2bde134d58b4bad81171",
+    "semantic_hash": "3515cb46abab2bde134d58b4bad81171"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\garment-classification\\types.ts": {
+    "mtime": 1780326004.544127,
+    "ast_hash": "869335ac9db1e7c0caf52d716123892f",
+    "semantic_hash": "869335ac9db1e7c0caf52d716123892f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\insights\\get-least-worn-garments.ts": {
+    "mtime": 1780385647.9251091,
+    "ast_hash": "d1d970e319cc85679c9d8f3e899de3bd",
+    "semantic_hash": "d1d970e319cc85679c9d8f3e899de3bd"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\insights\\get-most-worn-garments.ts": {
+    "mtime": 1780385647.9720063,
+    "ast_hash": "b68f7c34f82f8cb54101eb941770f105",
+    "semantic_hash": "b68f7c34f82f8cb54101eb941770f105"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\insights\\get-most-worn-outfits.ts": {
+    "mtime": 1780385648.0150704,
+    "ast_hash": "c097da7c96f2f57c15238f2fdd640c1c",
+    "semantic_hash": "c097da7c96f2f57c15238f2fdd640c1c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\insights\\get-never-worn-garments.ts": {
+    "mtime": 1780385648.0457215,
+    "ast_hash": "8c439a040d2fa000e4c3ffaa7b0da142",
+    "semantic_hash": "8c439a040d2fa000e4c3ffaa7b0da142"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\insights\\types.ts": {
+    "mtime": 1780385648.0789042,
+    "ast_hash": "0c39b51946adbb1e2c0081e1f7e03dab",
+    "semantic_hash": "0c39b51946adbb1e2c0081e1f7e03dab"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\outfit-generation\\generate-outfits.ts": {
+    "mtime": 1780330679.8311746,
+    "ast_hash": "371c54db92b9ab87e7f39331f0d391fa",
+    "semantic_hash": "371c54db92b9ab87e7f39331f0d391fa"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\outfit-generation\\prompts.ts": {
+    "mtime": 1780329885.7832499,
+    "ast_hash": "eed2c2dcd130635006d84705fbc7665b",
+    "semantic_hash": "eed2c2dcd130635006d84705fbc7665b"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\outfit-generation\\types.ts": {
+    "mtime": 1780329868.0616765,
+    "ast_hash": "4804e03d797a7319d4ec79d55edc6457",
+    "semantic_hash": "4804e03d797a7319d4ec79d55edc6457"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\preferences\\build-profile.ts": {
+    "mtime": 1780326004.5456831,
+    "ast_hash": "9e3c29ef72f3c914f036ff97030ae5b0",
+    "semantic_hash": "9e3c29ef72f3c914f036ff97030ae5b0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\preferences\\calculate-scores.ts": {
+    "mtime": 1780385648.1197605,
+    "ast_hash": "014999c69fc7cc9a8c4417cc0d506b57",
+    "semantic_hash": "014999c69fc7cc9a8c4417cc0d506b57"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\preferences\\types.ts": {
+    "mtime": 1780326004.5461867,
+    "ast_hash": "37170244cdd1eaa90335051b074bd4c2",
+    "semantic_hash": "37170244cdd1eaa90335051b074bd4c2"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\preferences\\update-profile.ts": {
+    "mtime": 1780385648.172316,
+    "ast_hash": "1c96d1a7fae7dc819dc97d7faa1de189",
+    "semantic_hash": "1c96d1a7fae7dc819dc97d7faa1de189"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\recommendation-history\\index.ts": {
+    "mtime": 1780385648.413495,
+    "ast_hash": "ddb9d759570da7291e941e75e425253e",
+    "semantic_hash": "ddb9d759570da7291e941e75e425253e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\recommendation\\explain-recommendation.ts": {
+    "mtime": 1780385648.206665,
+    "ast_hash": "d5629fb624996aaa6027732685823937",
+    "semantic_hash": "d5629fb624996aaa6027732685823937"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\recommendation\\rank-outfits.ts": {
+    "mtime": 1780385648.253669,
+    "ast_hash": "f15a9071000a9fece2a1e94a58c61cbf",
+    "semantic_hash": "f15a9071000a9fece2a1e94a58c61cbf"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\recommendation\\score-outfit.ts": {
+    "mtime": 1780385648.2982817,
+    "ast_hash": "b657f4eaf648a046343b09faa19e57f6",
+    "semantic_hash": "b657f4eaf648a046343b09faa19e57f6"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\recommendation\\types.ts": {
+    "mtime": 1780385648.3687418,
+    "ast_hash": "327a8e824b5e188eecdef2a6475275db",
+    "semantic_hash": "327a8e824b5e188eecdef2a6475275db"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\wear-history\\index.ts": {
+    "mtime": 1780385648.4595404,
+    "ast_hash": "23cad76b163bb01d48057785ce37a0e7",
+    "semantic_hash": "23cad76b163bb01d48057785ce37a0e7"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\weather\\index.ts": {
+    "mtime": 1780327797.5209115,
+    "ast_hash": "8cdc9a1ed0c5c2fcbe21fed35b2274de",
+    "semantic_hash": "8cdc9a1ed0c5c2fcbe21fed35b2274de"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\services\\weather\\types.ts": {
+    "mtime": 1780326004.5483205,
+    "ast_hash": "82e0a7f8acb1c444f05b6beb74b11403",
+    "semantic_hash": "82e0a7f8acb1c444f05b6beb74b11403"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\src\\types\\index.ts": {
+    "mtime": 1780386160.2214897,
+    "ast_hash": "c302be61e0675a71eba8870120dccbc0",
+    "semantic_hash": "c302be61e0675a71eba8870120dccbc0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\tsconfig.json": {
+    "mtime": 1780386098.0803802,
+    "ast_hash": "06342f6622349c353e0ce0322c0110a1",
+    "semantic_hash": "06342f6622349c353e0ce0322c0110a1"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\backend\\vitest.config.ts": {
+    "mtime": 1780385846.8407977,
+    "ast_hash": "dee5dba8f14dc5e4e8abfb70b60f7de9",
+    "semantic_hash": "dee5dba8f14dc5e4e8abfb70b60f7de9"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\evals\\evals.json": {
+    "mtime": 1780141493.8469372,
+    "ast_hash": "0f0bf03846c2b112f38ce82cce2b34cb",
+    "semantic_hash": "0f0bf03846c2b112f38ce82cce2b34cb"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\templates\\astro-basic-auth\\astro.config.mjs": {
+    "mtime": 1780141493.8499367,
+    "ast_hash": "24eec6c3f2443720e4a7bf0f8f66b61c",
+    "semantic_hash": "24eec6c3f2443720e4a7bf0f8f66b61c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\templates\\astro-basic-auth\\package.json": {
+    "mtime": 1780141493.8499367,
+    "ast_hash": "a1d262801626bd74edcf4a4f76974e37",
+    "semantic_hash": "a1d262801626bd74edcf4a4f76974e37"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\templates\\astro-basic-auth\\src\\layouts\\Layout.astro": {
+    "mtime": 1780141493.8499367,
+    "ast_hash": "18f38f3997b6bfd059d2825ed56b0688",
+    "semantic_hash": "18f38f3997b6bfd059d2825ed56b0688"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\templates\\astro-basic-auth\\src\\middleware.ts": {
+    "mtime": 1780141493.8509371,
+    "ast_hash": "a912d77e19605546659dce9309bbbba2",
+    "semantic_hash": "a912d77e19605546659dce9309bbbba2"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\templates\\astro-basic-auth\\src\\pages\\index.astro": {
+    "mtime": 1780141493.8509371,
+    "ast_hash": "67dfd865e781ca4e87bd0053a598ed2c",
+    "semantic_hash": "67dfd865e781ca4e87bd0053a598ed2c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\templates\\astro-basic-auth\\tsconfig.json": {
+    "mtime": 1780141493.8509371,
+    "ast_hash": "74e689de1fed021f042a8aef5fa81ed7",
+    "semantic_hash": "74e689de1fed021f042a8aef5fa81ed7"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-backend-api\\evals\\evals.json": {
+    "mtime": 1780141493.8339322,
+    "ast_hash": "869bb529fab2d9355f2da286c391bbeb",
+    "semantic_hash": "869bb529fab2d9355f2da286c391bbeb"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-backend-api\\scripts\\api-specs-context.sh": {
+    "mtime": 1780141493.8339322,
+    "ast_hash": "da36ce337af1f46765839fe2242b936a",
+    "semantic_hash": "da36ce337af1f46765839fe2242b936a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-backend-api\\scripts\\execute-request.sh": {
+    "mtime": 1780141493.8339322,
+    "ast_hash": "b07eb51ade20b1001bdaccf1f0a0a503",
+    "semantic_hash": "b07eb51ade20b1001bdaccf1f0a0a503"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-backend-api\\scripts\\extract-endpoint-detail.sh": {
+    "mtime": 1780141493.834934,
+    "ast_hash": "d12be1681c0253aac488f5f5143f3554",
+    "semantic_hash": "d12be1681c0253aac488f5f5143f3554"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-backend-api\\scripts\\extract-tag-endpoints.sh": {
+    "mtime": 1780141493.834934,
+    "ast_hash": "ab0fe741a89abae96904061bb94915cc",
+    "semantic_hash": "ab0fe741a89abae96904061bb94915cc"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-backend-api\\scripts\\extract-tags.js": {
+    "mtime": 1780141493.834934,
+    "ast_hash": "3f73b2b510b007428e085a50d40fa0f3",
+    "semantic_hash": "3f73b2b510b007428e085a50d40fa0f3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-billing\\evals\\evals.json": {
+    "mtime": 1780141493.839933,
+    "ast_hash": "a9efabeb0382d6e6d304755f2f1ece35",
+    "semantic_hash": "a9efabeb0382d6e6d304755f2f1ece35"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-chrome-extension-patterns\\evals\\evals.json": {
+    "mtime": 1780141493.851937,
+    "ast_hash": "c654192cac822d8ea6feeeba03820608",
+    "semantic_hash": "c654192cac822d8ea6feeeba03820608"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-chrome-extension-patterns\\templates\\chrome-ext-basic-auth\\package.json": {
+    "mtime": 1780141493.8539393,
+    "ast_hash": "bf65e598d88b7db5a35e9ec9c63e5918",
+    "semantic_hash": "bf65e598d88b7db5a35e9ec9c63e5918"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-chrome-extension-patterns\\templates\\chrome-ext-basic-auth\\src\\popup.tsx": {
+    "mtime": 1780141493.8539393,
+    "ast_hash": "4c5a05766fc677f9a052dd12d4ad2dae",
+    "semantic_hash": "4c5a05766fc677f9a052dd12d4ad2dae"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-chrome-extension-patterns\\templates\\chrome-ext-basic-auth\\tsconfig.json": {
+    "mtime": 1780141493.8554442,
+    "ast_hash": "47e3e8157a3a9c3f0ce8e04206a85c70",
+    "semantic_hash": "47e3e8157a3a9c3f0ce8e04206a85c70"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo-patterns\\evals\\evals.json": {
+    "mtime": 1780141493.8554442,
+    "ast_hash": "be5256587483972f4d73baa86d30c442",
+    "semantic_hash": "be5256587483972f4d73baa86d30c442"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo-patterns\\templates\\expo-basic-auth\\app.json": {
+    "mtime": 1780141493.8580327,
+    "ast_hash": "b7492e928710e36f767c7a57de0eed1c",
+    "semantic_hash": "b7492e928710e36f767c7a57de0eed1c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo-patterns\\templates\\expo-basic-auth\\app\\(auth)\\_layout.tsx": {
+    "mtime": 1780141493.8590336,
+    "ast_hash": "8074875c2e1cffd298e6df7c50ebe352",
+    "semantic_hash": "8074875c2e1cffd298e6df7c50ebe352"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo-patterns\\templates\\expo-basic-auth\\app\\(home)\\_layout.tsx": {
+    "mtime": 1780141493.8590336,
+    "ast_hash": "4e5932e62f87a3b4b5e032f032875082",
+    "semantic_hash": "4e5932e62f87a3b4b5e032f032875082"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo-patterns\\templates\\expo-basic-auth\\app\\(home)\\index.tsx": {
+    "mtime": 1780141493.8590336,
+    "ast_hash": "1352dcb4baea2cd54d99f8dee166209a",
+    "semantic_hash": "1352dcb4baea2cd54d99f8dee166209a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo-patterns\\templates\\expo-basic-auth\\app\\_layout.tsx": {
+    "mtime": 1780141493.860034,
+    "ast_hash": "06895010d98f02860cfc68cc06f7f625",
+    "semantic_hash": "06895010d98f02860cfc68cc06f7f625"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo-patterns\\templates\\expo-basic-auth\\package.json": {
+    "mtime": 1780141493.860034,
+    "ast_hash": "5a97d27c94939dd92185485a5baca073",
+    "semantic_hash": "5a97d27c94939dd92185485a5baca073"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo-patterns\\templates\\expo-basic-auth\\tsconfig.json": {
+    "mtime": 1780141493.860034,
+    "ast_hash": "b75b74d9546ef765c37746742764550d",
+    "semantic_hash": "b75b74d9546ef765c37746742764550d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nextjs-patterns\\evals\\evals.json": {
+    "mtime": 1780141493.8615384,
+    "ast_hash": "239ee0a9e327a26d17dbcc54eae26e73",
+    "semantic_hash": "239ee0a9e327a26d17dbcc54eae26e73"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nextjs-patterns\\templates\\nextjs-basic-auth\\app\\layout.tsx": {
+    "mtime": 1780141493.8640473,
+    "ast_hash": "d0f6cf0737656fea2133ed76640bf494",
+    "semantic_hash": "d0f6cf0737656fea2133ed76640bf494"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nextjs-patterns\\templates\\nextjs-basic-auth\\app\\page.tsx": {
+    "mtime": 1780141493.8640473,
+    "ast_hash": "8695f88cebf4e7144dc906c126c5b8f6",
+    "semantic_hash": "8695f88cebf4e7144dc906c126c5b8f6"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nextjs-patterns\\templates\\nextjs-basic-auth\\package.json": {
+    "mtime": 1780141493.8640473,
+    "ast_hash": "272cb82b941efab52bc76463a56eb609",
+    "semantic_hash": "272cb82b941efab52bc76463a56eb609"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nextjs-patterns\\templates\\nextjs-basic-auth\\proxy.ts": {
+    "mtime": 1780141493.865047,
+    "ast_hash": "6f38f02c933790af7fd3b929c24c5528",
+    "semantic_hash": "6f38f02c933790af7fd3b929c24c5528"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nextjs-patterns\\templates\\nextjs-basic-auth\\tsconfig.json": {
+    "mtime": 1780141493.865047,
+    "ast_hash": "0f30e8b7b30167c189aab9359ce09271",
+    "semantic_hash": "0f30e8b7b30167c189aab9359ce09271"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nuxt-patterns\\evals\\evals.json": {
+    "mtime": 1780141493.866047,
+    "ast_hash": "1b22f96a604daf845492dc98f6b8d424",
+    "semantic_hash": "1b22f96a604daf845492dc98f6b8d424"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nuxt-patterns\\templates\\nuxt-basic-auth\\app.vue": {
+    "mtime": 1780141493.8680465,
+    "ast_hash": "3a32c9a0f84f6184715699dfe0c5de4a",
+    "semantic_hash": "3a32c9a0f84f6184715699dfe0c5de4a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nuxt-patterns\\templates\\nuxt-basic-auth\\nuxt.config.ts": {
+    "mtime": 1780141493.8680465,
+    "ast_hash": "40906b8f9b6ef7e449af29514af6402c",
+    "semantic_hash": "40906b8f9b6ef7e449af29514af6402c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nuxt-patterns\\templates\\nuxt-basic-auth\\package.json": {
+    "mtime": 1780141493.8680465,
+    "ast_hash": "63b29a4a149dacd87a5a2356fadac069",
+    "semantic_hash": "63b29a4a149dacd87a5a2356fadac069"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-orgs\\evals\\evals.json": {
+    "mtime": 1780141493.8429372,
+    "ast_hash": "18e86d07393a4be599c5306b13a0471d",
+    "semantic_hash": "18e86d07393a4be599c5306b13a0471d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-patterns\\evals\\evals.json": {
+    "mtime": 1780141493.8690467,
+    "ast_hash": "dd94f2b641b5e9150dfd1b9bbfbf4f54",
+    "semantic_hash": "dd94f2b641b5e9150dfd1b9bbfbf4f54"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-patterns\\templates\\react-basic-auth\\package.json": {
+    "mtime": 1780141493.871047,
+    "ast_hash": "b4fd7be99eb7e5d323a8cf33172244e2",
+    "semantic_hash": "b4fd7be99eb7e5d323a8cf33172244e2"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-patterns\\templates\\react-basic-auth\\src\\App.tsx": {
+    "mtime": 1780141493.8720562,
+    "ast_hash": "e461244caeffa028813416d721273abb",
+    "semantic_hash": "e461244caeffa028813416d721273abb"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-patterns\\templates\\react-basic-auth\\src\\main.tsx": {
+    "mtime": 1780141493.8726635,
+    "ast_hash": "7fba3b79523eef5e0f44594ced3ed37a",
+    "semantic_hash": "7fba3b79523eef5e0f44594ced3ed37a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-patterns\\templates\\react-basic-auth\\tsconfig.json": {
+    "mtime": 1780141493.8726635,
+    "ast_hash": "22b1870e69a16edc9fbe54704e8d944d",
+    "semantic_hash": "22b1870e69a16edc9fbe54704e8d944d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-patterns\\templates\\react-basic-auth\\vite.config.ts": {
+    "mtime": 1780141493.8726635,
+    "ast_hash": "0a07270752fc00dbe3308e9ca2f358ef",
+    "semantic_hash": "0a07270752fc00dbe3308e9ca2f358ef"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-router-patterns\\evals\\evals.json": {
+    "mtime": 1780141493.8746676,
+    "ast_hash": "18e0ca26846f1ae78dbc3389752772d3",
+    "semantic_hash": "18e0ca26846f1ae78dbc3389752772d3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-router-patterns\\templates\\react-router-basic-auth\\app\\root.tsx": {
+    "mtime": 1780141493.8756676,
+    "ast_hash": "35ced569d59220592a79824999a821c3",
+    "semantic_hash": "35ced569d59220592a79824999a821c3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-router-patterns\\templates\\react-router-basic-auth\\app\\routes.ts": {
+    "mtime": 1780141493.8766687,
+    "ast_hash": "02d3a0ca3311dae3c2b5fd71e91fb232",
+    "semantic_hash": "02d3a0ca3311dae3c2b5fd71e91fb232"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-router-patterns\\templates\\react-router-basic-auth\\app\\routes\\home.tsx": {
+    "mtime": 1780141493.8766687,
+    "ast_hash": "21bb3dc8d68617ea9eab04c67bb6f2ed",
+    "semantic_hash": "21bb3dc8d68617ea9eab04c67bb6f2ed"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-router-patterns\\templates\\react-router-basic-auth\\package.json": {
+    "mtime": 1780141493.8766687,
+    "ast_hash": "d927d3dc9c1e9e711cdd63c2ed4a7e73",
+    "semantic_hash": "d927d3dc9c1e9e711cdd63c2ed4a7e73"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-router-patterns\\templates\\react-router-basic-auth\\react-router.config.ts": {
+    "mtime": 1780141493.8776689,
+    "ast_hash": "93f62d8fbdc3e62a0652628960fc18fc",
+    "semantic_hash": "93f62d8fbdc3e62a0652628960fc18fc"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-router-patterns\\templates\\react-router-basic-auth\\vite.config.ts": {
+    "mtime": 1780141493.8776689,
+    "ast_hash": "67c5ab80aa40ef61abd788144ec4d85e",
+    "semantic_hash": "67c5ab80aa40ef61abd788144ec4d85e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-setup\\evals\\evals.json": {
+    "mtime": 1780141493.8379323,
+    "ast_hash": "ad83cb06eec91e3114235a94d101c340",
+    "semantic_hash": "ad83cb06eec91e3114235a94d101c340"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\evals\\evals.json": {
+    "mtime": 1780141493.8786688,
+    "ast_hash": "d7748da12e7c304cebc832a56cf5e8dc",
+    "semantic_hash": "d7748da12e7c304cebc832a56cf5e8dc"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\templates\\tanstack-basic-auth\\package.json": {
+    "mtime": 1780141493.8806686,
+    "ast_hash": "180a22e95f1cf569fcb061609983a8e4",
+    "semantic_hash": "180a22e95f1cf569fcb061609983a8e4"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\templates\\tanstack-basic-auth\\src\\router.tsx": {
+    "mtime": 1780141493.8806686,
+    "ast_hash": "83ff260171b7fe1060de916ba544abcd",
+    "semantic_hash": "83ff260171b7fe1060de916ba544abcd"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\templates\\tanstack-basic-auth\\src\\routes\\__root.tsx": {
+    "mtime": 1780141493.8816702,
+    "ast_hash": "ad42673046264fa5e792344a9bb37e3e",
+    "semantic_hash": "ad42673046264fa5e792344a9bb37e3e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\templates\\tanstack-basic-auth\\src\\routes\\index.tsx": {
+    "mtime": 1780141493.8816702,
+    "ast_hash": "ec1cfe81411cfd2c7cafc6746f94d65f",
+    "semantic_hash": "ec1cfe81411cfd2c7cafc6746f94d65f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\templates\\tanstack-basic-auth\\src\\start.ts": {
+    "mtime": 1780141493.8816702,
+    "ast_hash": "f96602b135668b5d38eb83b635d236c5",
+    "semantic_hash": "f96602b135668b5d38eb83b635d236c5"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\templates\\tanstack-basic-auth\\tsconfig.json": {
+    "mtime": 1780141493.882669,
+    "ast_hash": "391fd7a334f30af47292c3026abb5a55",
+    "semantic_hash": "391fd7a334f30af47292c3026abb5a55"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\templates\\tanstack-basic-auth\\vite.config.ts": {
+    "mtime": 1780141493.882669,
+    "ast_hash": "86622ac8868a3d5b586c95919b8fbf98",
+    "semantic_hash": "86622ac8868a3d5b586c95919b8fbf98"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-vue-patterns\\evals\\evals.json": {
+    "mtime": 1780141493.88367,
+    "ast_hash": "17800aa94b3ee553cd9728b2e61521bf",
+    "semantic_hash": "17800aa94b3ee553cd9728b2e61521bf"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-vue-patterns\\templates\\vue-basic-auth\\package.json": {
+    "mtime": 1780141493.8856676,
+    "ast_hash": "3da1e3fc9e43779e76f9c21d92b09170",
+    "semantic_hash": "3da1e3fc9e43779e76f9c21d92b09170"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-vue-patterns\\templates\\vue-basic-auth\\src\\App.vue": {
+    "mtime": 1780141493.8856676,
+    "ast_hash": "3048a64b6be34f4085961c7ca933532d",
+    "semantic_hash": "3048a64b6be34f4085961c7ca933532d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-vue-patterns\\templates\\vue-basic-auth\\src\\main.ts": {
+    "mtime": 1780141493.8856676,
+    "ast_hash": "e1be285140f26c9a8318e43d73d1e0ec",
+    "semantic_hash": "e1be285140f26c9a8318e43d73d1e0ec"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-vue-patterns\\templates\\vue-basic-auth\\vite.config.ts": {
+    "mtime": 1780141493.8866682,
+    "ast_hash": "22005ee4fe73dfe4b46b241eceb60a9a",
+    "semantic_hash": "22005ee4fe73dfe4b46b241eceb60a9a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-webhooks\\evals\\evals.json": {
+    "mtime": 1780141493.8459368,
+    "ast_hash": "642e20d7e3796c3408079b21566a65d5",
+    "semantic_hash": "642e20d7e3796c3408079b21566a65d5"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.clerk\\.tmp\\keyless.json": {
+    "mtime": 1780139698.479391,
+    "ast_hash": "6985ed4862e7a91e685e8d74f6f86a0e",
+    "semantic_hash": "6985ed4862e7a91e685e8d74f6f86a0e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\garments\\[id]\\classify\\route.ts": {
+    "mtime": 1780385813.0799663,
+    "ast_hash": "934a75ad7c17c0e1929d6f3e949ea3b0",
+    "semantic_hash": "934a75ad7c17c0e1929d6f3e949ea3b0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\garments\\[id]\\remove-background\\route.ts": {
+    "mtime": 1780385813.0809622,
+    "ast_hash": "a5169c69e1e837efac80209093453214",
+    "semantic_hash": "a5169c69e1e837efac80209093453214"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\garments\\[id]\\route.ts": {
+    "mtime": 1780386183.4277835,
+    "ast_hash": "195767464e40d45ce40f64a920f8a50a",
+    "semantic_hash": "195767464e40d45ce40f64a920f8a50a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\garments\\[id]\\status\\route.ts": {
+    "mtime": 1780385813.0809622,
+    "ast_hash": "58ddc401542b91d2321e513bbf2128bb",
+    "semantic_hash": "58ddc401542b91d2321e513bbf2128bb"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\garments\\route.ts": {
+    "mtime": 1780385813.0789566,
+    "ast_hash": "8ff030e68527b489f2e7a866995c86c1",
+    "semantic_hash": "8ff030e68527b489f2e7a866995c86c1"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\insights\\route.ts": {
+    "mtime": 1780385813.0821593,
+    "ast_hash": "71c5932c5dc68770ed844ea091f3ea18",
+    "semantic_hash": "71c5932c5dc68770ed844ea091f3ea18"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\onboarding\\complete\\route.ts": {
+    "mtime": 1780385813.0821593,
+    "ast_hash": "9f50dad054e183f06b1b2a8fd5e7cdb7",
+    "semantic_hash": "9f50dad054e183f06b1b2a8fd5e7cdb7"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\outfits\\[id]\\route.ts": {
+    "mtime": 1780386183.4137566,
+    "ast_hash": "b403f21bafa9f585c467ecf153da0472",
+    "semantic_hash": "b403f21bafa9f585c467ecf153da0472"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\outfits\\generate\\route.ts": {
+    "mtime": 1780385813.0821593,
+    "ast_hash": "483e42ac6c4043aa918fd7152ca08b02",
+    "semantic_hash": "483e42ac6c4043aa918fd7152ca08b02"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\outfits\\route.ts": {
+    "mtime": 1780385813.083169,
+    "ast_hash": "109a52226e12bc1b3249b1cf58c098f8",
+    "semantic_hash": "109a52226e12bc1b3249b1cf58c098f8"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\preferences\\route.ts": {
+    "mtime": 1780386183.395037,
+    "ast_hash": "a6b9174cae0dd7eaacdc6663de497645",
+    "semantic_hash": "a6b9174cae0dd7eaacdc6663de497645"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\recommendations\\[outfitId]\\dislike\\route.ts": {
+    "mtime": 1780385813.0849025,
+    "ast_hash": "4cbdb4999bc22238b2598b315d4b5201",
+    "semantic_hash": "4cbdb4999bc22238b2598b315d4b5201"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\recommendations\\[outfitId]\\like\\route.ts": {
+    "mtime": 1780385813.0849025,
+    "ast_hash": "9d83dcea11fdad213a7d80d37a3e9dff",
+    "semantic_hash": "9d83dcea11fdad213a7d80d37a3e9dff"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\recommendations\\[outfitId]\\wear\\route.ts": {
+    "mtime": 1780385813.0859556,
+    "ast_hash": "21f7f64d442ceff9a8c29a90902e9e93",
+    "semantic_hash": "21f7f64d442ceff9a8c29a90902e9e93"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\recommendations\\route.ts": {
+    "mtime": 1780385813.0849025,
+    "ast_hash": "aa7b288cb8ab31a9d7410794beae784e",
+    "semantic_hash": "aa7b288cb8ab31a9d7410794beae784e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\upload\\route.ts": {
+    "mtime": 1780385813.0859556,
+    "ast_hash": "1f8b14c563323d71c1f3ede5dedf7434",
+    "semantic_hash": "1f8b14c563323d71c1f3ede5dedf7434"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\wear-history\\[id]\\route.ts": {
+    "mtime": 1780385813.0859556,
+    "ast_hash": "ba5f8aaa433591e9fe4cc88d12db5d51",
+    "semantic_hash": "ba5f8aaa433591e9fe4cc88d12db5d51"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\api\\wear-history\\route.ts": {
+    "mtime": 1780385813.0859556,
+    "ast_hash": "752485281b1f7608b288c692dc173c01",
+    "semantic_hash": "752485281b1f7608b288c692dc173c01"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\editor\\page.tsx": {
+    "mtime": 1780326234.0262065,
+    "ast_hash": "7f6add848b106c85399a817b7b3210f4",
+    "semantic_hash": "7f6add848b106c85399a817b7b3210f4"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\editor\\wardrobe\\page.tsx": {
+    "mtime": 1780330091.413371,
+    "ast_hash": "05e69848de7bb33eaf34d8be83c63880",
+    "semantic_hash": "05e69848de7bb33eaf34d8be83c63880"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\history\\page.tsx": {
+    "mtime": 1780326004.531351,
+    "ast_hash": "111ef4570cf0030fc3b2d9ca60f1b0f6",
+    "semantic_hash": "111ef4570cf0030fc3b2d9ca60f1b0f6"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\insights\\page.tsx": {
+    "mtime": 1780326004.531351,
+    "ast_hash": "f90c83c706217880f71eb65af552833c",
+    "semantic_hash": "f90c83c706217880f71eb65af552833c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\layout.tsx": {
+    "mtime": 1780344801.4402552,
+    "ast_hash": "eedbe10cd465b6a28c5924ea19b499ba",
+    "semantic_hash": "eedbe10cd465b6a28c5924ea19b499ba"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\onboarding\\page.tsx": {
+    "mtime": 1780328157.1660652,
+    "ast_hash": "49745fa4449df77ffae0c56ba2595cdb",
+    "semantic_hash": "49745fa4449df77ffae0c56ba2595cdb"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\page.tsx": {
+    "mtime": 1780386175.8574667,
+    "ast_hash": "c0a947c300789c328885c66bf99ba55d",
+    "semantic_hash": "c0a947c300789c328885c66bf99ba55d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\preferences\\page.tsx": {
+    "mtime": 1780328241.5333798,
+    "ast_hash": "b18695375f8391ffd13f85d40aa75bb5",
+    "semantic_hash": "b18695375f8391ffd13f85d40aa75bb5"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\sign-in\\[[...sign-in]]\\page.tsx": {
+    "mtime": 1780344812.5476048,
+    "ast_hash": "e16728e78f7dacde65e1296415a85836",
+    "semantic_hash": "e16728e78f7dacde65e1296415a85836"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\app\\sign-up\\[[...sign-up]]\\page.tsx": {
+    "mtime": 1780344825.381555,
+    "ast_hash": "65bfb4bbd30c2599f640b3a450aa5a03",
+    "semantic_hash": "65bfb4bbd30c2599f640b3a450aa5a03"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components.json": {
+    "mtime": 1780138909.6734369,
+    "ast_hash": "02016e740b7b0e6a3b00a3441ac0bda7",
+    "semantic_hash": "02016e740b7b0e6a3b00a3441ac0bda7"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\editor\\editor-navbar.tsx": {
+    "mtime": 1780344067.735333,
+    "ast_hash": "377e2cdf847ed079c59a32b6a0cd0c65",
+    "semantic_hash": "377e2cdf847ed079c59a32b6a0cd0c65"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\editor\\editorial-dialog.tsx": {
+    "mtime": 1780138909.6744409,
+    "ast_hash": "a5cc088879a6a73db6162ff346b5d1ec",
+    "semantic_hash": "a5cc088879a6a73db6162ff346b5d1ec"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\editor\\garment-card.tsx": {
+    "mtime": 1780328334.704788,
+    "ast_hash": "dc6de12fd51dd21492e6ab395bcc6ca1",
+    "semantic_hash": "dc6de12fd51dd21492e6ab395bcc6ca1"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\editor\\garment-details-dialog.tsx": {
+    "mtime": 1780326004.5334826,
+    "ast_hash": "8102af2671874259e320ef2456b649ed",
+    "semantic_hash": "8102af2671874259e320ef2456b649ed"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\editor\\outfit-builder-dialog.tsx": {
+    "mtime": 1780326004.5340083,
+    "ast_hash": "d9429020bf4d0393f37269f3812fbfb0",
+    "semantic_hash": "d9429020bf4d0393f37269f3812fbfb0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\editor\\outfit-card.tsx": {
+    "mtime": 1780329971.0824733,
+    "ast_hash": "db756595d1a3558f0b23e8d95e7a6754",
+    "semantic_hash": "db756595d1a3558f0b23e8d95e7a6754"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\editor\\outfit-grid.tsx": {
+    "mtime": 1780326004.5345309,
+    "ast_hash": "4f0578213ea22aa9f6d8b1562d5231aa",
+    "semantic_hash": "4f0578213ea22aa9f6d8b1562d5231aa"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\editor\\project-sidebar.tsx": {
+    "mtime": 1780327649.5944753,
+    "ast_hash": "d750f233f8fac337f3c5d2a27a488a13",
+    "semantic_hash": "d750f233f8fac337f3c5d2a27a488a13"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\editor\\upload-garment-dialog.tsx": {
+    "mtime": 1780329403.134015,
+    "ast_hash": "2cd37ddbcaaa03924abf2f370093e9ff",
+    "semantic_hash": "2cd37ddbcaaa03924abf2f370093e9ff"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\editor\\wardrobe-grid.tsx": {
+    "mtime": 1780326004.5356026,
+    "ast_hash": "e2322753fa802ff64fb36a2b13f04813",
+    "semantic_hash": "e2322753fa802ff64fb36a2b13f04813"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\history\\history-detail-dialog.tsx": {
+    "mtime": 1780326004.5361252,
+    "ast_hash": "1f79bed92f5cf75d7579f58aef6aeb5f",
+    "semantic_hash": "1f79bed92f5cf75d7579f58aef6aeb5f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\history\\history-item.tsx": {
+    "mtime": 1780326004.5361252,
+    "ast_hash": "3d372e5a8dcafb1a84b45453ee3002cd",
+    "semantic_hash": "3d372e5a8dcafb1a84b45453ee3002cd"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\recommendation\\todays-recommendations.tsx": {
+    "mtime": 1780386170.3210528,
+    "ast_hash": "15e49de3330a42edf7e1217ba3a2f217",
+    "semantic_hash": "15e49de3330a42edf7e1217ba3a2f217"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\ui\\button.tsx": {
+    "mtime": 1780138909.675441,
+    "ast_hash": "fa7dc9bec92a2ea0344e2a5c4738514f",
+    "semantic_hash": "fa7dc9bec92a2ea0344e2a5c4738514f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\ui\\card.tsx": {
+    "mtime": 1780138909.675441,
+    "ast_hash": "ee74a83be6bb8fc3473cb6cceffe8813",
+    "semantic_hash": "ee74a83be6bb8fc3473cb6cceffe8813"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\ui\\dialog.tsx": {
+    "mtime": 1780138909.675441,
+    "ast_hash": "89fd7888d5bbc59f2eae651ffc05fc70",
+    "semantic_hash": "89fd7888d5bbc59f2eae651ffc05fc70"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\ui\\input.tsx": {
+    "mtime": 1780138909.6764412,
+    "ast_hash": "da33823853390b57ac04230a67657585",
+    "semantic_hash": "da33823853390b57ac04230a67657585"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\ui\\scroll-area.tsx": {
+    "mtime": 1780138909.6764412,
+    "ast_hash": "7e213fb00f86a1b00b2df7cfab32525d",
+    "semantic_hash": "7e213fb00f86a1b00b2df7cfab32525d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\ui\\tabs.tsx": {
+    "mtime": 1780138909.6764412,
+    "ast_hash": "aa67dc7b086fe22106b124f2c5a7fd3b",
+    "semantic_hash": "aa67dc7b086fe22106b124f2c5a7fd3b"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\components\\ui\\textarea.tsx": {
+    "mtime": 1780138909.6774414,
+    "ast_hash": "378ccca2b6eee051a23c1e6d7bc80952",
+    "semantic_hash": "378ccca2b6eee051a23c1e6d7bc80952"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\eslint.config.mjs": {
+    "mtime": 1780138909.6774414,
+    "ast_hash": "6c4307ffa009658f5c97f5629094c0c2",
+    "semantic_hash": "6c4307ffa009658f5c97f5629094c0c2"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\lib\\utils.ts": {
+    "mtime": 1780326004.537165,
+    "ast_hash": "8c95a65ec8f62756dd0a6f6ea46aa28c",
+    "semantic_hash": "8c95a65ec8f62756dd0a6f6ea46aa28c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\next-env.d.ts": {
+    "mtime": 1780386505.7025437,
+    "ast_hash": "29f60a376e12bf72b67d4994fcc84214",
+    "semantic_hash": "29f60a376e12bf72b67d4994fcc84214"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\next.config.ts": {
+    "mtime": 1780385822.9367058,
+    "ast_hash": "c7ea74b73d89cfa6ee8a1b713ba5a784",
+    "semantic_hash": "c7ea74b73d89cfa6ee8a1b713ba5a784"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\package.json": {
+    "mtime": 1780385829.4578152,
+    "ast_hash": "45aa0c8635b64daee65540d25d0ebeff",
+    "semantic_hash": "45aa0c8635b64daee65540d25d0ebeff"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\postcss.config.mjs": {
+    "mtime": 1780138909.6804416,
+    "ast_hash": "481fac0fdecd70e1821cc30b86030c1a",
+    "semantic_hash": "481fac0fdecd70e1821cc30b86030c1a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\proxy.ts": {
+    "mtime": 1780326004.5425663,
+    "ast_hash": "3fff4fb8dbd1a27edd6aa02a326464ac",
+    "semantic_hash": "3fff4fb8dbd1a27edd6aa02a326464ac"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\skills-lock.json": {
+    "mtime": 1780141497.6135209,
+    "ast_hash": "af53d574ab1f31a865f5f0c3f4167db1",
+    "semantic_hash": "af53d574ab1f31a865f5f0c3f4167db1"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\tsconfig.json": {
+    "mtime": 1780138909.6804416,
+    "ast_hash": "ab575e944f15d39a5486cf9fca385c5e",
+    "semantic_hash": "ab575e944f15d39a5486cf9fca385c5e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\types\\index.ts": {
+    "mtime": 1780385713.3310702,
+    "ast_hash": "1429473b7ae7ada193cef52628c6f1e2",
+    "semantic_hash": "1429473b7ae7ada193cef52628c6f1e2"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\package.json": {
+    "mtime": 1780385657.6329508,
+    "ast_hash": "0a06330b6cbe3e95e427870fb51704e3",
+    "semantic_hash": "0a06330b6cbe3e95e427870fb51704e3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\SKILL.md": {
+    "mtime": 1780346639.3121734,
+    "ast_hash": "ad2778d6dc1e1661b5e7e53a870e4d26",
+    "semantic_hash": "ad2778d6dc1e1661b5e7e53a870e4d26"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\adapt.md": {
+    "mtime": 1780346639.2671208,
+    "ast_hash": "677c79a3dfdb092d711e5e59c46b41bb",
+    "semantic_hash": "677c79a3dfdb092d711e5e59c46b41bb"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\animate.md": {
+    "mtime": 1780346639.267676,
+    "ast_hash": "87e75f869b8289acb616dce325e1d008",
+    "semantic_hash": "87e75f869b8289acb616dce325e1d008"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\audit.md": {
+    "mtime": 1780346639.268213,
+    "ast_hash": "fb3a1ab9b014ecc9fe0d22075616702a",
+    "semantic_hash": "fb3a1ab9b014ecc9fe0d22075616702a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\bolder.md": {
+    "mtime": 1780346639.268213,
+    "ast_hash": "60c92579e8c0b55945bac5f3fbdd7746",
+    "semantic_hash": "60c92579e8c0b55945bac5f3fbdd7746"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\brand.md": {
+    "mtime": 1780346639.2689111,
+    "ast_hash": "5e8f9b86533d7b855aa1b93bc0b9a311",
+    "semantic_hash": "5e8f9b86533d7b855aa1b93bc0b9a311"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\clarify.md": {
+    "mtime": 1780346639.2689111,
+    "ast_hash": "59f37b001528ffa685aa9fc8b815ac0c",
+    "semantic_hash": "59f37b001528ffa685aa9fc8b815ac0c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\codex.md": {
+    "mtime": 1780346639.2704735,
+    "ast_hash": "6d97d559484916f05fa74f6b74f3da07",
+    "semantic_hash": "6d97d559484916f05fa74f6b74f3da07"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\colorize.md": {
+    "mtime": 1780346639.2704735,
+    "ast_hash": "69f597448e78f518d64617c0137bc533",
+    "semantic_hash": "69f597448e78f518d64617c0137bc533"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\craft.md": {
+    "mtime": 1780346639.2720115,
+    "ast_hash": "30b636d36ebb80efb147c409fbd56ef0",
+    "semantic_hash": "30b636d36ebb80efb147c409fbd56ef0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\critique.md": {
+    "mtime": 1780346639.2720115,
+    "ast_hash": "8f6903ba0a98fff1c229bfd091bb56fa",
+    "semantic_hash": "8f6903ba0a98fff1c229bfd091bb56fa"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\delight.md": {
+    "mtime": 1780346639.2720115,
+    "ast_hash": "994a24c88a90cd4497831f73ad50e92c",
+    "semantic_hash": "994a24c88a90cd4497831f73ad50e92c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\distill.md": {
+    "mtime": 1780346639.2720115,
+    "ast_hash": "d47f1e82b6f7728ed0cad7e7ea0711b4",
+    "semantic_hash": "d47f1e82b6f7728ed0cad7e7ea0711b4"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\document.md": {
+    "mtime": 1780346639.2735198,
+    "ast_hash": "ae73c8b196b13f02a2616080f4db0709",
+    "semantic_hash": "ae73c8b196b13f02a2616080f4db0709"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\extract.md": {
+    "mtime": 1780346639.274461,
+    "ast_hash": "85e31dfecff207358c2ac0e335085245",
+    "semantic_hash": "85e31dfecff207358c2ac0e335085245"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\harden.md": {
+    "mtime": 1780346639.274461,
+    "ast_hash": "e87b0bff32be86e7825e7ff4c50157e3",
+    "semantic_hash": "e87b0bff32be86e7825e7ff4c50157e3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\init.md": {
+    "mtime": 1780346639.274973,
+    "ast_hash": "77ef1cf6a45cfcc629b1be3bc9469ea4",
+    "semantic_hash": "77ef1cf6a45cfcc629b1be3bc9469ea4"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\interaction-design.md": {
+    "mtime": 1780346639.2755032,
+    "ast_hash": "1dd83bb8a96d7e250914064aa7389f8b",
+    "semantic_hash": "1dd83bb8a96d7e250914064aa7389f8b"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\layout.md": {
+    "mtime": 1780346639.276585,
+    "ast_hash": "0df4b2064cadee109afe865ce7d20d1e",
+    "semantic_hash": "0df4b2064cadee109afe865ce7d20d1e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\live.md": {
+    "mtime": 1780346639.2771208,
+    "ast_hash": "f54d4bfc538942b8d29fad083dff6f23",
+    "semantic_hash": "f54d4bfc538942b8d29fad083dff6f23"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\onboard.md": {
+    "mtime": 1780346639.2776577,
+    "ast_hash": "7095aaea9e2994e37afb3cf1743bc092",
+    "semantic_hash": "7095aaea9e2994e37afb3cf1743bc092"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\optimize.md": {
+    "mtime": 1780346639.2787464,
+    "ast_hash": "d01f252b7e5cb35b8443d57eaad40b58",
+    "semantic_hash": "d01f252b7e5cb35b8443d57eaad40b58"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\overdrive.md": {
+    "mtime": 1780346639.2793062,
+    "ast_hash": "dadd48faf8bc6dbb63196215a7195abb",
+    "semantic_hash": "dadd48faf8bc6dbb63196215a7195abb"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\polish.md": {
+    "mtime": 1780346639.2793062,
+    "ast_hash": "fe186b5a0d88279bc0675d0ba1c5213f",
+    "semantic_hash": "fe186b5a0d88279bc0675d0ba1c5213f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\product.md": {
+    "mtime": 1780346639.2799304,
+    "ast_hash": "6408a63ddbfe7003c732650381506860",
+    "semantic_hash": "6408a63ddbfe7003c732650381506860"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\quieter.md": {
+    "mtime": 1780346639.2805586,
+    "ast_hash": "2f534f1c782f998a78ef17b34eedb0ce",
+    "semantic_hash": "2f534f1c782f998a78ef17b34eedb0ce"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\shape.md": {
+    "mtime": 1780346639.2810962,
+    "ast_hash": "328ad4e06423eed564fa9391985f834c",
+    "semantic_hash": "328ad4e06423eed564fa9391985f834c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\.claude\\skills\\impeccable\\reference\\typeset.md": {
+    "mtime": 1780346639.2821915,
+    "ast_hash": "8e8e3a58858713ff62de8ffa1a740cc6",
+    "semantic_hash": "8e8e3a58858713ff62de8ffa1a740cc6"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\CLAUDE.md": {
+    "mtime": 1780391815.6379662,
+    "ast_hash": "8a6643a420fdad6bfb583523bc6cef16",
+    "semantic_hash": "8a6643a420fdad6bfb583523bc6cef16"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\README.md": {
+    "mtime": 1780138909.6669235,
+    "ast_hash": "822a573d1692a4fc793d1136dbe844e1",
+    "semantic_hash": "822a573d1692a4fc793d1136dbe844e1"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\ai-workflow-rules.md": {
+    "mtime": 1780138909.6669235,
+    "ast_hash": "367b3c735bae8ff3eb47888c82574623",
+    "semantic_hash": "367b3c735bae8ff3eb47888c82574623"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\architecture.md": {
+    "mtime": 1780138909.667928,
+    "ast_hash": "a507ffc1dcf6f5d944ffd324daff9745",
+    "semantic_hash": "a507ffc1dcf6f5d944ffd324daff9745"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\code-standards.md": {
+    "mtime": 1780138909.667928,
+    "ast_hash": "b622e598cf71c43cf629b4d803fdd06f",
+    "semantic_hash": "b622e598cf71c43cf629b4d803fdd06f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\01-design-system.md": {
+    "mtime": 1780138909.6689284,
+    "ast_hash": "192ba0ba7fc187b17a51ba2e53c6771a",
+    "semantic_hash": "192ba0ba7fc187b17a51ba2e53c6771a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\02-editor.md": {
+    "mtime": 1780138909.6689284,
+    "ast_hash": "c71d0734dede80c2f5ae14d0fd849d4a",
+    "semantic_hash": "c71d0734dede80c2f5ae14d0fd849d4a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\03-auth.md": {
+    "mtime": 1780140867.3499992,
+    "ast_hash": "858d1692b44b5169d9a42f0615816b71",
+    "semantic_hash": "858d1692b44b5169d9a42f0615816b71"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\04-upload-garment.md": {
+    "mtime": 1780326004.6735718,
+    "ast_hash": "077974238681f96e0114ccaa8e1dcfe0",
+    "semantic_hash": "077974238681f96e0114ccaa8e1dcfe0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\05-prisma.md": {
+    "mtime": 1780141750.832383,
+    "ast_hash": "244657d477bbacd2cff9cbcf9cae2081",
+    "semantic_hash": "244657d477bbacd2cff9cbcf9cae2081"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\06-project-apis.md": {
+    "mtime": 1780326004.7138412,
+    "ast_hash": "ba029320db8eea5ef878deb516da1b6a",
+    "semantic_hash": "ba029320db8eea5ef878deb516da1b6a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\06-wardrobe-system.md": {
+    "mtime": 1780326004.519244,
+    "ast_hash": "4574afecc8aa40db40acaa1bf1d584ec",
+    "semantic_hash": "4574afecc8aa40db40acaa1bf1d584ec"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\07-wardrobe-management.md": {
+    "mtime": 1780326004.519244,
+    "ast_hash": "2c301167be3c112dfc65f74acf0f3207",
+    "semantic_hash": "2c301167be3c112dfc65f74acf0f3207"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\08-outfit-fuilder.md": {
+    "mtime": 1780326004.5213811,
+    "ast_hash": "e96431525c0bab41def90d9ed6211451",
+    "semantic_hash": "e96431525c0bab41def90d9ed6211451"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\09-garment-classification.md": {
+    "mtime": 1780326004.5213811,
+    "ast_hash": "1d1d0d11ebafdd57f1e12b4d3144e96c",
+    "semantic_hash": "1d1d0d11ebafdd57f1e12b4d3144e96c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\10-recommendation-engine.md": {
+    "mtime": 1780326004.5213811,
+    "ast_hash": "25526b80e9f4f83e510132d190a2ac56",
+    "semantic_hash": "25526b80e9f4f83e510132d190a2ac56"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\11-recommendation-feedback.md": {
+    "mtime": 1780326004.5223937,
+    "ast_hash": "caaa4cdb47a7eccfec64b1b7067f52ad",
+    "semantic_hash": "caaa4cdb47a7eccfec64b1b7067f52ad"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\12-wear-history.md": {
+    "mtime": 1780326004.5223937,
+    "ast_hash": "3acc1102a7b88597dca8daa79bb739e0",
+    "semantic_hash": "3acc1102a7b88597dca8daa79bb739e0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\13-wear-insights.md": {
+    "mtime": 1780326004.5223937,
+    "ast_hash": "87c7a22784a5b04e8598d59a120c04c3",
+    "semantic_hash": "87c7a22784a5b04e8598d59a120c04c3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\14-preference-learning.md": {
+    "mtime": 1780326004.5223937,
+    "ast_hash": "e47effea9c52c900ab91d8252aa25ea2",
+    "semantic_hash": "e47effea9c52c900ab91d8252aa25ea2"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\15-background-removal.md": {
+    "mtime": 1780326004.5223937,
+    "ast_hash": "f40aee3b6c5dfa3d2d811a6d5e441fef",
+    "semantic_hash": "f40aee3b6c5dfa3d2d811a6d5e441fef"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\feature-specs\\16-ai-outfit-generator.md": {
+    "mtime": 1780329696.2759893,
+    "ast_hash": "3c592798c44e118f44789eb4b6d7844b",
+    "semantic_hash": "3c592798c44e118f44789eb4b6d7844b"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\progress-tracker.md": {
+    "mtime": 1780386237.89506,
+    "ast_hash": "7a8ed52e3afed74b5969acff3a69f44e",
+    "semantic_hash": "7a8ed52e3afed74b5969acff3a69f44e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\project-overview.md": {
+    "mtime": 1780138909.6699278,
+    "ast_hash": "65ca889783f81e284df193340e43718f",
+    "semantic_hash": "65ca889783f81e284df193340e43718f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\context\\ui-context.md": {
+    "mtime": 1780138909.6699278,
+    "ast_hash": "1fabbcc292d72897761be5cfd7969ee9",
+    "semantic_hash": "1fabbcc292d72897761be5cfd7969ee9"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-android\\SKILL.md": {
+    "mtime": 1780141493.8876688,
+    "ast_hash": "e0c0993f00495c6ee2f545b92b57d890",
+    "semantic_hash": "e0c0993f00495c6ee2f545b92b57d890"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-android\\references\\custom.md": {
+    "mtime": 1780141493.8876688,
+    "ast_hash": "978b83f8e3b61686e89d8ab7e0588eb0",
+    "semantic_hash": "978b83f8e3b61686e89d8ab7e0588eb0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-android\\references\\prebuilt.md": {
+    "mtime": 1780141493.8876688,
+    "ast_hash": "0dce21aeae59f05e0c8f6adafd9960c2",
+    "semantic_hash": "0dce21aeae59f05e0c8f6adafd9960c2"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\SKILL.md": {
+    "mtime": 1780141493.8469372,
+    "ast_hash": "2d236dcf57ff6c5658d7babf77aba3f9",
+    "semantic_hash": "2d236dcf57ff6c5658d7babf77aba3f9"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\references\\api-routes.md": {
+    "mtime": 1780141493.8479388,
+    "ast_hash": "fcde9dd6e861faf28056e62ca2654185",
+    "semantic_hash": "fcde9dd6e861faf28056e62ca2654185"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\references\\astro-react.md": {
+    "mtime": 1780141493.8479388,
+    "ast_hash": "cf78906e5dfa3d1da4090165a3f0bc98",
+    "semantic_hash": "cf78906e5dfa3d1da4090165a3f0bc98"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\references\\island-components.md": {
+    "mtime": 1780141493.8479388,
+    "ast_hash": "07975d37aaa25cf82c9dd7173503c779",
+    "semantic_hash": "07975d37aaa25cf82c9dd7173503c779"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\references\\middleware.md": {
+    "mtime": 1780141493.8489385,
+    "ast_hash": "b3543c8f704bde382062631a78608e29",
+    "semantic_hash": "b3543c8f704bde382062631a78608e29"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-astro-patterns\\references\\ssr-pages.md": {
+    "mtime": 1780141493.8489385,
+    "ast_hash": "d8329a8e34e913c9347f6e36a6abfe8b",
+    "semantic_hash": "d8329a8e34e913c9347f6e36a6abfe8b"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-backend-api\\SKILL.md": {
+    "mtime": 1780141493.8329334,
+    "ast_hash": "83fcf96dd62a18faea53f93d40a41fb0",
+    "semantic_hash": "83fcf96dd62a18faea53f93d40a41fb0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-billing\\SKILL.md": {
+    "mtime": 1780141493.838933,
+    "ast_hash": "3b17e2f297cecfd3ce539443939c8eb7",
+    "semantic_hash": "3b17e2f297cecfd3ce539443939c8eb7"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-billing\\references\\b2b-patterns.md": {
+    "mtime": 1780141493.839933,
+    "ast_hash": "23dcf732beb81a422197d31ea6d2915a",
+    "semantic_hash": "23dcf732beb81a422197d31ea6d2915a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-billing\\references\\b2c-patterns.md": {
+    "mtime": 1780141493.8409376,
+    "ast_hash": "220f305989740beabdbe8ab5fccb22f6",
+    "semantic_hash": "220f305989740beabdbe8ab5fccb22f6"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-billing\\references\\billing-components.md": {
+    "mtime": 1780141493.8409376,
+    "ast_hash": "57244de6eda1b4959be04ed40cc844e3",
+    "semantic_hash": "57244de6eda1b4959be04ed40cc844e3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-billing\\references\\billing-webhooks.md": {
+    "mtime": 1780141493.841938,
+    "ast_hash": "0c5daf11b18c983ccf0d725d12083225",
+    "semantic_hash": "0c5daf11b18c983ccf0d725d12083225"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-chrome-extension-patterns\\SKILL.md": {
+    "mtime": 1780141493.851937,
+    "ast_hash": "0dd8b7be3da65ff1be0d04f870593e0e",
+    "semantic_hash": "0dd8b7be3da65ff1be0d04f870593e0e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-chrome-extension-patterns\\references\\content-scripts.md": {
+    "mtime": 1780141493.8529372,
+    "ast_hash": "33cf555b4454ee095251eefcb2721c2c",
+    "semantic_hash": "33cf555b4454ee095251eefcb2721c2c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-chrome-extension-patterns\\references\\create-clerk-client.md": {
+    "mtime": 1780141493.8529372,
+    "ast_hash": "0f5db10955693f78e46e3b53e921a0c6",
+    "semantic_hash": "0f5db10955693f78e46e3b53e921a0c6"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-chrome-extension-patterns\\references\\headless-extension.md": {
+    "mtime": 1780141493.8529372,
+    "ast_hash": "6cb1a5218baf508da6128618365e1b89",
+    "semantic_hash": "6cb1a5218baf508da6128618365e1b89"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-chrome-extension-patterns\\references\\sync-host.md": {
+    "mtime": 1780141493.8539393,
+    "ast_hash": "6b9edf59ef96b9bc57ac2ed6478a6395",
+    "semantic_hash": "6b9edf59ef96b9bc57ac2ed6478a6395"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-custom-ui\\SKILL.md": {
+    "mtime": 1780141493.8359344,
+    "ast_hash": "e5eb1b64098e570c726d6d8935916d60",
+    "semantic_hash": "e5eb1b64098e570c726d6d8935916d60"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-custom-ui\\core-2\\custom-sign-in.md": {
+    "mtime": 1780141493.8359344,
+    "ast_hash": "885faf09fd3957aba25a9109228a4f66",
+    "semantic_hash": "885faf09fd3957aba25a9109228a4f66"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-custom-ui\\core-2\\custom-sign-up.md": {
+    "mtime": 1780141493.8359344,
+    "ast_hash": "46b3450a3a660b6189ca2ce2bae1bb44",
+    "semantic_hash": "46b3450a3a660b6189ca2ce2bae1bb44"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-custom-ui\\core-3\\custom-sign-in.md": {
+    "mtime": 1780141493.8369336,
+    "ast_hash": "f10d4bfc8fd433e39c7d2b5269aa8fb1",
+    "semantic_hash": "f10d4bfc8fd433e39c7d2b5269aa8fb1"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-custom-ui\\core-3\\custom-sign-up.md": {
+    "mtime": 1780141493.8369336,
+    "ast_hash": "d813d36ff404f83e478833e96dd7e778",
+    "semantic_hash": "d813d36ff404f83e478833e96dd7e778"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-custom-ui\\core-3\\show-component.md": {
+    "mtime": 1780141493.8369336,
+    "ast_hash": "1bf1bf74e49ceb6a80c0df783aed9f2b",
+    "semantic_hash": "1bf1bf74e49ceb6a80c0df783aed9f2b"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo-patterns\\SKILL.md": {
+    "mtime": 1780141493.8554442,
+    "ast_hash": "3deea83beec72c6f2abd1647bbb14e3b",
+    "semantic_hash": "3deea83beec72c6f2abd1647bbb14e3b"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo-patterns\\references\\oauth-deep-linking.md": {
+    "mtime": 1780141493.8564494,
+    "ast_hash": "aeea3e445d482148f9360697d42f5571",
+    "semantic_hash": "aeea3e445d482148f9360697d42f5571"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo-patterns\\references\\protected-routes.md": {
+    "mtime": 1780141493.8570282,
+    "ast_hash": "dad9fdab246b8f995a4ecefc9737efdb",
+    "semantic_hash": "dad9fdab246b8f995a4ecefc9737efdb"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo-patterns\\references\\push-notifications.md": {
+    "mtime": 1780141493.8570282,
+    "ast_hash": "bb2a4f8fc24349d8c472025519fd4e89",
+    "semantic_hash": "bb2a4f8fc24349d8c472025519fd4e89"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo\\SKILL.md": {
+    "mtime": 1780141493.8886683,
+    "ast_hash": "93d10a134e9cc473f878f15ea6688fe1",
+    "semantic_hash": "93d10a134e9cc473f878f15ea6688fe1"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo\\references\\custom.md": {
+    "mtime": 1780141493.8886683,
+    "ast_hash": "b7a16d928eef2d68796c62a969214eb3",
+    "semantic_hash": "b7a16d928eef2d68796c62a969214eb3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-expo\\references\\prebuilt.md": {
+    "mtime": 1780141493.8896697,
+    "ast_hash": "b1d69e6d177e5d4fe43fc98cf22c6825",
+    "semantic_hash": "b1d69e6d177e5d4fe43fc98cf22c6825"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nextjs-patterns\\SKILL.md": {
+    "mtime": 1780141493.8610337,
+    "ast_hash": "0c79430dd7f0681163702ca1715683af",
+    "semantic_hash": "0c79430dd7f0681163702ca1715683af"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nextjs-patterns\\references\\api-routes.md": {
+    "mtime": 1780141493.862042,
+    "ast_hash": "5b7fced4d73cc20a228a9d71438cbf12",
+    "semantic_hash": "5b7fced4d73cc20a228a9d71438cbf12"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nextjs-patterns\\references\\caching-auth.md": {
+    "mtime": 1780141493.862042,
+    "ast_hash": "323ae1a2d7abfa8ee5ecfb2e5349592b",
+    "semantic_hash": "323ae1a2d7abfa8ee5ecfb2e5349592b"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nextjs-patterns\\references\\middleware-strategies.md": {
+    "mtime": 1780141493.862042,
+    "ast_hash": "b28a24aa100eb53f552a0202f72297d7",
+    "semantic_hash": "b28a24aa100eb53f552a0202f72297d7"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nextjs-patterns\\references\\server-actions.md": {
+    "mtime": 1780141493.8630466,
+    "ast_hash": "de999075d1c8cd2be00618ae7798a95a",
+    "semantic_hash": "de999075d1c8cd2be00618ae7798a95a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nextjs-patterns\\references\\server-vs-client.md": {
+    "mtime": 1780141493.8630466,
+    "ast_hash": "9835f9b7a3021b66b704f0430307ef57",
+    "semantic_hash": "9835f9b7a3021b66b704f0430307ef57"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nuxt-patterns\\SKILL.md": {
+    "mtime": 1780141493.866047,
+    "ast_hash": "fd511943fa7161d09d0181450220a81f",
+    "semantic_hash": "fd511943fa7161d09d0181450220a81f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nuxt-patterns\\references\\composables.md": {
+    "mtime": 1780141493.866047,
+    "ast_hash": "38d18c860c41560e58dc4e2919695c18",
+    "semantic_hash": "38d18c860c41560e58dc4e2919695c18"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nuxt-patterns\\references\\nuxt-middleware.md": {
+    "mtime": 1780141493.8670466,
+    "ast_hash": "558535640c3cb75cdf13c992fede855d",
+    "semantic_hash": "558535640c3cb75cdf13c992fede855d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nuxt-patterns\\references\\server-api-routes.md": {
+    "mtime": 1780141493.8670466,
+    "ast_hash": "3387b2cf19c8bb8b91fd40533f67bbf0",
+    "semantic_hash": "3387b2cf19c8bb8b91fd40533f67bbf0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-nuxt-patterns\\references\\ssr-auth.md": {
+    "mtime": 1780141493.8670466,
+    "ast_hash": "4c0d079c61246dcde7d932e1f4511926",
+    "semantic_hash": "4c0d079c61246dcde7d932e1f4511926"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-orgs\\SKILL.md": {
+    "mtime": 1780141493.841938,
+    "ast_hash": "ca0ee998dfce274637bf8d9a0445e04b",
+    "semantic_hash": "ca0ee998dfce274637bf8d9a0445e04b"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-orgs\\references\\enterprise-sso.md": {
+    "mtime": 1780141493.8429372,
+    "ast_hash": "cb4417a197dec37dd728272671defe1c",
+    "semantic_hash": "cb4417a197dec37dd728272671defe1c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-orgs\\references\\invitations.md": {
+    "mtime": 1780141493.8429372,
+    "ast_hash": "8b34a75ba79af427e12d62a5e95f78a3",
+    "semantic_hash": "8b34a75ba79af427e12d62a5e95f78a3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-orgs\\references\\nextjs-patterns.md": {
+    "mtime": 1780141493.8439357,
+    "ast_hash": "1ebcfa4d8737efe7c0b8ed67cc426cf8",
+    "semantic_hash": "1ebcfa4d8737efe7c0b8ed67cc426cf8"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-orgs\\references\\roles-permissions.md": {
+    "mtime": 1780141493.8439357,
+    "ast_hash": "452c3ee3fd0a077844d01a6199a8d063",
+    "semantic_hash": "452c3ee3fd0a077844d01a6199a8d063"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-patterns\\SKILL.md": {
+    "mtime": 1780141493.8690467,
+    "ast_hash": "573b3e0d652d51e8cd15c6634b0aea8b",
+    "semantic_hash": "573b3e0d652d51e8cd15c6634b0aea8b"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-patterns\\references\\custom-flows.md": {
+    "mtime": 1780141493.8700466,
+    "ast_hash": "036051e9cd0b732da38379c66a93f975",
+    "semantic_hash": "036051e9cd0b732da38379c66a93f975"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-patterns\\references\\hooks.md": {
+    "mtime": 1780141493.8700466,
+    "ast_hash": "8a84e7028f6eb00292e893c45f451cbd",
+    "semantic_hash": "8a84e7028f6eb00292e893c45f451cbd"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-patterns\\references\\protected-routes.md": {
+    "mtime": 1780141493.8700466,
+    "ast_hash": "cfd134d565b36c9fc6b8f3ae49106db6",
+    "semantic_hash": "cfd134d565b36c9fc6b8f3ae49106db6"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-patterns\\references\\router-integration.md": {
+    "mtime": 1780141493.8700466,
+    "ast_hash": "926ae5cfb13fcfa40267f6d9378a9df6",
+    "semantic_hash": "926ae5cfb13fcfa40267f6d9378a9df6"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-patterns\\templates\\react-basic-auth\\index.html": {
+    "mtime": 1780141493.871047,
+    "ast_hash": "5e673e902637e99140b4d8660eec84e4",
+    "semantic_hash": "5e673e902637e99140b4d8660eec84e4"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-router-patterns\\SKILL.md": {
+    "mtime": 1780141493.8736691,
+    "ast_hash": "a32814a0f2e250d47128d6848a5aaf0c",
+    "semantic_hash": "a32814a0f2e250d47128d6848a5aaf0c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-router-patterns\\references\\loaders-actions.md": {
+    "mtime": 1780141493.8746676,
+    "ast_hash": "750a970254b2b0771f3b63283635ea73",
+    "semantic_hash": "750a970254b2b0771f3b63283635ea73"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-router-patterns\\references\\protected-routes.md": {
+    "mtime": 1780141493.8746676,
+    "ast_hash": "56305e5fccf134e0ece337bfbada0ddb",
+    "semantic_hash": "56305e5fccf134e0ece337bfbada0ddb"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-react-router-patterns\\references\\ssr-auth.md": {
+    "mtime": 1780141493.8746676,
+    "ast_hash": "5ded12f2057f58d31fbaea3787cce29c",
+    "semantic_hash": "5ded12f2057f58d31fbaea3787cce29c"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-setup\\SKILL.md": {
+    "mtime": 1780141493.8379323,
+    "ast_hash": "86c8996e35721e883b8f50406ce16dc2",
+    "semantic_hash": "86c8996e35721e883b8f50406ce16dc2"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-swift\\SKILL.md": {
+    "mtime": 1780141493.8896697,
+    "ast_hash": "ea725785d73d978c748f0c00cd62a01a",
+    "semantic_hash": "ea725785d73d978c748f0c00cd62a01a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-swift\\references\\custom.md": {
+    "mtime": 1780141493.8906736,
+    "ast_hash": "1f33a177a16a60493d6c62ca5c667487",
+    "semantic_hash": "1f33a177a16a60493d6c62ca5c667487"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-swift\\references\\prebuilt.md": {
+    "mtime": 1780141493.8906736,
+    "ast_hash": "9cf06a1ef8c1aa4e7455445dd740103f",
+    "semantic_hash": "9cf06a1ef8c1aa4e7455445dd740103f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\SKILL.md": {
+    "mtime": 1780141493.8776689,
+    "ast_hash": "527a51f26c3ecabdcb4321f763eac51a",
+    "semantic_hash": "527a51f26c3ecabdcb4321f763eac51a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\references\\loaders.md": {
+    "mtime": 1780141493.8786688,
+    "ast_hash": "97b5a2e7a1730e376ee3aa2ad23de40a",
+    "semantic_hash": "97b5a2e7a1730e376ee3aa2ad23de40a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\references\\router-guards.md": {
+    "mtime": 1780141493.8796687,
+    "ast_hash": "08cfc0acf7be4307e5c38d39b443d6bc",
+    "semantic_hash": "08cfc0acf7be4307e5c38d39b443d6bc"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\references\\server-functions.md": {
+    "mtime": 1780141493.8796687,
+    "ast_hash": "b3cb59ab8386e37ad2232952989882da",
+    "semantic_hash": "b3cb59ab8386e37ad2232952989882da"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-tanstack-patterns\\references\\vinxi-server.md": {
+    "mtime": 1780141493.8796687,
+    "ast_hash": "e27253c1e76b852598a966791b4d39fe",
+    "semantic_hash": "e27253c1e76b852598a966791b4d39fe"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-testing\\SKILL.md": {
+    "mtime": 1780141493.8449378,
+    "ast_hash": "52d0ba6a02a0edbcf6937f0dff241aa8",
+    "semantic_hash": "52d0ba6a02a0edbcf6937f0dff241aa8"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-vue-patterns\\SKILL.md": {
+    "mtime": 1780141493.882669,
+    "ast_hash": "fb1235597e0e80c8219b1550327b2bce",
+    "semantic_hash": "fb1235597e0e80c8219b1550327b2bce"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-vue-patterns\\references\\composables.md": {
+    "mtime": 1780141493.88367,
+    "ast_hash": "9754c0be8a0a7dc315ce9c3d35cf0403",
+    "semantic_hash": "9754c0be8a0a7dc315ce9c3d35cf0403"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-vue-patterns\\references\\pinia-integration.md": {
+    "mtime": 1780141493.884668,
+    "ast_hash": "1bf4cb362608f7f0fb3ff27086a374f2",
+    "semantic_hash": "1bf4cb362608f7f0fb3ff27086a374f2"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-vue-patterns\\references\\vue-router-guards.md": {
+    "mtime": 1780141493.884668,
+    "ast_hash": "43ae42951e841eb8c790c6233308f894",
+    "semantic_hash": "43ae42951e841eb8c790c6233308f894"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-vue-patterns\\templates\\vue-basic-auth\\index.html": {
+    "mtime": 1780141493.8856676,
+    "ast_hash": "482a98e86406f283edf817b85b55b304",
+    "semantic_hash": "482a98e86406f283edf817b85b55b304"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-webhooks\\SKILL.md": {
+    "mtime": 1780141493.8449378,
+    "ast_hash": "b7b8f7caaf32fa062fee5dedb2302e8b",
+    "semantic_hash": "b7b8f7caaf32fa062fee5dedb2302e8b"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk-webhooks\\references\\frameworks.md": {
+    "mtime": 1780141493.8459368,
+    "ast_hash": "e751a2e05c5052818654342528f80dec",
+    "semantic_hash": "e751a2e05c5052818654342528f80dec"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\clerk\\SKILL.md": {
+    "mtime": 1780141493.838933,
+    "ast_hash": "2cfbde8450dabfa171d7c8952224944a",
+    "semantic_hash": "2cfbde8450dabfa171d7c8952224944a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\SKILL.md": {
+    "mtime": 1780141219.5609732,
+    "ast_hash": "48457f6a35191b8549cddb857e23c624",
+    "semantic_hash": "48457f6a35191b8549cddb857e23c624"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\db-execute.md": {
+    "mtime": 1780141219.5609732,
+    "ast_hash": "fa456e36f9700329b4c1a8093e7ae92a",
+    "semantic_hash": "fa456e36f9700329b4c1a8093e7ae92a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\db-pull.md": {
+    "mtime": 1780141219.5609732,
+    "ast_hash": "112e9c49afcd099c98a39801ecfe8f64",
+    "semantic_hash": "112e9c49afcd099c98a39801ecfe8f64"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\db-push.md": {
+    "mtime": 1780141219.5619721,
+    "ast_hash": "9ce38315249c360b0d9d98c8830f72eb",
+    "semantic_hash": "9ce38315249c360b0d9d98c8830f72eb"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\db-seed.md": {
+    "mtime": 1780141219.5619721,
+    "ast_hash": "6b49790f9fc526c3bf9f9e465b20abf1",
+    "semantic_hash": "6b49790f9fc526c3bf9f9e465b20abf1"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\debug.md": {
+    "mtime": 1780141219.5619721,
+    "ast_hash": "efc540e515df61fb409d2b0f33b3f236",
+    "semantic_hash": "efc540e515df61fb409d2b0f33b3f236"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\dev.md": {
+    "mtime": 1780141219.5619721,
+    "ast_hash": "633c1f65ae2e3ac43e9b0f7f328f049f",
+    "semantic_hash": "633c1f65ae2e3ac43e9b0f7f328f049f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\format.md": {
+    "mtime": 1780141219.5630903,
+    "ast_hash": "7f9480c36e8fb8fd39e4aa2b466e734d",
+    "semantic_hash": "7f9480c36e8fb8fd39e4aa2b466e734d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\generate.md": {
+    "mtime": 1780141219.5630903,
+    "ast_hash": "6a346f0ccc80b0087320071ffdb31ab6",
+    "semantic_hash": "6a346f0ccc80b0087320071ffdb31ab6"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\init.md": {
+    "mtime": 1780141219.5630903,
+    "ast_hash": "9f16c481b3f39cb2be012d9d8a6babe2",
+    "semantic_hash": "9f16c481b3f39cb2be012d9d8a6babe2"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\mcp.md": {
+    "mtime": 1780141219.5630903,
+    "ast_hash": "4acdbd48475b8607a4fc4ebe550d58d6",
+    "semantic_hash": "4acdbd48475b8607a4fc4ebe550d58d6"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\migrate-deploy.md": {
+    "mtime": 1780141219.5640907,
+    "ast_hash": "ad5b33f62e3ca6762f18ccbf7c3e1e02",
+    "semantic_hash": "ad5b33f62e3ca6762f18ccbf7c3e1e02"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\migrate-dev.md": {
+    "mtime": 1780141219.5640907,
+    "ast_hash": "b8fd854ae76ef31cb412fa7ce34e936f",
+    "semantic_hash": "b8fd854ae76ef31cb412fa7ce34e936f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\migrate-diff.md": {
+    "mtime": 1780141219.5640907,
+    "ast_hash": "171192cdeeb27614abc384f8520c828a",
+    "semantic_hash": "171192cdeeb27614abc384f8520c828a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\migrate-reset.md": {
+    "mtime": 1780141219.5640907,
+    "ast_hash": "4a4b97d0e361ef33078c8f64657c1485",
+    "semantic_hash": "4a4b97d0e361ef33078c8f64657c1485"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\migrate-resolve.md": {
+    "mtime": 1780141219.565091,
+    "ast_hash": "bd96262ad456e74b111c1b9f7f6990d5",
+    "semantic_hash": "bd96262ad456e74b111c1b9f7f6990d5"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\migrate-status.md": {
+    "mtime": 1780141219.565091,
+    "ast_hash": "6cbb214b8dfd4484e938f8714d1c1787",
+    "semantic_hash": "6cbb214b8dfd4484e938f8714d1c1787"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\studio.md": {
+    "mtime": 1780141219.565091,
+    "ast_hash": "2026596659d5240e723e8aa2e08457cb",
+    "semantic_hash": "2026596659d5240e723e8aa2e08457cb"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-cli\\references\\validate.md": {
+    "mtime": 1780141219.565091,
+    "ast_hash": "e55d15ed599ab1d5daa22b3dded2f3a6",
+    "semantic_hash": "e55d15ed599ab1d5daa22b3dded2f3a6"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-client-api\\SKILL.md": {
+    "mtime": 1780141219.5660896,
+    "ast_hash": "19c076fd9a8c45d37fe3bd6cc0b54b83",
+    "semantic_hash": "19c076fd9a8c45d37fe3bd6cc0b54b83"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-client-api\\references\\client-methods.md": {
+    "mtime": 1780141219.5660896,
+    "ast_hash": "415a45ea5ddf1995a14c1d70694868ed",
+    "semantic_hash": "415a45ea5ddf1995a14c1d70694868ed"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-client-api\\references\\constructor.md": {
+    "mtime": 1780141219.5660896,
+    "ast_hash": "c0e171479e8285b9acc3fa7794fd9698",
+    "semantic_hash": "c0e171479e8285b9acc3fa7794fd9698"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-client-api\\references\\filters.md": {
+    "mtime": 1780141219.5674484,
+    "ast_hash": "44a7456d7ea6cb8d8f4ccc6a20b16814",
+    "semantic_hash": "44a7456d7ea6cb8d8f4ccc6a20b16814"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-client-api\\references\\model-queries.md": {
+    "mtime": 1780141219.5674484,
+    "ast_hash": "2bb53c933e4baf20076d713e13151091",
+    "semantic_hash": "2bb53c933e4baf20076d713e13151091"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-client-api\\references\\query-options.md": {
+    "mtime": 1780141219.5674484,
+    "ast_hash": "30e889e6586befa4d524469e9110b989",
+    "semantic_hash": "30e889e6586befa4d524469e9110b989"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-client-api\\references\\raw-queries.md": {
+    "mtime": 1780141219.5674484,
+    "ast_hash": "f44a8a8109b53c0b2488c940aacb1f10",
+    "semantic_hash": "f44a8a8109b53c0b2488c940aacb1f10"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-client-api\\references\\relations.md": {
+    "mtime": 1780141219.5684476,
+    "ast_hash": "2c822b05319d89528354ada1d09dc241",
+    "semantic_hash": "2c822b05319d89528354ada1d09dc241"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-client-api\\references\\transactions.md": {
+    "mtime": 1780141219.5684476,
+    "ast_hash": "b63ef1dd624c20c22a028f28a9e8a705",
+    "semantic_hash": "b63ef1dd624c20c22a028f28a9e8a705"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-database-setup\\SKILL.md": {
+    "mtime": 1780141219.5684476,
+    "ast_hash": "9c9afe672f345717c2baf9c344cb2483",
+    "semantic_hash": "9c9afe672f345717c2baf9c344cb2483"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-database-setup\\references\\cockroachdb.md": {
+    "mtime": 1780141219.5694475,
+    "ast_hash": "ecc90249cc5d3cf8fa902833e1e8c4c3",
+    "semantic_hash": "ecc90249cc5d3cf8fa902833e1e8c4c3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-database-setup\\references\\mongodb.md": {
+    "mtime": 1780141219.5694475,
+    "ast_hash": "1044d94928f815164034e5580fa186d8",
+    "semantic_hash": "1044d94928f815164034e5580fa186d8"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-database-setup\\references\\mysql.md": {
+    "mtime": 1780141219.5694475,
+    "ast_hash": "1de02d7ba8e59e687dc9e6f1eed0479d",
+    "semantic_hash": "1de02d7ba8e59e687dc9e6f1eed0479d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-database-setup\\references\\postgresql.md": {
+    "mtime": 1780141219.5694475,
+    "ast_hash": "9b98145695a9515cec3e553537a34dde",
+    "semantic_hash": "9b98145695a9515cec3e553537a34dde"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-database-setup\\references\\prisma-client-setup.md": {
+    "mtime": 1780141219.5704486,
+    "ast_hash": "099cdb7a3b2671433d04fb0436f7ed64",
+    "semantic_hash": "099cdb7a3b2671433d04fb0436f7ed64"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-database-setup\\references\\prisma-postgres.md": {
+    "mtime": 1780141219.5704486,
+    "ast_hash": "ef8a7308a3a1e93aa2fe8740205857ac",
+    "semantic_hash": "ef8a7308a3a1e93aa2fe8740205857ac"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-database-setup\\references\\sqlite.md": {
+    "mtime": 1780141219.5710082,
+    "ast_hash": "a0dbc3fa71caec14bb3df2870930a141",
+    "semantic_hash": "a0dbc3fa71caec14bb3df2870930a141"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-database-setup\\references\\sqlserver.md": {
+    "mtime": 1780141219.5710082,
+    "ast_hash": "b0fea0c3fae6d9ab2a55f543013c136a",
+    "semantic_hash": "b0fea0c3fae6d9ab2a55f543013c136a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-driver-adapter-implementation\\SKILL.md": {
+    "mtime": 1780141219.5710082,
+    "ast_hash": "1cadc51f8e8a263b34fbe52380abdd13",
+    "semantic_hash": "1cadc51f8e8a263b34fbe52380abdd13"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-postgres-setup\\SKILL.md": {
+    "mtime": 1780141219.5720124,
+    "ast_hash": "e5cc6eb2f5b3c46f4b319e66e1d231e3",
+    "semantic_hash": "e5cc6eb2f5b3c46f4b319e66e1d231e3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-postgres-setup\\references\\api-basics.md": {
+    "mtime": 1780141219.5720124,
+    "ast_hash": "b2b6128edf9a16484cc88101b7dc8615",
+    "semantic_hash": "b2b6128edf9a16484cc88101b7dc8615"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-postgres-setup\\references\\auth.md": {
+    "mtime": 1780141219.5730133,
+    "ast_hash": "5bdc8a9ff4366069adf9cae58d59a644",
+    "semantic_hash": "5bdc8a9ff4366069adf9cae58d59a644"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-postgres-setup\\references\\endpoints.md": {
+    "mtime": 1780141219.5730133,
+    "ast_hash": "17cabc9a231b2a9a0b84c8c9a6f734c7",
+    "semantic_hash": "17cabc9a231b2a9a0b84c8c9a6f734c7"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-postgres-setup\\references\\prisma7-client.md": {
+    "mtime": 1780141219.5730133,
+    "ast_hash": "6bd84df46714c17be8a8b240f63f1a8a",
+    "semantic_hash": "6bd84df46714c17be8a8b240f63f1a8a"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-postgres\\SKILL.md": {
+    "mtime": 1780141219.5730133,
+    "ast_hash": "31143b798be637e458522db31a311128",
+    "semantic_hash": "31143b798be637e458522db31a311128"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-postgres\\references\\console-and-connections.md": {
+    "mtime": 1780141219.5740135,
+    "ast_hash": "b7a663ec5facd992f1c9cc3d3b7f1991",
+    "semantic_hash": "b7a663ec5facd992f1c9cc3d3b7f1991"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-postgres\\references\\create-db-cli.md": {
+    "mtime": 1780141219.5740135,
+    "ast_hash": "0a3b59e3666f81aeaedff67b173e94d0",
+    "semantic_hash": "0a3b59e3666f81aeaedff67b173e94d0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-postgres\\references\\management-api-sdk.md": {
+    "mtime": 1780141219.5740135,
+    "ast_hash": "c8d57f8b3b6d458d36eaacb8320e5d49",
+    "semantic_hash": "c8d57f8b3b6d458d36eaacb8320e5d49"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-postgres\\references\\management-api.md": {
+    "mtime": 1780141219.5750144,
+    "ast_hash": "1ca1c7f1d0703e51018071fe7735fd60",
+    "semantic_hash": "1ca1c7f1d0703e51018071fe7735fd60"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-upgrade-v7\\SKILL.md": {
+    "mtime": 1780141219.5750144,
+    "ast_hash": "044d125f4942d051755a6aea42fb9b46",
+    "semantic_hash": "044d125f4942d051755a6aea42fb9b46"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-upgrade-v7\\references\\accelerate-users.md": {
+    "mtime": 1780141219.5750144,
+    "ast_hash": "dabf06bdced251eff703585d8aa09a81",
+    "semantic_hash": "dabf06bdced251eff703585d8aa09a81"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-upgrade-v7\\references\\driver-adapters.md": {
+    "mtime": 1780141219.5760143,
+    "ast_hash": "41cbd41798f18c5d9e1a8e75aa5569a4",
+    "semantic_hash": "41cbd41798f18c5d9e1a8e75aa5569a4"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-upgrade-v7\\references\\env-variables.md": {
+    "mtime": 1780141219.5760143,
+    "ast_hash": "248ff3c8a622636e45e132b1e8b5079e",
+    "semantic_hash": "248ff3c8a622636e45e132b1e8b5079e"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-upgrade-v7\\references\\esm-support.md": {
+    "mtime": 1780141219.5760143,
+    "ast_hash": "cff7f35c26c4bc52f4eab28e8f05997f",
+    "semantic_hash": "cff7f35c26c4bc52f4eab28e8f05997f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-upgrade-v7\\references\\prisma-config.md": {
+    "mtime": 1780141219.5770123,
+    "ast_hash": "195a2e920a8ac7ee65d06c7b5dc3f346",
+    "semantic_hash": "195a2e920a8ac7ee65d06c7b5dc3f346"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-upgrade-v7\\references\\removed-features.md": {
+    "mtime": 1780141219.5770123,
+    "ast_hash": "f915f82fffed7764d722c712004762b3",
+    "semantic_hash": "f915f82fffed7764d722c712004762b3"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.agents\\skills\\prisma-upgrade-v7\\references\\schema-changes.md": {
+    "mtime": 1780141219.5770123,
+    "ast_hash": "1b1e7daa4f6109c92c716e1cb33b023d",
+    "semantic_hash": "1b1e7daa4f6109c92c716e1cb33b023d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\.clerk\\.tmp\\README.md": {
+    "mtime": 1780139698.4773824,
+    "ast_hash": "4836f69292e3b5045ec81cee9ed0b2cf",
+    "semantic_hash": "4836f69292e3b5045ec81cee9ed0b2cf"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\AGENTS.md": {
+    "mtime": 1780138909.6699278,
+    "ast_hash": "d0790e47b54ba3f7baef855a3c284253",
+    "semantic_hash": "d0790e47b54ba3f7baef855a3c284253"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\CLAUDE.md": {
+    "mtime": 1780138909.6714323,
+    "ast_hash": "771faa62feb60b7de901a397aebb29b0",
+    "semantic_hash": "771faa62feb60b7de901a397aebb29b0"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\frontend\\README.md": {
+    "mtime": 1780138909.6714323,
+    "ast_hash": "9162add00befbcdb432430f405c4ad8d",
+    "semantic_hash": "9162add00befbcdb432430f405c4ad8d"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\screenshots\\dashboard.webp": {
+    "mtime": 1780385360.991503,
+    "ast_hash": "390bbb1c06a9a4826693bac235e3e7ed",
+    "semantic_hash": "390bbb1c06a9a4826693bac235e3e7ed"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\screenshots\\history.webp": {
+    "mtime": 1780385381.94042,
+    "ast_hash": "3222422f978b91c89b085b150f6d2853",
+    "semantic_hash": "3222422f978b91c89b085b150f6d2853"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\screenshots\\outfits.webp": {
+    "mtime": 1780385374.5223007,
+    "ast_hash": "67093d885222b7783b67af8c0ce9872f",
+    "semantic_hash": "67093d885222b7783b67af8c0ce9872f"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\screenshots\\preferences.webp": {
+    "mtime": 1780385387.0951145,
+    "ast_hash": "fd27ba1fd811ff5ca40e5eca98b5b649",
+    "semantic_hash": "fd27ba1fd811ff5ca40e5eca98b5b649"
+  },
+  "D:\\Padhai\\Style-Sync-AI\\screenshots\\preview (1).webp": {
+    "mtime": 1780385366.177361,
+    "ast_hash": "5b23eb59c48cb8f831425c6aa6e925bb",
+    "semantic_hash": "5b23eb59c48cb8f831425c6aa6e925bb"
+  }
+}

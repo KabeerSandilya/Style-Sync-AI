@@ -107,7 +107,7 @@ export function GarmentCard({ garment, onFavoriteToggle, onCardClick }: GarmentC
     <div
       onClick={() => onCardClick?.(liveGarment)}
       className={cn(
-        "group bg-card border border-border/30 rounded-2xl overflow-hidden shadow-xs hover:shadow-md hover:scale-[1.01] transition-all duration-300 flex flex-col h-full relative",
+        "group bg-card border border-border/30 rounded-none overflow-hidden shadow-xs hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex flex-col h-full relative",
         onCardClick && "cursor-pointer"
       )}
     >
@@ -135,7 +135,7 @@ export function GarmentCard({ garment, onFavoriteToggle, onCardClick }: GarmentC
           onClick={handleFavoriteClick}
           disabled={isFavoriting}
           className={cn(
-            "absolute top-4 right-4 bg-background/80 hover:bg-background border border-border/40 p-2 rounded-full hover:scale-105 transition-all shadow-xs cursor-pointer z-10 flex items-center justify-center size-9",
+            "absolute top-4 right-4 bg-background/80 hover:bg-background border border-border/40 p-2 rounded-none hover:scale-105 transition-all shadow-xs cursor-pointer z-10 flex items-center justify-center size-9",
             liveGarment.isFavorite && "bg-background/90"
           )}
           aria-label={liveGarment.isFavorite ? "Remove from favorites" : "Add to favorites"}

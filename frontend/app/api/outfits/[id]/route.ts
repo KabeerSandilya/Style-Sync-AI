@@ -1,6 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { prisma } from "@style-sync/backend";
+import { prisma, isRateLimited } from "@style-sync/backend";
+
+const FAVORITE_RATE_LIMIT = { limit: 20, windowMs: 60_000 };
 
 export async function PATCH(
   req: Request,
@@ -131,11 +133,17 @@ export async function PATCH(
         where: { id: outfitId },
         data: dataToUpdate,
       });
+    } else {
+      // Nothing to do — reject empty payloads
+      return NextResponse.json(
+        { success: false, error: "No fields to update." },
+        { status: 400 }
+      );
     }
 
-    // 4. Retrieve and return the updated outfit including updated garments
-    const updatedOutfit = await prisma.outfit.findUnique({
-      where: { id: outfitId },
+    // 4. Retrieve and return the updated outfit including updated garments (scoped by userId)
+    const updatedOutfit = await prisma.outfit.findFirst({
+      where: { id: outfitId, userId },
       include: {
         garments: {
           include: {
@@ -146,6 +154,9 @@ export async function PATCH(
     });
 
     if (body.isFavorite !== undefined) {
+      if (isRateLimited(`${userId}:outfit-favorite`, FAVORITE_RATE_LIMIT)) {
+        return NextResponse.json({ success: true, data: updatedOutfit });
+      }
       const { updatePreferenceProfile } = await import("@style-sync/backend");
       await updatePreferenceProfile(userId);
     }

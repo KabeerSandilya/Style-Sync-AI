@@ -150,8 +150,14 @@ function WardrobeStudioContent() {
     fetchOutfits();
   }, []);
 
-  // Deep-linking parameter handling on mount/data-load
+  // Deep-linking parameter handling — runs once after initial data load completes
+  const deepLinkHandled = React.useRef(false);
   React.useEffect(() => {
+    if (deepLinkHandled.current) return;
+    if (fetchingGarments || fetchingOutfits) return;
+
+    deepLinkHandled.current = true;
+
     const selectedGarmentId = searchParams.get("selectedGarmentId");
     const selectedOutfitId = searchParams.get("selectedOutfitId");
     const addClothing = searchParams.get("addClothing") === "true";
@@ -177,7 +183,7 @@ function WardrobeStudioContent() {
         setIsOutfitBuilderOpen(true);
       }
     }
-  }, [searchParams, garments, outfits]);
+  }, [searchParams, garments, outfits, fetchingGarments, fetchingOutfits]);
 
   const handleAddClothing = () => {
     setIsSidebarOpen(false);

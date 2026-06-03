@@ -3,7 +3,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 
 import * as React from "react";
-import { Sparkles, ChevronLeft, ArrowRight } from "lucide-react";
+import { Sparkles, ChevronLeft, ArrowRight, CalendarDays, Trash2, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { EditorNavbar } from "@/components/editor/editor-navbar";
@@ -28,36 +28,31 @@ export default function HistoryPage() {
   const [historyItems, setHistoryItems] = React.useState<WearHistoryItem[]>([]);
   const [selectedItem, setSelectedItem] = React.useState<WearHistoryItem | null>(null);
   const [toastMessage, setToastMessage] = React.useState<string | null>(null);
+  const [toastVisible, setToastVisible] = React.useState(false);
 
   const triggerToast = (message: string) => {
     setToastMessage(message);
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 4000);
+    setToastVisible(true);
+    setTimeout(() => setToastVisible(false), 3800);
+    setTimeout(() => setToastMessage(null), 4200);
   };
 
   const handleClearAll = async () => {
-    if (!confirm("Are you sure you want to clear your entire wear history? This cannot be undone.")) {
-      return;
-    }
+    if (!confirm("Clear your entire wear history? This cannot be undone.")) return;
     try {
-      const res = await fetch("/api/wear-history", {
-        method: "DELETE",
-      });
+      const res = await fetch("/api/wear-history", { method: "DELETE" });
       const data = await res.json();
       if (data.success) {
         setHistoryItems([]);
-        triggerToast("Wear history cleared successfully.");
+        triggerToast("Wear history cleared.");
       } else {
         triggerToast(data.error || "Failed to clear history.");
       }
-    } catch (err) {
-      console.error("Error clearing history:", err);
+    } catch {
       triggerToast("Failed to clear history.");
     }
   };
 
-  // Sidebar states
   const [garments, setGarments] = React.useState<Garment[]>([]);
   const [fetchingGarments, setFetchingGarments] = React.useState(true);
   const [outfits, setOutfits] = React.useState<Outfit[]>([]);
@@ -67,9 +62,7 @@ export default function HistoryPage() {
     try {
       const res = await fetch("/api/wear-history");
       const data = await res.json();
-      if (data.success) {
-        setHistoryItems(data.data);
-      }
+      if (data.success) setHistoryItems(data.data ?? []);
     } catch (error) {
       console.error("Error fetching wear history:", error);
     } finally {
@@ -81,9 +74,7 @@ export default function HistoryPage() {
     try {
       const res = await fetch("/api/garments");
       const data = await res.json();
-      if (data.success) {
-        setGarments(data.data);
-      }
+      if (data.success) setGarments(data.data);
     } catch (error) {
       console.error("Error fetching garments:", error);
     } finally {
@@ -95,9 +86,7 @@ export default function HistoryPage() {
     try {
       const res = await fetch("/api/outfits");
       const data = await res.json();
-      if (data.success) {
-        setOutfits(data.data);
-      }
+      if (data.success) setOutfits(data.data);
     } catch (error) {
       console.error("Error fetching outfits:", error);
     } finally {
@@ -126,7 +115,6 @@ export default function HistoryPage() {
     router.push(`/editor/wardrobe?addClothing=true`);
   };
 
-  // Grouping function
   const groupedHistory = React.useMemo(() => {
     const today: WearHistoryItem[] = [];
     const yesterday: WearHistoryItem[] = [];
@@ -140,43 +128,32 @@ export default function HistoryPage() {
     historyItems.forEach((item) => {
       const date = new Date(item.wornAt);
       const dDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      
-      const diffTime = dNow.getTime() - dDate.getTime();
-      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+      const diffDays = Math.round((dNow.getTime() - dDate.getTime()) / 86400000);
 
-      if (diffDays === 0) {
-        today.push(item);
-      } else if (diffDays === 1) {
-        yesterday.push(item);
-      } else if (diffDays > 1 && diffDays <= 7) {
-        thisWeek.push(item);
-      } else if (diffDays > 7 && diffDays <= 14) {
-        lastWeek.push(item);
-      } else {
-        earlier.push(item);
-      }
+      if (diffDays === 0) today.push(item);
+      else if (diffDays === 1) yesterday.push(item);
+      else if (diffDays <= 7) thisWeek.push(item);
+      else if (diffDays <= 14) lastWeek.push(item);
+      else earlier.push(item);
     });
 
     const groups: GroupedHistory[] = [];
-    if (today.length > 0) groups.push({ title: "Today", items: today });
-    if (yesterday.length > 0) groups.push({ title: "Yesterday", items: yesterday });
-    if (thisWeek.length > 0) groups.push({ title: "This Week", items: thisWeek });
-    if (lastWeek.length > 0) groups.push({ title: "Last Week", items: lastWeek });
-    if (earlier.length > 0) groups.push({ title: "Earlier", items: earlier });
-
+    if (today.length) groups.push({ title: "Today", items: today });
+    if (yesterday.length) groups.push({ title: "Yesterday", items: yesterday });
+    if (thisWeek.length) groups.push({ title: "This Week", items: thisWeek });
+    if (lastWeek.length) groups.push({ title: "Last Week", items: lastWeek });
+    if (earlier.length) groups.push({ title: "Earlier", items: earlier });
     return groups;
   }, [historyItems]);
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground selection:bg-accent/50">
-      {/* Editor Navbar Chrome */}
       <EditorNavbar
         isSidebarOpen={isSidebarOpen}
         onSidebarToggle={() => setIsSidebarOpen(!isSidebarOpen)}
         title="Style Timeline"
       />
 
-      {/* Wardrobe Drawer Sidebar Overlay */}
       <ProjectSidebar
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
@@ -189,22 +166,29 @@ export default function HistoryPage() {
         onOutfitClick={handleOutfitClick}
       />
 
-      {/* Main Content Area */}
       <main className="flex-1 max-w-3xl w-full mx-auto px-6 md:px-8 py-12 flex flex-col gap-10">
-        {/* Editorial Hero Block */}
-        <section className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-6 border-b border-border/30">
-          <div className="flex flex-col gap-2 max-w-xl">
+
+        {/* ── Page header ──────────────────────────────────────── */}
+        <section className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-8 border-b border-border/30 animate-enter-1">
+          <div className="flex flex-col gap-3">
             <button
               onClick={() => router.push("/editor")}
-              className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground text-xs font-semibold uppercase tracking-wider font-sans mb-1 cursor-pointer transition-colors"
+              className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground text-[10px] font-bold uppercase tracking-widest font-sans transition-colors cursor-pointer"
             >
               <ChevronLeft className="w-3.5 h-3.5" />
-              <span>Back to Dashboard</span>
+              Dashboard
             </button>
-            <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight leading-tight">
-              Your style <span className="italic font-light text-primary">journal</span>.
-            </h1>
-            <p className="text-xs text-muted-foreground font-sans leading-relaxed">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-accent/40 flex items-center justify-center text-primary shrink-0">
+                <CalendarDays className="w-4.5 h-4.5" />
+              </div>
+              <div>
+                <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight leading-tight">
+                  Style <span className="italic font-light text-primary">journal</span>.
+                </h1>
+              </div>
+            </div>
+            <p className="font-sans text-xs text-muted-foreground leading-relaxed max-w-[48ch]">
               A chronological retrospective of the silhouettes and combinations you have worn.
             </p>
           </div>
@@ -212,28 +196,32 @@ export default function HistoryPage() {
             <Button
               variant="outline"
               onClick={handleClearAll}
-              className="rounded-none border-destructive/30 hover:border-destructive hover:bg-destructive/10 text-destructive text-xs font-semibold uppercase tracking-wider py-4 px-5 shrink-0"
+              className="rounded-none border-destructive/30 hover:border-destructive hover:bg-destructive/5 text-destructive/80 hover:text-destructive text-[10px] font-bold uppercase tracking-wider py-4 px-5 shrink-0 gap-2 cursor-pointer"
             >
-              Clear All History
+              <Trash2 className="w-3.5 h-3.5" />
+              Clear History
             </Button>
           )}
         </section>
 
-        {/* History timeline list */}
-        <section className="w-full flex-1">
+        {/* ── Content ───────────────────────────────────────────── */}
+        <section className="w-full flex-1 animate-enter-2">
           {fetchingHistory ? (
-            /* Editorial Skeleton Loader */
-            <div className="flex flex-col gap-8 animate-pulse">
-              {[1, 2].map((groupKey) => (
-                <div key={groupKey} className="flex flex-col gap-4">
-                  <div className="h-5 w-24 bg-accent/30 rounded-none mb-1" />
+            <div className="flex flex-col gap-10 animate-pulse">
+              {[1, 2].map((gk) => (
+                <div key={gk} className="flex flex-col gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="h-px flex-1 bg-accent/30" />
+                    <div className="h-4 w-20 bg-accent/30" />
+                    <div className="h-px flex-1 bg-accent/30" />
+                  </div>
                   <div className="flex flex-col gap-3">
-                    {[1, 2].map((itemKey) => (
-                      <div key={itemKey} className="flex gap-4 items-center border border-border/20 p-3 bg-card/40">
-                        <div className="w-12 h-14 bg-accent/30" />
+                    {[1, 2].map((ik) => (
+                      <div key={ik} className="flex gap-4 items-center border border-border/20 p-3 bg-card/40 h-20">
+                        <div className="w-12 h-14 bg-accent/30 shrink-0" />
                         <div className="flex-1 flex flex-col gap-2">
-                          <div className="h-4 bg-accent/30 w-1/3" />
-                          <div className="h-3 bg-accent/30 w-1/4" />
+                          <div className="h-4 bg-accent/30 w-2/5" />
+                          <div className="h-3 bg-accent/20 w-1/4" />
                         </div>
                       </div>
                     ))}
@@ -242,36 +230,52 @@ export default function HistoryPage() {
               ))}
             </div>
           ) : historyItems.length === 0 ? (
-            /* Empty State */
-            <div className="flex flex-col items-center justify-center text-center py-20 px-6 border border-dashed border-border/60 bg-card/20 rounded-none gap-5">
-              <div className="w-12 h-12 bg-accent/30 flex items-center justify-center text-primary">
-                <Sparkles className="w-6 h-6 stroke-[1.5]" />
+            /* ── Empty state ── */
+            <div className="flex flex-col items-center justify-center text-center py-24 px-6 gap-6">
+              {/* Decorative */}
+              <div className="relative">
+                <div className="w-20 h-20 border border-dashed border-border/50 flex items-center justify-center text-primary">
+                  <CalendarDays className="w-8 h-8 stroke-[1]" />
+                </div>
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-accent/40 flex items-center justify-center">
+                  <Sparkles className="w-3 h-3 text-primary" />
+                </div>
               </div>
-              <div className="flex flex-col gap-1.5">
-                <h3 className="font-serif text-lg font-medium text-foreground tracking-tight select-none">
-                  Your wear history will appear here.
+              <div className="flex flex-col gap-2 max-w-[30ch]">
+                <h3 className="font-serif text-2xl font-medium tracking-tight">
+                  Your history <span className="italic font-light text-primary">awaits.</span>
                 </h3>
-                <p className="font-sans text-xs text-muted-foreground max-w-[280px] mx-auto leading-relaxed">
-                  Mark outfits as worn to build your personal style timeline.
+                <p className="font-sans text-xs text-muted-foreground leading-relaxed">
+                  Mark outfits as worn from the dashboard to build your personal style timeline.
                 </p>
               </div>
               <Button
                 onClick={() => router.push("/editor")}
-                className="rounded-none px-6 py-5 text-xs font-semibold uppercase tracking-wider shadow-md mt-2 flex items-center gap-1.5"
+                className="rounded-none px-6 py-5 text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-2 cursor-pointer"
               >
-                <span>Explore Recommendations</span>
-                <ArrowRight className="w-4 h-4" />
+                Explore Recommendations
+                <ArrowRight className="w-3.5 h-3.5" />
               </Button>
             </div>
           ) : (
-            /* Timeline List grouped chronologically */
-            <div className="flex flex-col gap-8">
-              {groupedHistory.map((group) => (
-                <div key={group.title} className="flex flex-col gap-4">
-                  <h3 className="font-serif text-lg italic text-muted-foreground select-none border-b border-border/10 pb-1">
-                    {group.title}
-                  </h3>
-                  <div className="flex flex-col gap-3">
+            /* ── Timeline groups ── */
+            <div className="flex flex-col gap-10">
+              {groupedHistory.map((group, gi) => (
+                <div key={group.title} className="flex flex-col gap-4 animate-enter" style={{ animationDelay: `${gi * 0.07}s` }}>
+                  {/* Group label with horizontal rules */}
+                  <div className="flex items-center gap-3">
+                    <div className="h-px flex-1 bg-border/30" />
+                    <div className="flex items-center gap-2 px-3 py-1 border border-border/30 bg-card/50">
+                      <span className="font-serif text-xs italic text-muted-foreground select-none">
+                        {group.title}
+                      </span>
+                      <span className="font-sans text-[9px] font-bold text-primary/70 bg-primary/10 px-1.5 py-0.5">
+                        {group.items.length}
+                      </span>
+                    </div>
+                    <div className="h-px flex-1 bg-border/30" />
+                  </div>
+                  <div className="flex flex-col gap-2.5">
                     {group.items.map((item) => (
                       <HistoryItem
                         key={item.id}
@@ -284,12 +288,18 @@ export default function HistoryPage() {
                   </div>
                 </div>
               ))}
+
+              {/* Total count */}
+              <div className="flex justify-center pt-4 border-t border-border/20">
+                <p className="font-sans text-[10px] text-muted-foreground/60 uppercase tracking-widest">
+                  {historyItems.length} {historyItems.length === 1 ? "entry" : "entries"} in your style journal
+                </p>
+              </div>
             </div>
           )}
         </section>
       </main>
 
-      {/* History Detail Dialog */}
       <HistoryDetailDialog
         wearId={selectedItem?.id || null}
         outfit={selectedItem?.outfit || null}
@@ -302,22 +312,28 @@ export default function HistoryPage() {
         }}
       />
 
-      {/* Footer */}
-      <footer className="border-t border-border/30 py-12 px-6 bg-card/10 text-center font-sans text-xs text-muted-foreground">
-        <p>© 2026 StyleSync AI. Crafted with an editorial fashion perspective.</p>
+      <footer className="border-t border-border/30 py-10 px-6 bg-card/10 text-center font-sans text-[11px] text-muted-foreground/60 tracking-wide">
+        © 2026 StyleSync AI. Crafted with an editorial fashion perspective.
       </footer>
 
-      {/* Premium Minimal Toast Notification */}
+      {/* ── Toast ─────────────────────────────────────────────── */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-primary text-primary-foreground border border-border/20 px-6 py-4 shadow-xl select-none animate-slide-in font-sans font-medium text-xs flex items-center gap-2 transition-all">
-          <Sparkles className="w-4 h-4 text-primary-foreground/90" />
+        <div
+          className="fixed bottom-6 right-6 z-50 bg-[#1c1917] text-[#fffefb] px-5 py-4 shadow-2xl flex items-center gap-3 font-sans text-[11px] font-medium"
+          style={{
+            opacity: toastVisible ? 1 : 0,
+            transform: toastVisible ? "translateY(0)" : "translateY(8px)",
+            transition: "opacity 0.3s ease, transform 0.3s ease",
+          }}
+        >
+          <Sparkles className="w-3.5 h-3.5 text-[#9fb2a1] shrink-0" />
           <span>{toastMessage}</span>
           <button
-            onClick={() => setToastMessage(null)}
-            className="ml-4 hover:opacity-80 transition-opacity p-0.5"
-            aria-label="Dismiss toast"
+            onClick={() => { setToastVisible(false); setTimeout(() => setToastMessage(null), 300); }}
+            className="ml-3 hover:opacity-70 transition-opacity cursor-pointer shrink-0"
+            aria-label="Dismiss"
           >
-            <span className="font-sans font-bold">✕</span>
+            <X className="w-3.5 h-3.5" />
           </button>
         </div>
       )}
