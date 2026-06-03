@@ -18,22 +18,15 @@ export async function DELETE(
 
     const { id } = await params;
 
-    // 2. Fetch the wear record to verify existence and ownership
-    const wearRecord = await prisma.outfitWear.findUnique({
-      where: { id },
+    // 2. Verify existence and ownership in a single scoped query
+    const wearRecord = await prisma.outfitWear.findFirst({
+      where: { id, userId },
     });
 
     if (!wearRecord) {
       return NextResponse.json(
         { success: false, error: "Wear record not found." },
         { status: 404 }
-      );
-    }
-
-    if (wearRecord.userId !== userId) {
-      return NextResponse.json(
-        { success: false, error: "Forbidden" },
-        { status: 403 }
       );
     }
 
@@ -47,6 +40,18 @@ export async function DELETE(
       message: "Journal entry removed successfully.",
     });
   } catch (error) {
+    // P2025: record already deleted by a concurrent request
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      (error as { code: string }).code === "P2025"
+    ) {
+      return NextResponse.json(
+        { success: false, error: "Wear record not found." },
+        { status: 404 }
+      );
+    }
     console.error("API error during wear record deletion:", error);
     return NextResponse.json(
       { success: false, error: "Failed to remove journal entry." },

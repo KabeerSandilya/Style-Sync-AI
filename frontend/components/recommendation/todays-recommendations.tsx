@@ -207,7 +207,14 @@ export function TodaysRecommendations({
     }
   }, []);
 
-  const triggerRefresh = () => {
+  const lastRefreshAt = React.useRef(0);
+  const REFRESH_COOLDOWN_MS = 2000;
+
+  const triggerRefresh = React.useCallback(() => {
+    const now = Date.now();
+    if (now - lastRefreshAt.current < REFRESH_COOLDOWN_MS) return;
+    lastRefreshAt.current = now;
+
     if (typeof window !== "undefined" && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -222,7 +229,7 @@ export function TodaysRecommendations({
     } else {
       fetchRecommendations();
     }
-  };
+  }, [fetchRecommendations]);
 
   React.useEffect(() => {
     triggerRefresh();

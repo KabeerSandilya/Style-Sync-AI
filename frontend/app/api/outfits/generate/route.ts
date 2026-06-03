@@ -94,12 +94,12 @@ export async function POST() {
     }
 
     // 7. Filter duplicates and wardrobe rule violations
+    const garmentMap = new Map(allGarments.map((g) => [g.id, g]));
     const toSave = result.outfits.filter((generated) => {
       const fingerprint = [...generated.garmentIds].sort().join(",");
       if (existingFingerprints.has(fingerprint)) return false;
 
       // Enforce max 1 bottomwear and max 1 footwear
-      const garmentMap = new Map(allGarments.map((g) => [g.id, g]));
       let bottomCount = 0;
       let footwearCount = 0;
       for (const id of generated.garmentIds) {
