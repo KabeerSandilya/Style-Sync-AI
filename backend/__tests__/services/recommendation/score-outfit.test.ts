@@ -41,12 +41,13 @@ function makeGarment(overrides: Partial<Garment> = {}): Garment {
   };
 }
 
-function makeOutfit(garments: Garment[]): Outfit {
+function makeOutfit(garments: Garment[], occasion: string | null = null): Outfit {
   return {
     id: "o1",
     userId: "u1",
     name: "Test Outfit",
     notes: null,
+    occasion,
     isFavorite: false,
     isAiGenerated: false,
     createdAt: new Date().toISOString(),

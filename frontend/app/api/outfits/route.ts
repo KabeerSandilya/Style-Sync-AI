@@ -61,7 +61,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { name, notes, garmentIds } = body;
+    const { name, notes, garmentIds, occasion } = body;
 
     // 2. Validate input
     if (!garmentIds || !Array.isArray(garmentIds) || garmentIds.length === 0) {
@@ -114,12 +114,16 @@ export async function POST(req: Request) {
     const outfitName = name && name.trim() !== "" ? name.trim().substring(0, 100) : "Untitled Outfit";
     const outfitNotes = notes && typeof notes === "string" ? notes.trim().substring(0, 500) : null;
 
+    const VALID_OCCASIONS = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
+    const outfitOccasion = occasion && VALID_OCCASIONS.includes(occasion) ? occasion : null;
+
     // 4. Create outfit and join records
     const outfit = await prisma.outfit.create({
       data: {
         userId,
         name: outfitName,
         notes: outfitNotes,
+        occasion: outfitOccasion,
         garments: {
           create: garmentIds.map((garmentId) => ({
             garmentId,

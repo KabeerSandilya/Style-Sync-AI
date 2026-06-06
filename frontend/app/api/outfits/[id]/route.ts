@@ -36,10 +36,13 @@ export async function PATCH(
       );
     }
 
+    const VALID_OCCASIONS = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
+
     const dataToUpdate: {
       name?: string;
       notes?: string | null;
       isFavorite?: boolean;
+      occasion?: string | null;
     } = {};
 
     if (body.name !== undefined) {
@@ -59,6 +62,16 @@ export async function PATCH(
         );
       }
       dataToUpdate.isFavorite = body.isFavorite;
+    }
+
+    if (body.occasion !== undefined) {
+      if (body.occasion !== null && !VALID_OCCASIONS.includes(body.occasion)) {
+        return NextResponse.json(
+          { success: false, error: "Invalid occasion value." },
+          { status: 400 }
+        );
+      }
+      dataToUpdate.occasion = body.occasion;
     }
 
     // 3. Verify and handle garment updates if garmentIds is provided

@@ -33,11 +33,29 @@ export interface OutfitGarment {
   garment: Garment;
 }
 
+export type Occasion =
+  | 'Work'
+  | 'Casual'
+  | 'Smart Casual'
+  | 'Formal'
+  | 'Active'
+  | 'Date Night'
+
+export const OCCASIONS: Occasion[] = [
+  'Work',
+  'Casual',
+  'Smart Casual',
+  'Formal',
+  'Active',
+  'Date Night',
+]
+
 export interface Outfit {
   id: string;
   userId: string;
   name: string;
   notes?: string | null;
+  occasion: string | null;
   isFavorite: boolean;
   isAiGenerated: boolean;
   createdAt: string;
@@ -58,4 +76,5 @@ export interface OutfitWear {
 // Components can import them without pulling in any server runtime.
 export type { ScoredOutfit } from "../services/recommendation/types";
 export type { WeatherContext } from "../services/weather/types";
+
 

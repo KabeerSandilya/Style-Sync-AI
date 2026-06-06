@@ -21,6 +21,7 @@ export async function GET(req: Request) {
     const lonStr = searchParams.get("lon");
     const lat = latStr ? parseFloat(latStr) : undefined;
     const lon = lonStr ? parseFloat(lonStr) : undefined;
+    const occasion = searchParams.get("occasion") || null;
 
     // 3. Fetch normalized weather data
     const weather = await fetchWeather(city, lat, lon);
@@ -68,7 +69,8 @@ export async function GET(req: Request) {
       weather,
       userPreference || undefined,
       wearsMap,
-      feedbackMap
+      feedbackMap,
+      occasion,
     );
 
     // Return the response containing the ranked outfit configurations and weather context

@@ -34,10 +34,13 @@ export function OutfitBuilderDialog({
 }: OutfitBuilderDialogProps) {
   const isEditMode = !!outfit;
 
+  const VALID_OCCASIONS = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
+
   // Dialog Form States
   const [selectedGarmentIds, setSelectedGarmentIds] = React.useState<string[]>([]);
   const [name, setName] = React.useState("");
   const [notes, setNotes] = React.useState("");
+  const [occasion, setOccasion] = React.useState<string | null>(null);
   const [isFavorite, setIsFavorite] = React.useState(false);
 
   // Status States
@@ -88,11 +91,13 @@ export function OutfitBuilderDialog({
         setSelectedGarmentIds(outfit.garments.map((g) => g.garment.id));
         setName(outfit.name || "");
         setNotes(outfit.notes || "");
+        setOccasion(outfit.occasion ?? null);
         setIsFavorite(outfit.isFavorite || false);
       } else {
         setSelectedGarmentIds([]);
         setName("");
         setNotes("");
+        setOccasion(null);
         setIsFavorite(false);
       }
     }
@@ -145,6 +150,7 @@ export function OutfitBuilderDialog({
       name: name.trim(),
       notes: notes.trim(),
       isFavorite,
+      occasion,
       garmentIds: selectedGarmentIds,
     };
 
@@ -461,6 +467,25 @@ export function OutfitBuilderDialog({
                       rows={4}
                       className="rounded-none bg-background/50 border-border/60 focus-visible:ring-primary/40 focus-visible:border-primary/60 text-xs leading-relaxed resize-none min-h-24 p-3"
                     />
+                  </div>
+
+                  {/* Occasion Dropdown */}
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="outfit-occasion" className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                      Occasion
+                    </label>
+                    <select
+                      id="outfit-occasion"
+                      value={occasion ?? ""}
+                      onChange={(e) => setOccasion(e.target.value === "" ? null : e.target.value)}
+                      disabled={saving || deleting}
+                      className="h-10 px-3 bg-background/50 border border-border/60 text-sm font-sans text-foreground focus:outline-none focus:ring-1 focus:ring-primary/40 focus:border-primary/60 rounded-none disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <option value="">— None —</option>
+                      {VALID_OCCASIONS.map((occ) => (
+                        <option key={occ} value={occ}>{occ}</option>
+                      ))}
+                    </select>
                   </div>
 
                   {/* Favorite Toggle button */}

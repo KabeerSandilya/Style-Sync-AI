@@ -21,7 +21,10 @@ import {
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn, getDisplayImageUrl } from "@/lib/utils";
-import type { ScoredOutfit, WeatherContext } from "@/types";
+import type { ScoredOutfit, WeatherContext, Occasion } from "@/types";
+
+const OCCASIONS: Occasion[] = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
+const OCCASION_STORAGE_KEY = 'stylesync_occasion';
 
 interface TodaysRecommendationsProps {
   onCreateOutfitClick?: () => void;
@@ -110,7 +113,25 @@ export function TodaysRecommendations({
   const [weather, setWeather] = React.useState<WeatherContext | null>(null);
   const [error, setError] = React.useState<string | null>(null);
   const [coldStartReason, setColdStartReason] = React.useState<"no_garments" | "no_outfits" | null>(null);
-  
+
+  // Occasion picker state
+  const [selectedOccasion, setSelectedOccasionState] = React.useState<string | null>(null);
+  const selectedOccasionRef = React.useRef<string | null>(null);
+
+  const setSelectedOccasion = React.useCallback((occ: string | null) => {
+    selectedOccasionRef.current = occ;
+    setSelectedOccasionState(occ);
+  }, []);
+
+  // Restore occasion from localStorage on mount (before first fetch)
+  React.useEffect(() => {
+    const stored = localStorage.getItem(OCCASION_STORAGE_KEY);
+    if (stored && (OCCASIONS as string[]).includes(stored)) {
+      selectedOccasionRef.current = stored;
+      setSelectedOccasionState(stored);
+    }
+  }, []);
+
   // Track currently featured recommended outfit
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [actionLoading, setActionLoading] = React.useState<string | null>(null);
@@ -186,6 +207,10 @@ export function TodaysRecommendations({
       let url = "/api/recommendations?city=Paris";
       if (lat !== undefined && lon !== undefined) {
         url = `/api/recommendations?lat=${lat}&lon=${lon}`;
+      }
+      const occ = selectedOccasionRef.current;
+      if (occ) {
+        url += `&occasion=${encodeURIComponent(occ)}`;
       }
       const res = await fetch(url);
       const data = await res.json();
@@ -455,8 +480,40 @@ export function TodaysRecommendations({
     .filter((item) => item.idx !== activeIndex)
     .slice(0, 3);
 
+  const handleOccasionSelect = (occ: string | null) => {
+    if (occ) {
+      localStorage.setItem(OCCASION_STORAGE_KEY, occ);
+    } else {
+      localStorage.removeItem(OCCASION_STORAGE_KEY);
+    }
+    setSelectedOccasion(occ);
+    triggerRefresh();
+  };
+
   return (
     <div className="flex flex-col gap-6 w-full select-none">
+      {/* Occasion Picker */}
+      <div className="flex gap-1.5 overflow-x-auto pb-0.5 no-scrollbar">
+        {(['All', ...OCCASIONS] as (string | null)[]).map((occ) => {
+          const value = occ === 'All' ? null : occ;
+          const isSelected = selectedOccasion === value;
+          return (
+            <button
+              key={occ ?? 'all'}
+              onClick={() => handleOccasionSelect(value)}
+              className={cn(
+                "shrink-0 px-3 py-1 text-[10px] font-sans font-bold uppercase tracking-widest transition-colors cursor-pointer",
+                isSelected
+                  ? "bg-primary text-primary-foreground"
+                  : "border border-border text-muted-foreground hover:border-primary"
+              )}
+            >
+              {occ}
+            </button>
+          );
+        })}
+      </div>
+
       {/* Primary recommendation section: FEATURED OUTFIT */}
       <div className="flex flex-col gap-3">
         <div className="flex justify-between items-baseline border-b border-border/20 pb-1.5">

@@ -187,6 +187,11 @@ export function OutfitCard({
         <div className="text-[10px] text-muted-foreground/80 font-sans uppercase tracking-wider font-semibold mt-0.5 border-t border-border/10 pt-1.5">
           {formatLastWorn(outfit.wears)}
         </div>
+        {outfit.occasion && (
+          <div className="self-start px-2 py-0.5 bg-muted/40 text-muted-foreground border border-border/50 text-[10px] uppercase tracking-widest font-medium font-sans">
+            {outfit.occasion}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ export interface GeneratedOutfit {
   name: string;
   garmentIds: string[];
   reason: string;
+  occasion?: string | null;
 }
 
 export interface GenerationResult {
