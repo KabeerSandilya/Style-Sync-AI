@@ -6,12 +6,24 @@ import type { GarmentInput } from "@style-sync/backend";
 const GENERATE_RATE_LIMIT = { limit: 1, windowMs: 60_000 };
 const MIN_CLASSIFIED_GARMENTS = 3;
 
-export async function POST() {
+export async function POST(req: Request) {
   try {
     // 1. Auth
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+    }
+
+    // 1b. Parse optional body
+    let occasion: string | null = null;
+    try {
+      const body = await req.json();
+      const VALID_OCCASIONS = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
+      if (body.occasion && VALID_OCCASIONS.includes(body.occasion)) {
+        occasion = body.occasion;
+      }
+    } catch {
+      // no body or invalid JSON — treat as no occasion
     }
 
     // 2. Rate limit — 1 generation per minute per user
@@ -77,7 +89,7 @@ export async function POST() {
     // 6. Call Gemini generation service with retry
     const garmentInputs: GarmentInput[] = allGarments;
     const result = await withRetry(
-      () => generateOutfits(garmentInputs),
+      () => generateOutfits(garmentInputs, occasion),
       "generate outfits"
     );
 
@@ -129,6 +141,7 @@ export async function POST() {
             name: generated.name,
             notes: generated.reason,
             isAiGenerated: true,
+            occasion: generated.occasion ?? null,
             garments: {
               create: generated.garmentIds.map((garmentId) => ({ garmentId })),
             },

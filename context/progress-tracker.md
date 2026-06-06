@@ -270,11 +270,35 @@ Blockers:
 
 ---
 
+## Completed — Phase 2 Feature
+
+### Unit 17 — Occasion-Aware Recommendations (Completed)
+
+- Added `occasion String?` field to `Outfit` Prisma model; schema pushed and Prisma client regenerated.
+- Exported `Occasion` union type and `OCCASIONS` constant from `backend/src/types/index.ts`.
+- Added `OCCASION_GROUPS` constant and `requestedOccasion` 6th parameter to `scoreOutfit()` — exact match: +25, compatible group: +12, conflict: −15. No regression when `requestedOccasion` is omitted.
+- Updated `explainRecommendation()` to accept `requestedOccasion` and append occasion phrase ("A strong match for X." / "Works well for X.") when score is positive; conflict (−15) is silently omitted.
+- Updated `rankOutfits()` to accept and thread `requestedOccasion` through to both `scoreOutfit()` and `explainRecommendation()`.
+- Created `services/recommendation/infer-occasion.ts` — rule-based occasion inference from garment `style`/`subcategory`; returns `null` when no clear signal.
+- Extended `services/outfit-generation/types.ts`: added `occasion?: string | null` to `GeneratedOutfit`.
+- Extended `generate-outfits.ts`: accepts optional `occasion` parameter, passes it to `buildGenerationPrompt()`, and sets occasion on each result (explicit if provided, inferred via `inferOccasion()` otherwise).
+- Updated `prompts.ts`: appends occasion context line to Gemini system prompt when occasion is provided.
+- Extended `GET /api/recommendations` to read `?occasion=` query param and pass to `rankOutfits()`.
+- Extended `POST /api/outfits` to accept and persist `occasion` (validated against the 6 valid values).
+- Extended `PATCH /api/outfits/[id]` to accept and validate `occasion`; returns `400` for invalid strings.
+- Extended `POST /api/outfits/generate` to accept optional `occasion` in request body and pass to `generateOutfits()`.
+- Added horizontally scrollable occasion picker pill row (All + 6 occasion pills) above recommendation cards in `TodaysRecommendations`; selection persisted in `localStorage` as `stylesync_occasion` and restored on mount.
+- Added Occasion dropdown to `OutfitBuilderDialog` below the Styling Notes textarea; saves via `PATCH /api/outfits/[id]`.
+- Added occasion badge (`bg-muted/40`, uppercase tracking) to `OutfitCard` info section below last worn date.
+- Updated `makeOutfit()` test helper to include `occasion` field — 17/17 tests passing, no TypeScript errors.
+
+---
+
 ## Next Up
 
 ### Avatar / Virtual Try-On (Phase 3)
 
-Or continue Phase 2 intelligence layer (occasion-aware recommendations, outfit export).
+Or continue Phase 2 intelligence layer (outfit export, multi-day planning).
 
 ---
 

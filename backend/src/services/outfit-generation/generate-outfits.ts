@@ -1,6 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { GarmentInput, GenerationResult } from "./types";
 import { buildGenerationPrompt } from "./prompts";
+import { inferOccasion } from "../recommendation/infer-occasion";
 
 const getGenAIClient = () => {
   const apiKey = process.env.GEMINI_API_KEY;
@@ -18,18 +19,35 @@ function extractJson(raw: string): string {
   return raw.trim();
 }
 
-export async function generateOutfits(garments: GarmentInput[]): Promise<GenerationResult> {
+export async function generateOutfits(garments: GarmentInput[], occasion?: string | null): Promise<GenerationResult> {
   const ai = getGenAIClient();
   if (!ai) throw new Error("Gemini API key is not configured.");
 
-  const prompt = buildGenerationPrompt(garments);
+  const garmentInputMap = new Map(garments.map((g) => [g.id, g]));
 
-  // Pass the prompt as a plain string — matches the pattern used by classify-garment.ts
-  const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: prompt,
-    config: { responseMimeType: "application/json" },
-  });
+  const prompt = buildGenerationPrompt(garments, occasion);
+
+  // Try primary model; fall back to gemini-2.0-flash on 503 (capacity spikes).
+  let response;
+  try {
+    response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+      config: { responseMimeType: "application/json" },
+    });
+  } catch (err: unknown) {
+    const status = (err as { status?: number })?.status;
+    if (status === 503) {
+      console.warn("[generateOutfits] gemini-2.5-flash unavailable (503), retrying with gemini-2.0-flash");
+      response = await ai.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: prompt,
+        config: { responseMimeType: "application/json" },
+      });
+    } else {
+      throw err;
+    }
+  }
 
   const rawText =
     response.text ?? response.candidates?.[0]?.content?.parts?.[0]?.text;
@@ -95,11 +113,16 @@ export async function generateOutfits(garments: GarmentInput[]): Promise<Generat
 
       return true;
     })
-    .map((o) => ({
-      name: o.name.trim().slice(0, 100),
-      garmentIds: o.garmentIds as string[],
-      reason: o.reason.trim().slice(0, 500),
-    }));
+    .map((o) => {
+      const resolvedGarments = (o.garmentIds as string[]).map((id) => garmentInputMap.get(id)).filter(Boolean) as GarmentInput[];
+      const outfitOccasion = occasion !== undefined ? (occasion ?? null) : (inferOccasion(resolvedGarments) ?? null);
+      return {
+        name: o.name.trim().slice(0, 100),
+        garmentIds: o.garmentIds as string[],
+        reason: o.reason.trim().slice(0, 500),
+        occasion: outfitOccasion,
+      };
+    });
 
   console.log(`[generateOutfits] ${valid.length} outfit(s) passed validation`);
 

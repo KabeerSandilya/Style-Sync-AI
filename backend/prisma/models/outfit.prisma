@@ -7,6 +7,8 @@ model Outfit {
 
   notes         String?
 
+  occasion      String?
+
   isFavorite      Boolean @default(false)
   isAiGenerated   Boolean @default(false)
 

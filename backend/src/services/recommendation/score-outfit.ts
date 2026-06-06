@@ -43,12 +43,22 @@ function checkGarmentMatch(garment: Garment, keywords: string[]): boolean {
   );
 }
 
+export const OCCASION_GROUPS: Record<string, string[]> = {
+  Work:           ['Work', 'Smart Casual'],
+  'Smart Casual': ['Smart Casual', 'Work', 'Date Night'],
+  Formal:         ['Formal'],
+  Casual:         ['Casual', 'Active'],
+  Active:         ['Active', 'Casual'],
+  'Date Night':   ['Date Night', 'Smart Casual', 'Formal'],
+};
+
 export function scoreOutfit(
   outfit: Outfit,
   weather: WeatherContext,
   userPreference?: UserPreferenceInput,
   lastWornAt?: Date | null,
-  feedbackType?: FeedbackType | null
+  feedbackType?: FeedbackType | null,
+  requestedOccasion?: string | null,
 ): number {
   const garments = outfit.garments.map((g) => g.garment).filter(Boolean);
   if (garments.length === 0) return 0;
@@ -267,8 +277,22 @@ export function scoreOutfit(
     }
   }
 
+  // 7. Occasion Score (-15 to 25 points)
+  let occasionScore = 0;
+  if (requestedOccasion) {
+    if (!outfit.occasion) {
+      occasionScore = 0; // untagged outfit — neutral, do not penalise
+    } else if (outfit.occasion === requestedOccasion) {
+      occasionScore = 25; // exact match
+    } else if (OCCASION_GROUPS[requestedOccasion]?.includes(outfit.occasion)) {
+      occasionScore = 12; // compatible match
+    } else {
+      occasionScore = -15; // clear conflict
+    }
+  }
+
   // Calculate final combined score (clamped between 0 and 100)
   const baseScore = weatherScore + seasonScore + styleScore - metadataPenalty + preferenceMatchBonus - preferenceMatchPenalty;
-  const finalScore = Math.max(0, Math.min(100, baseScore + feedbackScore - wearPenalty));
+  const finalScore = Math.max(0, Math.min(100, baseScore + feedbackScore - wearPenalty + occasionScore));
   return finalScore;
 }
