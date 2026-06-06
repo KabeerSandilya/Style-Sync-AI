@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { prisma, isRateLimited } from "@style-sync/backend";
+import { prisma, isRateLimited, OCCASIONS } from "@style-sync/backend";
 
 const FAVORITE_RATE_LIMIT = { limit: 20, windowMs: 60_000 };
 
@@ -36,8 +36,6 @@ export async function PATCH(
       );
     }
 
-    const VALID_OCCASIONS = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
-
     const dataToUpdate: {
       name?: string;
       notes?: string | null;
@@ -65,7 +63,7 @@ export async function PATCH(
     }
 
     if (body.occasion !== undefined) {
-      if (body.occasion !== null && !VALID_OCCASIONS.includes(body.occasion)) {
+      if (body.occasion !== null && !OCCASIONS.includes(body.occasion)) {
         return NextResponse.json(
           { success: false, error: "Invalid occasion value." },
           { status: 400 }

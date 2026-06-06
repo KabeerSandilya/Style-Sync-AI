@@ -16,7 +16,7 @@ export function inferOccasion(garments: InferableGarment[]): Occasion | null {
   }
 
   // 3. Any garment subcategory includes "Suit", "Blazer", or "Dress" (no Active signal above)
-  if (garments.some((g) => g.subcategory && /(suit|blazer|dress)/i.test(g.subcategory))) {
+  if (garments.some((g) => g.subcategory && /\b(suit|blazer|dress)\b/i.test(g.subcategory))) {
     return "Formal";
   }
 

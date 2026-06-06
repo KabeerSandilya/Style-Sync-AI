@@ -26,6 +26,7 @@ function NavItems({ pathname }: { pathname: string }) {
     { label: "History", href: "/history", active: pathname === "/history" },
     { label: "Insights", href: "/insights", active: pathname === "/insights" },
     { label: "Preferences", href: "/preferences", active: pathname === "/preferences" },
+    { label: "Planner", href: "/editor/planner", active: pathname === "/editor/planner" },
   ];
 
   return (

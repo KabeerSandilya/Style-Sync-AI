@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { prisma, fetchWeather, rankOutfits, getRecentWearsMap, getFeedbackHistoryMap } from "@style-sync/backend";
+import { prisma, fetchWeather, rankOutfits, getRecentWearsMap, getFeedbackHistoryMap, OCCASIONS } from "@style-sync/backend";
 
 export async function GET(req: Request) {
   try {
@@ -21,7 +21,8 @@ export async function GET(req: Request) {
     const lonStr = searchParams.get("lon");
     const lat = latStr ? parseFloat(latStr) : undefined;
     const lon = lonStr ? parseFloat(lonStr) : undefined;
-    const occasion = searchParams.get("occasion") || null;
+    const occasionParam = searchParams.get("occasion");
+    const occasion = occasionParam && OCCASIONS.includes(occasionParam as any) ? occasionParam : null;
 
     // 3. Fetch normalized weather data
     const weather = await fetchWeather(city, lat, lon);

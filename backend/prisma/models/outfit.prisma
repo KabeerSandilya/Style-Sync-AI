@@ -20,6 +20,7 @@ model Outfit {
   recommendations Recommendation[]
   feedbacks       RecommendationFeedback[]
   wears           OutfitWear[]
+  plans           OutfitPlan[]
 
   @@index([userId])
   @@index([createdAt])

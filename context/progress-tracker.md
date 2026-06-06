@@ -270,7 +270,7 @@ Blockers:
 
 ---
 
-## Completed — Phase 2 Feature
+## Completed — Phase 2 Feature (Unit 17)
 
 ### Unit 17 — Occasion-Aware Recommendations (Completed)
 
@@ -294,11 +294,35 @@ Blockers:
 
 ---
 
+---
+
+## Completed — Phase 2 Feature
+
+### Unit 18 — Weekly Outfit Planner (Completed)
+
+- Added `OutfitPlan` model to `prisma/models/outfit-plan.prisma` with `(userId, plannedDate)` unique constraint; schema pushed and Prisma client regenerated.
+- Added `plans OutfitPlan[]` reverse relation on `Outfit` model.
+- Added `OutfitPlan` interface to `backend/src/types/index.ts`.
+- Created `backend/src/services/planner/get-week-range.ts` utility (ISO week resolution, `toDateString` helper).
+- Exported new `./planner` entry point from `@style-sync/backend` package.
+- Created `GET /api/planner` — fetches the user's plans for a given week window (default: current week).
+- Created `POST /api/planner` — upserts a plan by `(userId, plannedDate)`; validates outfitId ownership and occasion.
+- Created `DELETE /api/planner/[id]` and `PATCH /api/planner/[id]` with ownership checks.
+- Created `PlannerDayCard` component — compact collage thumbnail, outfit name, occasion badge, hover actions (change/remove).
+- Created `EmptyDaySlot` component — dashed placeholder with "Pick outfit" and "Suggest" actions; past-day read-only state.
+- Created `OutfitPickerSheet` component — dialog with occasion pill filter and outfit grid.
+- Created `/editor/planner` page — 7-column ISO week grid, week navigation, deep-linkable via `?week=YYYY-MM-DD`, Suspense boundary for `useSearchParams`.
+- Suggestion flow reads `stylesync_occasion` from localStorage (same key as dashboard) and calls existing `/api/recommendations` for the top result.
+- Added "Planner" nav link to `EditorNavbar`.
+- `npm run build` passes (22 routes, 0 TypeScript errors).
+
+---
+
 ## Next Up
 
 ### Avatar / Virtual Try-On (Phase 3)
 
-Or continue Phase 2 intelligence layer (outfit export, multi-day planning).
+Or continue Phase 2 intelligence layer (outfit export).
 
 ---
 

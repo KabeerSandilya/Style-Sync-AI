@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { prisma } from "@style-sync/backend";
+import { prisma, OCCASIONS } from "@style-sync/backend";
 
 export async function GET() {
   try {
@@ -114,8 +114,7 @@ export async function POST(req: Request) {
     const outfitName = name && name.trim() !== "" ? name.trim().substring(0, 100) : "Untitled Outfit";
     const outfitNotes = notes && typeof notes === "string" ? notes.trim().substring(0, 500) : null;
 
-    const VALID_OCCASIONS = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
-    const outfitOccasion = occasion && VALID_OCCASIONS.includes(occasion) ? occasion : null;
+    const outfitOccasion = occasion && OCCASIONS.includes(occasion as any) ? occasion : null;
 
     // 4. Create outfit and join records
     const outfit = await prisma.outfit.create({

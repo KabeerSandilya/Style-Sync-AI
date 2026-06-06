@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { prisma, generateOutfits, withRetry, isRateLimited } from "@style-sync/backend";
+import { prisma, generateOutfits, withRetry, isRateLimited, OCCASIONS } from "@style-sync/backend";
 import type { GarmentInput } from "@style-sync/backend";
 
 const GENERATE_RATE_LIMIT = { limit: 1, windowMs: 60_000 };
@@ -18,8 +18,7 @@ export async function POST(req: Request) {
     let occasion: string | null = null;
     try {
       const body = await req.json();
-      const VALID_OCCASIONS = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
-      if (body.occasion && VALID_OCCASIONS.includes(body.occasion)) {
+      if (body.occasion && OCCASIONS.includes(body.occasion)) {
         occasion = body.occasion;
       }
     } catch {
