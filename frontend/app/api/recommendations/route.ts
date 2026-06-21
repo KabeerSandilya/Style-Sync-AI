@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { prisma, fetchWeather, rankOutfits, getRecentWearsMap, getFeedbackHistoryMap, OCCASIONS } from "@style-sync/backend";
+import { prisma, fetchWeather, rankOutfits, getRecentWearsMap, getFeedbackHistoryMap } from "@style-sync/backend";
+import { RecommendationsQuerySchema, zodError } from "@/lib/schemas";
 
 export async function GET(req: Request) {
   try {
@@ -14,15 +15,16 @@ export async function GET(req: Request) {
       );
     }
 
-    // 2. Parse request query parameters (default to "Paris" if not specified)
+    // 2. Parse and validate query parameters
     const { searchParams } = new URL(req.url);
-    const city = searchParams.get("city") || "Paris";
-    const latStr = searchParams.get("lat");
-    const lonStr = searchParams.get("lon");
-    const lat = latStr ? parseFloat(latStr) : undefined;
-    const lon = lonStr ? parseFloat(lonStr) : undefined;
-    const occasionParam = searchParams.get("occasion");
-    const occasion = occasionParam && OCCASIONS.includes(occasionParam as any) ? occasionParam : null;
+    const qResult = RecommendationsQuerySchema.safeParse({
+      lat:      searchParams.get("lat") || undefined,
+      lon:      searchParams.get("lon") || undefined,
+      city:     searchParams.get("city") || undefined,
+      occasion: searchParams.get("occasion") || undefined,
+    });
+    if (!qResult.success) return zodError(qResult.error);
+    const { lat, lon, city = "Paris", occasion = null } = qResult.data;
 
     // 3. Fetch normalized weather data
     const weather = await fetchWeather(city, lat, lon);

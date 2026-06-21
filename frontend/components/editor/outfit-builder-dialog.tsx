@@ -103,6 +103,23 @@ export function OutfitBuilderDialog({
     }
   }, [open, outfit]);
 
+  const suggestName = () => {
+    if (selectedGarments.length === 0) return;
+    const primaryStyle = selectedGarments
+      .map((g) => g.style)
+      .find((s) => s && s.toLowerCase() !== "unknown");
+    const occ = occasion;
+    let suggested = "";
+    if (primaryStyle && occ) suggested = `${primaryStyle} ${occ} Look`;
+    else if (primaryStyle) suggested = `${primaryStyle} Edit`;
+    else if (occ) suggested = `${occ} Look`;
+    else {
+      const cats = [...new Set(selectedGarments.map((g) => g.category).filter((c) => c && c.toLowerCase() !== "unknown"))];
+      suggested = cats.length >= 2 ? `${cats[0]} & ${cats[1]} Look` : cats.length === 1 ? `${cats[0]} Ensemble` : "New Look";
+    }
+    setName(suggested);
+  };
+
   // Toggle garment selection
   const handleGarmentToggle = (garmentId: string) => {
     if (saving || deleting) return;
@@ -434,9 +451,21 @@ export function OutfitBuilderDialog({
                   
                   {/* Outfit Name */}
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="outfit-name" className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-                      Outfit Name
-                    </label>
+                    <div className="flex items-center justify-between">
+                      <label htmlFor="outfit-name" className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                        Outfit Name
+                      </label>
+                      {selectedGarments.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={suggestName}
+                          disabled={saving || deleting}
+                          className="text-[9px] font-bold uppercase tracking-wider text-primary/70 hover:text-primary transition-colors cursor-pointer disabled:opacity-40"
+                        >
+                          Suggest
+                        </button>
+                      )}
+                    </div>
                     <Input
                       id="outfit-name"
                       type="text"

@@ -58,6 +58,7 @@ export interface Outfit {
   occasion: Occasion | null;
   isFavorite: boolean;
   isAiGenerated: boolean;
+  shareToken?: string | null;
   createdAt: string;
   updatedAt: string;
   garments: OutfitGarment[];

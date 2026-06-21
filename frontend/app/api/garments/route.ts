@@ -124,9 +124,31 @@ export async function POST(req: Request) {
       );
     }
 
+    const ALLOWED_URL = /^https?:\/\//i;
+    if (!ALLOWED_URL.test(imageUrl.trim())) {
+      return NextResponse.json(
+        { success: false, error: "imageUrl must be an http/https URL" },
+        { status: 400 }
+      );
+    }
+
+    if (imageUrl.length > 2048) {
+      return NextResponse.json(
+        { success: false, error: "imageUrl is too long (max 2048 characters)" },
+        { status: 400 }
+      );
+    }
+
     if (notes !== undefined && notes !== null && typeof notes !== "string") {
       return NextResponse.json(
         { success: false, error: "Notes must be a string" },
+        { status: 400 }
+      );
+    }
+
+    if (typeof notes === "string" && notes.length > 500) {
+      return NextResponse.json(
+        { success: false, error: "Notes must be 500 characters or fewer" },
         { status: 400 }
       );
     }

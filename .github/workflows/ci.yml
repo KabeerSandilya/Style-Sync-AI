@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main, development]
+  pull_request:
+    branches: [main, development]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Type check (backend)
+        run: npm run typecheck --workspace=backend
+
+      - name: Type check (frontend)
+        run: npx tsc --noEmit
+        working-directory: frontend
+
+      - name: Run tests
+        run: npm test --workspace=backend
+        env:
+          DATABASE_URL: ""          # tests are pure; no DB needed
+
+      - name: Build
+        run: npm run build --workspace=frontend
+        env:
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+          CLERK_SECRET_KEY:                 ${{ secrets.CLERK_SECRET_KEY }}
+          DATABASE_URL:                     ${{ secrets.DATABASE_URL }}
+          GEMINI_API_KEY:                   ${{ secrets.GEMINI_API_KEY }}
+          CLOUDINARY_CLOUD_NAME:            ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY:               ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET:            ${{ secrets.CLOUDINARY_API_SECRET }}
+          OPENWEATHER_API_KEY:              ${{ secrets.OPENWEATHER_API_KEY }}

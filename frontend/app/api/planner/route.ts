@@ -2,8 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { prisma } from "@style-sync/backend";
 import { getWeekRange, toDateString } from "@style-sync/backend/planner";
-
-const VALID_OCCASIONS = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
+import { CreatePlanSchema, zodError } from "@/lib/schemas";
 
 export async function GET(req: Request) {
   try {
@@ -14,6 +13,14 @@ export async function GET(req: Request) {
 
     const { searchParams } = new URL(req.url);
     const weekParam = searchParams.get("week") ?? new Date().toISOString().slice(0, 10);
+
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(weekParam)) {
+      return NextResponse.json(
+        { success: false, error: "week must be in YYYY-MM-DD format" },
+        { status: 400 }
+      );
+    }
+
     const { start, end } = getWeekRange(weekParam);
 
     const plans = await prisma.outfitPlan.findMany({
@@ -50,18 +57,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
     }
 
-    const body = await req.json();
-    const { outfitId, plannedDate, occasion, note } = body;
-
-    if (!outfitId || typeof outfitId !== "string") {
-      return NextResponse.json({ success: false, error: "outfitId is required." }, { status: 400 });
-    }
-    if (!plannedDate || !/^\d{4}-\d{2}-\d{2}$/.test(plannedDate)) {
-      return NextResponse.json({ success: false, error: "plannedDate must be YYYY-MM-DD." }, { status: 400 });
-    }
-    if (occasion != null && !VALID_OCCASIONS.includes(occasion)) {
-      return NextResponse.json({ success: false, error: "Invalid occasion value." }, { status: 400 });
-    }
+    const result = CreatePlanSchema.safeParse(await req.json());
+    if (!result.success) return zodError(result.error);
+    const { outfitId, plannedDate, occasion, note } = result.data;
 
     const outfit = await prisma.outfit.findFirst({ where: { id: outfitId, userId } });
     if (!outfit) {

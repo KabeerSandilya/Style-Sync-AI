@@ -1,5 +1,11 @@
 import { prisma } from "../../lib/prisma";
+import { OCCASIONS, Occasion } from "../../types";
 import { OutfitWithStats } from "./types";
+
+function toOccasion(s: string | null): Occasion | null {
+  if (s === null) return null;
+  return OCCASIONS.includes(s as Occasion) ? (s as Occasion) : null;
+}
 
 export async function getMostWornOutfits(userId: string, limit: number = 10): Promise<OutfitWithStats[]> {
   const outfits = await prisma.outfit.findMany({
@@ -27,6 +33,7 @@ export async function getMostWornOutfits(userId: string, limit: number = 10): Pr
     const wearCount = outfit.wears.length;
     return {
       ...outfit,
+      occasion: toOccasion(outfit.occasion),
       createdAt: outfit.createdAt.toISOString(),
       updatedAt: outfit.updatedAt.toISOString(),
       wears: outfit.wears.map(w => ({

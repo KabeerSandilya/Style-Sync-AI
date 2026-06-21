@@ -1,18 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { prisma } from "@style-sync/backend";
-
-const VALID_CATEGORIES = [
-  "Topwear",
-  "Bottomwear",
-  "Outerwear",
-  "Footwear",
-  "Accessories",
-  "Formalwear",
-  "Sportswear",
-  "Ethnicwear",
-  "Uncategorized",
-];
+import { UpdateGarmentSchema, zodError } from "@/lib/schemas";
 
 export async function PATCH(
   req: Request,
@@ -29,14 +18,15 @@ export async function PATCH(
     }
 
     const { id } = await params;
-    const body = await req.json();
 
-    // 2. Verify ownership
+    // 2. Validate request body
+    const result = UpdateGarmentSchema.safeParse(await req.json());
+    if (!result.success) return zodError(result.error);
+    const { name, category, isFavorite, notes, tags } = result.data;
+
+    // 3. Verify ownership
     const garment = await prisma.garment.findFirst({
-      where: {
-        id,
-        userId,
-      },
+      where: { id, userId },
     });
 
     if (!garment) {
@@ -46,7 +36,7 @@ export async function PATCH(
       );
     }
 
-    // 3. Validate fields
+    // 4. Build update payload
     const dataToUpdate: {
       name?: string;
       category?: string;
@@ -55,46 +45,11 @@ export async function PATCH(
       isFavorite?: boolean;
     } = {};
 
-    if (body.name !== undefined) {
-      const trimmedName = body.name.trim();
-      dataToUpdate.name = trimmedName === "" ? "Untitled Garment" : trimmedName.substring(0, 100);
-    }
-
-    if (body.category !== undefined) {
-      if (!VALID_CATEGORIES.includes(body.category)) {
-        return NextResponse.json(
-          { success: false, error: `Invalid category. Must be one of: ${VALID_CATEGORIES.join(", ")}` },
-          { status: 400 }
-        );
-      }
-      dataToUpdate.category = body.category;
-    }
-
-    if (body.notes !== undefined) {
-      dataToUpdate.notes = typeof body.notes === "string" ? body.notes.trim().slice(0, 500) : null;
-    }
-
-    if (body.tags !== undefined) {
-      if (!Array.isArray(body.tags)) {
-        return NextResponse.json(
-          { success: false, error: "Tags must be an array of strings." },
-          { status: 400 }
-        );
-      }
-      dataToUpdate.tags = body.tags
-        .map((t: unknown) => (typeof t === "string" ? t.trim() : ""))
-        .filter((t: string) => t.length > 0);
-    }
-
-    if (body.isFavorite !== undefined) {
-      if (typeof body.isFavorite !== "boolean") {
-        return NextResponse.json(
-          { success: false, error: "isFavorite must be a boolean." },
-          { status: 400 }
-        );
-      }
-      dataToUpdate.isFavorite = body.isFavorite;
-    }
+    if (name !== undefined) dataToUpdate.name = name.trim() || "Untitled Garment";
+    if (category !== undefined) dataToUpdate.category = category;
+    if (notes !== undefined) dataToUpdate.notes = notes ? notes.trim() : null;
+    if (tags !== undefined) dataToUpdate.tags = tags.map((t) => t.trim()).filter(Boolean);
+    if (isFavorite !== undefined) dataToUpdate.isFavorite = isFavorite;
 
     if (Object.keys(dataToUpdate).length === 0) {
       return NextResponse.json(
@@ -103,15 +58,13 @@ export async function PATCH(
       );
     }
 
-    // 4. Update the garment
+    // 5. Update the garment
     const updatedGarment = await prisma.garment.update({
-      where: {
-        id,
-      },
+      where: { id },
       data: dataToUpdate,
     });
 
-    if (body.isFavorite !== undefined) {
+    if (isFavorite !== undefined) {
       const { updatePreferenceProfile } = await import("@style-sync/backend");
       await updatePreferenceProfile(userId);
     }

@@ -1,6 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { after, NextResponse } from "next/server";
-import { cloudinary, prisma, classifyGarment, removeBackground, withRetry } from "@style-sync/backend";
+import { cloudinary, prisma, classifyGarment, removeBackground, withRetry, isRateLimited } from "@style-sync/backend";
+
+const UPLOAD_RATE_LIMIT = { limit: 10, windowMs: 60_000 };
 
 export async function POST(req: Request) {
   try {
@@ -13,7 +15,15 @@ export async function POST(req: Request) {
       );
     }
 
-    // 2. Parse Multipart Form Data
+    // 2. Rate limit
+    if (isRateLimited(`${userId}:upload`, UPLOAD_RATE_LIMIT)) {
+      return NextResponse.json(
+        { success: false, error: "Too many uploads. Please wait a moment." },
+        { status: 429 }
+      );
+    }
+
+    // 3. Parse Multipart Form Data
     const formData = await req.formData();
     const file = formData.get("file") as File | null;
     // Client may have already removed the background in the browser
@@ -31,7 +41,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 3. Validation - File Type
+    // 4. Validation - File Type
     const validMimeTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
     if (!validMimeTypes.includes(file.type)) {
       return NextResponse.json(
@@ -40,7 +50,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 4. Validation - File Size (10MB limit)
+    // 5. Validation - File Size (10MB limit)
     const maxSizeBytes = 10 * 1024 * 1024;
     if (file.size > maxSizeBytes) {
       return NextResponse.json(
@@ -49,7 +59,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 5. Cloudinary Upload with Base64 Database Fallback
+    // 6b. Cloudinary Upload with Base64 Database Fallback
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
@@ -111,7 +121,23 @@ export async function POST(req: Request) {
       : [];
     const isFavorite = isFavoriteString === "true";
 
-    // 6. If the client already removed the background, upload the processed PNG now
+    // 6. Validate processedImageFile if present
+    if (processedImageFile) {
+      if (!validMimeTypes.includes(processedImageFile.type)) {
+        return NextResponse.json(
+          { success: false, error: "Invalid processed image type. Only PNG, JPG, and WEBP are allowed." },
+          { status: 400 }
+        );
+      }
+      if (processedImageFile.size > maxSizeBytes) {
+        return NextResponse.json(
+          { success: false, error: "Processed image too large. Maximum size is 10MB." },
+          { status: 400 }
+        );
+      }
+    }
+
+    // 7. If the client already removed the background, upload the processed PNG now
     let processedImageUrl: string | null = null;
 
     if (processedImageFile && hasCloudinaryCreds) {

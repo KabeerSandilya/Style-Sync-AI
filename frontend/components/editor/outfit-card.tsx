@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import * as React from "react";
-import { Heart, Sparkles } from "lucide-react";
+import { Heart, Sparkles, Download, Share2, Link2Off } from "lucide-react";
 import { cn, getDisplayImageUrl } from "@/lib/utils";
 import { Outfit } from "@/types";
 
@@ -11,6 +11,9 @@ interface OutfitCardProps {
   outfit: Outfit;
   onFavoriteToggle?: (id: string, isFavorite: boolean) => void;
   onOutfitClick?: (outfit: Outfit) => void;
+  onExport?: (outfit: Outfit) => void;
+  onShare?: (outfit: Outfit) => void;
+  onRevoke?: (outfit: Outfit) => void;
 }
 
 function formatLastWorn(wears?: { id: string; wornAt: string }[]) {
@@ -21,33 +24,26 @@ function formatLastWorn(wears?: { id: string; wornAt: string }[]) {
   const lastWornDate = new Date(wears[0].wornAt);
   const now = new Date();
 
-  // Strip time parts to compare dates only
   const dDate = new Date(lastWornDate.getFullYear(), lastWornDate.getMonth(), lastWornDate.getDate());
   const dNow = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
   const diffTime = dNow.getTime() - dDate.getTime();
   const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
-  if (diffDays === 0) {
-    return "Last worn Today";
-  } else if (diffDays === 1) {
-    return "Last worn Yesterday";
-  } else if (diffDays > 1 && diffDays <= 7) {
-    return `Last worn ${diffDays} days ago`;
-  } else {
-    const formatted = lastWornDate.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
-    return `Last worn ${formatted}`;
-  }
+  if (diffDays === 0) return "Last worn Today";
+  if (diffDays === 1) return "Last worn Yesterday";
+  if (diffDays > 1 && diffDays <= 7) return `Last worn ${diffDays} days ago`;
+
+  return `Last worn ${lastWornDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`;
 }
 
 export function OutfitCard({
   outfit,
   onFavoriteToggle,
   onOutfitClick,
+  onExport,
+  onShare,
+  onRevoke,
 }: OutfitCardProps) {
   const garmentsList = outfit.garments.map((g) => g.garment);
   const garmentCount = garmentsList.length;
@@ -57,7 +53,21 @@ export function OutfitCard({
     onFavoriteToggle?.(outfit.id, !outfit.isFavorite);
   };
 
-  // Render the layered flat-lay collage of garment images
+  const handleExportClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onExport?.(outfit);
+  };
+
+  const handleShareClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onShare?.(outfit);
+  };
+
+  const handleRevokeClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onRevoke?.(outfit);
+  };
+
   const renderCollage = () => {
     if (garmentCount === 0) {
       return (
@@ -101,11 +111,9 @@ export function OutfitCard({
       );
     }
 
-    // 3 or more garments
     const displayGarments = garmentsList.slice(0, 3);
     return (
       <div className="w-full h-full relative overflow-hidden bg-[#fcf9f5] dark:bg-[#151513] flex items-center justify-center p-4">
-        {/* First Garment - Bottom Layer Left */}
         <div className="absolute left-[10%] w-[40%] h-[70%] flex items-center justify-center transform -rotate-12 translate-y-4 opacity-80 transition-transform duration-300 group-hover:-rotate-18 group-hover:-translate-x-1">
           <img
             src={getDisplayImageUrl(displayGarments[0])}
@@ -113,7 +121,6 @@ export function OutfitCard({
             className="max-h-full max-w-full object-contain filter drop-shadow-sm"
           />
         </div>
-        {/* Second Garment - Bottom Layer Right */}
         <div className="absolute right-[10%] w-[40%] h-[70%] flex items-center justify-center transform rotate-12 translate-y-4 opacity-80 transition-transform duration-300 group-hover:rotate-18 group-hover:translate-x-1">
           <img
             src={getDisplayImageUrl(displayGarments[1])}
@@ -121,7 +128,6 @@ export function OutfitCard({
             className="max-h-full max-w-full object-contain filter drop-shadow-sm"
           />
         </div>
-        {/* Third Garment - Top Layer Centered */}
         <div className="absolute w-[50%] h-[80%] flex items-center justify-center transform -translate-y-2 z-10 transition-all duration-300 group-hover:scale-[1.05] group-hover:-translate-y-4">
           <img
             src={getDisplayImageUrl(displayGarments[2])}
@@ -142,7 +148,7 @@ export function OutfitCard({
       <div className="aspect-4/5 w-full border-b border-border/20 overflow-hidden relative">
         {renderCollage()}
 
-        {/* Favorite Heart Toggle Overlay */}
+        {/* Favorite Heart Toggle */}
         <button
           onClick={handleFavoriteClick}
           className="absolute top-4 right-4 z-20 w-8 h-8 rounded-none border border-border/60 bg-card/90 backdrop-blur-xs flex items-center justify-center hover:bg-accent/40 text-muted-foreground hover:text-foreground transition-all cursor-pointer shadow-sm"
@@ -156,7 +162,48 @@ export function OutfitCard({
           />
         </button>
 
-        {/* Garment count badge overlay */}
+        {/* Export + Share actions — visible on hover */}
+        {(onExport || onShare || onRevoke) && (
+          <div className="absolute top-4 right-14 z-20 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            {onExport && (
+              <button
+                onClick={handleExportClick}
+                className="w-8 h-8 rounded-none border border-border/60 bg-card/90 backdrop-blur-xs flex items-center justify-center hover:bg-accent/40 text-muted-foreground hover:text-foreground transition-all cursor-pointer shadow-sm"
+                aria-label="Export as image"
+                title="Export as PNG"
+              >
+                <Download className="w-3.5 h-3.5" />
+              </button>
+            )}
+            {onShare && (
+              <button
+                onClick={handleShareClick}
+                className={cn(
+                  "w-8 h-8 rounded-none border bg-card/90 backdrop-blur-xs flex items-center justify-center transition-all cursor-pointer shadow-sm",
+                  outfit.shareToken
+                    ? "border-primary/60 text-primary hover:bg-primary/10"
+                    : "border-border/60 text-muted-foreground hover:bg-accent/40 hover:text-foreground"
+                )}
+                aria-label="Share outfit"
+                title={outfit.shareToken ? "Copy share link" : "Share outfit"}
+              >
+                <Share2 className="w-3.5 h-3.5" />
+              </button>
+            )}
+            {onRevoke && outfit.shareToken && (
+              <button
+                onClick={handleRevokeClick}
+                className="w-8 h-8 rounded-none border border-destructive/40 bg-card/90 backdrop-blur-xs flex items-center justify-center hover:bg-destructive/10 text-destructive/70 hover:text-destructive transition-all cursor-pointer shadow-sm"
+                aria-label="Revoke share link"
+                title="Revoke share link"
+              >
+                <Link2Off className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Garment count badge */}
         <div className="absolute bottom-4 left-4 z-20 px-2 py-1 bg-card/90 backdrop-blur-xs border border-border/40 text-[9px] font-sans uppercase font-bold tracking-wider text-muted-foreground">
           {garmentCount} {garmentCount === 1 ? "piece" : "pieces"}
         </div>
@@ -166,6 +213,13 @@ export function OutfitCard({
           <div className="absolute top-4 left-4 z-20 flex items-center gap-1 bg-primary/10 text-primary border border-primary/20 px-2 py-0.5">
             <Sparkles className="w-2.5 h-2.5" />
             <span className="text-[8px] font-sans font-bold uppercase tracking-wider">AI</span>
+          </div>
+        )}
+
+        {/* Shared indicator badge */}
+        {outfit.shareToken && (
+          <div className="absolute bottom-4 right-4 z-20 px-2 py-1 bg-primary/10 border border-primary/30 text-[9px] font-sans uppercase font-bold tracking-wider text-primary">
+            Shared
           </div>
         )}
       </div>

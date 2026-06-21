@@ -3,12 +3,15 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import { EditorNavbar } from "@/components/editor/editor-navbar";
 import { ProjectSidebar } from "@/components/editor/project-sidebar";
 import { PlannerDayCard } from "@/components/planner/planner-day-card";
 import { EmptyDaySlot } from "@/components/planner/empty-day-slot";
 import { OutfitPickerSheet } from "@/components/planner/outfit-picker-sheet";
-import { OutfitPlan, Outfit } from "@/types";
+import { usePlanner } from "@/lib/hooks/use-planner";
+import { QK } from "@/lib/query-keys";
+import { Outfit } from "@/types";
 
 const DAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const OCCASION_STORAGE_KEY = "stylesync_occasion";
@@ -58,40 +61,31 @@ function isPast(d: Date): boolean {
 function PlannerContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const queryClient = useQueryClient();
 
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   const [weekStart, setWeekStart] = React.useState<Date>(() =>
     getMonday(searchParams.get("week"))
   );
-  const [plans, setPlans] = React.useState<OutfitPlan[]>([]);
-  const [loading, setLoading] = React.useState(true);
   const [suggestingDates, setSuggestingDates] = React.useState<Set<string>>(new Set());
   const [pickerDate, setPickerDate] = React.useState<string | null>(null);
   const [changingPlan, setChangingPlan] = React.useState<{ planId: string; date: string } | null>(null);
 
   const weekEnd = addDays(weekStart, 6);
   const weekDays = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
+  const weekKey = toISO(weekStart);
 
-  const fetchPlans = React.useCallback(async (ws: Date) => {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/planner?week=${toISO(ws)}`);
-      const data = await res.json();
-      if (data.success) setPlans(data.plans ?? []);
-    } catch {
-      setPlans([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const { data: plans = [], isLoading: loading } = usePlanner(weekKey);
 
   React.useEffect(() => {
-    fetchPlans(weekStart);
-    router.replace(`/editor/planner?week=${toISO(weekStart)}`, { scroll: false });
-  }, [weekStart, fetchPlans, router]);
+    router.replace(`/editor/planner?week=${weekKey}`, { scroll: false });
+  }, [weekKey, router]);
+
+  const invalidatePlanner = () =>
+    queryClient.invalidateQueries({ queryKey: QK.planner(weekKey) });
 
   const planByDate = React.useMemo(() => {
-    const map: Record<string, OutfitPlan> = {};
+    const map: Record<string, (typeof plans)[0]> = {};
     for (const p of plans) {
       map[p.plannedDate.slice(0, 10)] = p;
     }
@@ -120,7 +114,7 @@ function PlannerContent() {
           body: JSON.stringify({ outfitId: outfit.id, plannedDate: date }),
         });
       }
-      await fetchPlans(weekStart);
+      invalidatePlanner();
     } catch {
       // silent
     }
@@ -142,7 +136,7 @@ function PlannerContent() {
   const handleRemove = async (planId: string) => {
     try {
       await fetch(`/api/planner/${planId}`, { method: "DELETE" });
-      setPlans((prev) => prev.filter((p) => p.id !== planId));
+      invalidatePlanner();
     } catch {
       // silent
     }
@@ -162,7 +156,7 @@ function PlannerContent() {
         : "/api/recommendations";
       const res = await fetch(url);
       const data = await res.json();
-      const top: Outfit | undefined = data.recommendations?.[0]?.outfit;
+      const top: Outfit | undefined = data.data?.[0]?.outfit;
       if (top) {
         await fetch("/api/planner", {
           method: "POST",
@@ -173,7 +167,7 @@ function PlannerContent() {
             occasion: occasion ?? null,
           }),
         });
-        await fetchPlans(weekStart);
+        invalidatePlanner();
       }
     } catch {
       // silent
@@ -185,8 +179,6 @@ function PlannerContent() {
       });
     }
   };
-
-  const pickerOpen = pickerDate !== null || changingPlan !== null;
 
   return (
     <div className="min-h-screen bg-background">

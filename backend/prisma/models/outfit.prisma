@@ -12,6 +12,8 @@ model Outfit {
   isFavorite      Boolean @default(false)
   isAiGenerated   Boolean @default(false)
 
+  shareToken      String?  @unique
+
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 

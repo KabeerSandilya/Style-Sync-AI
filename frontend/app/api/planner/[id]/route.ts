@@ -1,8 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { prisma } from "@style-sync/backend";
-
-const VALID_OCCASIONS = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
+import { UpdatePlanSchema, zodError } from "@/lib/schemas";
 
 export async function DELETE(
   _req: Request,
@@ -50,12 +49,9 @@ export async function PATCH(
       return NextResponse.json({ success: false, error: "Forbidden." }, { status: 403 });
     }
 
-    const body = await req.json();
-    const { outfitId, occasion, note } = body;
-
-    if (occasion !== undefined && occasion !== null && !VALID_OCCASIONS.includes(occasion)) {
-      return NextResponse.json({ success: false, error: "Invalid occasion value." }, { status: 400 });
-    }
+    const bodyResult = UpdatePlanSchema.safeParse(await req.json());
+    if (!bodyResult.success) return zodError(bodyResult.error);
+    const { outfitId, occasion, note } = bodyResult.data;
 
     if (outfitId !== undefined) {
       const outfit = await prisma.outfit.findFirst({ where: { id: outfitId, userId } });

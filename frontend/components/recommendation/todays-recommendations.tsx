@@ -18,9 +18,13 @@ import {
   ThumbsDown,
   Loader2,
 } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn, getDisplayImageUrl } from "@/lib/utils";
+import { useRecommendations } from "@/lib/hooks/use-recommendations";
+import { useWearOutfit } from "@/lib/hooks/use-wear-outfit";
+import { useLikeDislike } from "@/lib/hooks/use-like-dislike";
 import type { ScoredOutfit, WeatherContext, Occasion } from "@/types";
 
 const OCCASIONS: Occasion[] = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
@@ -29,10 +33,10 @@ const OCCASION_STORAGE_KEY = 'stylesync_occasion';
 interface TodaysRecommendationsProps {
   onCreateOutfitClick?: () => void;
   onOutfitClick?: (outfit: any) => void;
-  refreshTrigger?: number; // To trigger refetch from parent
 }
 
 function GenerateLooksButton({ onSuccess }: { onSuccess: () => void }) {
+  const queryClient = useQueryClient();
   const [state, setState] = React.useState<"idle" | "loading" | "done" | "error">("idle");
   const [message, setMessage] = React.useState<string | null>(null);
 
@@ -64,6 +68,8 @@ function GenerateLooksButton({ onSuccess }: { onSuccess: () => void }) {
       }
 
       setState("done");
+      queryClient.invalidateQueries({ queryKey: ["outfits"] });
+      queryClient.invalidateQueries({ queryKey: ["recommendations"] });
       onSuccess();
     } catch {
       setMessage("Network error. Please try again.");
@@ -106,159 +112,73 @@ function GenerateLooksButton({ onSuccess }: { onSuccess: () => void }) {
 export function TodaysRecommendations({
   onCreateOutfitClick,
   onOutfitClick,
-  refreshTrigger = 0,
 }: TodaysRecommendationsProps) {
-  const [loading, setLoading] = React.useState(true);
-  const [recommendations, setRecommendations] = React.useState<ScoredOutfit[]>([]);
-  const [weather, setWeather] = React.useState<WeatherContext | null>(null);
-  const [error, setError] = React.useState<string | null>(null);
-  const [coldStartReason, setColdStartReason] = React.useState<"no_garments" | "no_outfits" | null>(null);
+  // Location state — starts with Paris fallback, updates when geolocation resolves
+  const [location, setLocation] = React.useState<{ lat?: number; lon?: number; city?: string }>({ city: "Paris" });
 
   // Occasion picker state
   const [selectedOccasion, setSelectedOccasionState] = React.useState<string | null>(null);
-  const selectedOccasionRef = React.useRef<string | null>(null);
 
   const setSelectedOccasion = React.useCallback((occ: string | null) => {
-    selectedOccasionRef.current = occ;
     setSelectedOccasionState(occ);
   }, []);
 
-  // Restore occasion from localStorage on mount (before first fetch)
+  // Restore occasion from localStorage on mount
   React.useEffect(() => {
     const stored = localStorage.getItem(OCCASION_STORAGE_KEY);
     if (stored && (OCCASIONS as string[]).includes(stored)) {
-      selectedOccasionRef.current = stored;
       setSelectedOccasionState(stored);
     }
   }, []);
 
-  // Track currently featured recommended outfit
-  const [activeIndex, setActiveIndex] = React.useState(0);
-  const [actionLoading, setActionLoading] = React.useState<string | null>(null);
-
-  const handleWear = async (e: React.MouseEvent, outfitId: string) => {
-    e.stopPropagation();
-    if (actionLoading) return;
-    setActionLoading(`wear-${outfitId}`);
-    try {
-      const res = await fetch(`/api/recommendations/${outfitId}/wear`, {
-        method: "POST",
-      });
-      const data = await res.json();
-      if (data.success) {
-        triggerRefresh();
-      } else {
-        console.error("Failed to record wear:", data.error);
-      }
-    } catch (err) {
-      console.error("Error recording wear:", err);
-    } finally {
-      setActionLoading(null);
-    }
-  };
-
-  const handleLike = async (e: React.MouseEvent, outfitId: string) => {
-    e.stopPropagation();
-    if (actionLoading) return;
-    setActionLoading(`like-${outfitId}`);
-    try {
-      const res = await fetch(`/api/recommendations/${outfitId}/like`, {
-        method: "POST",
-      });
-      const data = await res.json();
-      if (data.success) {
-        triggerRefresh();
-      } else {
-        console.error("Failed to record like:", data.error);
-      }
-    } catch (err) {
-      console.error("Error recording like:", err);
-    } finally {
-      setActionLoading(null);
-    }
-  };
-
-  const handleDislike = async (e: React.MouseEvent, outfitId: string) => {
-    e.stopPropagation();
-    if (actionLoading) return;
-    setActionLoading(`dislike-${outfitId}`);
-    try {
-      const res = await fetch(`/api/recommendations/${outfitId}/dislike`, {
-        method: "POST",
-      });
-      const data = await res.json();
-      if (data.success) {
-        triggerRefresh();
-      } else {
-        console.error("Failed to record dislike:", data.error);
-      }
-    } catch (err) {
-      console.error("Error recording dislike:", err);
-    } finally {
-      setActionLoading(null);
-    }
-  };
-
-  const fetchRecommendations = React.useCallback(async (lat?: number, lon?: number) => {
-    setLoading(true);
-    setError(null);
-    setColdStartReason(null);
-    try {
-      let url = "/api/recommendations?city=Paris";
-      if (lat !== undefined && lon !== undefined) {
-        url = `/api/recommendations?lat=${lat}&lon=${lon}`;
-      }
-      const occ = selectedOccasionRef.current;
-      if (occ) {
-        url += `&occasion=${encodeURIComponent(occ)}`;
-      }
-      const res = await fetch(url);
-      const data = await res.json();
-      if (data.success) {
-        setRecommendations(data.data);
-        setWeather(data.weather);
-        setActiveIndex(0);
-        if (data.coldStartReason) {
-          setColdStartReason(data.coldStartReason);
-        }
-      } else {
-        setError(data.error || "Failed to load recommendations.");
-      }
-    } catch (err) {
-      console.error("Error loading recommendations:", err);
-      setError("Failed to fetch styling recommendations.");
-    } finally {
-      setLoading(false);
+  // Try geolocation on mount — updates location which auto-refetches the query
+  React.useEffect(() => {
+    if (typeof window !== "undefined" && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => setLocation({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
+        () => setLocation({ city: "Paris" }),
+        { enableHighAccuracy: false, timeout: 5000, maximumAge: 600_000 }
+      );
     }
   }, []);
 
-  const lastRefreshAt = React.useRef(0);
-  const REFRESH_COOLDOWN_MS = 2000;
+  const { data: queryData, isLoading: loading, isError, refetch } = useRecommendations({
+    ...location,
+    occasion: selectedOccasion,
+  });
 
-  const triggerRefresh = React.useCallback(() => {
-    const now = Date.now();
-    if (now - lastRefreshAt.current < REFRESH_COOLDOWN_MS) return;
-    lastRefreshAt.current = now;
+  const recommendations: ScoredOutfit[] = queryData?.data ?? [];
+  const weather: WeatherContext | null = queryData?.weather ?? null;
+  const coldStartReason = queryData?.coldStartReason ?? null;
+  const error = isError ? "Failed to fetch styling recommendations." : (!queryData?.success ? queryData?.error : null);
 
-    if (typeof window !== "undefined" && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          fetchRecommendations(position.coords.latitude, position.coords.longitude);
-        },
-        (err) => {
-          console.warn("Geolocation permission denied or failed. Defaulting to Paris.", err);
-          fetchRecommendations();
-        },
-        { enableHighAccuracy: false, timeout: 5000, maximumAge: 600000 }
-      );
-    } else {
-      fetchRecommendations();
-    }
-  }, [fetchRecommendations]);
+  // Track currently featured recommended outfit
+  const [activeIndex, setActiveIndex] = React.useState(0);
 
+  // Reset active index when recommendations change
   React.useEffect(() => {
-    triggerRefresh();
-  }, [refreshTrigger, fetchRecommendations]);
+    setActiveIndex(0);
+  }, [recommendations.length]);
+
+  const wearMutation = useWearOutfit();
+  const likeDislikeMutation = useLikeDislike();
+
+  const handleWear = (e: React.MouseEvent, outfitId: string) => {
+    e.stopPropagation();
+    wearMutation.mutate(outfitId);
+  };
+
+  const handleLike = (e: React.MouseEvent, outfitId: string) => {
+    e.stopPropagation();
+    likeDislikeMutation.mutate({ outfitId, action: "like" });
+  };
+
+  const handleDislike = (e: React.MouseEvent, outfitId: string) => {
+    e.stopPropagation();
+    likeDislikeMutation.mutate({ outfitId, action: "dislike" });
+  };
+
+  const anyActionPending = wearMutation.isPending || likeDislikeMutation.isPending;
 
   // Weather Icon Matcher
   const getWeatherIcon = (cond: string) => {
@@ -359,11 +279,11 @@ export function TodaysRecommendations({
 
   // Format Date for widget
   const getFormattedDate = () => {
-    const options: Intl.DateTimeFormatOptions = { 
-      month: 'short', 
-      day: 'numeric', 
-      hour: '2-digit', 
-      minute: '2-digit' 
+    const options: Intl.DateTimeFormatOptions = {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
     };
     return new Date().toLocaleDateString('en-US', options);
   };
@@ -401,6 +321,15 @@ export function TodaysRecommendations({
     );
   }
 
+  // Render error state
+  if (error && recommendations.length === 0) {
+    return (
+      <div className="flex items-center justify-center min-h-40 text-sm text-muted-foreground font-sans">
+        {error}
+      </div>
+    );
+  }
+
   // Render Cold-Start / Empty State
   if (!loading && recommendations.length === 0) {
     const isNoGarments = coldStartReason === "no_garments";
@@ -434,7 +363,7 @@ export function TodaysRecommendations({
 
             {/* Generate Looks — only shown when user has garments but no outfits */}
             {!isNoGarments && (
-              <GenerateLooksButton onSuccess={triggerRefresh} />
+              <GenerateLooksButton onSuccess={() => refetch()} />
             )}
           </div>
         </Card>
@@ -487,7 +416,6 @@ export function TodaysRecommendations({
       localStorage.removeItem(OCCASION_STORAGE_KEY);
     }
     setSelectedOccasion(occ);
-    triggerRefresh();
   };
 
   return (
@@ -523,7 +451,7 @@ export function TodaysRecommendations({
           </span>
         </div>
 
-        <Card 
+        <Card
           onClick={onOutfitClick ? () => onOutfitClick(primary.outfit) : undefined}
           className={cn(
             "group relative rounded-none border-border bg-card overflow-hidden",
@@ -535,7 +463,7 @@ export function TodaysRecommendations({
             {/* Collage Section (left) */}
             <div className="w-full sm:w-[42%] aspect-video sm:aspect-auto sm:min-h-50 border-b sm:border-b-0 sm:border-r border-border/20 overflow-hidden relative bg-[#fcf9f5] dark:bg-[#151513] shrink-0">
               {renderCollage(primary)}
-              
+
               {/* Piece Count */}
               <div className="absolute bottom-3 left-3 z-20 px-2 py-0.5 bg-card/90 backdrop-blur-xs border border-border/40 text-[9px] font-sans uppercase font-bold tracking-wider text-muted-foreground">
                 {primary.outfit.garments.length} {primary.outfit.garments.length === 1 ? "piece" : "pieces"}
@@ -554,30 +482,30 @@ export function TodaysRecommendations({
               </div>
 
               {/* Action Buttons Row */}
-              <div 
+              <div
                 className="flex items-center gap-3 mt-4 pt-3 border-t border-border/10"
                 onClick={(e) => e.stopPropagation()}
               >
                 <Button
                   size="sm"
                   onClick={(e) => handleWear(e, primary.outfit.id)}
-                  disabled={actionLoading !== null || primary.wornToday}
+                  disabled={anyActionPending || primary.wornToday}
                   className="rounded-none h-8 px-4 text-xs font-sans font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 flex items-center gap-1.5 cursor-pointer"
                 >
                   <Check className="w-3.5 h-3.5" />
-                  {actionLoading === `wear-${primary.outfit.id}`
+                  {wearMutation.isPending && wearMutation.variables === primary.outfit.id
                     ? "Wearing..."
                     : primary.wornToday
                     ? "Worn Today"
                     : "Wear This"}
                 </Button>
-                
+
                 <div className="flex items-center gap-1.5 ml-auto">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={(e) => handleLike(e, primary.outfit.id)}
-                    disabled={actionLoading !== null}
+                    disabled={anyActionPending}
                     className={cn(
                       "rounded-none h-8 w-8 p-0 border-border/30 flex items-center justify-center cursor-pointer transition-colors",
                       primary.feedbackType === "LIKE"
@@ -592,7 +520,7 @@ export function TodaysRecommendations({
                     variant="outline"
                     size="sm"
                     onClick={(e) => handleDislike(e, primary.outfit.id)}
-                    disabled={actionLoading !== null}
+                    disabled={anyActionPending}
                     className={cn(
                       "rounded-none h-8 w-8 p-0 border-border/30 flex items-center justify-center cursor-pointer transition-colors",
                       primary.feedbackType === "DISLIKE"
@@ -633,12 +561,12 @@ export function TodaysRecommendations({
       {alternatives.length > 0 && (
         <div className="flex flex-col gap-2.5 mt-2">
           <span className="font-serif italic text-xs text-muted-foreground">Alternative Looks</span>
-          
+
           <div className="flex flex-col gap-2">
             {alternatives.map(({ scored, idx }) => (
               <div
                 key={scored.outfitId}
-                onClick={() => setActiveIndex(idx)} // Clicking swaps it into primary slot!
+                onClick={() => setActiveIndex(idx)}
                 className="group flex items-center bg-card border border-border/40 hover:border-border/80 transition-all duration-200 cursor-pointer p-2 gap-3"
                 title="Swap to spotlight this look"
               >
@@ -680,7 +608,7 @@ export function TodaysRecommendations({
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    triggerRefresh();
+                    refetch();
                   }}
                   className="text-muted-foreground hover:text-foreground cursor-pointer transition-colors p-1"
                   title="Refresh Weather Forecast"
