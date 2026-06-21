@@ -1,0 +1,31 @@
+enum FeedbackType {
+  LIKE
+  DISLIKE
+}
+
+model RecommendationFeedback {
+  id            String       @id @default(cuid())
+  userId        String
+  outfitId      String
+  feedbackType  FeedbackType
+  createdAt     DateTime     @default(now())
+
+  outfit        Outfit       @relation(fields: [outfitId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([outfitId])
+  @@index([createdAt])
+}
+
+model OutfitWear {
+  id        String   @id @default(cuid())
+  userId    String
+  outfitId  String
+  wornAt    DateTime @default(now())
+
+  outfit    Outfit   @relation(fields: [outfitId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([outfitId])
+  @@index([wornAt])
+}

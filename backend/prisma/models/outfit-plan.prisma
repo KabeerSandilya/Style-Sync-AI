@@ -1,0 +1,14 @@
+model OutfitPlan {
+  id          String   @id @default(cuid())
+  userId      String
+  outfitId    String
+  plannedDate DateTime @db.Date
+  occasion    String?
+  note        String?
+  createdAt   DateTime @default(now())
+
+  outfit      Outfit   @relation(fields: [outfitId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, plannedDate])
+  @@index([userId])
+}

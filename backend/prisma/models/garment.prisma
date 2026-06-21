@@ -1,0 +1,39 @@
+model Garment {
+  id              String   @id @default(cuid())
+
+  userId          String
+
+  imageUrl          String
+  processedImageUrl String?
+  bgRemovedAt       DateTime?
+
+  name            String
+  category        String
+
+  notes           String?
+
+  tags            String[]
+
+  dominantColor   String?
+  season           String?
+  occasion         String?
+  clothingType     String?
+
+  subcategory      String?
+  primaryColor     String?
+  secondaryColor   String?
+  style            String?
+  material         String?
+  confidence       Int?
+
+  isFavorite      Boolean  @default(false)
+  isProcessed      Boolean  @default(false)
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  outfitItems      OutfitGarment[]
+
+  @@index([userId])
+  @@index([createdAt])
+}

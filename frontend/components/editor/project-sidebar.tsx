@@ -5,15 +5,32 @@ import { X, Plus, Shirt, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
+import { cn, getDisplayImageUrl } from "@/lib/utils";
+import { Garment, Outfit } from "@/types";
 
 interface ProjectSidebarProps {
   isOpen: boolean;
   onClose: () => void;
   onAddClothing?: () => void;
+  garments?: Garment[];
+  loading?: boolean;
+  onGarmentClick?: (garment: Garment) => void;
+  outfits?: Outfit[];
+  loadingOutfits?: boolean;
+  onOutfitClick?: (outfit: Outfit) => void;
 }
 
-export function ProjectSidebar({ isOpen, onClose, onAddClothing }: ProjectSidebarProps) {
+export function ProjectSidebar({
+  isOpen,
+  onClose,
+  onAddClothing,
+  garments = [],
+  loading = false,
+  onGarmentClick,
+  outfits = [],
+  loadingOutfits = false,
+  onOutfitClick,
+}: ProjectSidebarProps) {
   // Close sidebar on Escape key press
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -31,7 +48,9 @@ export function ProjectSidebar({ isOpen, onClose, onAddClothing }: ProjectSideba
       <div
         className={cn(
           "fixed inset-0 bg-black/10 backdrop-blur-xs z-50 transition-opacity duration-300 ease-in-out",
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          isOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none",
         )}
         onClick={onClose}
       />
@@ -39,8 +58,8 @@ export function ProjectSidebar({ isOpen, onClose, onAddClothing }: ProjectSideba
       {/* Sidebar Panel */}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 w-[320px] sm:w-[380px] bg-card border-r border-border/40 shadow-2xl z-50 transition-transform duration-300 ease-in-out transform flex flex-col h-full",
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          "fixed inset-y-0 left-0 w-[320px] sm:w-95 bg-card border-r border-border/40 shadow-2xl z-50 transition-transform duration-300 ease-in-out transform flex flex-col h-full",
+          isOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
         {/* Sidebar Header */}
@@ -79,35 +98,143 @@ export function ProjectSidebar({ isOpen, onClose, onAddClothing }: ProjectSideba
 
             {/* Scrollable Tab Contents */}
             <div className="flex-1 overflow-hidden">
-              <TabsContent value="wardrobe" className="h-full flex flex-col outline-none">
+              <TabsContent
+                value="wardrobe"
+                className="h-full flex flex-col outline-none"
+              >
                 <ScrollArea className="h-full pr-1">
-                  <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
-                    <div className="bg-accent/40 text-primary p-4 rounded-none mb-4">
-                      <Shirt className="w-6 h-6 stroke-[1.5]" />
+                  {loading ? (
+                    <div className="flex flex-col gap-4 p-2 animate-pulse">
+                      {[1, 2, 3].map((n) => (
+                        <div
+                          key={n}
+                          className="flex gap-3 items-center border border-border/20 p-3 bg-background/40"
+                        >
+                          <div className="w-12 aspect-4/5 bg-accent/30" />
+                          <div className="flex-1 flex flex-col gap-2">
+                            <div className="h-3.5 bg-accent/30 w-3/4" />
+                            <div className="h-2.5 bg-accent/30 w-1/2" />
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                    <h3 className="font-serif text-lg font-medium text-foreground tracking-tight">
-                      Your wardrobe is empty
-                    </h3>
-                    <p className="font-sans text-xs text-muted-foreground max-w-[240px] mx-auto mt-2 leading-relaxed">
-                      Upload your clothes to curate combinations and construct your signature style.
-                    </p>
-                  </div>
+                  ) : garments.length > 0 ? (
+                    <div className="flex flex-col gap-3 p-2">
+                      {garments.map((garment) => (
+                        <div
+                          key={garment.id}
+                          onClick={() => onGarmentClick?.(garment)}
+                          className="group flex gap-3 items-center border border-border/20 p-3 bg-background/40 hover:bg-background transition-colors duration-200 cursor-pointer rounded-sm"
+                        >
+                          <div className="w-12 aspect-4/5 bg-[#fcf9f5] dark:bg-[#151513] border border-border/30 rounded-none flex items-center justify-center p-1 overflow-hidden shrink-0">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={getDisplayImageUrl(garment)}
+                              alt={garment.name}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                          <div className="flex-1 min-w-0 flex flex-col gap-0.5">
+                            <span className="text-xs font-semibold text-foreground truncate group-hover:text-primary transition-colors">
+                              {garment.name}
+                            </span>
+                            <span className="text-[10px] uppercase tracking-wider font-semibold text-primary/80">
+                              {garment.category}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
+                      <div className="bg-accent/40 text-primary p-4 rounded-none mb-4">
+                        <Shirt className="w-6 h-6 stroke-[1.5]" />
+                      </div>
+                      <h3 className="font-serif text-lg font-medium text-foreground tracking-tight">
+                        Your wardrobe is empty
+                      </h3>
+                      <p className="font-sans text-xs text-muted-foreground max-w-60 mx-auto mt-2 leading-relaxed">
+                        Upload your clothes to curate combinations and construct
+                        your signature style.
+                      </p>
+                    </div>
+                  )}
                 </ScrollArea>
               </TabsContent>
 
-              <TabsContent value="outfits" className="h-full flex flex-col outline-none">
+              <TabsContent
+                value="outfits"
+                className="h-full flex flex-col outline-none"
+              >
                 <ScrollArea className="h-full pr-1">
-                  <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
-                    <div className="bg-accent/40 text-primary p-4 rounded-none mb-4">
-                      <Sparkles className="w-6 h-6 stroke-[1.5]" />
+                  {loadingOutfits ? (
+                    <div className="flex flex-col gap-4 p-2 animate-pulse">
+                      {[1, 2, 3].map((n) => (
+                        <div
+                          key={n}
+                          className="flex gap-3 items-center border border-border/20 p-3 bg-background/40"
+                        >
+                          <div className="w-12 aspect-4/5 bg-accent/30" />
+                          <div className="flex-1 flex flex-col gap-2">
+                            <div className="h-3.5 bg-accent/30 w-3/4" />
+                            <div className="h-2.5 bg-accent/30 w-1/2" />
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                    <h3 className="font-serif text-lg font-medium text-foreground tracking-tight">
-                      No saved combinations
-                    </h3>
-                    <p className="font-sans text-xs text-muted-foreground max-w-[240px] mx-auto mt-2 leading-relaxed">
-                      Your saved outfits will appear here. Start experimenting in the builder to save your first look.
-                    </p>
-                  </div>
+                  ) : outfits.length > 0 ? (
+                    <div className="flex flex-col gap-3 p-2">
+                      {outfits.map((outfit) => (
+                        <div
+                          key={outfit.id}
+                          onClick={() => onOutfitClick?.(outfit)}
+                          className="group flex gap-3 items-center border border-border/20 p-3 bg-background/40 hover:bg-background transition-colors duration-200 cursor-pointer rounded-sm"
+                        >
+                          <div className="w-12 aspect-4/5 bg-[#fcf9f5] dark:bg-[#151513] border border-border/30 rounded-none flex items-center justify-center overflow-hidden shrink-0 relative">
+                            {outfit.garments.length > 0 ? (
+                              /* eslint-disable-next-line @next/next/no-img-element */
+                              <img
+                                src={getDisplayImageUrl(outfit.garments[0].garment)}
+                                alt={outfit.name}
+                                className="w-full h-full object-contain p-1"
+                              />
+                            ) : (
+                              <Sparkles className="w-4 h-4 text-muted-foreground" />
+                            )}
+                            {outfit.garments.length > 1 && (
+                              <div className="absolute bottom-0.5 right-0.5 bg-primary text-primary-foreground text-[8px] font-bold px-1 select-none font-sans">
+                                +{outfit.garments.length - 1}
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex-1 min-w-0 flex flex-col gap-0.5">
+                            <span className="text-xs font-semibold text-foreground truncate group-hover:text-primary transition-colors">
+                              {outfit.name}
+                            </span>
+                            <span className="text-[10px] uppercase tracking-wider font-semibold text-primary/80">
+                              {outfit.garments.length}{" "}
+                              {outfit.garments.length === 1
+                                ? "piece"
+                                : "pieces"}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
+                      <div className="bg-accent/40 text-primary p-4 rounded-none mb-4">
+                        <Sparkles className="w-6 h-6 stroke-[1.5]" />
+                      </div>
+                      <h3 className="font-serif text-lg font-medium text-foreground tracking-tight">
+                        No saved combinations
+                      </h3>
+                      <p className="font-sans text-xs text-muted-foreground max-w-60 mx-auto mt-2 leading-relaxed">
+                        Your saved outfits will appear here. Start curating in
+                        the builder to save your first look.
+                      </p>
+                    </div>
+                  )}
                 </ScrollArea>
               </TabsContent>
             </div>
