@@ -1,6 +1,29 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { prisma } from "@style-sync/backend";
+import { CreateOutfitSchema, zodError } from "@/lib/schemas";
+
+function generateOutfitName(
+  garments: Array<{ style: string | null; category: string }>,
+  occasion: string | null
+): string {
+  const primaryStyle = garments
+    .map((g) => g.style)
+    .find((s) => s && s.toLowerCase() !== "unknown");
+
+  if (primaryStyle && occasion) return `${primaryStyle} ${occasion} Look`;
+  if (primaryStyle) return `${primaryStyle} Edit`;
+  if (occasion) return `${occasion} Look`;
+
+  const cats = [
+    ...new Set(
+      garments.map((g) => g.category).filter((c) => c && c.toLowerCase() !== "unknown")
+    ),
+  ];
+  if (cats.length >= 2) return `${cats[0]} & ${cats[1]} Look`;
+  if (cats.length === 1) return `${cats[0]} Ensemble`;
+  return "New Look";
+}
 
 export async function GET() {
   try {
@@ -60,16 +83,10 @@ export async function POST(req: Request) {
       );
     }
 
-    const body = await req.json();
-    const { name, notes, garmentIds, occasion } = body;
-
-    // 2. Validate input
-    if (!garmentIds || !Array.isArray(garmentIds) || garmentIds.length === 0) {
-      return NextResponse.json(
-        { success: false, error: "Please select at least one garment." },
-        { status: 400 }
-      );
-    }
+    // 2. Validate request body
+    const result = CreateOutfitSchema.safeParse(await req.json());
+    if (!result.success) return zodError(result.error);
+    const { name, notes, garmentIds, occasion } = result.data;
 
     // 3. Verify garment ownership and retrieve details for category checks
     const ownedGarments = await prisma.garment.findMany({
@@ -111,11 +128,12 @@ export async function POST(req: Request) {
       );
     }
 
-    const outfitName = name && name.trim() !== "" ? name.trim().substring(0, 100) : "Untitled Outfit";
+    const outfitOccasion = occasion ?? null;
+    const outfitName =
+      name && name.trim() !== ""
+        ? name.trim().substring(0, 100)
+        : generateOutfitName(ownedGarments, outfitOccasion);
     const outfitNotes = notes && typeof notes === "string" ? notes.trim().substring(0, 500) : null;
-
-    const VALID_OCCASIONS = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
-    const outfitOccasion = occasion && VALID_OCCASIONS.includes(occasion) ? occasion : null;
 
     // 4. Create outfit and join records
     const outfit = await prisma.outfit.create({

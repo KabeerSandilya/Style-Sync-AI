@@ -55,9 +55,10 @@ export interface Outfit {
   userId: string;
   name: string;
   notes?: string | null;
-  occasion: string | null;
+  occasion: Occasion | null;
   isFavorite: boolean;
   isAiGenerated: boolean;
+  shareToken?: string | null;
   createdAt: string;
   updatedAt: string;
   garments: OutfitGarment[];
@@ -69,6 +70,17 @@ export interface OutfitWear {
   userId: string;
   outfitId: string;
   wornAt: string;
+}
+
+export interface OutfitPlan {
+  id: string;
+  userId: string;
+  outfitId: string;
+  plannedDate: string;
+  occasion: string | null;
+  note: string | null;
+  createdAt: string;
+  outfit: Outfit;
 }
 
 // Service-level view types that are consumed by the frontend. Re-exported here

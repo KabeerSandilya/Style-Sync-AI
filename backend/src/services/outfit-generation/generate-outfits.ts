@@ -3,6 +3,45 @@ import { GarmentInput, GenerationResult } from "./types";
 import { buildGenerationPrompt } from "./prompts";
 import { inferOccasion } from "../recommendation/infer-occasion";
 
+/**
+ * Pure validation helper — no side effects, fully testable.
+ * Returns true when the raw outfit object is structurally valid and safe to save.
+ */
+export function validateGeneratedOutfit(
+  o: unknown,
+  inputIds: Set<string>,
+  garmentCategoryMap: Map<string, string>,
+  existingFingerprints?: Set<string>,
+): o is { name: string; garmentIds: string[]; reason: string } {
+  if (typeof o !== "object" || o === null) return false;
+  const obj = o as Record<string, unknown>;
+
+  if (typeof obj.name !== "string" || obj.name.trim() === "") return false;
+  if (!Array.isArray(obj.garmentIds)) return false;
+  const ids = obj.garmentIds as unknown[];
+  if (ids.length < 2 || ids.length > 5) return false;
+  if (typeof obj.reason !== "string") return false;
+
+  // All referenced IDs must exist in the garment input
+  const badIds = ids.filter((id) => typeof id !== "string" || !inputIds.has(id as string));
+  if (badIds.length > 0) return false;
+
+  // Category exclusivity: at most one bottomwear and one footwear per outfit
+  const categories = (ids as string[]).map((id) =>
+    (garmentCategoryMap.get(id) ?? "").toLowerCase(),
+  );
+  if (categories.filter((c) => c.includes("bottom")).length >= 2) return false;
+  if (categories.filter((c) => c.includes("foot")).length >= 2) return false;
+
+  // Fingerprint deduplication against already-saved outfits
+  if (existingFingerprints) {
+    const fingerprint = [...(ids as string[])].sort().join("|");
+    if (existingFingerprints.has(fingerprint)) return false;
+  }
+
+  return true;
+}
+
 const getGenAIClient = () => {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
@@ -74,43 +113,18 @@ export async function generateOutfits(garments: GarmentInput[], occasion?: strin
   }
 
   const inputIds = new Set(garments.map((g) => g.id));
+  const garmentCategoryMap = new Map(garments.map((g) => [g.id, g.category]));
   const rawOutfits = (parsed as Record<string, unknown>).outfits as unknown[];
 
   console.log(`[generateOutfits] Gemini returned ${rawOutfits.length} raw outfit(s)`);
 
   const valid = rawOutfits
     .filter((o): o is { name: string; garmentIds: string[]; reason: string } => {
-      if (typeof o !== "object" || o === null) return false;
-      const obj = o as Record<string, unknown>;
-
-      if (typeof obj.name !== "string" || obj.name.trim() === "") {
-        console.warn("[generateOutfits] Skipping outfit — missing name:", obj);
+      if (!validateGeneratedOutfit(o, inputIds, garmentCategoryMap)) {
+        const name = (o as Record<string, unknown>)?.name ?? "(no name)";
+        console.warn(`[generateOutfits] Skipping invalid outfit: ${name}`);
         return false;
       }
-      if (!Array.isArray(obj.garmentIds)) {
-        console.warn("[generateOutfits] Skipping outfit — garmentIds not an array:", obj.name);
-        return false;
-      }
-      if (obj.garmentIds.length < 2 || obj.garmentIds.length > 5) {
-        console.warn(`[generateOutfits] Skipping outfit "${obj.name}" — ${obj.garmentIds.length} garments (need 2–5)`);
-        return false;
-      }
-      if (typeof obj.reason !== "string") {
-        console.warn(`[generateOutfits] Skipping outfit "${obj.name}" — missing reason`);
-        return false;
-      }
-
-      // Validate that every referenced ID actually exists in the input
-      const badIds = (obj.garmentIds as unknown[]).filter(
-        (id) => typeof id !== "string" || !inputIds.has(id)
-      );
-      if (badIds.length > 0) {
-        console.warn(
-          `[generateOutfits] Skipping outfit "${obj.name}" — unknown garment IDs: ${JSON.stringify(badIds)}`
-        );
-        return false;
-      }
-
       return true;
     })
     .map((o) => {

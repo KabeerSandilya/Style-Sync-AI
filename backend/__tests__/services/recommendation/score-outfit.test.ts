@@ -6,7 +6,7 @@ vi.mock("@prisma/client", () => ({
 }));
 
 import { scoreOutfit } from "@/services/recommendation/score-outfit";
-import type { Garment, Outfit } from "@/types";
+import type { Garment, Outfit, Occasion } from "@/types";
 import type { WeatherContext } from "@/services/weather/types";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -41,7 +41,7 @@ function makeGarment(overrides: Partial<Garment> = {}): Garment {
   };
 }
 
-function makeOutfit(garments: Garment[], occasion: string | null = null): Outfit {
+function makeOutfit(garments: Garment[], occasion: Occasion | null = null): Outfit {
   return {
     id: "o1",
     userId: "u1",
@@ -379,5 +379,60 @@ describe("scoreOutfit", () => {
 
     expect(score).toBeGreaterThanOrEqual(0);
     expect(score).toBeLessThanOrEqual(100);
+  });
+});
+
+describe("scoreOutfit — occasion scoring", () => {
+  it("adds 25 for an exact occasion match", () => {
+    const garment = makeGarment({ season: "All Season" });
+    const outfit = makeOutfit([garment], "Casual");
+
+    const base = scoreOutfit(outfit, mildWeather, undefined, null, null, null);
+    const matched = scoreOutfit(outfit, mildWeather, undefined, null, null, "Casual");
+
+    expect(matched).toBe(Math.min(100, base + 25));
+  });
+
+  it("adds 12 for a compatible occasion (same group)", () => {
+    const garment = makeGarment({ season: "All Season" });
+    const outfit = makeOutfit([garment], "Work");
+
+    const base = scoreOutfit(outfit, mildWeather, undefined, null, null, null);
+    // "Smart Casual" group includes "Work" → compatible
+    const compatible = scoreOutfit(outfit, mildWeather, undefined, null, null, "Smart Casual");
+
+    expect(compatible).toBe(Math.min(100, base + 12));
+  });
+
+  it("applies -15 for a conflicting occasion", () => {
+    const garment = makeGarment({ season: "All Season" });
+    const outfit = makeOutfit([garment], "Active");
+
+    const base = scoreOutfit(outfit, mildWeather, undefined, null, null, null);
+    // "Formal" group only includes ["Formal"] → Active is a conflict
+    const conflicting = scoreOutfit(outfit, mildWeather, undefined, null, null, "Formal");
+
+    expect(conflicting).toBe(Math.max(0, base - 15));
+  });
+
+  it("does not change score when requestedOccasion is null", () => {
+    const garment = makeGarment({ season: "All Season" });
+    const outfit = makeOutfit([garment], "Casual");
+
+    const withoutOccasion = scoreOutfit(outfit, mildWeather);
+    const withNullOccasion = scoreOutfit(outfit, mildWeather, undefined, null, null, null);
+
+    expect(withoutOccasion).toBe(withNullOccasion);
+  });
+
+  it("gives 0 occasion score for an untagged outfit (no penalty)", () => {
+    const garment = makeGarment({ season: "All Season" });
+    const outfit = makeOutfit([garment], null); // no occasion tag
+
+    const base = scoreOutfit(outfit, mildWeather, undefined, null, null, null);
+    const withOccasion = scoreOutfit(outfit, mildWeather, undefined, null, null, "Formal");
+
+    // Untagged outfit should not be penalised
+    expect(withOccasion).toBe(base);
   });
 });

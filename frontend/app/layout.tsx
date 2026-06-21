@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Providers } from "@/components/providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -157,7 +158,9 @@ export default function RootLayout({
         lang="en"
         className={`${geistSans.variable} ${cormorantGaramond.variable} h-full antialiased`}
       >
-        <body className="min-h-full flex flex-col">{children}</body>
+        <body className="min-h-full flex flex-col">
+          <Providers>{children}</Providers>
+        </body>
       </html>
     </ClerkProvider>
   );

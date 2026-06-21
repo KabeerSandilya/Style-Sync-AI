@@ -3,6 +3,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import {
   Sparkles,
   Upload,
@@ -13,6 +14,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { EditorNavbar } from "@/components/editor/editor-navbar";
 import { ProjectSidebar } from "@/components/editor/project-sidebar";
@@ -21,13 +23,23 @@ import { WardrobeGrid } from "@/components/editor/wardrobe-grid";
 import { GarmentDetailsDialog } from "@/components/editor/garment-details-dialog";
 import { OutfitGrid } from "@/components/editor/outfit-grid";
 import { OutfitBuilderDialog } from "@/components/editor/outfit-builder-dialog";
+import { OutfitExportCard } from "@/components/editor/outfit-export-card";
+import { exportOutfitAsPng } from "@/lib/export-outfit";
 import { cn } from "@/lib/utils";
+import { QK } from "@/lib/query-keys";
+import { useGarments } from "@/lib/hooks/use-garments";
+import { useOutfits } from "@/lib/hooks/use-outfits";
+import { useToggleGarmentFavorite } from "@/lib/hooks/use-toggle-garment-favorite";
+import { useToggleOutfitFavorite } from "@/lib/hooks/use-toggle-outfit-favorite";
+import { useGenerateOutfits } from "@/lib/hooks/use-generate-outfits";
+import { useShareOutfit, useRevokeShare } from "@/lib/hooks/use-share-outfit";
 import { Garment, Outfit } from "@/types";
 
 function WardrobeStudioContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+  const queryClient = useQueryClient();
+
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   const [isUploadOpen, setIsUploadOpen] = React.useState(false);
   const [selectedGarment, setSelectedGarment] = React.useState<Garment | null>(null);
@@ -35,25 +47,30 @@ function WardrobeStudioContent() {
   // Outfit States
   const [isOutfitBuilderOpen, setIsOutfitBuilderOpen] = React.useState(false);
   const [selectedOutfit, setSelectedOutfit] = React.useState<Outfit | null>(null);
-  const [outfits, setOutfits] = React.useState<Outfit[]>([]);
-  const [fetchingOutfits, setFetchingOutfits] = React.useState(true);
-
-  // AI generation state
-  const [generating, setGenerating] = React.useState(false);
 
   // View Switching State
   const [activeView, setActiveView] = React.useState<"wardrobe" | "outfits">("wardrobe");
 
-  // Wardrobe state management
-  const [garments, setGarments] = React.useState<Garment[]>([]);
-  const [fetchingGarments, setFetchingGarments] = React.useState(true);
   const [toastMessage, setToastMessage] = React.useState<string | null>(null);
+
+  // Export ref for off-screen card capture
+  const exportCardRef = React.useRef<HTMLDivElement>(null);
+  const [exportingOutfit, setExportingOutfit] = React.useState<Outfit | null>(null);
 
   // Filtering states
   const [selectedCategory, setSelectedCategory] = React.useState("All");
   const [showFavorites, setShowFavorites] = React.useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  // TanStack Query
+  const { data: garments = [], isLoading: fetchingGarments } = useGarments();
+  const { data: outfits = [], isLoading: fetchingOutfits } = useOutfits();
+  const toggleGarmentFav = useToggleGarmentFavorite();
+  const toggleOutfitFav = useToggleOutfitFavorite();
+  const generateOutfitsMutation = useGenerateOutfits();
+  const shareOutfitMutation = useShareOutfit();
+  const revokeShareMutation = useRevokeShare();
 
   React.useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -90,49 +107,59 @@ function WardrobeStudioContent() {
     }, 4000);
   };
 
-  const fetchGarments = async () => {
+  const handleExportOutfit = async (outfit: Outfit) => {
+    setExportingOutfit(outfit);
+    await new Promise((r) => setTimeout(r, 100));
+    if (!exportCardRef.current) {
+      setExportingOutfit(null);
+      return;
+    }
     try {
-      const res = await fetch("/api/garments");
-      const data = await res.json();
-      if (data.success) {
-        setGarments(data.data);
-      }
-    } catch (error) {
-      console.error("Error fetching garments:", error);
+      await exportOutfitAsPng(outfit, exportCardRef.current);
+    } catch {
+      triggerToast("Export failed. Please try again.");
     } finally {
-      setFetchingGarments(false);
+      setExportingOutfit(null);
     }
   };
 
-  const fetchOutfits = async () => {
-    try {
-      const res = await fetch("/api/outfits");
-      const data = await res.json();
-      if (data.success) {
-        setOutfits(data.data);
-      }
-    } catch (error) {
-      console.error("Error fetching outfits:", error);
-    } finally {
-      setFetchingOutfits(false);
-    }
+  const handleShareOutfit = (outfit: Outfit) => {
+    shareOutfitMutation.mutate(outfit.id, {
+      onSuccess: async (data) => {
+        if (!data.success) {
+          triggerToast("Failed to generate share link.");
+          return;
+        }
+        await navigator.clipboard.writeText(data.data.url);
+        triggerToast("Share link copied to clipboard.");
+      },
+      onError: () => triggerToast("Failed to generate share link."),
+    });
+  };
+
+  const handleRevokeShare = (outfit: Outfit) => {
+    revokeShareMutation.mutate(outfit.id, {
+      onSuccess: (data) => {
+        if (!data.success) {
+          triggerToast("Failed to revoke share link.");
+          return;
+        }
+        triggerToast("Share link revoked.");
+      },
+      onError: () => triggerToast("Failed to revoke share link."),
+    });
   };
 
   const handleGenerateLooks = async () => {
-    if (generating) return;
-    setGenerating(true);
+    if (generateOutfitsMutation.isPending) return;
     try {
-      const res = await fetch("/api/outfits/generate", { method: "POST" });
-      const data = await res.json();
+      const data = await generateOutfitsMutation.mutateAsync(undefined);
       if (data.success) {
         const label =
           data.data?.length === 0
             ? data.message ?? "All looks already exist in your wardrobe."
             : `${data.data.length} new look${data.data.length === 1 ? "" : "s"} generated.`;
         triggerToast(label);
-        fetchOutfits();
-      } else if (res.status === 429) {
-        triggerToast("Please wait before generating again.");
       } else if (data.error === "not_enough_garments") {
         triggerToast(`Classify at least 3 garments first (you have ${data.classifiedCount ?? 0}).`);
       } else {
@@ -140,15 +167,8 @@ function WardrobeStudioContent() {
       }
     } catch {
       triggerToast("Network error. Please try again.");
-    } finally {
-      setGenerating(false);
     }
   };
-
-  React.useEffect(() => {
-    fetchGarments();
-    fetchOutfits();
-  }, []);
 
   // Deep-linking parameter handling — runs once after initial data load completes
   const deepLinkHandled = React.useRef(false);
@@ -190,52 +210,16 @@ function WardrobeStudioContent() {
     setIsUploadOpen(true);
   };
 
-  // Toggle favorite status on the server and update local state
-  const handleFavoriteToggle = async (id: string, isFavorite: boolean) => {
-    try {
-      const res = await fetch(`/api/garments/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ isFavorite }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setGarments((prev) =>
-          prev.map((g) => (g.id === id ? { ...g, isFavorite } : g))
-        );
-      } else {
-        throw new Error(data.error || "Failed to update favorite status.");
-      }
-    } catch (error) {
-      console.error("Error toggling favorite:", error);
-      triggerToast("Failed to update favorite status.");
-    }
+  const handleFavoriteToggle = (id: string, isFavorite: boolean) => {
+    toggleGarmentFav.mutate({ id, isFavorite }, {
+      onError: () => triggerToast("Failed to update favorite status."),
+    });
   };
 
-  // Toggle favorite status for outfits on the server and update local state
-  const handleOutfitFavoriteToggle = async (id: string, isFavorite: boolean) => {
-    try {
-      const res = await fetch(`/api/outfits/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ isFavorite }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setOutfits((prev) =>
-          prev.map((o) => (o.id === id ? { ...o, isFavorite } : o))
-        );
-      } else {
-        throw new Error(data.error || "Failed to update outfit favorite status.");
-      }
-    } catch (error) {
-      console.error("Error toggling outfit favorite:", error);
-      triggerToast("Failed to update favorite status.");
-    }
+  const handleOutfitFavoriteToggle = (id: string, isFavorite: boolean) => {
+    toggleOutfitFav.mutate({ id, isFavorite }, {
+      onError: () => triggerToast("Failed to update favorite status."),
+    });
   };
 
   // Memoized filtered garments list
@@ -313,7 +297,7 @@ function WardrobeStudioContent() {
               Manage your <span className="italic font-light text-primary">wardrobe collection</span>.
             </h1>
           </div>
-          
+
           {activeView === "wardrobe" ? (
             <Button
               onClick={() => setIsUploadOpen(true)}
@@ -341,7 +325,7 @@ function WardrobeStudioContent() {
             onOpenChange={setIsUploadOpen}
             onSuccess={(msg) => {
               triggerToast(msg || "Garment uploaded successfully.");
-              fetchGarments();
+              queryClient.invalidateQueries({ queryKey: QK.garments() });
             }}
           />
 
@@ -352,7 +336,7 @@ function WardrobeStudioContent() {
             onClose={() => setSelectedGarment(null)}
             onSuccess={(msg) => {
               triggerToast(msg || "Garment updated successfully.");
-              fetchGarments();
+              queryClient.invalidateQueries({ queryKey: QK.garments() });
             }}
           />
 
@@ -367,7 +351,7 @@ function WardrobeStudioContent() {
             outfit={selectedOutfit}
             onSuccess={(msg) => {
               triggerToast(msg || "Outfit saved successfully.");
-              fetchOutfits();
+              queryClient.invalidateQueries({ queryKey: QK.outfits() });
             }}
           />
         </section>
@@ -425,7 +409,7 @@ function WardrobeStudioContent() {
                       )}
                     </button>
                   ))}
-                  
+
                   {/* Hamburger menu for extra categories */}
                   <div className="relative">
                     <button
@@ -505,15 +489,15 @@ function WardrobeStudioContent() {
                   {/* Generate Looks */}
                   <button
                     onClick={handleGenerateLooks}
-                    disabled={generating}
+                    disabled={generateOutfitsMutation.isPending}
                     className="flex items-center gap-1.5 px-3 py-1.5 font-sans text-[10px] font-semibold uppercase tracking-wider border border-primary/40 bg-primary/5 text-primary hover:bg-primary/10 transition-all rounded-sm cursor-pointer shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {generating ? (
+                    {generateOutfitsMutation.isPending ? (
                       <Loader2 className="w-3.5 h-3.5 animate-spin" />
                     ) : (
                       <Sparkles className="w-3.5 h-3.5" />
                     )}
-                    <span>{generating ? "Generating…" : "Generate Looks"}</span>
+                    <span>{generateOutfitsMutation.isPending ? "Generating…" : "Generate Looks"}</span>
                   </button>
 
                   {/* Favorites Toggle for Outfits */}
@@ -545,6 +529,9 @@ function WardrobeStudioContent() {
                     setSelectedOutfit(null);
                     setIsOutfitBuilderOpen(true);
                   }}
+                  onExport={handleExportOutfit}
+                  onShare={handleShareOutfit}
+                  onRevoke={handleRevokeShare}
                 />
               </div>
             </>
@@ -571,6 +558,24 @@ function WardrobeStudioContent() {
           </button>
         </div>
       )}
+
+      {/* Off-screen export card portal — captured by html-to-image */}
+      {exportingOutfit &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            style={{
+              position: "fixed",
+              top: -9999,
+              left: -9999,
+              pointerEvents: "none",
+              zIndex: -1,
+            }}
+          >
+            <OutfitExportCard ref={exportCardRef} outfit={exportingOutfit} />
+          </div>,
+          document.body
+        )}
     </div>
   );
 }

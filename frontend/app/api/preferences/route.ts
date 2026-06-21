@@ -1,6 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { prisma } from "@style-sync/backend";
+import { UpdatePreferencesSchema, zodError } from "@/lib/schemas";
+
 
 /**
  * GET /api/preferences
@@ -64,25 +66,20 @@ export async function PATCH(req: Request) {
       return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
     }
 
-    let body;
+    let raw;
     try {
-      body = await req.json();
+      raw = await req.json();
     } catch {
       return NextResponse.json({ success: false, error: "Invalid JSON payload" }, { status: 400 });
     }
 
-    const { favoriteColors, favoriteStyles } = body;
-
-    if (favoriteColors !== undefined && !Array.isArray(favoriteColors)) {
-      return NextResponse.json({ success: false, error: "favoriteColors must be an array" }, { status: 400 });
-    }
-    if (favoriteStyles !== undefined && !Array.isArray(favoriteStyles)) {
-      return NextResponse.json({ success: false, error: "favoriteStyles must be an array" }, { status: 400 });
-    }
+    const result = UpdatePreferencesSchema.safeParse(raw);
+    if (!result.success) return zodError(result.error);
+    const { favoriteColors, favoriteStyles } = result.data;
 
     const updateData: Record<string, unknown> = {};
-    if (favoriteColors !== undefined) updateData.favoriteColors = favoriteColors.filter((c: unknown) => typeof c === "string");
-    if (favoriteStyles !== undefined) updateData.favoriteStyles = favoriteStyles.filter((s: unknown) => typeof s === "string");
+    if (favoriteColors !== undefined) updateData.favoriteColors = favoriteColors;
+    if (favoriteStyles !== undefined) updateData.favoriteStyles = favoriteStyles;
 
     const updated = await prisma.userPreference.upsert({
       where: { userId },
@@ -128,10 +125,11 @@ export async function POST(req: Request) {
       );
     }
 
-    const body = await req.json();
-    const { threshold } = body;
+    const result = UpdatePreferencesSchema.safeParse(await req.json());
+    if (!result.success) return zodError(result.error);
+    const { threshold } = result.data;
 
-    if (threshold === undefined || typeof threshold !== "number") {
+    if (threshold === undefined) {
       return NextResponse.json(
         { success: false, error: "Please provide a valid numeric threshold." },
         { status: 400 }

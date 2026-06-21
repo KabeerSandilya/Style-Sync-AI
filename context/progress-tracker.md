@@ -270,7 +270,7 @@ Blockers:
 
 ---
 
-## Completed — Phase 2 Feature
+## Completed — Phase 2 Feature (Unit 17)
 
 ### Unit 17 — Occasion-Aware Recommendations (Completed)
 
@@ -294,11 +294,106 @@ Blockers:
 
 ---
 
+---
+
+## Completed — Phase 2 Feature
+
+### Unit 18 — Weekly Outfit Planner (Completed)
+
+- Added `OutfitPlan` model to `prisma/models/outfit-plan.prisma` with `(userId, plannedDate)` unique constraint; schema pushed and Prisma client regenerated.
+- Added `plans OutfitPlan[]` reverse relation on `Outfit` model.
+- Added `OutfitPlan` interface to `backend/src/types/index.ts`.
+- Created `backend/src/services/planner/get-week-range.ts` utility (ISO week resolution, `toDateString` helper).
+- Exported new `./planner` entry point from `@style-sync/backend` package.
+- Created `GET /api/planner` — fetches the user's plans for a given week window (default: current week).
+- Created `POST /api/planner` — upserts a plan by `(userId, plannedDate)`; validates outfitId ownership and occasion.
+- Created `DELETE /api/planner/[id]` and `PATCH /api/planner/[id]` with ownership checks.
+- Created `PlannerDayCard` component — compact collage thumbnail, outfit name, occasion badge, hover actions (change/remove).
+- Created `EmptyDaySlot` component — dashed placeholder with "Pick outfit" and "Suggest" actions; past-day read-only state.
+- Created `OutfitPickerSheet` component — dialog with occasion pill filter and outfit grid.
+- Created `/editor/planner` page — 7-column ISO week grid, week navigation, deep-linkable via `?week=YYYY-MM-DD`, Suspense boundary for `useSearchParams`.
+- Suggestion flow reads `stylesync_occasion` from localStorage (same key as dashboard) and calls existing `/api/recommendations` for the top result.
+- Added "Planner" nav link to `EditorNavbar`.
+- `npm run build` passes (22 routes, 0 TypeScript errors).
+
+---
+
+---
+
+## Completed — Phase 1.5 Hardening
+
+### Unit 20 — Zod Validation Layer (Completed)
+
+- Installed `zod` in the `frontend/` workspace.
+- Created `frontend/lib/schemas.ts` — single, auditable schema library with `zodError` helper and all route schemas: `UpdateGarmentSchema`, `CreateOutfitSchema`, `UpdateOutfitSchema`, `GenerateOutfitsSchema`, `RecommendationsQuerySchema`, `CreatePlanSchema`, `UpdatePreferencesSchema`, `OnboardingSchema`.
+- Replaced all manual `if (!field)` / `typeof` body guards in 8 API route handlers with `schema.safeParse()`:
+  - `PATCH /api/garments/[id]` — `UpdateGarmentSchema` (enum for category, tags array, strict)
+  - `POST /api/outfits` — `CreateOutfitSchema` (garmentId CUID array, occasion enum)
+  - `PATCH /api/outfits/[id]` — `UpdateOutfitSchema` (refine rejects empty payloads)
+  - `POST /api/outfits/generate` — `GenerateOutfitsSchema` (optional body)
+  - `GET /api/recommendations` — `RecommendationsQuerySchema` (coerce lat/lon from strings)
+  - `POST /api/planner` — `CreatePlanSchema` (CUID outfitId, YYYY-MM-DD date regex)
+  - `POST /api/preferences` — `UpdatePreferencesSchema` (strict, includes threshold)
+  - `POST /api/onboarding/complete` — `OnboardingSchema` (min 1 style and color required)
+- All invalid bodies now return `{ success: false, error: "<message>" }` with status `400`.
+- Fixed pre-existing TypeScript error in `backend/src/services/insights/get-most-worn-outfits.ts`: added `toOccasion()` narrowing function to convert `string | null` → `Occasion | null` at the mapping site.
+- Fixed `Occasion | null` type mismatch in `backend/__tests__/services/recommendation/score-outfit.test.ts` test helper.
+- `npx tsc --noEmit` — zero errors (frontend and backend).
+- 17/17 backend tests passing.
+- `npm run build` passes.
+
+---
+
+---
+
+## Completed — Phase 1.5 Hardening
+
+### Unit 21 — TanStack Query Migration (Completed)
+
+- Installed `@tanstack/react-query` and `@tanstack/react-query-devtools` in the `frontend/` workspace.
+- Created `frontend/components/providers.tsx` — `QueryClientProvider` wrapper with `staleTime: 60s`, `gcTime: 5min`, `retry: 1`, `refetchOnWindowFocus: false`; `ReactQueryDevtools` shown in development only.
+- Wrapped `frontend/app/layout.tsx` root body in `<Providers>`.
+- Created `frontend/lib/query-keys.ts` — typed `QK` constant for garments, garment, outfits, recommendations, planner, insights, wearHistory, preferences.
+- Created 6 query hooks in `frontend/lib/hooks/`: `useGarments`, `useOutfits`, `useRecommendations`, `usePlanner`, `useInsights`, `useWearHistory`.
+- Created 9 mutation hooks in `frontend/lib/hooks/`: `useToggleGarmentFavorite` (optimistic), `useToggleOutfitFavorite` (optimistic), `useCreateOutfit`, `useUpdateOutfit`, `useDeleteOutfit`, `useGenerateOutfits`, `useWearOutfit`, `useLikeDislike`, `useShareOutfit`/`useRevokeShare`.
+- Migrated `app/editor/wardrobe/page.tsx` — all `useState + useEffect + fetch` patterns replaced; favorite toggles use optimistic updates; generate/share/revoke use mutation hooks; upload and outfit-builder success callbacks use `queryClient.invalidateQueries`.
+- Migrated `app/editor/page.tsx` — garment and outfit sidebar data use `useGarments`/`useOutfits`.
+- Migrated `components/recommendation/todays-recommendations.tsx` — geolocation drives `location` state feeding `useRecommendations`; occasion changes auto-trigger refetch via key change; wear/like/dislike use mutation hooks that invalidate `["recommendations"]`; weather refresh uses `refetch()`; `GenerateLooksButton` invalidates outfits + recommendations on success.
+- Migrated `app/editor/planner/page.tsx` — plan data uses `usePlanner(weekKey)`; assign and remove operations call `queryClient.invalidateQueries` after server mutations.
+- Migrated `app/insights/page.tsx` — insights, garments, outfits all use query hooks.
+- Migrated `app/history/page.tsx` — history, garments, outfits use query hooks; clear-all and delete-entry use `queryClient.invalidateQueries({ queryKey: QK.wearHistory() })`.
+- No `useEffect(() => { fetch(...) }, [])` patterns remain in any migrated page.
+- `npx tsc --noEmit` — zero errors. `npm run build` passes (34 routes, 0 TypeScript errors).
+
+---
+
+---
+
+## Completed — Phase 1.5 Hardening
+
+### Unit 22 — Tests & CI (Completed)
+
+- Extracted `validateGeneratedOutfit()` pure helper from `services/outfit-generation/generate-outfits.ts` — added bottomwear/footwear category-exclusivity checks and fingerprint deduplication parameter; updated `generateOutfits()` filter to use it.
+- Created shared test fixture factory (`backend/src/services/recommendation/__tests__/fixtures.ts`) — `makeGarment`, `makeOutfit`, and four weather constants.
+- Extended existing `backend/__tests__/services/recommendation/score-outfit.test.ts` with 5 occasion-scoring tests (exact match +25, compatible group +12, conflict −15, null no-op, untagged outfit neutral).
+- Created `backend/src/services/recommendation/__tests__/infer-occasion.test.ts` — 7 tests covering Formal, Active, Blazer subcategory, Smart Casual majority, Casual majority, mixed null, empty list.
+- Created `backend/src/services/recommendation/__tests__/rank-outfits.test.ts` — 6 tests: empty input, count preserved, higher-scoring first, tie-breaking by createdAt desc, explanation attached, occasion threaded through.
+- Created `backend/src/services/outfit-generation/__tests__/validate-outfit.test.ts` — 18 tests: shape checks (missing name/reason/garmentIds, 0/1/>5 garments, hallucinated IDs), category exclusivity (2× bottomwear, 2× footwear), fingerprint deduplication (order-independent, existing match, no-set passthrough, all-invalid → empty).
+- Created `backend/src/services/preferences/__tests__/update-profile.test.ts` — 9 tests for `buildProfile()`: empty history, wear-score threshold inclusion, ranking order, dislike exclusion, per-category cap (≤5), configurable threshold.
+- Created `frontend/lib/__tests__/schemas.test.ts` — 18 tests for Zod schemas: `CreateOutfitSchema` (empty array, invalid occasion, all 6 valid occasions, null), `UpdateOutfitSchema` (empty object rejection, partial update, name length), `RecommendationsQuerySchema` (string coercion, out-of-range lat, boundary values, optional fields), `OnboardingSchema` (empty styles, >10 colors, minimal valid, empty colors).
+- Added `frontend/vitest.config.ts` with `environment: "node"` and `globals: true`; mocked `next/server` in schema tests.
+- Added `vitest: "^4.1.8"` to `frontend/devDependencies`; added `"test": "vitest run"` and `"typecheck": "tsc --noEmit"` to `frontend/package.json` scripts.
+- Updated root `package.json`: `"test"` → `npm test --workspaces --if-present`; added `"typecheck"` → `npm run typecheck --workspaces --if-present`.
+- Created `.github/workflows/ci.yml` — typecheck (backend + frontend) → test (backend) → build (frontend) with all secrets injected; triggers on push/PR to `main` and `development`.
+- **79/79 tests passing** (61 backend + 18 frontend); `npm test` from root runs all.
+
+---
+
 ## Next Up
 
 ### Avatar / Virtual Try-On (Phase 3)
 
-Or continue Phase 2 intelligence layer (outfit export, multi-day planning).
+Or continue Phase 2 intelligence layer (outfit export).
 
 ---
 

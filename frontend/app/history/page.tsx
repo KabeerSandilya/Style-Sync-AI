@@ -1,15 +1,18 @@
 "use client";
 
-/* eslint-disable react-hooks/set-state-in-effect */
-
 import * as React from "react";
 import { Sparkles, ChevronLeft, ArrowRight, CalendarDays, Trash2, X } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { EditorNavbar } from "@/components/editor/editor-navbar";
 import { ProjectSidebar } from "@/components/editor/project-sidebar";
 import { HistoryItem } from "@/components/history/history-item";
 import { HistoryDetailDialog } from "@/components/history/history-detail-dialog";
+import { useGarments } from "@/lib/hooks/use-garments";
+import { useOutfits } from "@/lib/hooks/use-outfits";
+import { useWearHistory } from "@/lib/hooks/use-wear-history";
+import { QK } from "@/lib/query-keys";
 import { Garment, Outfit, OutfitWear } from "@/types";
 
 interface WearHistoryItem extends OutfitWear {
@@ -23,12 +26,16 @@ interface GroupedHistory {
 
 export default function HistoryPage() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
-  const [fetchingHistory, setFetchingHistory] = React.useState(true);
-  const [historyItems, setHistoryItems] = React.useState<WearHistoryItem[]>([]);
   const [selectedItem, setSelectedItem] = React.useState<WearHistoryItem | null>(null);
   const [toastMessage, setToastMessage] = React.useState<string | null>(null);
   const [toastVisible, setToastVisible] = React.useState(false);
+
+  const { data: historyRaw, isLoading: fetchingHistory } = useWearHistory();
+  const historyItems: WearHistoryItem[] = historyRaw ?? [];
+  const { data: garments = [], isLoading: fetchingGarments } = useGarments();
+  const { data: outfits = [], isLoading: fetchingOutfits } = useOutfits();
 
   const triggerToast = (message: string) => {
     setToastMessage(message);
@@ -43,7 +50,7 @@ export default function HistoryPage() {
       const res = await fetch("/api/wear-history", { method: "DELETE" });
       const data = await res.json();
       if (data.success) {
-        setHistoryItems([]);
+        queryClient.invalidateQueries({ queryKey: QK.wearHistory() });
         triggerToast("Wear history cleared.");
       } else {
         triggerToast(data.error || "Failed to clear history.");
@@ -52,53 +59,6 @@ export default function HistoryPage() {
       triggerToast("Failed to clear history.");
     }
   };
-
-  const [garments, setGarments] = React.useState<Garment[]>([]);
-  const [fetchingGarments, setFetchingGarments] = React.useState(true);
-  const [outfits, setOutfits] = React.useState<Outfit[]>([]);
-  const [fetchingOutfits, setFetchingOutfits] = React.useState(true);
-
-  const fetchHistory = async () => {
-    try {
-      const res = await fetch("/api/wear-history");
-      const data = await res.json();
-      if (data.success) setHistoryItems(data.data ?? []);
-    } catch (error) {
-      console.error("Error fetching wear history:", error);
-    } finally {
-      setFetchingHistory(false);
-    }
-  };
-
-  const fetchGarments = async () => {
-    try {
-      const res = await fetch("/api/garments");
-      const data = await res.json();
-      if (data.success) setGarments(data.data);
-    } catch (error) {
-      console.error("Error fetching garments:", error);
-    } finally {
-      setFetchingGarments(false);
-    }
-  };
-
-  const fetchOutfits = async () => {
-    try {
-      const res = await fetch("/api/outfits");
-      const data = await res.json();
-      if (data.success) setOutfits(data.data);
-    } catch (error) {
-      console.error("Error fetching outfits:", error);
-    } finally {
-      setFetchingOutfits(false);
-    }
-  };
-
-  React.useEffect(() => {
-    fetchHistory();
-    fetchGarments();
-    fetchOutfits();
-  }, []);
 
   const handleGarmentClick = (g: Garment) => {
     setIsSidebarOpen(false);
@@ -307,7 +267,7 @@ export default function HistoryPage() {
         open={!!selectedItem}
         onClose={() => setSelectedItem(null)}
         onDeleteSuccess={(msg) => {
-          fetchHistory();
+          queryClient.invalidateQueries({ queryKey: QK.wearHistory() });
           triggerToast(msg);
         }}
       />

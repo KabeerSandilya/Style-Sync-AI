@@ -12,6 +12,9 @@ interface OutfitGridProps {
   onFavoriteToggle?: (id: string, isFavorite: boolean) => void;
   onOutfitClick?: (outfit: Outfit) => void;
   onCreateOutfitClick?: () => void;
+  onExport?: (outfit: Outfit) => void;
+  onShare?: (outfit: Outfit) => void;
+  onRevoke?: (outfit: Outfit) => void;
 }
 
 export function OutfitGrid({
@@ -20,6 +23,9 @@ export function OutfitGrid({
   onFavoriteToggle,
   onOutfitClick,
   onCreateOutfitClick,
+  onExport,
+  onShare,
+  onRevoke,
 }: OutfitGridProps) {
   if (loading) {
     return (
@@ -29,7 +35,7 @@ export function OutfitGrid({
             key={index}
             className="flex flex-col border border-border/20 bg-card/60 animate-pulse rounded-none"
           >
-            <div className="aspect-[4/5] bg-accent/20 w-full" />
+            <div className="aspect-4/5 bg-accent/20 w-full" />
             <div className="flex flex-col p-5 gap-3">
               <div className="h-4 bg-accent/20 w-2/3" />
               <div className="h-3 bg-accent/20 w-1/2" />
@@ -42,7 +48,7 @@ export function OutfitGrid({
 
   if (outfits.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center border border-dashed border-border/60 p-16 text-center bg-card/25 select-none rounded-none min-h-[400px]">
+      <div className="flex flex-col items-center justify-center border border-dashed border-border/60 p-16 text-center bg-card/25 select-none rounded-none min-h-100">
         <div className="bg-accent/40 text-primary p-4 rounded-none mb-6">
           <Sparkles className="w-8 h-8 stroke-[1.5]" />
         </div>
@@ -71,6 +77,9 @@ export function OutfitGrid({
           outfit={outfit}
           onFavoriteToggle={onFavoriteToggle}
           onOutfitClick={onOutfitClick}
+          onExport={onExport}
+          onShare={onShare}
+          onRevoke={onRevoke}
         />
       ))}
     </div>

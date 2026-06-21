@@ -49,4 +49,5 @@ export type {
 } from "./services/outfit-generation/types";
 
 // ─── Shared domain types (re-exported for server convenience) ────────────────
-export type { Garment, Outfit, OutfitGarment, OutfitWear } from "./types";
+export { OCCASIONS } from "./types";
+export type { Occasion, Garment, Outfit, OutfitGarment, OutfitWear } from "./types";

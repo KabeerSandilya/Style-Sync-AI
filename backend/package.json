@@ -5,7 +5,8 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./types": "./src/types/index.ts"
+    "./types": "./src/types/index.ts",
+    "./planner": "./src/services/planner/get-week-range.ts"
   },
   "scripts": {
     "prisma:generate": "prisma generate",

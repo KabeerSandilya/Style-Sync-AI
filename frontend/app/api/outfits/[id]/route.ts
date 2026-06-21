@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { prisma, isRateLimited } from "@style-sync/backend";
+import { UpdateOutfitSchema, zodError } from "@/lib/schemas";
 
 const FAVORITE_RATE_LIMIT = { limit: 20, windowMs: 60_000 };
 
@@ -19,14 +20,15 @@ export async function PATCH(
     }
 
     const { id: outfitId } = await params;
-    const body = await req.json();
 
-    // 2. Verify outfit existence and ownership
+    // 2. Validate request body
+    const result = UpdateOutfitSchema.safeParse(await req.json());
+    if (!result.success) return zodError(result.error);
+    const { name, notes, isFavorite, occasion, garmentIds } = result.data;
+
+    // 3. Verify outfit existence and ownership
     const existingOutfit = await prisma.outfit.findFirst({
-      where: {
-        id: outfitId,
-        userId,
-      },
+      where: { id: outfitId, userId },
     });
 
     if (!existingOutfit) {
@@ -36,8 +38,6 @@ export async function PATCH(
       );
     }
 
-    const VALID_OCCASIONS = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
-
     const dataToUpdate: {
       name?: string;
       notes?: string | null;
@@ -45,53 +45,22 @@ export async function PATCH(
       occasion?: string | null;
     } = {};
 
-    if (body.name !== undefined) {
-      const trimmedName = body.name.trim();
-      dataToUpdate.name = trimmedName === "" ? "Untitled Outfit" : trimmedName.substring(0, 100);
-    }
+    if (name !== undefined) dataToUpdate.name = name.trim() || "Untitled Outfit";
+    if (notes !== undefined) dataToUpdate.notes = notes ? notes.trim() : null;
+    if (isFavorite !== undefined) dataToUpdate.isFavorite = isFavorite;
+    if (occasion !== undefined) dataToUpdate.occasion = occasion;
 
-    if (body.notes !== undefined) {
-      dataToUpdate.notes = typeof body.notes === "string" ? body.notes.trim().slice(0, 500) : null;
-    }
-
-    if (body.isFavorite !== undefined) {
-      if (typeof body.isFavorite !== "boolean") {
-        return NextResponse.json(
-          { success: false, error: "isFavorite must be a boolean." },
-          { status: 400 }
-        );
-      }
-      dataToUpdate.isFavorite = body.isFavorite;
-    }
-
-    if (body.occasion !== undefined) {
-      if (body.occasion !== null && !VALID_OCCASIONS.includes(body.occasion)) {
-        return NextResponse.json(
-          { success: false, error: "Invalid occasion value." },
-          { status: 400 }
-        );
-      }
-      dataToUpdate.occasion = body.occasion;
-    }
-
-    // 3. Verify and handle garment updates if garmentIds is provided
-    if (body.garmentIds !== undefined) {
-      if (!Array.isArray(body.garmentIds) || body.garmentIds.length === 0) {
-        return NextResponse.json(
-          { success: false, error: "Please select at least one garment." },
-          { status: 400 }
-        );
-      }
-
+    // 4. Verify and handle garment updates if garmentIds is provided
+    if (garmentIds !== undefined) {
       // Verify that all new garments belong to this user
       const ownedGarments = await prisma.garment.findMany({
         where: {
-          id: { in: body.garmentIds },
+          id: { in: garmentIds },
           userId,
         },
       });
 
-      if (ownedGarments.length !== body.garmentIds.length) {
+      if (ownedGarments.length !== garmentIds.length) {
         return NextResponse.json(
           { success: false, error: "Invalid garment selection or ownership." },
           { status: 403 }
@@ -123,35 +92,24 @@ export async function PATCH(
         );
       }
 
-      // Update name, notes, favorite, and replace all garment mappings inside a transaction
+      // Replace all garment mappings inside a transaction
       await prisma.$transaction([
-        prisma.outfitGarment.deleteMany({
-          where: { outfitId },
-        }),
+        prisma.outfitGarment.deleteMany({ where: { outfitId } }),
         prisma.outfit.update({
           where: { id: outfitId },
           data: {
             ...dataToUpdate,
             garments: {
-              create: body.garmentIds.map((garmentId: string) => ({
-                garmentId,
-              })),
+              create: garmentIds.map((garmentId) => ({ garmentId })),
             },
           },
         }),
       ]);
     } else if (Object.keys(dataToUpdate).length > 0) {
-      // Just update basic fields
       await prisma.outfit.update({
         where: { id: outfitId },
         data: dataToUpdate,
       });
-    } else {
-      // Nothing to do — reject empty payloads
-      return NextResponse.json(
-        { success: false, error: "No fields to update." },
-        { status: 400 }
-      );
     }
 
     // 4. Retrieve and return the updated outfit including updated garments (scoped by userId)
@@ -166,7 +124,7 @@ export async function PATCH(
       },
     });
 
-    if (body.isFavorite !== undefined) {
+    if (isFavorite !== undefined) {
       if (isRateLimited(`${userId}:outfit-favorite`, FAVORITE_RATE_LIMIT)) {
         return NextResponse.json({ success: true, data: updatedOutfit });
       }

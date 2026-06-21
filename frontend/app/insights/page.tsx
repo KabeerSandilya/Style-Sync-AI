@@ -1,13 +1,14 @@
 "use client";
 
-/* eslint-disable react-hooks/set-state-in-effect */
-
 import * as React from "react";
 import { Sparkles, ChevronLeft, ArrowRight, TrendingUp, HelpCircle, EyeOff, Award, BarChart2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { EditorNavbar } from "@/components/editor/editor-navbar";
 import { ProjectSidebar } from "@/components/editor/project-sidebar";
+import { useGarments } from "@/lib/hooks/use-garments";
+import { useOutfits } from "@/lib/hooks/use-outfits";
+import { useInsights } from "@/lib/hooks/use-insights";
 import { Garment, Outfit } from "@/types";
 
 interface GarmentWithStats extends Garment { wearCount: number }
@@ -104,54 +105,10 @@ export default function InsightsPage() {
   const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
-  const [garments, setGarments] = React.useState<Garment[]>([]);
-  const [fetchingGarments, setFetchingGarments] = React.useState(true);
-  const [outfits, setOutfits] = React.useState<Outfit[]>([]);
-  const [fetchingOutfits, setFetchingOutfits] = React.useState(true);
-  const [fetchingInsights, setFetchingInsights] = React.useState(true);
-  const [insights, setInsights] = React.useState<InsightsData | null>(null);
-
-  const fetchInsights = async () => {
-    try {
-      const res = await fetch("/api/insights");
-      const data = await res.json();
-      if (data.success) setInsights(data.data);
-    } catch (error) {
-      console.error("Error fetching insights:", error);
-    } finally {
-      setFetchingInsights(false);
-    }
-  };
-
-  const fetchGarments = async () => {
-    try {
-      const res = await fetch("/api/garments");
-      const data = await res.json();
-      if (data.success) setGarments(data.data);
-    } catch (error) {
-      console.error("Error fetching garments:", error);
-    } finally {
-      setFetchingGarments(false);
-    }
-  };
-
-  const fetchOutfits = async () => {
-    try {
-      const res = await fetch("/api/outfits");
-      const data = await res.json();
-      if (data.success) setOutfits(data.data);
-    } catch (error) {
-      console.error("Error fetching outfits:", error);
-    } finally {
-      setFetchingOutfits(false);
-    }
-  };
-
-  React.useEffect(() => {
-    fetchInsights();
-    fetchGarments();
-    fetchOutfits();
-  }, []);
+  const { data: garments = [], isLoading: fetchingGarments } = useGarments();
+  const { data: outfits = [], isLoading: fetchingOutfits } = useOutfits();
+  const { data: insightsRaw, isLoading: fetchingInsights } = useInsights();
+  const insights = (insightsRaw as InsightsData | undefined) ?? null;
 
   const handleGarmentClick = (g: Garment) => {
     setIsSidebarOpen(false);

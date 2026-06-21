@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { prisma, generateOutfits, withRetry, isRateLimited } from "@style-sync/backend";
 import type { GarmentInput } from "@style-sync/backend";
+import { GenerateOutfitsSchema, zodError } from "@/lib/schemas";
 
 const GENERATE_RATE_LIMIT = { limit: 1, windowMs: 60_000 };
 const MIN_CLASSIFIED_GARMENTS = 3;
@@ -15,16 +16,15 @@ export async function POST(req: Request) {
     }
 
     // 1b. Parse optional body
-    let occasion: string | null = null;
+    let rawBody: unknown;
     try {
-      const body = await req.json();
-      const VALID_OCCASIONS = ['Work', 'Casual', 'Smart Casual', 'Formal', 'Active', 'Date Night'];
-      if (body.occasion && VALID_OCCASIONS.includes(body.occasion)) {
-        occasion = body.occasion;
-      }
+      rawBody = await req.json();
     } catch {
-      // no body or invalid JSON — treat as no occasion
+      rawBody = undefined;
     }
+    const genResult = GenerateOutfitsSchema.safeParse(rawBody);
+    if (!genResult.success) return zodError(genResult.error);
+    const occasion = genResult.data?.occasion ?? null;
 
     // 2. Rate limit — 1 generation per minute per user
     if (isRateLimited(`${userId}:generate-outfits`, GENERATE_RATE_LIMIT)) {
