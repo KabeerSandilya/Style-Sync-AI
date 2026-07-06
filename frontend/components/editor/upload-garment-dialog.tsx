@@ -388,7 +388,7 @@ export function UploadGarmentDialog({
                 </div>
                 <p className="text-sm font-medium text-foreground">Click to upload or drag image</p>
                 <p className="text-xs text-muted-foreground mt-1.5">
-                  PNG, JPG, WEBP — up to 10MB
+                  PNG, JPG, or WEBP, up to 10MB
                 </p>
               </div>
             )}

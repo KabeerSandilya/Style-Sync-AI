@@ -5,6 +5,11 @@ export const QK = {
   recommendations: (params: object) => ["recommendations", params] as const,
   planner:         (week: string) => ["planner", week]         as const,
   insights:        () => ["insights"]                          as const,
+  capsuleAudit:    () => ["capsule-audit"]                      as const,
   wearHistory:     () => ["wear-history"]                      as const,
   preferences:     () => ["preferences"]                       as const,
+  lookBook:        (filters: object) => ["lookbook", filters]  as const,
+  lookBookEntry:   (id: string) => ["lookbook", id]            as const,
+  communityProfile: () => ["community", "profile"] as const,
+  communityFeed:    (filters: object) => ["community", "feed", filters] as const,
 } as const;

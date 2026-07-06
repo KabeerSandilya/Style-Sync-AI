@@ -532,6 +532,7 @@ function WardrobeStudioContent() {
                   onExport={handleExportOutfit}
                   onShare={handleShareOutfit}
                   onRevoke={handleRevokeShare}
+                  onFlatLay={(outfit) => router.push(`/editor/flat-lay/${outfit.id}`)}
                 />
               </div>
             </>
@@ -541,7 +542,7 @@ function WardrobeStudioContent() {
 
       {/* Footer */}
       <footer className="border-t border-border/30 py-12 px-6 bg-card/10 text-center font-sans text-xs text-muted-foreground">
-        <p>© 2026 StyleSync AI. Crafted with an editorial fashion perspective.</p>
+        <p>© 2026 StyleSync AI.</p>
       </footer>
 
       {/* Premium Minimal Toast Notification */}

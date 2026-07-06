@@ -16,19 +16,19 @@ const FEATURES = [
     number: "01",
     tag: "AI Vision",
     title: "Your wardrobe,\ndigitised.",
-    body: "Upload your garments. Our AI analyses material, season, style, and colour with surgical precision — building a living, searchable inventory of everything you own.",
+    body: "Upload your garments and our AI reads material, season, style, and colour for each piece, turning your closet into a searchable inventory.",
   },
   {
     number: "02",
     tag: "Weather Intelligence",
     title: "Dressed for\nthe moment.",
-    body: "StyleSync reads live weather conditions and evaluates your wardrobe in real time, assembling outfit suggestions that are always seasonally appropriate.",
+    body: "StyleSync checks the forecast against your wardrobe and suggests outfits that actually fit the day.",
   },
   {
     number: "03",
     tag: "Wardrobe Analytics",
     title: "Dress with\nintention.",
-    body: "Discover what you actually wear versus what gathers dust. Understand your own patterns. Build a wardrobe that works — not one that merely exists.",
+    body: "See what you actually wear versus what just sits there, then use it to build a wardrobe you'll reach for.",
   },
 ];
 
@@ -130,8 +130,8 @@ export function LandingPage({ isSignedIn = false }: LandingPageProps) {
 
             {/* Sub */}
             <p className="lp-sub animate-enter-5">
-              StyleSync AI builds a living digital inventory of your wardrobe
-              and uses real‑time weather data to suggest looks that are always in season.
+              StyleSync AI keeps a digital inventory of your wardrobe and checks
+              real‑time weather data to suggest what to wear each day.
             </p>
 
             {/* Actions */}
@@ -212,17 +212,17 @@ export function LandingPage({ isSignedIn = false }: LandingPageProps) {
               {
                 num: "01",
                 title: "Upload",
-                desc: "Photograph your garments. Our AI categorises each piece — material, season, style, colour — instantly.",
+                desc: "Photograph your garments. Our AI tags material, season, style, and colour for each piece in seconds.",
               },
               {
                 num: "02",
                 title: "Connect",
-                desc: "StyleSync links your inventory to live weather data and your saved style preferences.",
+                desc: "StyleSync connects your inventory to live weather data and the style preferences you've saved.",
               },
               {
                 num: "03",
                 title: "Wear",
-                desc: "Receive daily outfit suggestions tailored precisely to the day ahead.",
+                desc: "Get an outfit suggestion each morning, picked for that day's weather.",
               },
             ].map((step, i) => (
               <div
@@ -245,7 +245,7 @@ export function LandingPage({ isSignedIn = false }: LandingPageProps) {
             Dress with<br /><em>intention.</em>
           </h2>
           <p className="lp-final-sub">
-            Your editorial wardrobe experience starts here.
+            Start building your wardrobe today.
           </p>
           <Link href={isSignedIn ? "/editor" : "/sign-up"} className="lp-final-btn">
             {isSignedIn ? "Enter Wardrobe" : "Create Your Wardrobe"} <ArrowRight className="lp-icon" />

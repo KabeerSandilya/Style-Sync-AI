@@ -21,10 +21,26 @@ describe("CreateOutfitSchema", () => {
     expect(result.success).toBe(false);
   });
 
-  it("rejects an invalid occasion string", () => {
+  it("accepts a custom occasion string", () => {
     const result = CreateOutfitSchema.safeParse({
       garmentIds: [VALID_CUID],
-      occasion: "InvalidOccasion",
+      occasion: "Birthday Party",
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects an empty occasion string", () => {
+    const result = CreateOutfitSchema.safeParse({
+      garmentIds: [VALID_CUID],
+      occasion: "",
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it("rejects an occasion string longer than 50 characters", () => {
+    const result = CreateOutfitSchema.safeParse({
+      garmentIds: [VALID_CUID],
+      occasion: "a".repeat(51),
     });
     expect(result.success).toBe(false);
   });

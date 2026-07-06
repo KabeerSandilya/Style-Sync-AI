@@ -1,4 +1,27 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(npx eslint *)",
+      "Bash(npm run *)",
+      "Bash(graphify update *)",
+      "Bash(npm test *)",
+      "Bash(find .claude/skills -maxdepth 1 -type d)",
+      "Bash(grep -Hm1 \"^description:\" .claude/skills/*/SKILL.md)",
+      "Bash(netstat -ano)",
+      "Bash(sleep 3; cat /tmp/nextdev.log 2>/dev/null | tail -40)",
+      "Read(//tmp/**)",
+      "Bash(curl -s -o /tmp/query_resp.json -w \"HTTP_STATUS:%{http_code}\\\\n\" -X POST http://localhost:3000/api/recommendations/query -H \"Content-Type: application/json\" -d '{\"query\":\"I am going for a run\"}')",
+      "Bash(curl -s -o /dev/null -w \"GET /api/recommendations -> %{http_code}\\\\n\" http://localhost:3000/api/recommendations)",
+      "Bash(curl -s -o /dev/null -w \"POST /api/outfits/generate -> %{http_code}\\\\n\" -X POST http://localhost:3000/api/outfits/generate)",
+      "Bash(curl -s -o /dev/null -w \"POST /api/recommendations/query -> %{http_code}\\\\n\" -X POST http://localhost:3000/api/recommendations/query -H \"Content-Type: application/json\" -d '{\"query\":\"test query\"}')",
+      "Bash(curl -s -o /dev/null -w \"GET / -> %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"GET /editor -> %{http_code}\\\\n\" http://localhost:3000/editor)",
+      "Bash(powershell -Command \"Get-Process -Id 32864 -ErrorAction SilentlyContinue | Stop-Process -Force\")",
+      "Bash(git status *)",
+      "Bash(npm ls *)"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {

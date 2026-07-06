@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   });
 
-  if (!outfit) return { title: "Outfit — StyleSync AI" };
+  if (!outfit) return { title: "Outfit on StyleSync AI" };
 
   const firstImage =
     outfit.garments[0]?.garment.processedImageUrl ??
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const desc = outfit.occasion ? `${outfit.occasion} · ${pieceText}` : pieceText;
 
   return {
-    title: `${outfit.name} — StyleSync AI`,
+    title: `${outfit.name} on StyleSync AI`,
     description: desc,
     openGraph: {
       title: outfit.name,

@@ -83,6 +83,56 @@ export interface OutfitPlan {
   outfit: Outfit;
 }
 
+export const MOOD_TAGS = [
+  "Confident",
+  "Comfortable",
+  "Underdressed",
+  "Overdressed",
+  "Effortless",
+  "Bold",
+  "Casual",
+] as const;
+export type MoodTag = (typeof MOOD_TAGS)[number];
+
+export interface LookBookEntry {
+  id: string;
+  userId: string;
+  outfitId: string | null;
+  photoUrl: string;
+  date: string;
+  rating: number;
+  mood: string[];
+  notes?: string | null;
+  isShareable: boolean;
+  createdAt: string;
+  outfit?: Outfit | null;
+}
+
+export interface CommunityProfile {
+  id: string;
+  userId: string;
+  displayName: string;
+  avatarUrl: string;
+  isPrivate: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CommunityPost {
+  id: string;
+  sourceLookBookEntryId: string | null;
+  photoUrl: string;
+  caption: string | null;
+  occasion: string | null;
+  createdAt: string;
+  profile: Pick<CommunityProfile, "displayName" | "avatarUrl">;
+  likeCount: number;
+  saveCount: number;
+  isLikedByViewer: boolean;
+  isSavedByViewer: boolean;
+  isOwnPost: boolean;
+}
+
 // Service-level view types that are consumed by the frontend. Re-exported here
 // (the runtime-free `@style-sync/backend/types` entry point) so Client
 // Components can import them without pulling in any server runtime.

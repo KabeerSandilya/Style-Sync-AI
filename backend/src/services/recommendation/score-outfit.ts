@@ -32,12 +32,17 @@ function matches(val: string | null | undefined, keywords: string[]): boolean {
   return keywords.some((kw) => lower.includes(kw.toLowerCase()));
 }
 
-// Helper to check if a garment has any matching keyword in name, subcategory, clothingType, tags, or notes
+// Helper to check if a garment has any matching keyword across its descriptive fields
+// (name, category, subcategory, clothingType, material, season, style, tags, or notes)
 function checkGarmentMatch(garment: Garment, keywords: string[]): boolean {
   return (
     matches(garment.name, keywords) ||
+    matches(garment.category, keywords) ||
     matches(garment.subcategory, keywords) ||
     matches(garment.clothingType, keywords) ||
+    matches(garment.material, keywords) ||
+    matches(garment.season, keywords) ||
+    matches(garment.style, keywords) ||
     garment.tags.some((tag) => keywords.some((kw) => tag.toLowerCase().includes(kw.toLowerCase()))) ||
     matches(garment.notes, keywords)
   );
@@ -59,6 +64,9 @@ export function scoreOutfit(
   lastWornAt?: Date | null,
   feedbackType?: FeedbackType | null,
   requestedOccasion?: string | null,
+  queryKeywords?: string[],
+  lastSuggestedAt?: Date | null,
+  seasonOverride?: string | null,
 ): number {
   const garments = outfit.garments.map((g) => g.garment).filter(Boolean);
   if (garments.length === 0) return 0;
@@ -148,7 +156,7 @@ export function scoreOutfit(
   weatherScore = Math.max(0, Math.min(40, weatherScore));
 
   // 2. Season Fit (0 to 30 points)
-  const currentSeason = getCurrentSeason().toLowerCase(); // "spring", "summer", "winter", "autumn"
+  const currentSeason = (seasonOverride || getCurrentSeason()).toLowerCase(); // "spring", "summer", "winter", "autumn"
   let totalSeasonScore = 0;
 
   garments.forEach((g) => {
@@ -277,6 +285,20 @@ export function scoreOutfit(
     }
   }
 
+  // 6.5. Recently Suggested Penalty (Ask the Stylist repeats the same pick otherwise)
+  let recentSuggestionPenalty = 0;
+  if (lastSuggestedAt) {
+    const diffHours = (Date.now() - new Date(lastSuggestedAt).getTime()) / (1000 * 60 * 60);
+
+    if (diffHours < 1) {
+      recentSuggestionPenalty = 40; // Just suggested -> push it down so a different fit surfaces
+    } else if (diffHours < 6) {
+      recentSuggestionPenalty = 20;
+    } else if (diffHours < 24) {
+      recentSuggestionPenalty = 8;
+    }
+  }
+
   // 7. Occasion Score (-15 to 25 points)
   let occasionScore = 0;
   if (requestedOccasion) {
@@ -291,8 +313,20 @@ export function scoreOutfit(
     }
   }
 
+  // 8. Query Keyword Match Bonus (0 to 15 points)
+  let keywordScore = 0;
+  if (queryKeywords && queryKeywords.length > 0) {
+    const matchedKeywords = new Set<string>();
+    garments.forEach((g) => {
+      queryKeywords.forEach((kw) => {
+        if (checkGarmentMatch(g, [kw])) matchedKeywords.add(kw);
+      });
+    });
+    keywordScore = Math.min(15, matchedKeywords.size * 5);
+  }
+
   // Calculate final combined score (clamped between 0 and 100)
   const baseScore = weatherScore + seasonScore + styleScore - metadataPenalty + preferenceMatchBonus - preferenceMatchPenalty;
-  const finalScore = Math.max(0, Math.min(100, baseScore + feedbackScore - wearPenalty + occasionScore));
+  const finalScore = Math.max(0, Math.min(100, baseScore + feedbackScore - wearPenalty - recentSuggestionPenalty + occasionScore + keywordScore));
   return finalScore;
 }

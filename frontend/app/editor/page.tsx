@@ -85,7 +85,7 @@ export default function Home() {
             </h1>
 
             <p className="font-sans text-sm text-white/50 max-w-[46ch] leading-relaxed animate-enter-3">
-              StyleSync AI evaluates your wardrobe against live weather conditions to curate looks that are always in season.
+              StyleSync AI checks your wardrobe against live weather conditions and curates looks to match.
             </p>
 
             <div className="flex items-center gap-4 pt-2 animate-enter-4">
@@ -160,7 +160,7 @@ export default function Home() {
       </main>
 
       <footer className="border-t border-border/30 py-10 px-6 bg-card/10 text-center font-sans text-[11px] text-muted-foreground/60 mt-auto tracking-wide">
-        © 2026 StyleSync AI. Crafted with an editorial fashion perspective.
+        © 2026 StyleSync AI.
       </footer>
     </div>
   );

@@ -21,7 +21,7 @@ export async function POST(
     const { id } = await params;
 
     // 2. Rate limit check
-    if (isRateLimited(`${userId}:classify`, CLASSIFY_RATE_LIMIT)) {
+    if (await isRateLimited(`${userId}:classify`, CLASSIFY_RATE_LIMIT)) {
       return NextResponse.json(
         { success: false, error: "Too many classification requests. Please wait a moment before trying again." },
         { status: 429 }
@@ -83,7 +83,7 @@ export async function POST(
   } catch (error) {
     console.error("API error during manual garment classification:", error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to classify garment." },
+      { success: false, error: "Failed to classify garment." },
       { status: 500 }
     );
   }

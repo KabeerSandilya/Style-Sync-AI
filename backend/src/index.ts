@@ -26,9 +26,13 @@ export type { WeatherContext } from "./services/weather/types";
 
 // ─── Recommendation engine ───────────────────────────────────────────────────
 export { rankOutfits } from "./services/recommendation/rank-outfits";
+export { interpretStyleQuery } from "./services/recommendation/interpret-query";
+export type { QueryInterpretation, QueryClimate } from "./services/recommendation/interpret-query";
+export { queryClimateToWeatherContext, queryClimateToSeasonOverride } from "./services/recommendation/query-climate";
 export {
   getRecentWearsMap,
   getFeedbackHistoryMap,
+  getRecentSuggestionsMap,
 } from "./services/recommendation-history";
 
 // ─── Preference learning ─────────────────────────────────────────────────────
@@ -48,6 +52,38 @@ export type {
   GenerationResult,
 } from "./services/outfit-generation/types";
 
+// ─── Style DNA ───────────────────────────────────────────────────────────────
+export { buildWardrobeSummary } from "./services/style-dna/summarize";
+export type { WardrobeSummary } from "./services/style-dna/summarize";
+export { generateStyleDNA } from "./services/style-dna/generate";
+export type { StyleDNAResult } from "./services/style-dna/generate";
+export { getCachedStyleDNA, setCachedStyleDNA, invalidateStyleDNACache } from "./lib/cache/style-dna";
+
+// ─── Capsule Wardrobe Auditor ────────────────────────────────────────────────
+export { scoreGarments } from "./services/capsule/score-garments";
+export type { GarmentScore } from "./services/capsule/score-garments";
+export { tierGarments } from "./services/capsule/tier-garments";
+export type { CapsuleTiers } from "./services/capsule/tier-garments";
+export { analyzeWardrobeGaps } from "./services/capsule/analyze-gaps";
+export type { WardrobeComposition, GapAnalysisResult } from "./services/capsule/analyze-gaps";
+export { getPurgeSuggestions } from "./services/capsule/purge-suggestions";
+export type { PurgeSuggestion } from "./services/capsule/purge-suggestions";
+export {
+  getCachedCapsuleAudit,
+  setCachedCapsuleAudit,
+  invalidateCapsuleAuditCache,
+} from "./lib/cache/capsule-audit";
+
 // ─── Shared domain types (re-exported for server convenience) ────────────────
-export { OCCASIONS } from "./types";
-export type { Occasion, Garment, Outfit, OutfitGarment, OutfitWear } from "./types";
+export { OCCASIONS, MOOD_TAGS } from "./types";
+export type {
+  Occasion,
+  Garment,
+  Outfit,
+  OutfitGarment,
+  OutfitWear,
+  MoodTag,
+  LookBookEntry,
+  CommunityProfile,
+  CommunityPost,
+} from "./types";

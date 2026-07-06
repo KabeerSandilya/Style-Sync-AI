@@ -19,7 +19,7 @@ export async function POST(
 
     const { id } = await params;
 
-    if (isRateLimited(`${userId}:remove-background`, BG_REMOVAL_RATE_LIMIT)) {
+    if (await isRateLimited(`${userId}:remove-background`, BG_REMOVAL_RATE_LIMIT)) {
       return NextResponse.json(
         { success: false, error: "Too many background removal requests. Please wait a moment before trying again." },
         { status: 429 }

@@ -8,6 +8,7 @@ export function explainRecommendation(
   score: number,
   userPreference?: UserPreferenceInput,
   requestedOccasion?: string | null,
+  queryKeywords?: string[],
 ): string {
   const garments = outfit.garments.map((g) => g.garment).filter(Boolean);
   if (garments.length === 0) {
@@ -102,6 +103,14 @@ export function explainRecommendation(
       explanation += ` Works well for ${requestedOccasion}.`;
     }
     // -15 conflict: omit occasion mention entirely
+  }
+
+  // Append matched keyword phrase when the query surfaced specific attribute matches
+  if (queryKeywords && queryKeywords.length > 0) {
+    const matched = queryKeywords.filter((kw) => garments.some((g) => hasKeyword(g, [kw])));
+    if (matched.length > 0) {
+      explanation += ` Tailored to match: ${matched.join(", ")}.`;
+    }
   }
 
   return explanation;

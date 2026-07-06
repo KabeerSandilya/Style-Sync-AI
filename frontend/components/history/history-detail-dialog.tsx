@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Sparkles, Calendar } from "lucide-react";
+import { Sparkles, Calendar, BookImage } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn, getDisplayImageUrl } from "@/lib/utils";
 import { Outfit } from "@/types";
+import { AddToLookBookDialog } from "@/components/lookbook/add-to-lookbook-dialog";
 
 interface HistoryDetailDialogProps {
   wearId: string | null;
@@ -19,6 +20,7 @@ interface HistoryDetailDialogProps {
   open: boolean;
   onClose: () => void;
   onDeleteSuccess?: (message: string) => void;
+  onToast?: (message: string) => void;
 }
 
 export function HistoryDetailDialog({
@@ -28,8 +30,10 @@ export function HistoryDetailDialog({
   open,
   onClose,
   onDeleteSuccess,
+  onToast,
 }: HistoryDetailDialogProps) {
   const [deleting, setDeleting] = React.useState(false);
+  const [addToLookBookOpen, setAddToLookBookOpen] = React.useState(false);
 
   const handleDelete = async () => {
     if (!wearId || deleting) return;
@@ -251,7 +255,16 @@ export function HistoryDetailDialog({
               </div>
 
               {/* Actions footer */}
-              <div className="pt-5 border-t border-border/20 mt-4 select-none">
+              <div className="pt-5 border-t border-border/20 mt-4 select-none flex flex-col gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setAddToLookBookOpen(true)}
+                  className="w-full rounded-none py-5 border-primary/40 hover:bg-primary/5 text-primary text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2"
+                >
+                  <BookImage className="w-3.5 h-3.5" />
+                  Add to Look Book
+                </Button>
                 <div className="flex gap-3 w-full">
                   <Button
                     type="button"
@@ -276,6 +289,14 @@ export function HistoryDetailDialog({
           </div>
         </div>
       </DialogContent>
+
+      <AddToLookBookDialog
+        open={addToLookBookOpen}
+        onOpenChange={setAddToLookBookOpen}
+        outfitId={outfit.id}
+        date={wornAt}
+        onSuccess={onToast}
+      />
     </Dialog>
   );
 }

@@ -1,13 +1,17 @@
 import { WeatherContext } from "./types";
+import { getRedis } from "../../lib/redis";
 
 const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes
+const CACHE_TTL_SECONDS = 15 * 60;
+const REDIS_KEY_PREFIX = 'stylesync:weather';
 
 interface CacheEntry {
   data: WeatherContext;
   cachedAt: number;
 }
 
-const weatherCache = new Map<string, CacheEntry>();
+// In-memory fallback (used when Redis unavailable)
+const localCache = new Map<string, CacheEntry>();
 
 function getCacheKey(city: string, lat?: number, lon?: number): string {
   if (lat !== undefined && lon !== undefined) {
@@ -18,9 +22,15 @@ function getCacheKey(city: string, lat?: number, lon?: number): string {
 
 export async function fetchWeather(city = "Paris", lat?: number, lon?: number): Promise<WeatherContext> {
   const cacheKey = getCacheKey(city, lat, lon);
-  const cached = weatherCache.get(cacheKey);
-  if (cached && Date.now() - cached.cachedAt < CACHE_TTL_MS) {
-    return cached.data;
+
+  // Read from cache
+  const redis = getRedis();
+  if (redis) {
+    const cached = await redis.get<WeatherContext>(`${REDIS_KEY_PREFIX}:${cacheKey}`);
+    if (cached) return cached;
+  } else {
+    const entry = localCache.get(cacheKey);
+    if (entry && Date.now() - entry.cachedAt < CACHE_TTL_MS) return entry.data;
   }
 
   const apiKey = process.env.OPENWEATHER_API_KEY;
@@ -71,14 +81,19 @@ export async function fetchWeather(city = "Paris", lat?: number, lon?: number): 
   const hasCoords = lat !== undefined && lon !== undefined;
   const mockCityName = hasCoords ? "Local Area" : city;
 
-  const cache = (data: WeatherContext): WeatherContext => {
-    weatherCache.set(cacheKey, { data, cachedAt: Date.now() });
+  const cache = async (data: WeatherContext): Promise<WeatherContext> => {
+    const r = getRedis();
+    if (r) {
+      await r.set(`${REDIS_KEY_PREFIX}:${cacheKey}`, data, { ex: CACHE_TTL_SECONDS });
+    } else {
+      localCache.set(cacheKey, { data, cachedAt: Date.now() });
+    }
     return data;
   };
 
   if (!apiKey || apiKey.trim() === "") {
     console.log("No OPENWEATHER_API_KEY set. Returning fallback mock weather context.");
-    return cache(getMockWeather(mockCityName));
+    return await cache(getMockWeather(mockCityName));
   }
 
   try {
@@ -98,7 +113,7 @@ export async function fetchWeather(city = "Paris", lat?: number, lon?: number): 
       const main = current.main;
       const weatherObj = current.weather[0];
 
-      return cache({
+      return await cache({
         temperature: Math.round(main.temp),
         humidity: Math.round(main.humidity),
         condition: weatherObj.main || "Clear",
@@ -132,7 +147,7 @@ export async function fetchWeather(city = "Paris", lat?: number, lon?: number): 
           rainProbability = 20;
         }
 
-        return cache({
+        return await cache({
           temperature: Math.round(main.temp),
           humidity: Math.round(main.humidity),
           condition: cond,
@@ -145,5 +160,5 @@ export async function fetchWeather(city = "Paris", lat?: number, lon?: number): 
     }
   }
 
-  return cache(getMockWeather(mockCityName));
+  return await cache(getMockWeather(mockCityName));
 }

@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { after, NextResponse } from "next/server";
 import { cloudinary, prisma, classifyGarment, removeBackground, withRetry, isRateLimited } from "@style-sync/backend";
+import { getQStash, getAppUrl } from "@/lib/qstash";
 
 const UPLOAD_RATE_LIMIT = { limit: 10, windowMs: 60_000 };
 
@@ -16,7 +17,7 @@ export async function POST(req: Request) {
     }
 
     // 2. Rate limit
-    if (isRateLimited(`${userId}:upload`, UPLOAD_RATE_LIMIT)) {
+    if (await isRateLimited(`${userId}:upload`, UPLOAD_RATE_LIMIT)) {
       return NextResponse.json(
         { success: false, error: "Too many uploads. Please wait a moment." },
         { status: 429 }
@@ -182,78 +183,93 @@ export async function POST(req: Request) {
       },
     });
 
-    // 8. Background classification — runs after response is sent.
-    // after() keeps the job alive on Vercel instead of killing it with the function.
+    // 8. Background classification — enqueue via QStash when configured, otherwise after() fallback.
     if (process.env.GEMINI_API_KEY) {
-      after(async () => {
-        try {
-          const metadata = await withRetry(
-            () => classifyGarment(imageUrl),
-            `classify garment ${garment.id}`
-          );
-          await prisma.garment.update({
-            where: { id: garment.id },
-            data: {
-              category: metadata.category,
-              subcategory: metadata.subcategory,
-              primaryColor: metadata.primaryColor,
-              secondaryColor: metadata.secondaryColor,
-              season: metadata.season,
-              style: metadata.style,
-              material: metadata.material,
-              confidence: metadata.confidence,
-              isProcessed: true,
-            },
-          });
-          console.log(`Auto-classification completed for garment ${garment.id}`);
-        } catch (error) {
-          console.error(`Auto-classification permanently failed for garment ${garment.id}:`, error);
-        }
-      });
+      const qstash = getQStash();
+      if (qstash) {
+        await qstash.publishJSON({
+          url: `${getAppUrl()}/api/jobs/classify`,
+          body: { garmentId: garment.id, userId },
+          retries: 3,
+        });
+      } else {
+        after(async () => {
+          try {
+            const metadata = await withRetry(
+              () => classifyGarment(imageUrl),
+              `classify garment ${garment.id}`
+            );
+            await prisma.garment.update({
+              where: { id: garment.id },
+              data: {
+                category: metadata.category,
+                subcategory: metadata.subcategory,
+                primaryColor: metadata.primaryColor,
+                secondaryColor: metadata.secondaryColor,
+                season: metadata.season,
+                style: metadata.style,
+                material: metadata.material,
+                confidence: metadata.confidence,
+                isProcessed: true,
+              },
+            });
+          } catch (error) {
+            console.error(`Auto-classification permanently failed for garment ${garment.id}:`, error);
+          }
+        });
+      }
     }
 
-    // 9. Server-side background removal — only if client didn't already do it.
+    // 9. Server-side background removal — enqueue via QStash when configured, otherwise after() fallback.
     if (hasCloudinaryCreds && !processedImageUrl) {
-      after(async () => {
-        try {
-          const processedBuffer = await withRetry(
-            () => removeBackground(imageUrl),
-            `remove background for garment ${garment.id}`
-          );
-          if (!processedBuffer) return;
+      const qstash = getQStash();
+      if (qstash) {
+        await qstash.publishJSON({
+          url: `${getAppUrl()}/api/jobs/remove-background`,
+          body: { garmentId: garment.id, userId },
+          retries: 3,
+        });
+      } else {
+        after(async () => {
+          try {
+            const processedBuffer = await withRetry(
+              () => removeBackground(imageUrl),
+              `remove background for garment ${garment.id}`
+            );
+            if (!processedBuffer) return;
 
-          const uploadProcessed = (): Promise<{ secure_url: string }> =>
-            new Promise((resolve, reject) => {
-              const stream = cloudinary.uploader.upload_stream(
-                {
-                  folder: `stylesync/wardrobe/${userId}/processed`,
-                  resource_type: "image",
-                  format: "png",
-                },
-                (error, result) => {
-                  if (error) reject(error);
-                  else resolve(result as { secure_url: string });
-                }
-              );
-              stream.end(processedBuffer);
+            const uploadProcessed = (): Promise<{ secure_url: string }> =>
+              new Promise((resolve, reject) => {
+                const stream = cloudinary.uploader.upload_stream(
+                  {
+                    folder: `stylesync/wardrobe/${userId}/processed`,
+                    resource_type: "image",
+                    format: "png",
+                  },
+                  (error, result) => {
+                    if (error) reject(error);
+                    else resolve(result as { secure_url: string });
+                  }
+                );
+                stream.end(processedBuffer);
+              });
+
+            const uploadResult = await withRetry(
+              uploadProcessed,
+              `upload processed image for garment ${garment.id}`
+            );
+            await prisma.garment.update({
+              where: { id: garment.id },
+              data: {
+                processedImageUrl: uploadResult.secure_url,
+                bgRemovedAt: new Date(),
+              },
             });
-
-          const uploadResult = await withRetry(
-            uploadProcessed,
-            `upload processed image for garment ${garment.id}`
-          );
-          await prisma.garment.update({
-            where: { id: garment.id },
-            data: {
-              processedImageUrl: uploadResult.secure_url,
-              bgRemovedAt: new Date(),
-            },
-          });
-          console.log(`Background removal completed for garment ${garment.id}`);
-        } catch (error) {
-          console.error(`Background removal permanently failed for garment ${garment.id}:`, error);
-        }
-      });
+          } catch (error) {
+            console.error(`Background removal permanently failed for garment ${garment.id}:`, error);
+          }
+        });
+      }
     }
 
     return NextResponse.json({

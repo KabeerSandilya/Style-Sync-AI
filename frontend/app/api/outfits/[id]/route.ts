@@ -125,7 +125,7 @@ export async function PATCH(
     });
 
     if (isFavorite !== undefined) {
-      if (isRateLimited(`${userId}:outfit-favorite`, FAVORITE_RATE_LIMIT)) {
+      if (await isRateLimited(`${userId}:outfit-favorite`, FAVORITE_RATE_LIMIT)) {
         return NextResponse.json({ success: true, data: updatedOutfit });
       }
       const { updatePreferenceProfile } = await import("@style-sync/backend");

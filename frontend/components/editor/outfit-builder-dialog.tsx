@@ -41,6 +41,7 @@ export function OutfitBuilderDialog({
   const [name, setName] = React.useState("");
   const [notes, setNotes] = React.useState("");
   const [occasion, setOccasion] = React.useState<string | null>(null);
+  const [isCustomOccasion, setIsCustomOccasion] = React.useState(false);
   const [isFavorite, setIsFavorite] = React.useState(false);
 
   // Status States
@@ -92,12 +93,14 @@ export function OutfitBuilderDialog({
         setName(outfit.name || "");
         setNotes(outfit.notes || "");
         setOccasion(outfit.occasion ?? null);
+        setIsCustomOccasion(!!outfit.occasion && !VALID_OCCASIONS.includes(outfit.occasion));
         setIsFavorite(outfit.isFavorite || false);
       } else {
         setSelectedGarmentIds([]);
         setName("");
         setNotes("");
         setOccasion(null);
+        setIsCustomOccasion(false);
         setIsFavorite(false);
       }
     }
@@ -160,6 +163,11 @@ export function OutfitBuilderDialog({
       return;
     }
 
+    if (isCustomOccasion && !occasion?.trim()) {
+      setErrorMessage("Please enter a custom occasion, or pick one from the list.");
+      return;
+    }
+
     setSaving(true);
     setErrorMessage(null);
 
@@ -167,7 +175,7 @@ export function OutfitBuilderDialog({
       name: name.trim(),
       notes: notes.trim(),
       isFavorite,
-      occasion,
+      occasion: occasion?.trim() ? occasion.trim() : null,
       garmentIds: selectedGarmentIds,
     };
 
@@ -505,16 +513,37 @@ export function OutfitBuilderDialog({
                     </label>
                     <select
                       id="outfit-occasion"
-                      value={occasion ?? ""}
-                      onChange={(e) => setOccasion(e.target.value === "" ? null : e.target.value)}
+                      value={isCustomOccasion ? "__custom__" : occasion ?? ""}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (value === "__custom__") {
+                          setIsCustomOccasion(true);
+                          setOccasion("");
+                        } else {
+                          setIsCustomOccasion(false);
+                          setOccasion(value === "" ? null : value);
+                        }
+                      }}
                       disabled={saving || deleting}
                       className="h-10 px-3 bg-background/50 border border-border/60 text-sm font-sans text-foreground focus:outline-none focus:ring-1 focus:ring-primary/40 focus:border-primary/60 rounded-none disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      <option value="">— None —</option>
+                      <option value="">None</option>
                       {VALID_OCCASIONS.map((occ) => (
                         <option key={occ} value={occ}>{occ}</option>
                       ))}
+                      <option value="__custom__">Custom…</option>
                     </select>
+                    {isCustomOccasion && (
+                      <Input
+                        value={occasion ?? ""}
+                        onChange={(e) => setOccasion(e.target.value)}
+                        placeholder="Enter a custom occasion"
+                        maxLength={50}
+                        disabled={saving || deleting}
+                        autoFocus
+                        className="h-10 rounded-none bg-background/50 border-border/60 focus-visible:ring-primary/40 focus-visible:border-primary/60 text-sm"
+                      />
+                    )}
                   </div>
 
                   {/* Favorite Toggle button */}

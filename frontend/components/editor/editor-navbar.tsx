@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { PanelLeftOpen, PanelLeftClose } from "lucide-react";
+import { PanelLeftOpen, PanelLeftClose, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { UserButton } from "@clerk/nextjs";
@@ -15,38 +15,52 @@ interface EditorNavbarProps {
   className?: string;
 }
 
+function NavLink({ label, href, active }: { label: string; href: string; active: boolean }) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "relative whitespace-nowrap font-sans text-[10px] font-bold uppercase tracking-[0.14em] transition-colors duration-200 py-0.5",
+        active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+      )}
+    >
+      {label}
+      {active && (
+        <span className="absolute -bottom-[1px] left-0 right-0 h-[2px] bg-primary" />
+      )}
+    </Link>
+  );
+}
+
 function NavItems({ pathname }: { pathname: string }) {
   const searchParams = useSearchParams();
   const isOutfitsView = pathname === "/editor/wardrobe" && searchParams.get("view") === "outfits";
   const isWardrobeView = pathname === "/editor/wardrobe" && !isOutfitsView;
 
-  const navItems = [
+  // Primary: the day-to-day loop of building outfits.
+  const primaryItems = [
     { label: "Wardrobe", href: "/editor/wardrobe", active: isWardrobeView },
     { label: "Outfits", href: "/editor/wardrobe?view=outfits", active: isOutfitsView },
+    { label: "Planner", href: "/editor/planner", active: pathname === "/editor/planner" },
+  ];
+
+  // Secondary: looking back or looking deeper, not the daily habit.
+  const secondaryItems = [
     { label: "History", href: "/history", active: pathname === "/history" },
     { label: "Insights", href: "/insights", active: pathname === "/insights" },
-    { label: "Preferences", href: "/preferences", active: pathname === "/preferences" },
-    { label: "Planner", href: "/editor/planner", active: pathname === "/editor/planner" },
+    { label: "Style DNA", href: "/style-dna", active: pathname === "/style-dna" },
+    { label: "Look Book", href: "/lookbook", active: pathname.startsWith("/lookbook") },
+    { label: "Community", href: "/community", active: pathname.startsWith("/community") },
   ];
 
   return (
     <>
-      {navItems.map(({ label, href, active }) => (
-        <Link
-          key={href}
-          href={href}
-          className={cn(
-            "relative font-sans text-[10px] font-bold uppercase tracking-[0.14em] transition-colors duration-200 py-0.5",
-            active
-              ? "text-foreground"
-              : "text-muted-foreground hover:text-foreground"
-          )}
-        >
-          {label}
-          {active && (
-            <span className="absolute -bottom-[1px] left-0 right-0 h-[2px] bg-primary" />
-          )}
-        </Link>
+      {primaryItems.map((item) => (
+        <NavLink key={item.href} {...item} />
+      ))}
+      <span className="h-3 w-px bg-border/60 shrink-0" aria-hidden="true" />
+      {secondaryItems.map((item) => (
+        <NavLink key={item.href} {...item} />
       ))}
     </>
   );
@@ -68,7 +82,7 @@ export function EditorNavbar({
       )}
     >
       {/* Left — Sidebar toggle + nav */}
-      <div className="flex items-center gap-5 justify-start flex-1 min-w-0">
+      <div className="flex items-center gap-5 justify-start flex-1">
         <Button
           variant="outline"
           size="icon"
@@ -142,7 +156,15 @@ export function EditorNavbar({
               },
             },
           }}
-        />
+        >
+          <UserButton.MenuItems>
+            <UserButton.Link
+              label="Preferences"
+              labelIcon={<SlidersHorizontal className="w-3.5 h-3.5" />}
+              href="/preferences"
+            />
+          </UserButton.MenuItems>
+        </UserButton>
       </div>
     </header>
   );

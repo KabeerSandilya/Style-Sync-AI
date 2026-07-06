@@ -16,7 +16,7 @@ export default function SignUpPage() {
             <span className="italic font-light text-primary">daily silhouette</span>.
           </h1>
           <p className="font-sans text-sm text-muted-foreground mb-6 text-center">
-            Create your refined StyleSync AI account.
+            Create your StyleSync AI account.
           </p>
 
           <SignUp

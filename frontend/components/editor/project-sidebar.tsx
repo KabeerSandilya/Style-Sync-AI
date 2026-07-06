@@ -154,8 +154,7 @@ export function ProjectSidebar({
                         Your wardrobe is empty
                       </h3>
                       <p className="font-sans text-xs text-muted-foreground max-w-60 mx-auto mt-2 leading-relaxed">
-                        Upload your clothes to curate combinations and construct
-                        your signature style.
+                        Upload your clothes to start building outfits.
                       </p>
                     </div>
                   )}
@@ -230,8 +229,7 @@ export function ProjectSidebar({
                         No saved combinations
                       </h3>
                       <p className="font-sans text-xs text-muted-foreground max-w-60 mx-auto mt-2 leading-relaxed">
-                        Your saved outfits will appear here. Start curating in
-                        the builder to save your first look.
+                        Save a look from the builder and it&apos;ll show up here.
                       </p>
                     </div>
                   )}
