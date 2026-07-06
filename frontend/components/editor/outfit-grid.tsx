@@ -15,6 +15,7 @@ interface OutfitGridProps {
   onExport?: (outfit: Outfit) => void;
   onShare?: (outfit: Outfit) => void;
   onRevoke?: (outfit: Outfit) => void;
+  onFlatLay?: (outfit: Outfit) => void;
 }
 
 export function OutfitGrid({
@@ -26,6 +27,7 @@ export function OutfitGrid({
   onExport,
   onShare,
   onRevoke,
+  onFlatLay,
 }: OutfitGridProps) {
   if (loading) {
     return (
@@ -56,7 +58,7 @@ export function OutfitGrid({
           No Curated Combinations
         </h2>
         <p className="font-sans text-xs text-muted-foreground max-w-sm mx-auto mt-3 leading-relaxed">
-          Create your first outfit from pieces you already own. Craft a signature look for daily or seasonal styling.
+          Create your first outfit from pieces you already own.
         </p>
         <Button
           onClick={onCreateOutfitClick}
@@ -80,6 +82,7 @@ export function OutfitGrid({
           onExport={onExport}
           onShare={onShare}
           onRevoke={onRevoke}
+          onFlatLay={onFlatLay}
         />
       ))}
     </div>

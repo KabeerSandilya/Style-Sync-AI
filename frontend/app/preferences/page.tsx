@@ -222,7 +222,7 @@ export default function PreferencesPage() {
               </h1>
             </div>
             <p className="font-sans text-xs text-muted-foreground leading-relaxed max-w-[52ch]">
-              Your signature style profile derived automatically from wardrobe interactions, logs, and feedback history.
+              Built automatically from how you use your wardrobe: what you wear, save, and rate.
             </p>
           </div>
         </section>
@@ -515,7 +515,7 @@ export default function PreferencesPage() {
       </main>
 
       <footer className="border-t border-border/30 py-10 px-6 bg-card/10 text-center font-sans text-[11px] text-muted-foreground/60 mt-20 tracking-wide">
-        © 2026 StyleSync AI. Crafted with an editorial fashion perspective.
+        © 2026 StyleSync AI.
       </footer>
     </div>
   );

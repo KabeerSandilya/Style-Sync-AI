@@ -8,6 +8,6 @@ export function useOutfits() {
     queryFn: () =>
       fetch("/api/outfits")
         .then((r) => r.json())
-        .then((d) => d.data as Outfit[]),
+        .then((d) => (d.data ?? []) as Outfit[]),
   });
 }

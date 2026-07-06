@@ -1,0 +1,57 @@
+model CommunityProfile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+
+  displayName String
+  avatarUrl   String
+  isPrivate   Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  posts       CommunityPost[]
+
+  @@index([userId])
+}
+
+model CommunityPost {
+  id                    String   @id @default(cuid())
+  userId                String
+  profile               CommunityProfile @relation(fields: [userId], references: [userId])
+
+  sourceLookBookEntryId String?  @unique
+  photoUrl              String
+  caption               String?
+  occasion              String?
+  isHidden              Boolean  @default(false)
+
+  createdAt             DateTime @default(now())
+
+  likes                 CommunityLike[]
+  saves                 InspirationSave[]
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model CommunityLike {
+  id        String        @id @default(cuid())
+  userId    String
+  postId    String
+  post      CommunityPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime      @default(now())
+
+  @@unique([userId, postId])
+  @@index([postId])
+}
+
+model InspirationSave {
+  id        String        @id @default(cuid())
+  userId    String
+  postId    String
+  post      CommunityPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime      @default(now())
+
+  @@unique([userId, postId])
+  @@index([userId])
+}

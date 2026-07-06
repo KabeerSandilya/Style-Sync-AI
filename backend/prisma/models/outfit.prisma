@@ -23,6 +23,7 @@ model Outfit {
   feedbacks       RecommendationFeedback[]
   wears           OutfitWear[]
   plans           OutfitPlan[]
+  lookBookEntries LookBookEntry[]
 
   @@index([userId])
   @@index([createdAt])

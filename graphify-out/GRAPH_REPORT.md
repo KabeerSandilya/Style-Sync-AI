@@ -1,35 +1,40 @@
-# Graph Report - .  (2026-06-04)
+# Graph Report - Style-Sync-AI  (2026-07-06)
 
 ## Corpus Check
-- 0 files · ~0 words
+- 514 files · ~439,442 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2729 nodes · 4972 edges · 291 communities (208 shown, 83 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 99 edges (avg confidence: 0.83)
+- 6572 nodes · 9131 edges · 536 communities (451 shown, 85 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 138 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
+## Graph Freshness
+- Built from commit: `fd7d5a8b`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
+
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_Live Browser DOM Capture|Live Browser DOM Capture]]
-- [[_COMMUNITY_Impeccable Live Server|Impeccable Live Server]]
-- [[_COMMUNITY_Generated Code Detection|Generated Code Detection]]
-- [[_COMMUNITY_CSS Rules Validation|CSS Rules Validation]]
-- [[_COMMUNITY_Browser Injection & Contrast|Browser Injection & Contrast]]
-- [[_COMMUNITY_Live Browser State Machine|Live Browser State Machine]]
-- [[_COMMUNITY_Screenshot Utility|Screenshot Utility]]
-- [[_COMMUNITY_Manual Edit Commit Flow|Manual Edit Commit Flow]]
-- [[_COMMUNITY_Manual Edit Discard Flow|Manual Edit Discard Flow]]
-- [[_COMMUNITY_StyleSync Frontend Dependencies|StyleSync Frontend Dependencies]]
-- [[_COMMUNITY_Performance Profiler|Performance Profiler]]
-- [[_COMMUNITY_CSS Antipattern Detector|CSS Antipattern Detector]]
-- [[_COMMUNITY_StyleSync API & Layout|StyleSync API & Layout]]
-- [[_COMMUNITY_Browser & CLI Detection|Browser & CLI Detection]]
-- [[_COMMUNITY_UIUX Pro Max Design System|UI/UX Pro Max Design System]]
-- [[_COMMUNITY_UIUX Pro Max System (Mirror)|UI/UX Pro Max System (Mirror)]]
-- [[_COMMUNITY_Live Event Validation|Live Event Validation]]
-- [[_COMMUNITY_Design Parser|Design Parser]]
-- [[_COMMUNITY_Live Browser UI Builder|Live Browser UI Builder]]
-- [[_COMMUNITY_Browser Manual Edit Context|Browser Manual Edit Context]]
+- [[_COMMUNITY_Community 0|Community 0]]
+- [[_COMMUNITY_Community 1|Community 1]]
+- [[_COMMUNITY_Community 2|Community 2]]
+- [[_COMMUNITY_Community 3|Community 3]]
+- [[_COMMUNITY_Community 4|Community 4]]
+- [[_COMMUNITY_Community 5|Community 5]]
+- [[_COMMUNITY_Community 6|Community 6]]
+- [[_COMMUNITY_Community 7|Community 7]]
+- [[_COMMUNITY_Community 8|Community 8]]
+- [[_COMMUNITY_Community 9|Community 9]]
+- [[_COMMUNITY_Community 10|Community 10]]
+- [[_COMMUNITY_Community 11|Community 11]]
+- [[_COMMUNITY_Community 12|Community 12]]
+- [[_COMMUNITY_Community 13|Community 13]]
+- [[_COMMUNITY_Community 14|Community 14]]
+- [[_COMMUNITY_Community 15|Community 15]]
+- [[_COMMUNITY_Community 16|Community 16]]
+- [[_COMMUNITY_Community 17|Community 17]]
+- [[_COMMUNITY_Community 18|Community 18]]
+- [[_COMMUNITY_Community 19|Community 19]]
 - [[_COMMUNITY_Community 20|Community 20]]
 - [[_COMMUNITY_Community 21|Community 21]]
 - [[_COMMUNITY_Community 22|Community 22]]
@@ -191,6 +196,7 @@
 - [[_COMMUNITY_Community 178|Community 178]]
 - [[_COMMUNITY_Community 179|Community 179]]
 - [[_COMMUNITY_Community 181|Community 181]]
+- [[_COMMUNITY_Community 182|Community 182]]
 - [[_COMMUNITY_Community 183|Community 183]]
 - [[_COMMUNITY_Community 184|Community 184]]
 - [[_COMMUNITY_Community 185|Community 185]]
@@ -235,6 +241,7 @@
 - [[_COMMUNITY_Community 232|Community 232]]
 - [[_COMMUNITY_Community 237|Community 237]]
 - [[_COMMUNITY_Community 238|Community 238]]
+- [[_COMMUNITY_Community 240|Community 240]]
 - [[_COMMUNITY_Community 244|Community 244]]
 - [[_COMMUNITY_Community 245|Community 245]]
 - [[_COMMUNITY_Community 246|Community 246]]
@@ -270,30 +277,268 @@
 - [[_COMMUNITY_Community 286|Community 286]]
 - [[_COMMUNITY_Community 287|Community 287]]
 - [[_COMMUNITY_Community 288|Community 288]]
+- [[_COMMUNITY_Community 291|Community 291]]
+- [[_COMMUNITY_Community 292|Community 292]]
+- [[_COMMUNITY_Community 293|Community 293]]
+- [[_COMMUNITY_Community 294|Community 294]]
+- [[_COMMUNITY_Community 295|Community 295]]
+- [[_COMMUNITY_Community 296|Community 296]]
+- [[_COMMUNITY_Community 297|Community 297]]
+- [[_COMMUNITY_Community 298|Community 298]]
+- [[_COMMUNITY_Community 299|Community 299]]
+- [[_COMMUNITY_Community 300|Community 300]]
+- [[_COMMUNITY_Community 301|Community 301]]
+- [[_COMMUNITY_Community 302|Community 302]]
+- [[_COMMUNITY_Community 303|Community 303]]
+- [[_COMMUNITY_Community 304|Community 304]]
+- [[_COMMUNITY_Community 305|Community 305]]
+- [[_COMMUNITY_Community 306|Community 306]]
+- [[_COMMUNITY_Community 307|Community 307]]
+- [[_COMMUNITY_Community 308|Community 308]]
+- [[_COMMUNITY_Community 309|Community 309]]
+- [[_COMMUNITY_Community 310|Community 310]]
+- [[_COMMUNITY_Community 311|Community 311]]
+- [[_COMMUNITY_Community 312|Community 312]]
+- [[_COMMUNITY_Community 313|Community 313]]
+- [[_COMMUNITY_Community 314|Community 314]]
+- [[_COMMUNITY_Community 315|Community 315]]
+- [[_COMMUNITY_Community 316|Community 316]]
+- [[_COMMUNITY_Community 317|Community 317]]
+- [[_COMMUNITY_Community 318|Community 318]]
+- [[_COMMUNITY_Community 319|Community 319]]
+- [[_COMMUNITY_Community 320|Community 320]]
+- [[_COMMUNITY_Community 321|Community 321]]
+- [[_COMMUNITY_Community 322|Community 322]]
+- [[_COMMUNITY_Community 323|Community 323]]
+- [[_COMMUNITY_Community 324|Community 324]]
+- [[_COMMUNITY_Community 325|Community 325]]
+- [[_COMMUNITY_Community 326|Community 326]]
+- [[_COMMUNITY_Community 327|Community 327]]
+- [[_COMMUNITY_Community 328|Community 328]]
+- [[_COMMUNITY_Community 329|Community 329]]
+- [[_COMMUNITY_Community 330|Community 330]]
+- [[_COMMUNITY_Community 331|Community 331]]
+- [[_COMMUNITY_Community 332|Community 332]]
+- [[_COMMUNITY_Community 333|Community 333]]
+- [[_COMMUNITY_Community 334|Community 334]]
+- [[_COMMUNITY_Community 335|Community 335]]
+- [[_COMMUNITY_Community 336|Community 336]]
+- [[_COMMUNITY_Community 337|Community 337]]
+- [[_COMMUNITY_Community 338|Community 338]]
+- [[_COMMUNITY_Community 339|Community 339]]
+- [[_COMMUNITY_Community 340|Community 340]]
+- [[_COMMUNITY_Community 341|Community 341]]
+- [[_COMMUNITY_Community 342|Community 342]]
+- [[_COMMUNITY_Community 343|Community 343]]
+- [[_COMMUNITY_Community 344|Community 344]]
+- [[_COMMUNITY_Community 345|Community 345]]
+- [[_COMMUNITY_Community 346|Community 346]]
+- [[_COMMUNITY_Community 347|Community 347]]
+- [[_COMMUNITY_Community 348|Community 348]]
+- [[_COMMUNITY_Community 349|Community 349]]
+- [[_COMMUNITY_Community 350|Community 350]]
+- [[_COMMUNITY_Community 351|Community 351]]
+- [[_COMMUNITY_Community 352|Community 352]]
+- [[_COMMUNITY_Community 353|Community 353]]
+- [[_COMMUNITY_Community 354|Community 354]]
+- [[_COMMUNITY_Community 355|Community 355]]
+- [[_COMMUNITY_Community 356|Community 356]]
+- [[_COMMUNITY_Community 357|Community 357]]
+- [[_COMMUNITY_Community 358|Community 358]]
+- [[_COMMUNITY_Community 359|Community 359]]
+- [[_COMMUNITY_Community 360|Community 360]]
+- [[_COMMUNITY_Community 361|Community 361]]
+- [[_COMMUNITY_Community 362|Community 362]]
+- [[_COMMUNITY_Community 363|Community 363]]
+- [[_COMMUNITY_Community 364|Community 364]]
+- [[_COMMUNITY_Community 365|Community 365]]
+- [[_COMMUNITY_Community 366|Community 366]]
+- [[_COMMUNITY_Community 367|Community 367]]
+- [[_COMMUNITY_Community 368|Community 368]]
+- [[_COMMUNITY_Community 369|Community 369]]
+- [[_COMMUNITY_Community 370|Community 370]]
+- [[_COMMUNITY_Community 371|Community 371]]
+- [[_COMMUNITY_Community 372|Community 372]]
+- [[_COMMUNITY_Community 373|Community 373]]
+- [[_COMMUNITY_Community 374|Community 374]]
+- [[_COMMUNITY_Community 375|Community 375]]
+- [[_COMMUNITY_Community 376|Community 376]]
+- [[_COMMUNITY_Community 377|Community 377]]
+- [[_COMMUNITY_Community 378|Community 378]]
+- [[_COMMUNITY_Community 379|Community 379]]
+- [[_COMMUNITY_Community 380|Community 380]]
+- [[_COMMUNITY_Community 381|Community 381]]
+- [[_COMMUNITY_Community 382|Community 382]]
+- [[_COMMUNITY_Community 383|Community 383]]
+- [[_COMMUNITY_Community 384|Community 384]]
+- [[_COMMUNITY_Community 385|Community 385]]
+- [[_COMMUNITY_Community 386|Community 386]]
+- [[_COMMUNITY_Community 387|Community 387]]
+- [[_COMMUNITY_Community 388|Community 388]]
+- [[_COMMUNITY_Community 389|Community 389]]
+- [[_COMMUNITY_Community 390|Community 390]]
+- [[_COMMUNITY_Community 391|Community 391]]
+- [[_COMMUNITY_Community 392|Community 392]]
+- [[_COMMUNITY_Community 393|Community 393]]
+- [[_COMMUNITY_Community 394|Community 394]]
+- [[_COMMUNITY_Community 395|Community 395]]
+- [[_COMMUNITY_Community 396|Community 396]]
+- [[_COMMUNITY_Community 397|Community 397]]
+- [[_COMMUNITY_Community 398|Community 398]]
+- [[_COMMUNITY_Community 399|Community 399]]
+- [[_COMMUNITY_Community 400|Community 400]]
+- [[_COMMUNITY_Community 401|Community 401]]
+- [[_COMMUNITY_Community 402|Community 402]]
+- [[_COMMUNITY_Community 403|Community 403]]
+- [[_COMMUNITY_Community 404|Community 404]]
+- [[_COMMUNITY_Community 405|Community 405]]
+- [[_COMMUNITY_Community 406|Community 406]]
+- [[_COMMUNITY_Community 407|Community 407]]
+- [[_COMMUNITY_Community 408|Community 408]]
+- [[_COMMUNITY_Community 409|Community 409]]
+- [[_COMMUNITY_Community 410|Community 410]]
+- [[_COMMUNITY_Community 411|Community 411]]
+- [[_COMMUNITY_Community 412|Community 412]]
+- [[_COMMUNITY_Community 413|Community 413]]
+- [[_COMMUNITY_Community 414|Community 414]]
+- [[_COMMUNITY_Community 415|Community 415]]
+- [[_COMMUNITY_Community 416|Community 416]]
+- [[_COMMUNITY_Community 417|Community 417]]
+- [[_COMMUNITY_Community 418|Community 418]]
+- [[_COMMUNITY_Community 419|Community 419]]
+- [[_COMMUNITY_Community 420|Community 420]]
+- [[_COMMUNITY_Community 421|Community 421]]
+- [[_COMMUNITY_Community 422|Community 422]]
+- [[_COMMUNITY_Community 423|Community 423]]
+- [[_COMMUNITY_Community 424|Community 424]]
+- [[_COMMUNITY_Community 425|Community 425]]
+- [[_COMMUNITY_Community 426|Community 426]]
+- [[_COMMUNITY_Community 427|Community 427]]
+- [[_COMMUNITY_Community 428|Community 428]]
+- [[_COMMUNITY_Community 429|Community 429]]
+- [[_COMMUNITY_Community 430|Community 430]]
+- [[_COMMUNITY_Community 431|Community 431]]
+- [[_COMMUNITY_Community 432|Community 432]]
+- [[_COMMUNITY_Community 433|Community 433]]
+- [[_COMMUNITY_Community 434|Community 434]]
+- [[_COMMUNITY_Community 435|Community 435]]
+- [[_COMMUNITY_Community 436|Community 436]]
+- [[_COMMUNITY_Community 437|Community 437]]
+- [[_COMMUNITY_Community 438|Community 438]]
+- [[_COMMUNITY_Community 439|Community 439]]
+- [[_COMMUNITY_Community 440|Community 440]]
+- [[_COMMUNITY_Community 441|Community 441]]
+- [[_COMMUNITY_Community 442|Community 442]]
+- [[_COMMUNITY_Community 443|Community 443]]
+- [[_COMMUNITY_Community 444|Community 444]]
+- [[_COMMUNITY_Community 445|Community 445]]
+- [[_COMMUNITY_Community 446|Community 446]]
+- [[_COMMUNITY_Community 447|Community 447]]
+- [[_COMMUNITY_Community 448|Community 448]]
+- [[_COMMUNITY_Community 449|Community 449]]
+- [[_COMMUNITY_Community 450|Community 450]]
+- [[_COMMUNITY_Community 451|Community 451]]
+- [[_COMMUNITY_Community 452|Community 452]]
+- [[_COMMUNITY_Community 453|Community 453]]
+- [[_COMMUNITY_Community 454|Community 454]]
+- [[_COMMUNITY_Community 455|Community 455]]
+- [[_COMMUNITY_Community 456|Community 456]]
+- [[_COMMUNITY_Community 457|Community 457]]
+- [[_COMMUNITY_Community 458|Community 458]]
+- [[_COMMUNITY_Community 459|Community 459]]
+- [[_COMMUNITY_Community 460|Community 460]]
+- [[_COMMUNITY_Community 461|Community 461]]
+- [[_COMMUNITY_Community 462|Community 462]]
+- [[_COMMUNITY_Community 463|Community 463]]
+- [[_COMMUNITY_Community 464|Community 464]]
+- [[_COMMUNITY_Community 465|Community 465]]
+- [[_COMMUNITY_Community 466|Community 466]]
+- [[_COMMUNITY_Community 467|Community 467]]
+- [[_COMMUNITY_Community 468|Community 468]]
+- [[_COMMUNITY_Community 469|Community 469]]
+- [[_COMMUNITY_Community 470|Community 470]]
+- [[_COMMUNITY_Community 471|Community 471]]
+- [[_COMMUNITY_Community 472|Community 472]]
+- [[_COMMUNITY_Community 473|Community 473]]
+- [[_COMMUNITY_Community 474|Community 474]]
+- [[_COMMUNITY_Community 475|Community 475]]
+- [[_COMMUNITY_Community 476|Community 476]]
+- [[_COMMUNITY_Community 477|Community 477]]
+- [[_COMMUNITY_Community 478|Community 478]]
+- [[_COMMUNITY_Community 479|Community 479]]
+- [[_COMMUNITY_Community 480|Community 480]]
+- [[_COMMUNITY_Community 481|Community 481]]
+- [[_COMMUNITY_Community 482|Community 482]]
+- [[_COMMUNITY_Community 483|Community 483]]
+- [[_COMMUNITY_Community 484|Community 484]]
+- [[_COMMUNITY_Community 485|Community 485]]
+- [[_COMMUNITY_Community 486|Community 486]]
+- [[_COMMUNITY_Community 487|Community 487]]
+- [[_COMMUNITY_Community 488|Community 488]]
+- [[_COMMUNITY_Community 489|Community 489]]
+- [[_COMMUNITY_Community 490|Community 490]]
+- [[_COMMUNITY_Community 491|Community 491]]
+- [[_COMMUNITY_Community 492|Community 492]]
+- [[_COMMUNITY_Community 493|Community 493]]
+- [[_COMMUNITY_Community 494|Community 494]]
+- [[_COMMUNITY_Community 495|Community 495]]
+- [[_COMMUNITY_Community 496|Community 496]]
+- [[_COMMUNITY_Community 497|Community 497]]
+- [[_COMMUNITY_Community 498|Community 498]]
+- [[_COMMUNITY_Community 499|Community 499]]
+- [[_COMMUNITY_Community 500|Community 500]]
+- [[_COMMUNITY_Community 501|Community 501]]
+- [[_COMMUNITY_Community 502|Community 502]]
+- [[_COMMUNITY_Community 503|Community 503]]
+- [[_COMMUNITY_Community 504|Community 504]]
+- [[_COMMUNITY_Community 506|Community 506]]
+- [[_COMMUNITY_Community 507|Community 507]]
+- [[_COMMUNITY_Community 508|Community 508]]
+- [[_COMMUNITY_Community 509|Community 509]]
+- [[_COMMUNITY_Community 510|Community 510]]
+- [[_COMMUNITY_Community 511|Community 511]]
+- [[_COMMUNITY_Community 512|Community 512]]
+- [[_COMMUNITY_Community 513|Community 513]]
+- [[_COMMUNITY_Community 514|Community 514]]
+- [[_COMMUNITY_Community 515|Community 515]]
+- [[_COMMUNITY_Community 519|Community 519]]
+- [[_COMMUNITY_Community 520|Community 520]]
+- [[_COMMUNITY_Community 521|Community 521]]
+- [[_COMMUNITY_Community 522|Community 522]]
+- [[_COMMUNITY_Community 523|Community 523]]
+- [[_COMMUNITY_Community 524|Community 524]]
+- [[_COMMUNITY_Community 525|Community 525]]
+- [[_COMMUNITY_Community 526|Community 526]]
+- [[_COMMUNITY_Community 530|Community 530]]
+- [[_COMMUNITY_Community 531|Community 531]]
+- [[_COMMUNITY_Community 533|Community 533]]
+- [[_COMMUNITY_Community 536|Community 536]]
+- [[_COMMUNITY_Community 540|Community 540]]
+- [[_COMMUNITY_Community 541|Community 541]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `_()` - 55 edges
-2. `cn()` - 55 edges
-3. `skills` - 28 edges
-4. `handleClick()` - 26 edges
-5. `handleKeyDown()` - 24 edges
-6. `commitManualEdits()` - 24 edges
-7. `collectBrowserFindings()` - 23 edges
-8. `detectHtml()` - 21 edges
-9. `applyEditing()` - 21 edges
-10. `Outfit` - 21 edges
+1. `cn()` - 83 edges
+2. `_()` - 55 edges
+3. `Outfit` - 33 edges
+4. `zodError()` - 31 edges
+5. `skills` - 28 edges
+6. `handleClick()` - 26 edges
+7. `Button()` - 26 edges
+8. `Garment` - 25 edges
+9. `Progress Tracker` - 25 edges
+10. `handleKeyDown()` - 24 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Home()` --rationale_for--> `Design Principles (Earned Minimalism)`  [INFERRED]
+- `Home()` --rationale_for--> `Design Principles`  [INFERRED]
   frontend/app/editor/page.tsx → PRODUCT.md
-- `updatePreferenceProfile()` --calls--> `PATCH()`  [INFERRED]
-  backend/src/services/preferences/update-profile.ts → frontend/app/api/outfits/[id]/route.ts
+- `POST()` --calls--> `isRateLimited()`  [INFERRED]
+  frontend/app/api/lookbook/route.ts → backend/src/lib/rate-limit.ts
 - `Landing Page Component` --rationale_for--> `Editorial Brand Personality`  [INFERRED]
   frontend/components/landing/landing-page.tsx → PRODUCT.md
-- `updatePreferenceProfile()` --calls--> `POST()`  [INFERRED]
-  backend/src/services/preferences/update-profile.ts → frontend/app/api/recommendations/[outfitId]/dislike/route.ts
-- `updatePreferenceProfile()` --calls--> `PATCH()`  [INFERRED]
-  backend/src/services/preferences/update-profile.ts → frontend/app/api/garments/[id]/route.ts
+- `POST()` --calls--> `isRateLimited()`  [INFERRED]
+  frontend/app/api/community/route.ts → backend/src/lib/rate-limit.ts
+- `PATCH()` --calls--> `isRateLimited()`  [INFERRED]
+  frontend/app/api/outfits/[id]/route.ts → backend/src/lib/rate-limit.ts
 
 ## Import Cycles
 - None detected.
@@ -303,151 +548,151 @@
 - **Outfit Generation Flow: Generate Looks Button -> API -> Recommendations Refresh** — generate_looks_button, api_outfits_generate_endpoint, todays_recommendations [INFERRED 0.95]
 - **Onboarding Color+Style Seeding into Preferences** — onboarding_page, onboarding_color_style_selection, api_onboarding_complete_endpoint, api_preferences_endpoint [INFERRED 0.85]
 
-## Communities (291 total, 83 thin omitted)
+## Communities (536 total, 85 thin omitted)
 
-### Community 0 - "Live Browser DOM Capture"
+### Community 0 - "Community 0"
 Cohesion: 0.04
-Nodes (69): acceptedDomAlreadyClean(), averageRgb01(), captureAndEmit(), captureElementToBlob(), checkpointPayload(), clearSteerFocusRecoverTimer(), collectEditableTextRows(), collectFontCssText() (+61 more)
+Nodes (85): acceptedDomAlreadyClean(), averageRgb01(), buildAnnotationsForCapture(), buildCollapsible(), buildColorModels(), buildPinElement(), buildPlaceholderResizeHandles(), buildRadiiModels() (+77 more)
 
-### Community 1 - "Impeccable Live Server"
+### Community 1 - "Community 1"
 Cohesion: 0.05
-Nodes (63): getLiveAnnotationsDir(), getLiveDir(), addOpToManualApplyChunk(), annotRoot, APPLY_EVENT_HARD_TIMEOUT_MS, APPLY_EVENT_SOFT_DEADLINE_MS, args, buildManualApplyAgentAction() (+55 more)
+Nodes (70): acknowledgePendingEvent(), addOpToManualApplyChunk(), agentPollingConnected(), annotRoot, APPLY_EVENT_HARD_TIMEOUT_MS, APPLY_EVENT_SOFT_DEADLINE_MS, args, broadcast() (+62 more)
 
-### Community 2 - "Generated Code Detection"
+### Community 2 - "Community 2"
 Cohesion: 0.07
 Nodes (63): hasGeneratedHeader(), HEADER_MARKERS, isGeneratedFile(), isGitIgnored(), acceptCli(), argVal(), deindentContent(), detectCommentSyntax() (+55 more)
 
-### Community 3 - "CSS Rules Validation"
-Cohesion: 0.08
-Nodes (57): checkBorders(), checkClippedOverflow(), checkColors(), checkCreamPalette(), checkElementAIPaletteDOM(), checkElementBorders(), checkElementBordersDOM(), checkElementClippedOverflow() (+49 more)
+### Community 3 - "Community 3"
+Cohesion: 0.06
+Nodes (69): checkBorders(), checkClippedOverflow(), checkColors(), checkCreamPalette(), checkElementAIPaletteDOM(), checkElementBorders(), checkElementBordersDOM(), checkElementClippedOverflow() (+61 more)
 
-### Community 4 - "Browser Injection & Contrast"
+### Community 4 - "Community 4"
 Cohesion: 0.07
 Nodes (50): addBrowserFindings(), addVisualContrastFindings(), addVisualContrastResult(), analyzeVisualContrast(), analyzeVisualContrastCandidate(), blendRgba(), browserFindingsFromMap(), buildSelectorSegment() (+42 more)
 
-### Community 5 - "Live Browser State Machine"
-Cohesion: 0.10
-Nodes (57): buildInsertPlaceholderSnapshotFromDom(), cancelEditing(), cancelEditingToPicking(), cancelInsertConfigure(), cleanup(), cleanupAcceptedSession(), clearAnnotations(), clearInsertPicking() (+49 more)
+### Community 5 - "Community 5"
+Cohesion: 0.11
+Nodes (52): buildInsertPlaceholderSnapshotFromDom(), cancelEditing(), cancelEditingToPicking(), cancelInsertConfigure(), captureAndEmit(), checkpointPayload(), cleanup(), cleanupAcceptedSession() (+44 more)
 
-### Community 6 - "Screenshot Utility"
+### Community 6 - "Community 6"
 Cohesion: 0.11
 Nodes (53): _(), ae(), be(), bt(), Ce(), Ct(), de(), dt() (+45 more)
 
-### Community 7 - "Manual Edit Commit Flow"
+### Community 7 - "Community 7"
 Cohesion: 0.09
-Nodes (50): allEntryIds(), argVal(), buildRepairBatch(), candidatesForEntry(), changedFilesSinceSnapshot(), clearAppliedEntries(), collectApplyOwnedFiles(), collectRollbackFiles() (+42 more)
+Nodes (49): allEntryIds(), argVal(), buildRepairBatch(), candidatesForEntry(), changedFilesSinceSnapshot(), clearAppliedEntries(), collectApplyOwnedFiles(), collectRollbackFiles() (+41 more)
 
-### Community 8 - "Manual Edit Discard Flow"
-Cohesion: 0.09
-Nodes (40): args, buffer, cwd, pageUrlFilter, remaining, analyzeSourceHint(), buildCandidatesForOp(), buildContextHintsByRef() (+32 more)
+### Community 8 - "Community 8"
+Cohesion: 0.14
+Nodes (24): analyzeSourceHint(), buildCandidatesForOp(), buildContextHintsByRef(), collectSearchFiles(), countOps(), escapeRegExp(), findContextMatches(), findLiteralMatches() (+16 more)
 
-### Community 9 - "StyleSync Frontend Dependencies"
-Cohesion: 0.05
-Nodes (43): shadcn/ui Components Config, @style-sync/backend Workspace Package, @base-ui/react Headless Components, @imgly/background-removal (Browser WASM), @clerk/nextjs Auth Integration, lucide-react Icon Library, Next.js 16 Framework, shadcn/ui Component Library (+35 more)
+### Community 9 - "Community 9"
+Cohesion: 0.10
+Nodes (21): dependencies, @base-ui/react, class-variance-authority, @clerk/nextjs, @clerk/themes, @clerk/ui, clsx, html-to-image (+13 more)
 
-### Community 10 - "Performance Profiler"
-Cohesion: 0.09
-Nodes (36): extractFindingIds(), profileFindings(), profileFindingsAsync(), profileNow(), profileStep(), profileStepAsync(), recordProfileEvent(), runTextContentAnalyzers() (+28 more)
+### Community 10 - "Community 10"
+Cohesion: 0.10
+Nodes (29): checkElementHeroEyebrow(), checkElementQuality(), checkElementQualityDOM(), checkQuality(), resolveLengthPx(), resolveVarRefs(), applyStaticDeclaration(), buildBorderOverrideMap() (+21 more)
 
-### Community 11 - "CSS Antipattern Detector"
+### Community 11 - "Community 11"
 Cohesion: 0.08
 Nodes (30): borderWidthsFromStyle(), buildSelectorSegment(), checkBorders(), checkElementBorders(), checkElementBordersDOM(), checkElementGptBorderShadow(), checkElementGptBorderShadowDOM(), checkElementItalicSerif() (+22 more)
 
-### Community 12 - "StyleSync API & Layout"
-Cohesion: 0.09
-Nodes (25): API /api/garments Endpoint, API /api/insights Endpoint, API /api/outfits Endpoint, API /api/wear-history Endpoint, Clerk Authentication Provider, Deep-Link URL Parameter Handling, EditorNavbar(), EditorNavbarProps (+17 more)
+### Community 12 - "Community 12"
+Cohesion: 0.08
+Nodes (30): API /api/garments Endpoint, API /api/onboarding/complete Endpoint, API /api/outfits Endpoint, API /api/outfits/generate Endpoint, API /api/preferences Endpoint, API /api/recommendations Endpoint, API /api/recommendations/:id/like Endpoint, API /api/recommendations/:id/wear Endpoint (+22 more)
 
-### Community 13 - "Browser & CLI Detection"
+### Community 13 - "Community 13"
 Cohesion: 0.11
-Nodes (31): createBrowserDetector(), detectCli(), formatFindings(), handleStdin(), printUsage(), buildImportGraph(), detectFrameworkConfig(), FRAMEWORK_CONFIGS (+23 more)
+Nodes (31): createBrowserDetector(), confirm(), detectCli(), formatFindings(), handleStdin(), printUsage(), buildImportGraph(), detectFrameworkConfig() (+23 more)
 
-### Community 14 - "UI/UX Pro Max Design System"
+### Community 14 - "Community 14"
 Cohesion: 0.10
 Nodes (27): bool, DesignSystemGenerator, _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system() (+19 more)
 
-### Community 15 - "UI/UX Pro Max System (Mirror)"
+### Community 15 - "Community 15"
 Cohesion: 0.10
 Nodes (27): bool, DesignSystemGenerator, _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system() (+19 more)
 
-### Community 16 - "Live Event Validation"
+### Community 16 - "Community 16"
 Cohesion: 0.08
 Nodes (22): FORBIDDEN_MANUAL_EDIT_TEXT_CHARS, INSERT_POSITIONS, isValidId(), isValidVariantId(), validateAnnotationFields(), validateEvent(), validateInsertGenerate(), validateManualEditEvent() (+14 more)
 
-### Community 17 - "Design Parser"
+### Community 17 - "Community 17"
 Cohesion: 0.15
 Nodes (32): buildColor(), CANONICAL_SECTIONS, collectBullets(), collectColorValues(), collectParagraphs(), detectFormat(), extractColors(), extractComponents() (+24 more)
 
-### Community 18 - "Live Browser UI Builder"
-Cohesion: 0.10
-Nodes (34): actionLabel(), applyParamDefaults(), applyParamValue(), buildConfigureRow(), buildConfirmedRow(), buildCyclingRow(), buildDots(), buildGeneratingRow() (+26 more)
-
-### Community 19 - "Browser Manual Edit Context"
+### Community 18 - "Community 18"
 Cohesion: 0.09
-Nodes (32): addManualContextText(), applyEditing(), buildLocatorForLeaf(), canRestoreManualEditElement(), contextElementForManualEdit(), copyEditContainerContext(), copyEditLeafContext(), copyToClipboard() (+24 more)
+Nodes (32): actionLabel(), applyParamDefaults(), applyParamValue(), buildConfigureRow(), buildConfirmedRow(), buildCyclingRow(), buildDots(), buildGeneratingRow() (+24 more)
+
+### Community 19 - "Community 19"
+Cohesion: 0.10
+Nodes (29): addManualContextText(), applyEditing(), buildLocatorForLeaf(), canRestoreManualEditElement(), contextElementForManualEdit(), copyEditContainerContext(), copyEditLeafContext(), directMixedTextRestoreNodes() (+21 more)
 
 ### Community 20 - "Community 20"
-Cohesion: 0.09
-Nodes (32): buildCollapsible(), buildColorModels(), buildDesignHeader(), buildRadiiModels(), buildTypographyModels(), cssSafe(), escapeHtml(), fetchDesignSystem() (+24 more)
+Cohesion: 0.05
+Nodes (43): 1. Cold-Start CTA (dashboard), 2. On-Demand (wardrobe studio), AI-Generated Badge on Outfit Cards, AI-Generated Badge on OutfitCard, AI Outfit Generator, API Endpoint, Authentication, Check When Done (+35 more)
 
 ### Community 21 - "Community 21"
-Cohesion: 0.07
-Nodes (31): Background Queue Invariant (No Blocking AI Jobs), Clerk Authentication Service, Cloudinary Image Storage + CDN, NestJS Backend API, Next.js + TypeScript Frontend, OpenWeather API Integration, PostgreSQL + pgvector Database, Custom Rule Engine + Embeddings Recommendation System (+23 more)
+Cohesion: 0.12
+Nodes (14): Background Queue Invariant (No Blocking AI Jobs), Clerk Authentication Service, Cloudinary Image Storage + CDN, NestJS Backend API, Next.js + TypeScript Frontend, OpenWeather API Integration, PostgreSQL + pgvector Database, Custom Rule Engine + Embeddings Recommendation System (+6 more)
 
 ### Community 22 - "Community 22"
 Cohesion: 0.13
-Nodes (30): applyMockWrites(), buildCopyEditBatchPrompt(), checkFrameworkSourceSyntax(), chooseCopyEditAgent(), COMMAND_AUTH_CACHE, commandAuthed(), commandExists(), compactBatchForPrompt() (+22 more)
+Nodes (31): applyMockWrites(), buildCopyEditBatchPrompt(), checkFrameworkSourceSyntax(), chooseCopyEditAgent(), COMMAND_AUTH_CACHE, commandAuthed(), commandExists(), compactBatchForPrompt() (+23 more)
 
 ### Community 23 - "Community 23"
-Cohesion: 0.08
-Nodes (30): applyPlaceholderDimensions(), applyPlaceholderSizingStyles(), buildPlaceholderResizeHandles(), clearHandled(), createInsertPlaceholder(), cursorForPlaceholderEdge(), detectInsertAxis(), detectInsertAxisFromStyle() (+22 more)
+Cohesion: 0.15
+Nodes (19): applyPlaceholderDimensions(), clearHandled(), cycleVariant(), ensureInsertPlaceholder(), findInsertAnchorInDom(), isInsertGeneratingSession(), isSessionHandled(), loadSession() (+11 more)
 
 ### Community 24 - "Community 24"
-Cohesion: 0.11
-Nodes (17): finding(), getAP(), CSS_IN_JS_EXTENSIONS, detectText(), extractCSSinJS(), extractStyleBlocks(), REGEX_ANALYZERS, REGEX_MATCHERS (+9 more)
+Cohesion: 0.10
+Nodes (23): applyPlaceholderSizingStyles(), attachSteerFocusDebug(), createInsertPlaceholder(), cursorForInsertAxis(), detectInsertAxis(), detectInsertAxisFromStyle(), ensureInsertLine(), focusConfigureInput() (+15 more)
 
 ### Community 25 - "Community 25"
 Cohesion: 0.15
 Nodes (27): checkColors(), checkElementAIPaletteDOM(), checkElementColors(), checkElementColorsDOM(), checkElementGlow(), checkElementGlowDOM(), checkElementIconTile(), checkElementIconTileDOM() (+19 more)
 
 ### Community 26 - "Community 26"
-Cohesion: 0.18
-Nodes (26): confirm(), clearStoredManualApplyState(), handleManualEditActivity(), hidePendingApplyDock(), manualApplyLoadingText(), manualApplyStateKey(), manualEditEventForCurrentPage(), numberOrNull() (+18 more)
+Cohesion: 0.16
+Nodes (28): clearStoredManualApplyState(), copyToClipboard(), handleManualEditActivity(), hidePendingApplyDock(), manualApplyLoadingText(), manualApplyStateKey(), manualEditEventForCurrentPage(), maybeShowFirstSaveToast() (+20 more)
 
 ### Community 27 - "Community 27"
-Cohesion: 0.11
-Nodes (12): POST(), PATCH(), VALID_CATEGORIES, POST(), buildProfile(), BuildProfileResult, calculateScores(), WEIGHTS (+4 more)
+Cohesion: 0.15
+Nodes (10): POST(), POST(), POST(), buildProfile(), BuildProfileResult, calculateScores(), WEIGHTS, PreferenceScoreData (+2 more)
 
 ### Community 28 - "Community 28"
-Cohesion: 0.19
-Nodes (19): ProjectSidebarProps, cn(), GenerateLooksButton(), TodaysRecommendations(), TodaysRecommendationsProps, Card(), CardAction(), CardContent() (+11 more)
+Cohesion: 0.16
+Nodes (23): EditorialDialog(), useAskStylist(), useLikeDislike(), useRecommendations(), useWearOutfit(), cn(), AskStylistDialog(), AskStylistLocation (+15 more)
 
 ### Community 29 - "Community 29"
-Cohesion: 0.12
-Nodes (24): attachSteerFocusDebug(), buildSteerProcessingDots(), clearSteerAwaitTimer(), collapsePageChat(), expandPageChat(), focusConfigureInput(), focusSteerChat(), id8() (+16 more)
+Cohesion: 0.11
+Nodes (26): clearSteerAwaitTimer(), collapsePageChat(), configureVoiceContext(), expandPageChat(), finishVoiceSession(), id8(), isEmbeddedPreviewBrowser(), lockSteerChat() (+18 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.15
-Nodes (24): attachSteerFocusGuard(), barPaletteForTheme(), brandMarkSvg(), connectSSE(), defangOutsideHandlers(), designPanelCss(), detectPageTheme(), ensureAgentPollTooltip() (+16 more)
+Cohesion: 0.10
+Nodes (36): attachSteerFocusGuard(), barPaletteForTheme(), brandMarkSvg(), buildDesignHeader(), buildParamsPanel(), buildSavingRow(), buildSteerProcessingDots(), connectSSE() (+28 more)
 
 ### Community 31 - "Community 31"
 Cohesion: 0.18
 Nodes (22): completionAckForAcceptResult(), completionTypeForAcceptResult(), augmentEventWithAcceptHandling(), buildAcceptScriptArgs(), buildPollReplyPayload(), EVENT_TYPES_NEEDING_AGENT_REPLY, fetchNextEvent(), fetchServerStatus() (+14 more)
 
 ### Community 32 - "Community 32"
-Cohesion: 0.17
-Nodes (14): explainRecommendation(), checkGarmentMatch(), getCurrentSeason(), matches(), scoreOutfit(), coldWeather, hotWeather, mildWeather (+6 more)
+Cohesion: 0.11
+Nodes (23): explainRecommendation(), checkGarmentMatch(), getCurrentSeason(), matches(), OCCASION_GROUPS, scoreOutfit(), coldWeather, hotWeather (+15 more)
 
 ### Community 33 - "Community 33"
 Cohesion: 0.09
 Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
 
 ### Community 34 - "Community 34"
-Cohesion: 0.16
-Nodes (19): firstExisting(), getDesignSidecarCandidates(), getDesignSidecarPath(), getImpeccableDir(), getLegacyLiveConfigPath(), getLegacyLiveServerPath(), getLiveConfigPath(), getLiveServerPath() (+11 more)
+Cohesion: 0.19
+Nodes (15): getPurgeSuggestions(), PurgeSuggestion, GarmentScore, scoreGarments(), CapsuleTiers, tierGarments(), POST(), getFeedbackHistoryMap() (+7 more)
 
 ### Community 35 - "Community 35"
-Cohesion: 0.17
-Nodes (15): EditorialDialog(), EditorialDialogProps, SUGGESTED_TAGS, UploadGarmentDialog(), UploadGarmentDialogProps, VALID_CATEGORIES, HistoryDetailDialogProps, Dialog() (+7 more)
+Cohesion: 0.08
+Nodes (39): EditorialDialogProps, formatLastWorn(), GarmentCard(), GarmentCardProps, GarmentDetailsDialog(), GarmentDetailsDialogProps, SUGGESTED_TAGS, VALID_CATEGORIES (+31 more)
 
 ### Community 37 - "Community 37"
 Cohesion: 0.15
@@ -462,8 +707,8 @@ Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 40 - "Community 40"
-Cohesion: 0.14
-Nodes (8): getLeastWornGarments(), getMostWornGarments(), getMostWornOutfits(), getNeverWornGarments(), GET(), GarmentWithStats, OutfitWithStats, globalForPrisma
+Cohesion: 0.07
+Nodes (28): "Add from wardrobe" panel, "Add from wardrobe" panel to pull in any other garment, Canvas Model, Caption layer, Check When Done, Client-side drag/resize/layer/flip interaction on garment images (pointer events, no library), Constraints, Database Changes (+20 more)
 
 ### Community 41 - "Community 41"
 Cohesion: 0.10
@@ -474,8 +719,8 @@ Cohesion: 0.16
 Nodes (19): analyzeVisualContrastCandidate(), blendRgba(), clampByte(), contrastRatio(), firstCssUrl(), getLayerValue(), loadVisualContrastImage(), parseObjectPosition() (+11 more)
 
 ### Community 43 - "Community 43"
-Cohesion: 0.20
-Nodes (13): formatLastWorn(), GarmentCard(), GarmentCardProps, GarmentDetailsDialog(), GarmentDetailsDialogProps, SUGGESTED_TAGS, VALID_CATEGORIES, OutfitBuilderDialog() (+5 more)
+Cohesion: 0.05
+Nodes (42): API, Categories, Check When Done, Clothing Types, Colors, Constraints, Data Sources, Database Model (+34 more)
 
 ### Community 44 - "Community 44"
 Cohesion: 0.18
@@ -490,8 +735,8 @@ Cohesion: 0.11
 Nodes (18): compilerOptions, allowJs, baseUrl, esModuleInterop, forceConsistentCasingInFileNames, isolatedModules, jsx, lib (+10 more)
 
 ### Community 47 - "Community 47"
-Cohesion: 0.22
-Nodes (11): extractJson(), generateOutfits(), getGenAIClient(), buildGenerationPrompt(), GarmentInput, GeneratedOutfit, GenerationResult, getFeedbackHistoryMap() (+3 more)
+Cohesion: 0.17
+Nodes (12): extractJson(), generateOutfits(), getGenAIClient(), validateGeneratedOutfit(), buildGenerationPrompt(), GarmentInput, GeneratedOutfit, GenerationResult (+4 more)
 
 ### Community 48 - "Community 48"
 Cohesion: 0.12
@@ -502,8 +747,8 @@ Cohesion: 0.14
 Nodes (16): browserFindingsFromMap(), checkClippedOverflow(), checkCreamPalette(), checkElementClippedOverflow(), checkElementClippedOverflowDOM(), checkElementTextOverflowDOM(), checkHtmlPatterns(), checkPageQualityDOM() (+8 more)
 
 ### Community 50 - "Community 50"
-Cohesion: 0.21
-Nodes (11): formatLastWorn(), OutfitCard(), OutfitCardProps, OutfitGrid(), OutfitGridProps, WardrobeGrid(), WardrobeGridProps, Outfit (+3 more)
+Cohesion: 0.06
+Nodes (31): "Add to Look Book" action, "Add to Look Book" action on outfit cards in the History view, API Routes, Backend Exports, Check When Done, Constraints, Database Changes, `DELETE /api/lookbook/[id]` (+23 more)
 
 ### Community 51 - "Community 51"
 Cohesion: 0.12
@@ -514,16 +759,16 @@ Cohesion: 0.18
 Nodes (14): appendOriginToDirective(), buildTagBlock(), commentClose(), commentOpen(), CONFIG_PATH, __dirname, findCspMetaTags(), getAttr() (+6 more)
 
 ### Community 53 - "Community 53"
-Cohesion: 0.14
-Nodes (11): CLASSIFY_RATE_LIMIT, POST(), GENERATE_RATE_LIMIT, POST(), isRateLimited(), RateLimitEntry, RateLimitOptions, store (+3 more)
+Cohesion: 0.20
+Nodes (10): CuidArraySchema, CuidSchema, GARMENT_CATEGORIES, OccasionSchema, OnboardingSchema, QueryRecommendationSchema, RecommendationsQuerySchema, UpdateOutfitSchema (+2 more)
 
 ### Community 54 - "Community 54"
 Cohesion: 0.12
 Nodes (15): dependencies, @clerk/react-router, react, react-dom, react-router, devDependencies, @react-router/dev, @react-router/node (+7 more)
 
 ### Community 55 - "Community 55"
-Cohesion: 0.17
-Nodes (16): beginEditPin(), buildAnnotationsForCapture(), buildPinElement(), cancelEditingPin(), clampPlaceholderSize(), finalizeEditingPin(), localCoords(), onAnnotDown() (+8 more)
+Cohesion: 0.22
+Nodes (13): beginEditPin(), cancelEditingPin(), clampPlaceholderSize(), finalizeEditingPin(), localCoords(), onAnnotDown(), onAnnotInputKey(), onAnnotMove() (+5 more)
 
 ### Community 56 - "Community 56"
 Cohesion: 0.13
@@ -534,12 +779,12 @@ Cohesion: 0.13
 Nodes (14): dependencies, @clerk/nextjs, next, react, react-dom, devDependencies, @types/react, @types/react-dom (+6 more)
 
 ### Community 58 - "Community 58"
-Cohesion: 0.13
-Nodes (14): name, private, scripts, build, dev, lint, postinstall, prisma:generate (+6 more)
+Cohesion: 0.12
+Nodes (15): name, private, scripts, build, dev, lint, postinstall, prisma:generate (+7 more)
 
 ### Community 59 - "Community 59"
-Cohesion: 0.29
-Nodes (12): getLegacyLiveSessionsDir(), collectManualApplyFiles(), manualApplyReplyCommand(), manualApplyResumeHint(), parseArgs(), resumeCli(), summarizeManualApplyEvent(), createLiveSessionStore() (+4 more)
+Cohesion: 0.08
+Nodes (43): firstExisting(), getDesignSidecarCandidates(), getDesignSidecarPath(), getImpeccableDir(), getLegacyLiveConfigPath(), getLegacyLiveServerPath(), getLegacyLiveSessionsDir(), getLiveAnnotationsDir() (+35 more)
 
 ### Community 60 - "Community 60"
 Cohesion: 0.14
@@ -550,28 +795,28 @@ Cohesion: 0.18
 Nodes (13): checkElementHeroEyebrow(), checkElementHeroEyebrowDOM(), checkElementOversizedH1(), checkElementOversizedH1DOM(), checkElementQuality(), checkElementQualityDOM(), checkHeroEyebrow(), checkOversizedH1() (+5 more)
 
 ### Community 62 - "Community 62"
-Cohesion: 0.24
-Nodes (10): cli(), COMMON_DEV_PORTS, devServerSignals(), gatherSignals(), gitSignals(), hasCode(), latestCritique(), SCANNABLE_EXT (+2 more)
-
-### Community 63 - "Community 63"
 Cohesion: 0.31
 Nodes (11): kebab(), listSnapshotsForSlug(), main(), nowFilenameStamp(), parseFrontmatter(), readLatestSnapshot(), readTrend(), serializeFrontmatter() (+3 more)
 
+### Community 63 - "Community 63"
+Cohesion: 0.17
+Nodes (15): FlatLayItemView(), FlatLayItemViewProps, CaptionLayer, EXPORT_DIMENSIONS, exportFlatLay(), ExportFlatLayOptions, FLAT_LAY_BACKGROUND_COLORS, FlatLayBackground (+7 more)
+
 ### Community 64 - "Community 64"
-Cohesion: 0.23
-Nodes (10): getLiveSessionsDir(), applyEvent(), baseSnapshot(), COMPLETED_PHASES, getJournalPath(), getSnapshotPath(), rebuildSnapshotFromJournal(), safeSessionId() (+2 more)
+Cohesion: 0.07
+Nodes (28): Backend, Check When Done, `/community` route — Feed / Saved tab switcher, occasion filter, trending toggle, Community Style Feed (F5), `CommunityPost` / `CommunityLike` / `InspirationSave` models, `CommunityProfile` model — one-time display name + avatar + privacy setup, gating all publishing, Constraints, Database Changes (+20 more)
 
 ### Community 65 - "Community 65"
-Cohesion: 0.17
-Nodes (12): Background Removal Node Dependency, Cloudinary Dependency, Google GenAI Dependency, Prisma ORM Dependency, Replicate AI Dependency, @style-sync/backend Package, exports, ./types (+4 more)
+Cohesion: 0.20
+Nodes (9): Background Removal Node Dependency, Cloudinary Dependency, Google GenAI Dependency, Prisma ORM Dependency, Replicate AI Dependency, name, private, type (+1 more)
 
 ### Community 66 - "Community 66"
 Cohesion: 0.26
 Nodes (12): Clerk Authentication (@clerk/nextjs/server), Outfit Duplicate Fingerprint Detection, GarmentInput Type, Gemini AI Outfit Generation (generateOutfits), Outfit Generate API Route (POST), Outfit [id] API Route (PATCH/DELETE), Outfit Wardrobe Validation Rules, updatePreferenceProfile Service (+4 more)
 
 ### Community 67 - "Community 67"
-Cohesion: 0.20
-Nodes (12): checkElementHeroEyebrow(), checkElementHeroEyebrowDOM(), checkElementOversizedH1(), checkElementOversizedH1DOM(), checkElementQuality(), checkElementQualityDOM(), checkHeroEyebrow(), checkOversizedH1() (+4 more)
+Cohesion: 0.24
+Nodes (10): cli(), COMMON_DEV_PORTS, devServerSignals(), gatherSignals(), gitSignals(), hasCode(), latestCritique(), SCANNABLE_EXT (+2 more)
 
 ### Community 68 - "Community 68"
 Cohesion: 0.30
@@ -594,8 +839,8 @@ Cohesion: 0.20
 Nodes (10): detectCsp(), INLINE_HEADER_SIGNALS, LAYOUT_EXTS, MONOREPO_HELPER_SIGNALS, NUXT_ROUTE_RULES_SIGNALS, NUXT_SECURITY_SIGNALS, SCAN_EXTS, SKIP_DIRS (+2 more)
 
 ### Community 73 - "Community 73"
-Cohesion: 0.24
-Nodes (11): acknowledgePendingEvent(), agentPollingConnected(), broadcast(), broadcastAgentPollingIfChanged(), enqueueEvent(), findAvailablePendingEvent(), flushPendingPolls(), handlePollGet() (+3 more)
+Cohesion: 0.42
+Nodes (7): __dirname, ensureServerRunning(), resolveFiles(), liveCli(), runScript(), safeParse(), scanForDrift()
 
 ### Community 74 - "Community 74"
 Cohesion: 0.24
@@ -610,28 +855,28 @@ Cohesion: 0.20
 Nodes (9): dependencies, astro, @astrojs/node, @clerk/astro, name, scripts, build, dev (+1 more)
 
 ### Community 77 - "Community 77"
-Cohesion: 0.20
-Nodes (10): Prisma Client Setup Reference, Prisma PostgreSQL Setup, Prisma Postgres Managed Database, Prisma Database Setup Skill, Prisma Driver Adapter Implementation Skill, Prisma Postgres Setup Skill, Prisma v7 Driver Adapters, Prisma v7 ESM Support (+2 more)
+Cohesion: 0.04
+Nodes (46): Prisma Client Setup Reference, Prisma PostgreSQL Setup, Prisma Postgres Managed Database, Prisma Database Setup Skill, Prisma Driver Adapter Implementation Skill, Error Handling, Prerequisites, Prisma Postgres Setup (+38 more)
 
 ### Community 78 - "Community 78"
 Cohesion: 0.20
 Nodes (9): compilerOptions, esModuleInterop, jsx, module, moduleResolution, skipLibCheck, strict, target (+1 more)
 
 ### Community 79 - "Community 79"
-Cohesion: 0.22
-Nodes (7): API /api/onboarding/complete Endpoint, API /api/preferences Endpoint, Onboarding Color & Style Selection Flow, COLORS, Step, STEP_META, STYLES
+Cohesion: 0.14
+Nodes (10): EditorNavbarProps, NavLink(), ColorStory, daysAgoLabel(), DNACard(), getHoursUntilRegen(), SignaturePieceThumbProps, Skeleton() (+2 more)
 
 ### Community 80 - "Community 80"
-Cohesion: 0.22
-Nodes (9): API /api/outfits/generate Endpoint, API /api/recommendations Endpoint, API /api/recommendations/:id/like Endpoint, API /api/recommendations/:id/wear Endpoint, GenerateLooksButton Component, Browser Geolocation for Weather, ScoredOutfit Type, Todays Recommendations Component (+1 more)
+Cohesion: 0.05
+Nodes (41): 1. Accessibility (CRITICAL), 2. Touch & Interaction (CRITICAL), 3. Performance (HIGH), 4. Layout & Responsive (HIGH), 5. Typography & Color (MEDIUM), 6. Animation (MEDIUM), 7. Style Selection (MEDIUM), 8. Charts & Data (LOW) (+33 more)
 
 ### Community 81 - "Community 81"
 Cohesion: 0.39
 Nodes (9): Backend Initial Database Migration SQL, FeedbackType Enum (LIKE/DISLIKE), Garment Table, Outfit Table, OutfitGarment Join Table, OutfitWear Table, Recommendation Table, RecommendationFeedback Table (+1 more)
 
 ### Community 82 - "Community 82"
-Cohesion: 0.22
-Nodes (9): dependencies, cloudinary, dotenv, @google/genai, @imgly/background-removal-node, pg, @prisma/adapter-pg, @prisma/client (+1 more)
+Cohesion: 0.18
+Nodes (11): dependencies, cloudinary, dotenv, @google/genai, @imgly/background-removal-node, pg, @prisma/adapter-pg, @prisma/client (+3 more)
 
 ### Community 83 - "Community 83"
 Cohesion: 0.31
@@ -642,20 +887,20 @@ Cohesion: 0.22
 Nodes (8): dependencies, @clerk/nuxt, nuxt, name, private, scripts, build, dev
 
 ### Community 85 - "Community 85"
-Cohesion: 0.42
-Nodes (7): __dirname, ensureServerRunning(), resolveFiles(), liveCli(), runScript(), safeParse(), scanForDrift()
+Cohesion: 0.38
+Nodes (5): formatLastWorn(), OutfitCard(), OutfitCardProps, OutfitGrid(), OutfitGridProps
 
 ### Community 86 - "Community 86"
-Cohesion: 0.32
-Nodes (4): cormorantGaramond, geistMono, geistSans, metadata
+Cohesion: 0.24
+Nodes (6): cormorantGaramond, geistMono, geistSans, metadata, Providers(), queryClient
 
 ### Community 87 - "Community 87"
-Cohesion: 0.29
+Cohesion: 0.36
 Nodes (5): IndexPage(), FEATURES, LandingPage(), LandingPageProps, MARQUEE_ITEMS
 
 ### Community 88 - "Community 88"
-Cohesion: 0.46
-Nodes (6): detectUrl(), runVisualContrastFallback(), filterByProviders(), captureVisualContrastCandidate(), compareScreenshotContrast(), sanitizeScreenshotClip()
+Cohesion: 0.10
+Nodes (34): detectUrl(), runVisualContrastFallback(), finding(), getAP(), createDetectorProfile(), extractFindingIds(), profileFindings(), profileFindingsAsync() (+26 more)
 
 ### Community 89 - "Community 89"
 Cohesion: 0.39
@@ -714,28 +959,32 @@ Cohesion: 0.33
 Nodes (5): compilerOptions, paths, strict, extends, @/*
 
 ### Community 104 - "Community 104"
-Cohesion: 0.33
-Nodes (6): Impeccable Adapt Reference, Impeccable Animate Reference, Impeccable Audit Reference, Impeccable Craft Reference, Impeccable Critique Reference, Impeccable UI Improvement Skill
+Cohesion: 0.09
+Nodes (21): Impeccable Adapt Reference, Impeccable Animate Reference, Impeccable Audit Reference, Impeccable Craft Reference, Impeccable Critique Reference, Absolute bans, Color, Color & Theme (+13 more)
 
 ### Community 105 - "Community 105"
-Cohesion: 0.33
-Nodes (6): Index Page (Landing Router), Landing Page Component, Editorial Brand Personality, Design Principles (Earned Minimalism), Product Document, User Persona (Style-Conscious 20-40)
+Cohesion: 0.14
+Nodes (13): Index Page (Landing Router), Landing Page Component, Accessibility & Inclusion, Anti-references, Editorial Brand Personality, Brand Personality, Design Principles, Product Document (+5 more)
 
 ### Community 106 - "Community 106"
-Cohesion: 0.40
-Nodes (6): Prisma CLI db push Command, Prisma CLI generate Command, Prisma CLI migrate deploy Command, Prisma CLI migrate dev Command, Prisma CLI Skill, Prisma CLI studio Command
+Cohesion: 0.08
+Nodes (24): Prisma CLI db push Command, Prisma CLI generate Command, Prisma CLI migrate deploy Command, Prisma CLI migrate dev Command, Bun Runtime, Client Generation, Command Categories, Current Command Behavior (+16 more)
 
 ### Community 107 - "Community 107"
-Cohesion: 0.33
-Nodes (6): Prisma Client API Skill, Prisma Query Filters, Prisma Client Methods, Prisma Model Queries (findMany, create, update, delete), Prisma Relations Queries, Prisma Transactions
+Cohesion: 0.08
+Nodes (24): Client Instantiation, Client Methods, Create records, Delete records, Filter Operators, Find records, How to Use, Model Query Methods (+16 more)
 
 ### Community 108 - "Community 108"
-Cohesion: 0.40
-Nodes (6): checkRepeatedSectionKickers(), checkRepeatedSectionKickersDOM(), checkRepeatedSectionKickersFromDoc(), cleanInlineText(), collectRepeatedSectionKickerCandidates(), isRepeatedKickerCandidate()
+Cohesion: 0.32
+Nodes (7): COMMUNITY_PUBLISH_RATE_LIMIT, GET(), POST(), postWithRelations, serializePost(), CommunityFeedQuerySchema, CreateCommunityPostSchema
 
 ### Community 109 - "Community 109"
 Cohesion: 0.40
 Nodes (5): Clerk React Protected Routes, Clerk TanStack Loaders, Clerk TanStack Router Guards, Clerk TanStack Server Functions, Clerk TanStack Patterns Skill
+
+### Community 110 - "Community 110"
+Cohesion: 0.19
+Nodes (8): POST(), VALID_COLORS, VALID_STYLES, PATCH(), FAVORITE_RATE_LIMIT, zodError(), PATCH(), POST()
 
 ### Community 111 - "Community 111"
 Cohesion: 0.40
@@ -846,64 +1095,72 @@ Cohesion: 0.40
 Nodes (5): computedHash, skillPath, source, sourceType, prisma-upgrade-v7
 
 ### Community 138 - "Community 138"
-Cohesion: 0.50
-Nodes (5): borderWidthsFromStyle(), checkElementGptBorderShadow(), checkElementGptBorderShadowDOM(), checkGptThinBorderWideShadow(), shadowMaxBlurPx()
+Cohesion: 0.05
+Nodes (41): 1. Accessibility (CRITICAL), 2. Touch & Interaction (CRITICAL), 3. Performance (HIGH), 4. Layout & Responsive (HIGH), 5. Typography & Color (MEDIUM), 6. Animation (MEDIUM), 7. Style Selection (MEDIUM), 8. Charts & Data (LOW) (+33 more)
 
 ### Community 139 - "Community 139"
 Cohesion: 0.40
 Nodes (4): apiKeysUrl, claimUrl, publishableKey, secretKey
 
 ### Community 140 - "Community 140"
-Cohesion: 0.50
-Nodes (4): CacheEntry, fetchWeather(), getCacheKey(), weatherCache
+Cohesion: 0.43
+Nodes (6): ProjectSidebarProps, Tabs(), TabsContent(), TabsList(), tabsListVariants, TabsTrigger()
 
 ### Community 141 - "Community 141"
-Cohesion: 0.50
-Nodes (4): API /api/garments/:id/status Endpoint, Background Removal Polling Pattern, Garment Card Component, GarmentCard Component (Insights Local)
+Cohesion: 0.05
+Nodes (41): Accepted Input, Authentication, Authentication, Backend, Check When Done, Cloudinary Configuration, Cloudinary Upload, Constraints (+33 more)
 
 ### Community 142 - "Community 142"
-Cohesion: 0.83
-Nodes (3): removeBackground(), removeBackgroundLocally(), removeBackgroundViaApi()
+Cohesion: 0.08
+Nodes (25): API Route, Ask the Stylist — Free-Text Query Recommendations (Unit 27), `<AskStylistDialog />`, `<AskStylistDialog />` + `useAskStylist()` hook, wired into `TodaysRecommendations`, Backend Exports, Check When Done, Constraints, Database Changes (+17 more)
 
 ### Community 143 - "Community 143"
-Cohesion: 0.50
-Nodes (4): Clerk Billing B2B Patterns, Clerk Billing B2C Patterns, Clerk Billing Skill, Clerk Billing Webhooks
+Cohesion: 0.06
+Nodes (33): Clerk Billing B2B Patterns, Clerk Billing B2C Patterns, 10. Upgrade / Downgrade Flow, 1. Render the Pricing Table, 2. Check Feature Entitlements (Server-Side), 3. Check Feature Entitlements (Client-Side), 4. Check Subscription Plan Server-Side, 5. Client-Side Plan Checks (+25 more)
 
 ### Community 144 - "Community 144"
 Cohesion: 0.50
 Nodes (4): Clerk Vue Composables, Clerk Vue Pinia Integration, Clerk Vue Router Guards, Clerk Vue Patterns Skill
 
+### Community 145 - "Community 145"
+Cohesion: 0.05
+Nodes (41): 1. Read the screenshot (if present), 2. Wrap the element, 3. Load the action's reference, 4. Plan three variants: identity first, then mode, then axes, 5. Apply the freeform prompt (if present), 6. Write all variants in a single edit, 7. Parameters (composition-sized, 0–4 per variant), 8. Signal done (+33 more)
+
 ### Community 146 - "Community 146"
-Cohesion: 0.67
-Nodes (3): formatWornDate(), HistoryItem(), HistoryItemProps
+Cohesion: 0.08
+Nodes (31): API /api/wear-history Endpoint, EditorNavbar(), OutfitExportCard, OutfitExportCardProps, ProjectSidebar(), formatWornDate(), HistoryItem(), HistoryItemProps (+23 more)
 
 ### Community 147 - "Community 147"
 Cohesion: 0.67
 Nodes (4): Contextual Signal Widget (Weather Card), Stylist Suggestion (AI Reasoning Text), Weather-Aware Recommendation Principle, Weather Data — Chittaranjan Park, 35°C, Humidity 39%, Clouds
 
 ### Community 149 - "Community 149"
-Cohesion: 0.50
+Cohesion: 0.67
 Nodes (3): adapt, argumentHint, description
 
 ### Community 150 - "Community 150"
 Cohesion: 0.50
 Nodes (3): candidates, detectorPath, __dirname
 
+### Community 151 - "Community 151"
+Cohesion: 0.40
+Nodes (4): hooks, PreToolUse, permissions, allow
+
 ### Community 153 - "Community 153"
 Cohesion: 0.67
 Nodes (3): Clerk Chrome Extension Content Scripts Auth, Clerk Chrome Headless Extension Pattern, Clerk Chrome Extension Patterns Skill
 
 ### Community 154 - "Community 154"
-Cohesion: 0.67
-Nodes (3): Clerk Custom Sign-In (Core 3), Clerk Custom Sign-Up (Core 3), Clerk Custom UI Skill
+Cohesion: 0.12
+Nodes (15): Clerk Custom Sign-In (Core 3), Clerk Custom Sign-Up (Core 3), Appearance Customization, Appearance Pattern, Common Pitfalls, Component Customization Options, Custom Flow References, Custom UI (+7 more)
 
 ### Community 155 - "Community 155"
-Cohesion: 0.67
-Nodes (3): Clerk Expo OAuth Deep Linking, Clerk Expo Patterns Skill, Clerk Expo Push Notifications Auth
+Cohesion: 0.12
+Nodes (15): Clerk Expo OAuth Deep Linking, app/_layout.tsx, Auth Hooks, Built-in Token Cache, Common Pitfalls, Docs, Expo Patterns, Import Map (+7 more)
 
 ### Community 156 - "Community 156"
-Cohesion: 0.67
-Nodes (3): Clerk Enterprise SSO, Clerk Orgs Roles & Permissions, Clerk Organizations Skill
+Cohesion: 0.06
+Nodes (33): Clerk Enterprise SSO, Clerk Orgs Roles & Permissions, 1. Read Organization from Auth, 2. Dynamic Routes with Org Slug, 3. Role-Based Access Control, 4. Conditional Rendering with `<Show>`, 5. OrganizationSwitcher, 6. Session Task — Choose Organization (+25 more)
 
 ### Community 157 - "Community 157"
 Cohesion: 0.67
@@ -914,19 +1171,27 @@ Cohesion: 0.67
 Nodes (3): Clerk React Router Loaders & Actions, Clerk React Router Patterns Skill, Clerk React Router SSR Auth
 
 ### Community 159 - "Community 159"
-Cohesion: 0.67
-Nodes (3): Clerk Core Skill, Clerk Webhooks Framework Integrations, Clerk Webhooks Skill
+Cohesion: 0.08
+Nodes (24): By Task, Clerk Skills Router, Quick Navigation, Version Detection, Clerk Webhooks Framework Integrations, Common Pitfalls, Complete Webhook Handler (Next.js App Router), Full Example: Organization Membership Sync to Database (+16 more)
+
+### Community 178 - "Community 178"
+Cohesion: 0.05
+Nodes (38): AI Garment Classification & Metadata Extraction, AI Provider, Background Processing, Category, Check When Done, Classification Endpoint, Classification Flow, Classification Service (+30 more)
+
+### Community 182 - "Community 182"
+Cohesion: 0.05
+Nodes (38): Backend API, Check When Done, Constraints, Empty State, Future Compatibility, Garment Cards, Insights, Insights API (+30 more)
 
 ### Community 183 - "Community 183"
 Cohesion: 0.67
 Nodes (3): Alternative Looks Section (Ranked by Match %), Alternative Outfit Row (75% / 55% / 45% Match), Enter Wardrobe Studio CTA Button
 
 ### Community 184 - "Community 184"
-Cohesion: 0.67
-Nodes (3): Prisma Postgres Console & Connections, Prisma Postgres Management API, Prisma Postgres Skill (Managed DB)
+Cohesion: 0.13
+Nodes (14): Prisma Postgres Console & Connections, Prisma Postgres Management API, 1. Console-first workflow, 2. Quick provisioning with create-db, 3. Link an existing local project, 4. Programmatic provisioning with Management API, 5. Type-safe integration with Management API SDK, Core Workflows (+6 more)
 
 ### Community 186 - "Community 186"
-Cohesion: 0.67
+Cohesion: 0.50
 Nodes (3): animate, argumentHint, description
 
 ### Community 187 - "Community 187"
@@ -1013,25 +1278,957 @@ Nodes (3): shape, argumentHint, description
 Cohesion: 0.67
 Nodes (3): typeset, argumentHint, description
 
+### Community 240 - "Community 240"
+Cohesion: 0.05
+Nodes (38): API Changes, Changes to `scoreOutfit()`, Check When Done, Constraints, Dashboard UI, Database Changes, Explanation Changes, Files to Create (+30 more)
+
+### Community 244 - "Community 244"
+Cohesion: 0.14
+Nodes (13): Activation Rules, Clerk Expo (React Native), Common Pitfalls, Decision Tree, Execution Gates (Do Not Skip), Flow References, Interaction Contract, Quick Start (+5 more)
+
+### Community 250 - "Community 250"
+Cohesion: 0.06
+Nodes (30): 1. Detect the Framework, 2. Fetch the Quickstart Guide, 3. Follow the Instructions, 4. Get API Keys, Adding Clerk, Agent-first: Provision via CLI, ClerkProvider Placement (Next.js), Common Pitfalls (+22 more)
+
+### Community 251 - "Community 251"
+Cohesion: 0.22
+Nodes (8): Anti-Patterns, Best Practices, Decision Tree, Framework-Specific, Mental Model, See Also, Testing, Workflow
+
+### Community 257 - "Community 257"
+Cohesion: 0.50
+Nodes (3): Deploy on Vercel, Getting Started, Learn More
+
+### Community 291 - "Community 291"
+Cohesion: 0.05
+Nodes (36): Check When Done, Constraints, Database Models, Dislike, Dislike Action, Dislike Button, Feedback APIs, Feedback Type Enum (+28 more)
+
+### Community 292 - "Community 292"
+Cohesion: 0.06
+Nodes (34): Alternative Options, Check When Done, Cold Weather, Constraints, Empty State, Future Compatibility, Hot Weather, Layout (+26 more)
+
+### Community 293 - "Community 293"
+Cohesion: 0.06
+Nodes (34): Background Processing, Background Removal Flow, Background Removal Pipeline, Background Removal Service, Background Removal Service, Check When Done, Cloudinary Integration, Constraints (+26 more)
+
+### Community 294 - "Community 294"
+Cohesion: 0.06
+Nodes (33): API, Check When Done, Constraints, Data Model, DELETE /api/planner/[id], DELETE /api/planner/[id] — remove a planned slot, EditorNavbar, EditorNavbar link to Planner (+25 more)
+
+### Community 295 - "Community 295"
+Cohesion: 0.06
+Nodes (33): `app/editor/page.tsx` (dashboard / recommendations), `app/editor/planner/page.tsx`, `app/editor/wardrobe/page.tsx`, `app/history/page.tsx`, `app/insights/page.tsx`, Changed Files, Check When Done, Installation (+25 more)
+
+### Community 296 - "Community 296"
+Cohesion: 0.06
+Nodes (32): Accent Color Application, Accessibility, Alpha Is A Design Smell, Assess Color Opportunity, Background & Surfaces, Balance & Refinement, Borders & Accents, Building Functional Palettes (+24 more)
+
+### Community 297 - "Community 297"
+Cohesion: 0.06
+Nodes (31): Backend APIs, Check When Done, Constraints, `DELETE /api/outfits/[outfitId]`, Empty State, Favorite Outfits, Favorite Toggle, `GET /api/outfits` (+23 more)
+
+### Community 298 - "Community 298"
+Cohesion: 0.06
+Nodes (31): Backend API, Check When Done, Constraints, Display, Empty State, Future Compatibility, Garment Count, History (+23 more)
+
+### Community 299 - "Community 299"
+Cohesion: 0.06
+Nodes (31): Apply Clarity Principles, Assess Current Copy, Avoid Redundant Copy, Button & CTA Text, Confirmation Dialogs, Confirmation Dialogs: Use Sparingly, Consistency: The Terminology Problem, Don't Blame the User (+23 more)
+
+### Community 300 - "Community 300"
+Cohesion: 0.07
+Nodes (29): Architecture Overview, Argument Mapping (input), Checklist, Column Type Inference, ColumnTypeEnum values, Conversion Helpers, Database-Specific Notes, E2E Tests (with PrismaClient) (+21 more)
+
+### Community 301 - "Community 301"
+Cohesion: 0.07
+Nodes (27): Backend Integration, Categorization, Category Selection, Check When Done, Constraints, Delete Garment, Delete Garment, Dialog Layout (+19 more)
+
+### Community 302 - "Community 302"
+Cohesion: 0.07
+Nodes (27): Accessibility Considerations, Anti-reflexes worth defending against, Assess Current Typography, Classic Typography Principles, Establish Hierarchy, Fix Readability, Fluid Type, Font Selection (+19 more)
+
+### Community 303 - "Community 303"
+Cohesion: 0.07
+Nodes (27): Accept self-signed certificates, After (v7), Available Adapters, Before (v6), Configuration, Connection Pool Configuration, Driver Adapters, Installation (+19 more)
+
+### Community 304 - "Community 304"
+Cohesion: 0.07
+Nodes (27): aggregate, Aggregation Operations, Atomic operations, count, create, Create Operations, createMany, createManyAndReturn (+19 more)
+
+### Community 305 - "Community 305"
+Cohesion: 0.43
+Nodes (6): extractJson(), getGenAIClient(), interpretStyleQuery(), QUERY_CLIMATES, QueryInterpretation, Occasion
+
+### Community 306 - "Community 306"
+Cohesion: 0.07
+Nodes (26): Add Clothing Button, Basic Filtering, Check When Done, Constraints, Desktop, Digital Wardrobe UI & Data Integration, Editor Page, Empty State (+18 more)
+
+### Community 307 - "Community 307"
+Cohesion: 0.07
+Nodes (26): Call sites to update, Capsule Audit Cache (F2 preparation), Capsule Audit result cache backed by Redis with 6-hour TTL (F2 prep), Check When Done, Constraints, Current Implementation, Current Implementation, Database Changes (+18 more)
+
+### Community 308 - "Community 308"
+Cohesion: 0.07
+Nodes (26): API Routes, Backend Exports, Check When Done, Constraints, Database Changes, Empty State, Export both from `@style-sync/backend`, Files to Create (+18 more)
+
+### Community 309 - "Community 309"
+Cohesion: 0.08
+Nodes (25): 0. Print usage, 1. Fetch tags, 2. Fetch tag endpoints, 3. Fetch endpoint detail, 4. Execute request, API specs context, Clerk Backend API — Full Endpoint Reference, Create organization + invite member (two-step) (+17 more)
+
+### Community 310 - "Community 310"
+Cohesion: 0.08
+Nodes (25): Check When Done, Database Changes, Durable AI Job Queue (F6), Fallback to `after()` in local dev when QStash env vars are absent, Files to Create, Files to Modify, Idempotency, Local Dev Behavior (+17 more)
+
+### Community 311 - "Community 311"
+Cohesion: 0.08
+Nodes (25): API Route, Backend Exports, "Capsule Audit" tab on the existing `/insights` page, Capsule Wardrobe Auditor (F2), Check When Done, Combinatorial Value Score (CVS), Combinatorial Value Score (CVS) service (`backend/src/services/capsule/score-garments.ts`), Constraints (+17 more)
+
+### Community 312 - "Community 312"
+Cohesion: 0.08
+Nodes (25): Assess Adaptation Challenge, Breakpoints: Content-Driven, Content Adaptation, Desktop Adaptation (Mobile → Desktop), Detect Input Method, Not Just Screen Size, Email Adaptation (Web → Email), Implement Adaptations, Layout Adaptation Patterns (+17 more)
+
+### Community 313 - "Community 313"
+Cohesion: 0.08
+Nodes (24): Authenticated Users, Authentication Setup (Clerk), Check When Done, Constraints, Dependencies, Design Requirements, Editor Navbar Integration, Explicit Design Constraints (+16 more)
+
+### Community 314 - "Community 314"
+Cohesion: 0.08
+Nodes (24): Component translation rules, Narrative mapping, Pitfalls, Scan mode (approach C: auto-extract, then confirm descriptive language), Schema, Seed mode, Step 1: Confirm seed mode, Step 1: Find the design assets (+16 more)
+
+### Community 315 - "Community 315"
+Cohesion: 0.08
+Nodes (23): Connect existing, Count Relations, Create or connect, Create with relations, Delete related, Disconnect, every, Filter counted relations (+15 more)
+
+### Community 316 - "Community 316"
+Cohesion: 0.08
+Nodes (23): Alternatives, Auto-generate after migrate, Auto-seed after migrate, Automatic Behaviors Removed, CLI Flags Removed, Client Middleware, Common Middleware Patterns, Custom counter with extensions (+15 more)
+
+### Community 317 - "Community 317"
+Cohesion: 0.09
+Nodes (22): Add Clothing, App Navbar, Center Section, Check When Done, Close Button, Constraints, Dialog Pattern, Editor Shell Requirements (+14 more)
+
+### Community 318 - "Community 318"
+Cohesion: 0.09
+Nodes (22): Assess Onboarding Needs, Context Over Ceremony, Contextual Help, Design Onboarding Experiences, Documentation & Help, Empty State Design, Feature Discovery & Adoption, Guided Tours & Walkthroughs (+14 more)
+
+### Community 319 - "Community 319"
+Cohesion: 0.09
+Nodes (21): `401 Unauthorized`, `403 Forbidden`, `404 Not Found`, API Response Shape, Authorization Rules, Backend APIs — Wardrobe & Outfit Management, Check When Done, Constraints (+13 more)
+
+### Community 320 - "Community 320"
+Cohesion: 0.09
+Nodes (21): Changed Files, Check When Done, Error Helper, Fix: `get-most-worn-outfits.ts` TypeScript Error, Garment Schemas, Installation, New Files, Onboarding Schema (+13 more)
+
+### Community 321 - "Community 321"
+Cohesion: 0.09
+Nodes (21): BigInt handling, Database-Specific Features, Date handling, Delete example, Dynamic table/column names, $executeRaw, Handling Results, Insert example (+13 more)
+
+### Community 322 - "Community 322"
+Cohesion: 0.10
+Nodes (20): Animate complex properties, Assess What "Extraordinary" Means Here, For data-heavy interfaces, For functional UI, For performance-critical UI, For visual/marketing surfaces, Implement with Discipline, Interact with the device (+12 more)
+
+### Community 323 - "Community 323"
+Cohesion: 0.10
+Nodes (18): Add custom methods, Add model methods, Chain extensions, Client Methods, $connect(), $disconnect(), $extends(), Graceful shutdown (+10 more)
+
+### Community 324 - "Community 324"
+Cohesion: 0.10
+Nodes (20): AND (explicit), AND (implicit), Array Field Filters, Combined, Comparison, Equality, every, Filter Conditions and Operators (+12 more)
+
+### Community 325 - "Community 325"
+Cohesion: 0.10
+Nodes (20): cursor, distinct, Filtered include, include, Include relation count, Multiple distinct fields, Negative take (reverse), Nested include (+12 more)
+
+### Community 326 - "Community 326"
+Cohesion: 0.10
+Nodes (19): Accessibility, Assess Animation Opportunities, CSS Animations, Delight Moments, Entrance Animations, Feedback & Guidance, Implement Animations, JavaScript Animation (+11 more)
+
+### Community 327 - "Community 327"
+Cohesion: 0.10
+Nodes (19): Clean Up, Code Quality, Color & Contrast, Content & Copy, Design System Discovery, Edge Cases & Error States, Final Verification, Forms & Inputs (+11 more)
+
+### Community 328 - "Community 328"
+Cohesion: 0.10
+Nodes (19): Accept data loss, Basic push, Command, Common Patterns, Comparison with migrate dev, Examples, Follow-up Command, Force reset (+11 more)
+
+### Community 329 - "Community 329"
+Cohesion: 0.10
+Nodes (19): Background mode, Command, Configuration, Custom ports, Examples, Force remove (stops first), Instance Management, List all instances (+11 more)
+
+### Community 330 - "Community 330"
+Cohesion: 0.10
+Nodes (19): After schema changes, Basic generation, Bun Runtime, CI/CD pipeline, Command, Common Patterns, Compiler Build Tuning, Current Generator Behavior (+11 more)
+
+### Community 331 - "Community 331"
+Cohesion: 0.10
+Nodes (19): After (v7) - prisma.config.ts, Basic Configuration, Before (v6) - schema.prisma, Configuration Options, Custom Config Path, datasource.directUrl, datasource.shadowDatabaseUrl, datasource.url (+11 more)
+
+### Community 332 - "Community 332"
+Cohesion: 0.10
+Nodes (19): Command, Common Workflow, Custom port, Don't open browser, Edit Records, Examples, Features, Filter Data (+11 more)
+
+### Community 333 - "Community 333"
+Cohesion: 0.19
+Nodes (18): args, buffer, cwd, pageUrlFilter, remaining, buildManualEditEvidence(), countByPage(), getBufferPath() (+10 more)
+
+### Community 334 - "Community 334"
+Cohesion: 0.11
+Nodes (19): Backend APIs — Wardrobe & Outfit Management (Completed), Completed, Database Integration & Schema, Design System & UI Primitives, Engineering Standards, Foundational Application Chrome (Editor Shell), Product Architecture, Unit 11 — Recommendation Feedback & Wear History (Completed) (+11 more)
+
+### Community 335 - "Community 335"
+Cohesion: 0.11
+Nodes (18): Client Trust, Complete Example: Email/Password with MFA, Custom Sign-In Flow, Docs, Email Code, Error Handling, Finalizing Sign-In, Hook API (+10 more)
+
+### Community 336 - "Community 336"
+Cohesion: 0.11
+Nodes (18): Check When Done, Constraints, Database Architecture, Database Branching, Dependencies, Future Compatibility, Garment Model, Migration (+10 more)
+
+### Community 337 - "Community 337"
+Cohesion: 0.11
+Nodes (18): Changed Files, Check When Done, Example Test — Scorer, GitHub Actions Workflow, New Files, npm Script Updates, Overview, Priority 1 — Recommendation Scorer (`score-outfit.ts`) (+10 more)
+
+### Community 338 - "Community 338"
+Cohesion: 0.14
+Nodes (11): usePlanner(), EmptyDaySlot(), EmptyDaySlotProps, addDays(), DAY_NAMES, formatWeekLabel(), PlannerContent(), toISO() (+3 more)
+
+### Community 339 - "Community 339"
+Cohesion: 0.11
+Nodes (18): Appropriate to Context, Assess Delight Opportunities, Celebration Moments, Compound Over Time, Delight Amplifies, Never Blocks, Delight Principles, Delight Techniques, Easter Eggs & Hidden Delights (+10 more)
+
+### Community 340 - "Community 340"
+Cohesion: 0.11
+Nodes (18): After schema changes, Command, Common Patterns, Create and apply migration, Create without applying, Examples, Follow-up Commands, Full workflow (+10 more)
+
+### Community 341 - "Community 341"
+Cohesion: 0.11
+Nodes (17): Complete Example: Phone OTP Sign-Up, Custom Sign-Up Flow, Docs, Email Code, Email Link, Email / Phone Verification, Error Handling, Finalizing Sign-Up (+9 more)
+
+### Community 342 - "Community 342"
+Cohesion: 0.11
+Nodes (17): 1. Export as Image, 2. Shareable Link, Card Layout, Changed Files, Changed Files, Data Model Change, New API Routes, New Files (+9 more)
+
+### Community 343 - "Community 343"
+Cohesion: 0.11
+Nodes (17): CSS Anchor Positioning, Destructive Actions: Undo > Confirm, Dropdown & Overlay Positioning, Fixed Positioning Fallback, Focus Rings: Do Them Right, Form Design: The Non-Obvious, Gesture Discoverability, Interaction Design (+9 more)
+
+### Community 344 - "Community 344"
+Cohesion: 0.11
+Nodes (17): Best Practices, Command, Common Patterns, Common seed commands, Conditional seeding, Configuration, Current Workflow, Development reset (+9 more)
+
+### Community 345 - "Community 345"
+Cohesion: 0.11
+Nodes (17): 1. Install dotenv, 2. Import in prisma.config.ts, Application Code, Bun Users, CI/CD Considerations, Entry point, Environment Variables, Multiple .env Files (+9 more)
+
+### Community 346 - "Community 346"
+Cohesion: 0.12
+Nodes (16): Bun Runtime, Configuration Files, Driver Adapters, How to Use, MongoDB, MySQL, PostgreSQL, Prisma Client Setup (Required) (+8 more)
+
+### Community 347 - "Community 347"
+Cohesion: 0.12
+Nodes (16): 1. Keep your Accelerate URL, 2. Install Accelerate extension, 3. Configure prisma.config.ts, 4. Instantiate client with accelerateUrl, Caching with Accelerate, Correct v7 Setup for Accelerate, Edge Runtime, Important (+8 more)
+
+### Community 348 - "Community 348"
+Cohesion: 0.12
+Nodes (16): Basic introspection, Command, Examples, Force overwrite, Generated Schema Example, MongoDB Introspection, Options, Post-Introspection Cleanup (+8 more)
+
+### Community 349 - "Community 349"
+Cohesion: 0.12
+Nodes (16): Browser-Safe Types, Bun, "Cannot use import statement outside a module", CommonJS Projects, "ERR_REQUIRE_ESM", ESM and CommonJS Support, ESM Projects, File Extensions (+8 more)
+
+### Community 350 - "Community 350"
+Cohesion: 0.12
+Nodes (16): Add an example model, Basic initialization, Bun Runtime, Command, Examples, Generated Config (Bun), Generated Config (Node.js default), Generated Schema (+8 more)
+
+### Community 351 - "Community 351"
+Cohesion: 0.12
+Nodes (16): Basic deployment, Best Practices, Check status first, Command, Comparison with migrate dev, Configuration, Docker deployment, Error Handling (+8 more)
+
+### Community 352 - "Community 352"
+Cohesion: 0.12
+Nodes (15): Accessibility Rules, AI Recommendation Experience, Avoid Motion For, Design Hierarchy, Design Principles, Elevation & Shadows, Forms & Onboarding, Future 3D / Avatar Guidelines (+7 more)
+
+### Community 353 - "Community 353"
+Cohesion: 0.12
+Nodes (15): Authentication State, Billing Feature Check, Billing Plan Check, Custom Condition (Function), Docs, Fallback Content, Import, Migration from Core 2 (+7 more)
+
+### Community 354 - "Community 354"
+Cohesion: 0.12
+Nodes (15): §0. READ THIS FIRST — "Documented" vs "Built", 10. Deployment & DevOps, 11. Design Decisions, 12. Challenges & Problem Solving (10), 15. Project Defense Round (25 skeptical questions + answers), 16. Hidden Follow-Up Questions (3 per key answer), 17. Production-Grade Improvements, 18. Complete Viva Preparation Sheet (rapid revision) (+7 more)
+
+### Community 355 - "Community 355"
+Cohesion: 0.12
+Nodes (15): Buttons, Cards, Check When Done, Constraints, Dialogs, Explicitly Avoid, Icons, Inputs & Textareas (+7 more)
+
+### Community 356 - "Community 356"
+Cohesion: 0.12
+Nodes (15): Anti-Goals, Brief Structure, Constraints, Content & Data, Design Direction, How to use the probes, Important limits, Interview cadence (+7 more)
+
+### Community 357 - "Community 357"
+Cohesion: 0.12
+Nodes (15): accelerateUrl (For Accelerate users), adapter (Required for the SQL provider workflow), Basic Instantiation, comments, Constructor Options, errorFormat, log, Log Events (+7 more)
+
+### Community 358 - "Community 358"
+Cohesion: 0.12
+Nodes (15): 1. Provider name, 2. Output is required, 3. engineType changed, 4. moduleFormat is explicit when needed, After Schema Changes, Datasource Block, Example Output Paths, Generated Entrypoints (+7 more)
+
+### Community 359 - "Community 359"
+Cohesion: 0.13
+Nodes (14): 1. root.tsx, 2. Middleware (root route or entry.server.ts), Auth in Actions, Auth in Loaders, Client Components, Common Pitfalls, Docs, Import Map (+6 more)
+
+### Community 360 - "Community 360"
+Cohesion: 0.16
+Nodes (15): Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Sprint 1 Infrastructure, Completed — Sprint 1 Infrastructure (+7 more)
+
+### Community 361 - "Community 361"
+Cohesion: 0.13
+Nodes (14): 1. Accessibility (A11y), 2. Performance, 3. Theming, 4. Responsive Design, 5. Anti-Patterns (CRITICAL), Anti-Patterns Verdict, Audit Health Score, Detailed Findings by Severity (+6 more)
+
+### Community 362 - "Community 362"
+Cohesion: 0.13
+Nodes (14): Brand bans (on top of the shared absolute bans), Brand permissions, Brand register, Color, Font selection procedure, Imagery, Layout, Motion (+6 more)
+
+### Community 363 - "Community 363"
+Cohesion: 0.13
+Nodes (14): Accessibility & Inclusion, Brand & Personality, Init Flow, Interview mode, not confirmation mode, Minimum viable interview, Register (ask first; it shapes everything below), Step 1: Load current state, Step 2: Explore the codebase (+6 more)
+
+### Community 364 - "Community 364"
+Cohesion: 0.13
+Nodes (14): All or nothing, Best Practices, Handle errors, Interactive Transactions, Isolation levels, Keep transactions short, Nested Writes, OrThrow in Transactions (+6 more)
+
+### Community 365 - "Community 365"
+Cohesion: 0.14
+Nodes (13): Authentication Options, Chrome Extension Patterns, Common Pitfalls, Content Scripts, createClerkClient() for Vanilla JS / Service Workers, CRITICAL RULES, Headless Extension (no popup, no side panel), Plan Requirements (+5 more)
+
+### Community 366 - "Community 366"
+Cohesion: 0.14
+Nodes (13): Common Pitfalls, Conditional Rendering with `<Show>`, Docs, getToken() for external APIs, Manual JWT verification (no Clerk middleware), Mental Model, Minimal Pattern, Next.js Patterns (+5 more)
+
+### Community 367 - "Community 367"
+Cohesion: 0.14
+Nodes (13): shadcn/ui Components Config, @style-sync/backend Workspace Package, @base-ui/react Headless Components, @imgly/background-removal (Browser WASM), @clerk/nextjs Auth Integration, lucide-react Icon Library, Next.js 16 Framework, shadcn/ui Component Library (+5 more)
+
+### Community 368 - "Community 368"
+Cohesion: 0.14
+Nodes (13): Assess Current Layout, Break Card Grid Monotony, Choose the Right Layout Tool, Create Visual Rhythm, Establish a Spacing System, Improve Layout Systematically, Live-mode signature params, Manage Depth & Elevation (+5 more)
+
+### Community 369 - "Community 369"
+Cohesion: 0.14
+Nodes (13): Animation Performance, Assess Performance Issues, Core Web Vitals Optimization, Cumulative Layout Shift (CLS < 0.1), First Input Delay (FID < 100ms) / INP (< 200ms), Largest Contentful Paint (LCP < 2.5s), Loading Performance, Network Optimization (+5 more)
+
+### Community 370 - "Community 370"
+Cohesion: 0.14
+Nodes (13): 1. Schema Configuration, 2. Environment Variable, Common Issues, Current Verification Notes, Driver Adapters, ID Field Requirement, "Invalid ObjectID", Migrations vs Introspection (+5 more)
+
+### Community 371 - "Community 371"
+Cohesion: 0.15
+Nodes (12): Activation Rules, Clerk Android (Native), Common Pitfalls, Decision Tree, Execution Gates (Do Not Skip), Flow References, Interaction Contract, Quick Start (+4 more)
+
+### Community 372 - "Community 372"
+Cohesion: 0.15
+Nodes (12): astro.config.mjs, Astro Patterns, Common Pitfalls, Docs, Env Variables, Import Map, Mental Model, See Also (+4 more)
+
+### Community 373 - "Community 373"
+Cohesion: 0.15
+Nodes (12): Activation Rules, Clerk Swift (Native iOS), Common Pitfalls, Decision Tree, Execution Gates (Do Not Skip), Flow References, Interaction Contract, Quick Start (+4 more)
+
+### Community 374 - "Community 374"
+Cohesion: 0.11
+Nodes (18): AI Workflow Rules, Approach, `architecture.md`, Bad Example, Before Moving to the Next Unit, `code-standards.md`, Feature Specs, Good Example (+10 more)
+
+### Community 375 - "Community 375"
+Cohesion: 0.15
+Nodes (12): 1. Create Sign-In, 2. First Factor Verification, 3. Second Factor (MFA), 4. Finalize, Complete Example: Email/Password with MFA, Custom Sign-In Flow (Core 2), Docs, Error Handling (+4 more)
+
+### Community 376 - "Community 376"
+Cohesion: 0.15
+Nodes (13): 2. System Architecture, API Flow (representative — upload), Architecture Diagram (ASCII), Authentication Flow, Backend Architecture, Component Interaction Diagram (upload → recommend), Data Flow, Database Architecture (+5 more)
+
+### Community 377 - "Community 377"
+Cohesion: 0.15
+Nodes (13): 3. Frontend Deep Dive, Accessibility, Caching, Error Handling, Forms, Next.js 16 (App Router), Performance Optimization, React 19 (+5 more)
+
+### Community 378 - "Community 378"
+Cohesion: 0.15
+Nodes (12): Command, Configuration, Current Option Surface, Examples, Execute from file, Execute from stdin, Execute `migrate diff` output, Limitations (+4 more)
+
+### Community 379 - "Community 379"
+Cohesion: 0.15
+Nodes (12): 1. Schema Configuration, 2. Config Configuration, 3. Environment Variable, Common Issues, Connection String Format, Driver Adapter, JSON Support, MySQL Setup (+4 more)
+
+### Community 380 - "Community 380"
+Cohesion: 0.17
+Nodes (11): Common Pitfalls, Docs, Mental Model, Minimal Pattern, Protected Route (React Router v6/v7), React SPA Patterns, References, See Also (+3 more)
+
+### Community 381 - "Community 381"
+Cohesion: 0.17
+Nodes (11): Common Pitfalls, Composables Usage, Docs, Import Map, Mental Model, Org Switching, See Also, Setup (+3 more)
+
+### Community 382 - "Community 382"
+Cohesion: 0.17
+Nodes (11): 1. Create Sign-Up, 2. Prepare Verification, 3. Attempt Verification, 4. Finalize, Complete Example: Email/Password with Email Verification, Custom Sign-Up Flow (Core 2), Docs, Error Handling (+3 more)
+
+### Community 383 - "Community 383"
+Cohesion: 0.17
+Nodes (12): 4. Backend Deep Dive, APIs — Next.js Route Handlers, Authentication — Clerk, Authorization, Background Jobs, Caching / Message Queues / WebSockets, Error Handling, Logging (+4 more)
+
+### Community 384 - "Community 384"
+Cohesion: 0.17
+Nodes (11): Amplify the Design, Assess Current State, Color Intensification, Composition Boldness, Motion & Animation, Plan Amplification, Register, Spatial Drama (+3 more)
+
+### Community 385 - "Community 385"
+Cohesion: 0.17
+Nodes (11): Assess Current State, Code Simplification, Content Simplification, Document Removed Complexity, Information Architecture, Interaction Simplification, Layout Simplification, Plan Simplification (+3 more)
+
+### Community 386 - "Community 386"
+Cohesion: 0.17
+Nodes (11): Accessibility Resilience, Assess Hardening Needs, Edge Cases & Boundary Conditions, Error Handling, Hardening Dimensions, Input Validation & Sanitization, Internationalization (i18n), Performance Resilience (+3 more)
+
+### Community 387 - "Community 387"
+Cohesion: 0.17
+Nodes (11): Billing Webhooks, Complete Billing Webhook Handler, Event Payload Reference, Key Rules, Make Route Public, Payload Shape (important), paymentAttempt.created / paymentAttempt.updated, Setup (+3 more)
+
+### Community 388 - "Community 388"
+Cohesion: 0.17
+Nodes (11): API exploration, Authentication methods, Base URL, Common endpoints, management-api, Notes, OAuth flow summary, Priority (+3 more)
+
+### Community 389 - "Community 389"
+Cohesion: 0.17
+Nodes (11): Check for drift (CI), Command, Create baseline migration, Examples, Generate SQL for a schema change, Options, prisma migrate diff, Review pending migrations (+3 more)
+
+### Community 390 - "Community 390"
+Cohesion: 0.17
+Nodes (11): Basic reset, Command, Configuration, Examples, Follow-up Steps, Force reset (CI/Automation), Options, prisma migrate reset (+3 more)
+
+### Community 391 - "Community 391"
+Cohesion: 0.17
+Nodes (11): 1. Schema Configuration, 2. Config Configuration, 3. Environment Variable, "Authentication failed", "Can't reach database server", Common Issues, Connection String Format, Driver Adapter (+3 more)
+
+### Community 392 - "Community 392"
+Cohesion: 0.17
+Nodes (11): 1. Schema Configuration, 2. Config Configuration, Connection String, Driver Adapter, Edge/serverless option, Features, Overview, Prisma Postgres Setup (+3 more)
+
+### Community 393 - "Community 393"
+Cohesion: 0.17
+Nodes (11): 1. Schema Configuration, 2. Config Configuration, 3. Environment Variable, Common Issues, Connection String Format, "Database file not found", Driver Adapter, Limitations (+3 more)
+
+### Community 394 - "Community 394"
+Cohesion: 0.18
+Nodes (10): Common Pitfalls, Docs, Mental Model, Minimal Pattern, Nuxt Patterns, Org-Aware Pattern, References, See Also (+2 more)
+
+### Community 395 - "Community 395"
+Cohesion: 0.18
+Nodes (11): 5. Database Deep Dive, Backup / Consistency / Transactions, Common Queries, Database choice — PostgreSQL + Prisma 7, ER Diagram, Indexing, Query Optimization, Relationships (+3 more)
+
+### Community 396 - "Community 396"
+Cohesion: 0.18
+Nodes (10): Craft Flow, Gates: do not compress, Production bar, Step 0: Project Foundation, Step 1: Shape the Design, Step 2: Load References, Step 3: Visual Direction & Assets (Harness-Gated), Step 4: Build to Production Quality (+2 more)
+
+### Community 397 - "Community 397"
+Cohesion: 0.18
+Nodes (10): Action Summary, Ask the User, Assessment A: Design Review, Assessment B: Detector + Browser Evidence, Assessment Orchestration, Hard Invariants, Persist the Snapshot, Purpose (+2 more)
+
+### Community 398 - "Community 398"
+Cohesion: 0.18
+Nodes (11): 10. Help and Documentation, 1. Visibility of System Status, 2. Match Between System and Real World, 3. User Control and Freedom, 4. Consistency and Standards, 5. Error Prevention, 6. Recognition Rather Than Recall, 7. Flexibility and Efficiency of Use (+3 more)
+
+### Community 399 - "Community 399"
+Cohesion: 0.18
+Nodes (10): Assess Current State, Color Refinement, Composition Refinement, Motion Reduction, Plan Refinement, Refine the Design, Register, Simplification (+2 more)
+
+### Community 400 - "Community 400"
+Cohesion: 0.18
+Nodes (10): api-basics, Base URL, Collection, Error codes by HTTP status, Error Responses, Pagination, Resource ID Prefixes, Response Envelope (+2 more)
+
+### Community 401 - "Community 401"
+Cohesion: 0.18
+Nodes (10): Billing Components, CheckoutButton, Client usage, Combining with role checks, has(), Plan and Feature Checks, Import Reference, PricingTable, Server usage (+2 more)
+
+### Community 402 - "Community 402"
+Cohesion: 0.18
+Nodes (10): Command discovery (`--help`), Commands, Common patterns, create-db-cli, `create` options, Lifecycle and claim flow, Priority, Programmatic usage (library API) (+2 more)
+
+### Community 403 - "Community 403"
+Cohesion: 0.18
+Nodes (10): Accept Invitations (Custom Flow), Built-in Invitation UI, Bulk Create, Create Invitation, Get a Single Invitation, Key Rules, List Invitations, Organization Invitations (+2 more)
+
+### Community 404 - "Community 404"
+Cohesion: 0.18
+Nodes (10): Billing Gates Permissions, Change a User's Role, Checking Roles and Permissions, Custom Permissions, Custom Roles, Default Roles, Key Rules, Role Sets (+2 more)
+
+### Community 405 - "Community 405"
+Cohesion: 0.18
+Nodes (10): 1. Schema Configuration, 2. Config Configuration, 3. Environment Variable, Common Issues, Connection String Format, Driver Adapter, "Login failed for user", Prerequisites (+2 more)
+
+### Community 406 - "Community 406"
+Cohesion: 0.18
+Nodes (10): Docs, Hide Unsupported Auth Methods in Popup, How It Works, Side Panel Limitation, Step 1 -- Environment Variables, Step 2 -- ClerkProvider with syncHost, Step 3 -- Manifest host_permissions, Step 4 -- Register Extension ID in Clerk (+2 more)
+
+### Community 407 - "Community 407"
+Cohesion: 0.20
+Nodes (9): Common Pitfalls, Docs, Mental Model, Minimal Pattern, References, See Also, Setup, TanStack React Start Patterns (+1 more)
+
+### Community 408 - "Community 408"
+Cohesion: 0.20
+Nodes (10): AI and Recommendation System, API Routes, Code Standards, Data and Storage, File Organization, General, NestJS (Backend), Next.js (Frontend) (+2 more)
+
+### Community 409 - "Community 409"
+Cohesion: 0.20
+Nodes (9): Completed Features, Core Wardrobe, Key Files, Open Questions / Next Steps, Other, Outfit Export & Share ✅ (June 2026), Outfit System, Current Phase (+1 more)
+
+### Community 410 - "Community 410"
+Cohesion: 0.20
+Nodes (10): devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, @types/node, @types/react, @types/react-dom (+2 more)
+
+### Community 411 - "Community 411"
+Cohesion: 0.20
+Nodes (9): After This File, Codex: Visual Direction & Asset Production, Four stop points before code, Step A: Explore Directions with the User, Step B: Generate the Brand Palette First, Step C: Generate 1-3 Visual Mocks Against the Palette, Step D: Approval Loop, Step E: Mock Fidelity Inventory (+1 more)
+
+### Community 412 - "Community 412"
+Cohesion: 0.20
+Nodes (9): Color, Components, Layout, Motion, Product bans (on top of the shared absolute bans), Product permissions, Product register, The product slop test (+1 more)
+
+### Community 413 - "Community 413"
+Cohesion: 0.20
+Nodes (9): 1. Schema Configuration, 2. Config Configuration, 3. Environment Variable, CockroachDB Setup, Common Issues, Driver Adapter, ID Generation, Prerequisites (+1 more)
+
+### Community 414 - "Community 414"
+Cohesion: 0.20
+Nodes (9): Adapter choices, Connection setup, console-and-connections, Console workflow, Linking an existing project, Local Studio, Priority, References (+1 more)
+
+### Community 415 - "Community 415"
+Cohesion: 0.20
+Nodes (9): Accessing SSO Info on the User, Common Mistakes, Configuration Flow, Custom Sign-In Flow with SSO, Enterprise SSO, JIT Provisioning (how SSO users auto-join), Key Rules, Strategy Name (+1 more)
+
+### Community 416 - "Community 416"
+Cohesion: 0.20
+Nodes (9): Behavior, Command, Examples, Format default schema, Format specific schema, Options, prisma format, Use in Editor (+1 more)
+
+### Community 417 - "Community 417"
+Cohesion: 0.20
+Nodes (9): Background Service Worker, Debugging, Environment Variables, Headless Extension (no popup, no side panel), Key Difference from Popup + syncHost, Manifest Configuration, Register Extension in Clerk, Requirements (+1 more)
+
+### Community 418 - "Community 418"
+Cohesion: 0.20
+Nodes (9): Command, Examples, Mark as Applied (Baselining), Mark as Rolled Back (Fixing Failures), Options, prisma migrate resolve, References, Use Cases (+1 more)
+
+### Community 419 - "Community 419"
+Cohesion: 0.20
+Nodes (9): Command, Common Errors, Examples, Options, prisma validate, Use in CI, Validate default schema, Validate specific schema (+1 more)
+
+### Community 420 - "Community 420"
+Cohesion: 0.43
+Nodes (5): extractJson(), generateStyleDNA(), getGenAIClient(), StyleDNAResult, WardrobeSummary
+
+### Community 421 - "Community 421"
+Cohesion: 0.22
+Nodes (8): Feature Roadmap, Implementation Order, New API Surface (Phase 3), New Routes (Frontend), Strategic Goal, StyleSync AI — Phase 3 Feature Specification, Success Criteria, What Phase 3 Does NOT Include
+
+### Community 422 - "Community 422"
+Cohesion: 0.22
+Nodes (8): useAuth, useClerk, useSignIn / useSignUp, useUser, Composables, CRITICAL, useOrganization, useOrganizationList
+
+### Community 423 - "Community 423"
+Cohesion: 0.22
+Nodes (9): 1. The Wall of Options, 2. The Memory Bridge, 3. The Hidden Navigation, 4. The Jargon Barrier, 5. The Visual Noise Floor, 6. The Inconsistent Pattern, 7. The Multi-Task Demand, 8. The Context Switch (+1 more)
+
+### Community 424 - "Community 424"
+Cohesion: 0.22
+Nodes (9): Anti-Patterns Verdict, Design Health Score, Generate Combined Critique Report, Minor Observations, Overall Impression, Persona Red Flags, Priority Issues, Questions to Consider (+1 more)
+
+### Community 425 - "Community 425"
+Cohesion: 0.22
+Nodes (8): B2B Billing Patterns, Common Mistake: Checking Plan Without Active Org, Core Pattern: Org-Level Plan Check, Org Billing Page, Overview, Plan Naming for B2B, Seat-Limit Plans, Webhook: Org Subscription Events
+
+### Community 426 - "Community 426"
+Cohesion: 0.22
+Nodes (8): Background Service Worker, createClerkClient() Options, createClerkClient() -- Vanilla JS and Service Workers, Docs, Making Authenticated API Calls from Background, Requesting the Token from a Tab or Content Script, Vanilla JS Popup (no React), When to Use
+
+### Community 427 - "Community 427"
+Cohesion: 0.22
+Nodes (8): Create connection, Create project (with database), Delete database, Delete project, endpoints, Get database, List projects, List regions
+
+### Community 428 - "Community 428"
+Cohesion: 0.22
+Nodes (8): Astro, Common Patterns Across Frameworks, Express, Fastify, Framework-Specific Webhook Handlers, Nuxt, React Router, TanStack Start
+
+### Community 429 - "Community 429"
+Cohesion: 0.22
+Nodes (8): Full SDK (OAuth + refresh), Install, management-api-sdk, OAuth SDK flow, Priority, References, Simple client (existing token), Why It Matters
+
+### Community 430 - "Community 430"
+Cohesion: 0.22
+Nodes (8): Check status, Command, Examples, Exit Codes, Options, prisma migrate status, What It Does, When to Use
+
+### Community 431 - "Community 431"
+Cohesion: 0.22
+Nodes (8): Client Component, Conditional Rendering, CRITICAL: Always `await auth()`, Hybrid Pattern, Import Rules, Server Component, Server vs Client, When to Use
+
+### Community 432 - "Community 432"
+Cohesion: 0.25
+Nodes (5): SharedGarment, SharedOutfit, SharedOutfitView(), SharedOutfitViewProps, Props
+
+### Community 433 - "Community 433"
+Cohesion: 0.25
+Nodes (8): Core User Flow, Goals, In Scope (MVP), Out of Scope (MVP), Overview, Scope, StyleSync AI, Success Criteria
+
+### Community 434 - "Community 434"
+Cohesion: 0.25
+Nodes (8): 1. Impatient Power User: "Alex", 2. Confused First-Timer: "Jordan", 3. Accessibility-Dependent User: "Sam", 4. Deliberate Stress Tester: "Riley", 5. Distracted Mobile User: "Casey", Persona-Based Design Testing, Project-Specific Personas, Selecting Personas
+
+### Community 435 - "Community 435"
+Cohesion: 0.25
+Nodes (7): Extract Flow, Step 1: Discover the Design System, Step 2: Identify Patterns, Step 3: Plan Extraction, Step 4: Extract & Enrich, Step 5: Migrate, Step 6: Document
+
+### Community 436 - "Community 436"
+Cohesion: 0.25
+Nodes (7): auth, Creating a service token, OAuth 2.0 (for user-scoped access), Security practices, Service Tokens, Token scope, Using a service token
+
+### Community 437 - "Community 437"
+Cohesion: 0.25
+Nodes (7): Account Billing Page, B2C Billing Patterns, Client-Side Feature Gating, Core Pattern: User Plan Check, Overview, Redirect Pattern After Checkout, Tiered Feature Gating
+
+### Community 438 - "Community 438"
+Cohesion: 0.25
+Nodes (7): Constraint, Content Script Registration (Plasmo), Content Scripts, Manifest Permissions, Pattern: Authenticated Fetch from Content Script, Pattern: Request Token from Background, Why Clerk Can't Be Used Directly in Content Scripts
+
+### Community 439 - "Community 439"
+Cohesion: 0.25
+Nodes (7): Command, Notes, prisma mcp, References, Typical Use Cases, Usage, What It Does
+
+### Community 440 - "Community 440"
+Cohesion: 0.25
+Nodes (7): Basic Setup, clerkMiddleware Signature, createRouteMatcher Patterns, CRITICAL, Middleware, No Handler (Pass-Through), With Custom Handler
+
+### Community 441 - "Community 441"
+Cohesion: 0.25
+Nodes (7): Auth Object Fields, Basic Auth Check, CRITICAL, Fetch Current User Data, getToken for External APIs, Org-Scoped Page, SSR Pages
+
+### Community 442 - "Community 442"
+Cohesion: 0.29
+Nodes (6): Combine with existing style preferences, Hard bans (never do these), Human, Output, Trigger, What to do instead
+
+### Community 443 - "Community 443"
+Cohesion: 0.13
+Nodes (9): getLeastWornGarments(), getMostWornGarments(), getMostWornOutfits(), getNeverWornGarments(), GET(), GarmentWithStats, OutfitWithStats, globalForPrisma (+1 more)
+
+### Community 444 - "Community 444"
+Cohesion: 0.29
+Nodes (6): Weather-Aware Outfit Recommendation Engine, Wardrobe Upload Pipeline (Upload→BgRemoval→Classify→Save), Feature Spec 10: Recommendation Engine, Feature Spec 11: Recommendation Feedback, Feature Spec 12: Wear History & Timeline, Feature Spec 13: Wardrobe Insights & Analytics
+
+### Community 445 - "Community 445"
+Cohesion: 0.29
+Nodes (7): AI Outfit Recommendation Engine, Authentication & User Management, Avatar & Virtual Try-On (Future Phase), Contextual Intelligence, Digital Wardrobe, Features, Outfit Builder
+
+### Community 446 - "Community 446"
+Cohesion: 0.29
+Nodes (7): 13. Resume Discussion Preparation, Hardest problem?, Tell me about this project, What did you learn?, What was your contribution?, What would you improve?, Why did you build it?
+
+### Community 447 - "Community 447"
+Cohesion: 0.29
+Nodes (7): Database Changes, F1 — Style DNA Profile, Functional Requirements, Technical Notes, UI Notes, User Story, What it is
+
+### Community 448 - "Community 448"
+Cohesion: 0.29
+Nodes (7): Database Changes, F2 — Capsule Wardrobe Auditor, Functional Requirements, Technical Notes, UI Notes, User Story, What it is
+
+### Community 449 - "Community 449"
+Cohesion: 0.29
+Nodes (6): API Routes, Basic Auth Check, CRITICAL, Permission Check, POST with Org Check, Using clerkClient in API Routes
+
+### Community 451 - "Community 451"
+Cohesion: 0.29
+Nodes (6): Hydration Safety, Pinia State Hydration, Server vs Client Boundary, SSR Auth (HIGH), SSR-Safe Page Pattern, useFetch with Auth
+
+### Community 452 - "Community 452"
+Cohesion: 0.29
+Nodes (7): scripts, build, dev, lint, start, test, typecheck
+
+### Community 453 - "Community 453"
+Cohesion: 0.29
+Nodes (7): Cognitive Load Assessment, Cognitive Load Checklist, Extraneous Load: Bad Design, Germane Load: Learning Effort, Intrinsic Load: The Task Itself, The Working Memory Rule, Three Types of Cognitive Load
+
+### Community 454 - "Community 454"
+Cohesion: 0.29
+Nodes (6): Astro + React Integration, Clerk Components in Astro Pages, Clerk Components in React Components, Key Differences, Setup, Stores in React Components
+
+### Community 455 - "Community 455"
+Cohesion: 0.29
+Nodes (6): Command, Example Output, Options, prisma debug, What It Does, When to Use
+
+### Community 456 - "Community 456"
+Cohesion: 0.29
+Nodes (3): getToken() for API Calls, Hooks (CRITICAL), isLoaded Guard
+
+### Community 457 - "Community 457"
+Cohesion: 0.29
+Nodes (6): Available Auth Fields, CRITICAL, getAuth in Actions, getAuth in Loaders, Loaders and Actions Auth, rootAuthLoader Callback Form
+
+### Community 458 - "Community 458"
+Cohesion: 0.29
+Nodes (6): Middleware Strategies, Permission-Gated Routes, Protected-First (internal tools, dashboards), Public-First (marketing sites, blogs), Session Tasks, Token-Based Protection (Machine APIs)
+
+### Community 459 - "Community 459"
+Cohesion: 0.29
+Nodes (6): API Route Example, Key Rules, Middleware: Role + Permission Protection, Next.js Patterns for Organizations, Server Actions: Scope Writes by `orgId`, URL Slug Safety Invariant
+
+### Community 460 - "Community 460"
+Cohesion: 0.29
+Nodes (6): Callback Screen, CRITICAL, OAuth Deep Linking, OAuth with useSSO, Prerequisites, Supported Strategies
+
+### Community 461 - "Community 461"
+Cohesion: 0.29
+Nodes (6): Basic instantiation, Common mistakes, Key rules, Prisma 7 Client Instantiation, Required packages, Usage in application code
+
+### Community 462 - "Community 462"
+Cohesion: 0.29
+Nodes (6): 1. Install dependencies, 2. Add generator block, 3. Generate Prisma Client, 4. Instantiate Prisma Client, 5. Use a single instance, Prisma Client Setup
+
+### Community 463 - "Community 463"
+Cohesion: 0.29
+Nodes (5): Calling from Components, Import Path, Org-Scoped Server Function, Redirect Pattern, Server Functions (CRITICAL)
+
+### Community 464 - "Community 464"
+Cohesion: 0.33
+Nodes (6): Architecture Context, Auth and Access Model, Invariants, Stack, Storage Model, System Boundaries
+
+### Community 465 - "Community 465"
+Cohesion: 0.33
+Nodes (6): Progress Tracker (Phase 1.5 Hardening), Gemini AI Outfit Generator (isAiGenerated), Automatic Preference Learning from Wear History, Phase 3: Avatar & Virtual Try-On (Planned), Feature Spec 14: Preference Learning, Feature Spec 16: AI Outfit Generator
+
+### Community 466 - "Community 466"
+Cohesion: 0.33
+Nodes (6): 3D Avatar Scope, AI Processing, Architecture Decisions, Database Strategy, Monorepo Architecture, Recommendation System
+
+### Community 467 - "Community 467"
+Cohesion: 0.33
+Nodes (6): 7. Feature-by-Feature Analysis, A. Garment Upload + AI Classification, B. AI Outfit Generation, C. Weather + Occasion Recommendation Engine (the crown jewel), D. Preference Learning (closed loop), E. Weekly Planner / Wear History / Insights
+
+### Community 468 - "Community 468"
+Cohesion: 0.33
+Nodes (6): Database Changes, F3 — Look Book (Style Journal), Functional Requirements, Technical Notes, User Story, What it is
+
+### Community 469 - "Community 469"
+Cohesion: 0.33
+Nodes (6): Database Changes, F4 — Flat Lay Builder, Functional Requirements, Technical Notes, User Story, What it is
+
+### Community 470 - "Community 470"
+Cohesion: 0.33
+Nodes (6): Database Changes, F5 — Community Style Feed, Functional Requirements, Technical Notes, User Story, What it is
+
+### Community 471 - "Community 471"
+Cohesion: 0.33
+Nodes (5): Purpose, Required Patterns, Source-Driven Requirements, Verification Checklist, Custom Flow Reference (Clerk Android API)
+
+### Community 472 - "Community 472"
+Cohesion: 0.33
+Nodes (5): CRITICAL, Layout-Level Guard, Protected Routes (Expo Router), Recommended File Structure, Screen-Level Guard
+
+### Community 473 - "Community 473"
+Cohesion: 0.33
+Nodes (5): Purpose, Required Patterns, Source-Driven Requirements, Verification Checklist, Custom Flow Reference (@clerk/expo hooks)
+
+### Community 474 - "Community 474"
+Cohesion: 0.33
+Nodes (5): Org-Gated Route, Protected Routes (CRITICAL), ProtectedRoute Component, Router Setup (React Router v6/v7), Using Prebuilt Components
+
+### Community 475 - "Community 475"
+Cohesion: 0.33
+Nodes (5): Client-Side Guard, Loader-Level Protection (Recommended), Middleware-Level Protection, Org-Gated Routes, Protected Routes
+
+### Community 476 - "Community 476"
+Cohesion: 0.33
+Nodes (5): getToken for External APIs, Pass Auth State to Components, Session Claims, SSR Auth, useAuth vs getAuth
+
+### Community 477 - "Community 477"
+Cohesion: 0.33
+Nodes (5): Purpose, Required Patterns, Source-Driven Requirements, Verification Checklist, Custom Flow Reference (ClerkKit)
+
+### Community 478 - "Community 478"
+Cohesion: 0.33
+Nodes (5): Custom Flows (HIGH), Custom Sign-In with useSignIn, Custom Sign-Up with useSignUp, Email Verification, signIn.status Values
+
+### Community 479 - "Community 479"
+Cohesion: 0.33
+Nodes (5): Client Directives, CRITICAL, Island Components, Prebuilt UI Components, React Island with Clerk Hooks
+
+### Community 480 - "Community 480"
+Cohesion: 0.33
+Nodes (5): Auth in Loaders, Loaders (HIGH), Org-Aware Loader, Server vs Client Data, useLoaderData
+
+### Community 481 - "Community 481"
+Cohesion: 0.33
+Nodes (5): Built-in Auth Middleware, Custom Route Middleware, Nuxt Middleware (CRITICAL), Redirect URLs, Server-Side Middleware (Nitro)
+
+### Community 482 - "Community 482"
+Cohesion: 0.33
+Nodes (5): beforeLoad Auth Guard, Layout Route Guard, Passing Auth to Loader, Redirect After Sign-In, Router Guards (CRITICAL)
+
+### Community 483 - "Community 483"
+Cohesion: 0.33
+Nodes (5): ClerkProvider Position, Redirect URLs, Router Integration (HIGH), useNavigate with Clerk Actions, Using Prebuilt Sign-In Component
+
+### Community 484 - "Community 484"
+Cohesion: 0.33
+Nodes (5): Auth Context in Nitro, Error Codes, Org-Scoped Server Routes, Server API Routes (HIGH), Using clerkClient
+
+### Community 485 - "Community 485"
+Cohesion: 0.33
+Nodes (5): API Routes, clerkMiddleware() Setup, ClerkProvider in Root, Environment Variables, Vinxi Server (HIGH)
+
+### Community 486 - "Community 486"
+Cohesion: 0.33
+Nodes (5): CRITICAL, Global Before Guard, Org-Gated Route, Per-Route Guard with In-Component Guard, Vue Router Guards
+
+### Community 487 - "Community 487"
+Cohesion: 0.10
+Nodes (17): API /api/garments/:id/status Endpoint, API /api/insights Endpoint, Background Removal Polling Pattern, Garment Card Component, GarmentCard Component (Insights Local), useCapsuleAudit(), useInsights(), CapsuleAuditData (+9 more)
+
+### Community 488 - "Community 488"
+Cohesion: 0.40
+Nodes (5): Approach, Database Changes, F6 — Durable AI Job Queue, What it is, Why Now
+
+### Community 489 - "Community 489"
+Cohesion: 0.40
+Nodes (4): Purpose, Required Patterns, Verification Checklist, Prebuilt Flow Reference (Clerk Android UI)
+
+### Community 490 - "Community 490"
+Cohesion: 0.40
+Nodes (4): Purpose, Required Patterns, Verification Checklist, Prebuilt Flow Reference (@clerk/expo native components)
+
+### Community 491 - "Community 491"
+Cohesion: 0.40
+Nodes (4): API Routes, 401 vs 403, Auth Check Pattern, Org Route Protection
+
+### Community 492 - "Community 492"
+Cohesion: 0.40
+Nodes (4): Purpose, Required Patterns, Verification Checklist, Prebuilt Flow Reference (ClerkKitUI)
+
+### Community 493 - "Community 493"
+Cohesion: 0.40
+Nodes (4): Caching with Auth, Org-Scoped Cache, Revalidate After Updates, User-Scoped Cache
+
+### Community 494 - "Community 494"
+Cohesion: 0.40
+Nodes (4): Auth Store (Thin Wrapper), CRITICAL, Org Store, Pinia Integration
+
+### Community 495 - "Community 495"
+Cohesion: 0.40
+Nodes (4): CRITICAL, Push Notifications with User Context, Register Push Token After Sign-In, Send Notification to User (Server)
+
+### Community 496 - "Community 496"
+Cohesion: 0.40
+Nodes (4): Basic Protection, Org + Role Check (B2B), Permission Check (RBAC), Server Actions
+
+### Community 497 - "Community 497"
+Cohesion: 0.67
+Nodes (3): Completed — Phase 1.5 Hardening, Completed — Phase 1.5 Hardening, Unit 21 — TanStack Query Migration (Completed)
+
+### Community 498 - "Community 498"
+Cohesion: 0.50
+Nodes (4): 14. Technical Interview Questions, Advanced (30), Beginner (20), Intermediate (30)
+
+### Community 499 - "Community 499"
+Cohesion: 0.50
+Nodes (4): Changes, Database Changes, F7 — Redis-backed Cache & Rate Limiting, What it is
+
+### Community 500 - "Community 500"
+Cohesion: 0.33
+Nodes (5): CreatePlanSchema, getWeekRange(), toDateString(), GET(), POST()
+
+### Community 501 - "Community 501"
+Cohesion: 0.50
+Nodes (4): Heuristics Scoring Guide, Issue Severity (P0–P3), Reference Material, Score Summary
+
+### Community 502 - "Community 502"
+Cohesion: 0.47
+Nodes (5): analyzeWardrobeGaps(), extractJson(), GapAnalysisResult, getGenAIClient(), WardrobeComposition
+
+### Community 503 - "Community 503"
+Cohesion: 0.67
+Nodes (3): exports, ./planner, ./types
+
+### Community 504 - "Community 504"
+Cohesion: 0.67
+Nodes (3): 2026-06-02 — Auth (Clerk) restyle, 2026-06-02 — Backend extracted into a workspace package, Session Notes
+
+### Community 507 - "Community 507"
+Cohesion: 0.40
+Nodes (5): Avatar / Virtual Try-On (Phase 3), F4 Flat Lay Builder / F5 Community Feed (Phase 3, Sprint 3 "Expression"), F5 Community Feed (Phase 3, Sprint 3 "Expression"), Later — Phase 3 Avatar, Next Up
+
+### Community 509 - "Community 509"
+Cohesion: 0.40
+Nodes (4): DELETE(), PATCH(), extractCloudinaryPublicId(), UpdateLookBookEntrySchema
+
+### Community 510 - "Community 510"
+Cohesion: 0.67
+Nodes (3): Completed — Phase 1.5 Hardening, Completed — Phase 1.5 Hardening, Unit 22 — Tests & CI (Completed)
+
+### Community 511 - "Community 511"
+Cohesion: 0.16
+Nodes (16): getCachedCapsuleAudit(), invalidateCapsuleAuditCache(), setCachedCapsuleAudit(), getCachedStyleDNA(), invalidateStyleDNACache(), setCachedStyleDNA(), GET(), getRedis() (+8 more)
+
+### Community 512 - "Community 512"
+Cohesion: 0.29
+Nodes (7): Completed — Sprint 2 Intelligence, Unit 25 — Style DNA Profile (Completed), Unit 26 — Capsule Wardrobe Auditor (Completed), Unit 27 — Ask the Stylist (Free-Text Query Recommendations) (Completed), Unit 28 — Look Book / Style Journal (Completed), Unit 29 — Flat Lay Builder (Completed), Unit 30 — Community Style Feed (Completed)
+
+### Community 513 - "Community 513"
+Cohesion: 0.10
+Nodes (27): CommunityPostCard(), CommunityPostCardProps, CommunityProfileSetup(), CommunityProfileSetupProps, CommunityPage(), PublishToCommunityDialog(), PublishToCommunityDialogProps, CommunityFeedFilters (+19 more)
+
+### Community 519 - "Community 519"
+Cohesion: 0.40
+Nodes (3): PATCH(), VALID_CATEGORIES, UpdateGarmentSchema
+
+### Community 520 - "Community 520"
+Cohesion: 0.08
+Nodes (25): CLASSIFY_RATE_LIMIT, getReceiver(), handleClassify(), JobPayload, POST(), POST(), POST(), POST() (+17 more)
+
+### Community 522 - "Community 522"
+Cohesion: 0.50
+Nodes (3): CreateOutfitSchema, generateOutfitName(), POST()
+
+### Community 523 - "Community 523"
+Cohesion: 0.40
+Nodes (4): LookBookQuerySchema, GET(), LOOKBOOK_UPLOAD_RATE_LIMIT, POST()
+
+### Community 525 - "Community 525"
+Cohesion: 0.50
+Nodes (3): GENERATE_RATE_LIMIT, POST(), GenerateOutfitsSchema
+
+### Community 530 - "Community 530"
+Cohesion: 0.67
+Nodes (3): Open Questions, Product Decisions, Technical Decisions
+
+### Community 531 - "Community 531"
+Cohesion: 0.83
+Nodes (3): removeBackground(), removeBackgroundLocally(), removeBackgroundViaApi()
+
+### Community 540 - "Community 540"
+Cohesion: 0.50
+Nodes (5): borderWidthsFromStyle(), checkElementGptBorderShadow(), checkElementGptBorderShadowDOM(), checkGptThinBorderWideShadow(), shadowMaxBlurPx()
+
+### Community 541 - "Community 541"
+Cohesion: 0.83
+Nodes (3): captureVisualContrastCandidate(), compareScreenshotContrast(), sanitizeScreenshotClip()
+
 ## Knowledge Gaps
-- **760 isolated node(s):** `PreToolUse`, `allow`, `DEPRECATED_NAMES`, `HARNESS_DIRS`, `SKILL_FINGERPRINTS` (+755 more)
+- **3527 isolated node(s):** `allow`, `PreToolUse`, `allow`, `DEPRECATED_NAMES`, `HARNESS_DIRS` (+3522 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **83 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **85 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `confirm()` connect `Community 26` to `Browser & CLI Detection`?**
-  _High betweenness centrality (0.097) - this node is a cross-community bridge._
-- **Why does `pickVariantContent()` connect `Community 23` to `Live Browser DOM Capture`, `Live Event Validation`?**
-  _High betweenness centrality (0.065) - this node is a cross-community bridge._
-- **Why does `resolveInsertSessionAnchor()` connect `Live Event Validation` to `Community 23`?**
-  _High betweenness centrality (0.065) - this node is a cross-community bridge._
-- **What connects `PreToolUse`, `allow`, `DEPRECATED_NAMES` to the rest of the system?**
-  _829 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Live Browser DOM Capture` be split into smaller, more focused modules?**
-  _Cohesion score 0.04360298336201951 - nodes in this community are weakly interconnected._
-- **Should `Impeccable Live Server` be split into smaller, more focused modules?**
-  _Cohesion score 0.047760088855979266 - nodes in this community are weakly interconnected._
-- **Should `Generated Code Detection` be split into smaller, more focused modules?**
-  _Cohesion score 0.06892010535557506 - nodes in this community are weakly interconnected._
+- **Why does `confirm()` connect `Community 13` to `Community 26`, `Community 19`?**
+  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+- **Why does `pickVariantContent()` connect `Community 23` to `Community 0`, `Community 16`?**
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+- **Why does `resolveInsertSessionAnchor()` connect `Community 16` to `Community 23`?**
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+- **Are the 4 inferred relationships involving `zodError()` (e.g. with `PATCH()` and `PATCH()`) actually correct?**
+  _`zodError()` has 4 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `allow`, `PreToolUse`, `allow` to the rest of the system?**
+  _3596 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Community 0` be split into smaller, more focused modules?**
+  _Cohesion score 0.03737373737373737 - nodes in this community are weakly interconnected._
+- **Should `Community 1` be split into smaller, more focused modules?**
+  _Cohesion score 0.04537037037037037 - nodes in this community are weakly interconnected._

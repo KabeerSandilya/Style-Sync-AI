@@ -1,0 +1,14 @@
+model StyleDNA {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  archetype         String
+  colorStory        Json
+  signaturePieces   String[]
+  styleKeywords     String[]
+  styleNarrative    String
+  wardrobeStrengths String[]
+  blindSpots        String[]
+  generatedAt       DateTime @default(now())
+
+  @@index([userId])
+}

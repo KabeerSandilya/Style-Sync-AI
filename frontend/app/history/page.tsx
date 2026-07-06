@@ -149,7 +149,7 @@ export default function HistoryPage() {
               </div>
             </div>
             <p className="font-sans text-xs text-muted-foreground leading-relaxed max-w-[48ch]">
-              A chronological retrospective of the silhouettes and combinations you have worn.
+              Everything you&apos;ve worn, in order.
             </p>
           </div>
           {historyItems.length > 0 && (
@@ -270,10 +270,11 @@ export default function HistoryPage() {
           queryClient.invalidateQueries({ queryKey: QK.wearHistory() });
           triggerToast(msg);
         }}
+        onToast={(msg) => triggerToast(msg)}
       />
 
       <footer className="border-t border-border/30 py-10 px-6 bg-card/10 text-center font-sans text-[11px] text-muted-foreground/60 tracking-wide">
-        © 2026 StyleSync AI. Crafted with an editorial fashion perspective.
+        © 2026 StyleSync AI.
       </footer>
 
       {/* ── Toast ─────────────────────────────────────────────── */}

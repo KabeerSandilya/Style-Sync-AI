@@ -63,7 +63,7 @@ export function WardrobeGrid({
           Your digital wardrobe starts here
         </h2>
         <p className="font-sans text-sm text-muted-foreground mt-3 mb-6 max-w-sm leading-relaxed">
-          Upload images of your favorite garments. Our AI system will automatically remove backgrounds and tag them to construct your virtual workspace.
+          Upload photos of your favorite garments and our AI removes the background and tags each one automatically.
         </p>
         <Button
           onClick={onUploadClick}

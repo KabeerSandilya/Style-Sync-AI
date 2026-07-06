@@ -221,7 +221,7 @@ export default function OnboardingPage() {
                       <span className="italic font-light text-[#708272]">starts here.</span>
                     </h1>
                     <p className="font-sans text-sm text-[#78716c] leading-relaxed mt-1 max-w-[38ch]">
-                      In just two quick steps, StyleSync learns your palette and aesthetic so recommendations feel personal from day one.
+                      Two quick steps and StyleSync knows your palette and aesthetic, so recommendations feel personal from the start.
                     </p>
                   </div>
                 </div>

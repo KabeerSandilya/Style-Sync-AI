@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Sparkles, ChevronLeft, ArrowRight, TrendingUp, HelpCircle, EyeOff, Award, BarChart2 } from "lucide-react";
+import { Sparkles, ChevronLeft, ChevronDown, ArrowRight, TrendingUp, HelpCircle, EyeOff, Award, BarChart2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { EditorNavbar } from "@/components/editor/editor-navbar";
@@ -9,6 +9,7 @@ import { ProjectSidebar } from "@/components/editor/project-sidebar";
 import { useGarments } from "@/lib/hooks/use-garments";
 import { useOutfits } from "@/lib/hooks/use-outfits";
 import { useInsights } from "@/lib/hooks/use-insights";
+import { useCapsuleAudit } from "@/lib/hooks/use-capsule-audit";
 import { Garment, Outfit } from "@/types";
 
 interface GarmentWithStats extends Garment { wearCount: number }
@@ -20,6 +21,40 @@ interface InsightsData {
   neverWornGarments: Garment[];
   mostWornOutfits: OutfitWithStats[];
   recentlyWornOutfits: Outfit[];
+}
+
+interface GarmentScore {
+  garmentId: string;
+  outfitCount: number;
+  wearCount: number;
+  likeCount: number;
+  dislikeCount: number;
+  neverWornPenalty: boolean;
+  cvs: number;
+}
+
+interface CapsuleTiers {
+  workhorses: GarmentScore[];
+  sleepingBeauties: GarmentScore[];
+  orphans: GarmentScore[];
+  unprocessedCount: number;
+}
+
+interface GapAnalysisResult {
+  gaps: Array<{ category: string; reason: string }>;
+  capsuleScore: number;
+}
+
+interface PurgeSuggestion {
+  garmentId: string;
+  name: string;
+  reason: string;
+}
+
+interface CapsuleAuditData {
+  tiers: CapsuleTiers;
+  gapAnalysis: GapAnalysisResult | null;
+  purgeSuggestions: PurgeSuggestion[];
 }
 
 function SectionHeader({
@@ -101,14 +136,253 @@ function GarmentCard({
   );
 }
 
+function StatTile({ icon, label, value }: { icon: React.ReactNode; label: string; value: number }) {
+  return (
+    <div className="flex flex-col gap-3 border border-border/30 bg-card p-5">
+      <div className="w-7 h-7 bg-accent/40 flex items-center justify-center text-primary shrink-0">
+        {icon}
+      </div>
+      <div className="flex flex-col gap-0.5">
+        <span className="font-serif text-3xl font-medium tracking-tight">{value}</span>
+        <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+          {label}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function CapsuleAuditTab({
+  data,
+  isLoading,
+  garmentById,
+  onGarmentClick,
+}: {
+  data: CapsuleAuditData | null;
+  isLoading: boolean;
+  garmentById: Map<string, Garment>;
+  onGarmentClick: (g: Garment) => void;
+}) {
+  const [purgeOpen, setPurgeOpen] = React.useState(false);
+
+  if (isLoading) {
+    return (
+      <div className="w-full flex-1 flex flex-col gap-16 animate-pulse">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+          {[1, 2, 3, 4].map((sk) => (
+            <div key={sk} className="border border-border/20 bg-card/40 h-24" />
+          ))}
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-5">
+          {[1, 2, 3, 4, 5].map((ck) => (
+            <div key={ck} className="border border-border/20 bg-card/40 aspect-[4/5]" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div className="w-full flex-1 flex flex-col items-center justify-center text-center py-24 px-6 gap-4">
+        <p className="font-serif text-xl text-muted-foreground">
+          Capsule audit isn&apos;t available yet.
+        </p>
+      </div>
+    );
+  }
+
+  const { tiers, gapAnalysis, purgeSuggestions } = data;
+
+  const scoredGarments = (scores: GarmentScore[]) =>
+    scores
+      .map((s) => ({ score: s, garment: garmentById.get(s.garmentId) }))
+      .filter((x): x is { score: GarmentScore; garment: Garment } => !!x.garment);
+
+  return (
+    <div className="w-full flex-1 flex flex-col gap-16">
+      {/* Tier Summary */}
+      <section className="flex flex-col gap-6 animate-enter-2">
+        <SectionHeader
+          icon={<BarChart2 className="w-3.5 h-3.5" />}
+          title="Capsule Overview"
+          subtitle="How hard every piece in your wardrobe is actually working."
+        />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+          <StatTile icon={<Award className="w-3.5 h-3.5" />} label="Workhorses" value={tiers.workhorses.length} />
+          <StatTile icon={<EyeOff className="w-3.5 h-3.5" />} label="Sleeping Beauties" value={tiers.sleepingBeauties.length} />
+          <StatTile icon={<HelpCircle className="w-3.5 h-3.5" />} label="Orphans" value={tiers.orphans.length} />
+          <StatTile icon={<BarChart2 className="w-3.5 h-3.5" />} label="Unprocessed" value={tiers.unprocessedCount} />
+        </div>
+      </section>
+
+      {/* Workhorses */}
+      {scoredGarments(tiers.workhorses).length > 0 && (
+        <section className="flex flex-col gap-6 animate-enter-3">
+          <SectionHeader
+            icon={<Award className="w-3.5 h-3.5" />}
+            title="Workhorses"
+            subtitle="Your highest combinatorial-value pieces, worn again and again."
+            tag="Top 20%"
+          />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5">
+            {scoredGarments(tiers.workhorses).map(({ score, garment }) => (
+              <GarmentCard
+                key={garment.id}
+                garment={garment}
+                badge={`CVS ${score.cvs}`}
+                badgeVariant="default"
+                onClick={() => onGarmentClick(garment)}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Sleeping Beauties */}
+      {scoredGarments(tiers.sleepingBeauties).length > 0 && (
+        <section className="flex flex-col gap-6 animate-enter-4">
+          <SectionHeader
+            icon={<EyeOff className="w-3.5 h-3.5" />}
+            title="Sleeping Beauties"
+            subtitle="Styled into an outfit, but never actually worn."
+            tag="Never worn"
+          />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5">
+            {scoredGarments(tiers.sleepingBeauties).map(({ garment }) => (
+              <GarmentCard
+                key={garment.id}
+                garment={garment}
+                badge="Never worn"
+                badgeVariant="alert"
+                onClick={() => onGarmentClick(garment)}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Orphans */}
+      {scoredGarments(tiers.orphans).length > 0 && (
+        <section className="flex flex-col gap-6 animate-enter-5">
+          <SectionHeader
+            icon={<HelpCircle className="w-3.5 h-3.5" />}
+            title="Orphans"
+            subtitle="Not part of any saved outfit yet."
+            tag={`${tiers.orphans.length} items`}
+          />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5">
+            {scoredGarments(tiers.orphans).map(({ garment }) => (
+              <GarmentCard
+                key={garment.id}
+                garment={garment}
+                badge="Not in any outfit"
+                badgeVariant="muted"
+                onClick={() => onGarmentClick(garment)}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Gap Recommendations */}
+      {gapAnalysis && (
+        <section className="flex flex-col gap-6">
+          <SectionHeader
+            icon={<Sparkles className="w-3.5 h-3.5" />}
+            title="Gap Recommendations"
+            subtitle="Where this wardrobe is underrepresented, and why."
+          />
+          <div className="border border-border/30 bg-card p-6 md:p-8 flex flex-col md:flex-row gap-8">
+            <div className="shrink-0 flex flex-col items-start gap-1">
+              <span className="font-serif text-5xl font-medium tracking-tight text-primary">
+                {gapAnalysis.capsuleScore}
+                <span className="text-xl text-muted-foreground"> / 100</span>
+              </span>
+              <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                Capsule Score
+              </span>
+            </div>
+            <div className="flex-1 flex flex-col gap-5 md:border-l md:border-border/20 md:pl-8">
+              {gapAnalysis.gaps.map((gap) => (
+                <div key={gap.category} className="flex flex-col gap-1">
+                  <h4 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">
+                    {gap.category}
+                  </h4>
+                  <p className="font-serif italic text-sm text-muted-foreground leading-relaxed">
+                    {gap.reason}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Purge Suggestions */}
+      {purgeSuggestions.length > 0 && (
+        <section className="flex flex-col gap-4">
+          <button
+            onClick={() => setPurgeOpen((o) => !o)}
+            className="flex items-center justify-between gap-3 pb-4 border-b border-border/20 cursor-pointer group"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 bg-accent/40 flex items-center justify-center text-primary shrink-0">
+                <HelpCircle className="w-3.5 h-3.5" />
+              </div>
+              <div className="flex flex-col items-start">
+                <h2 className="font-serif text-2xl font-medium tracking-tight">Purge Suggestions</h2>
+                <p className="font-sans text-xs text-muted-foreground">
+                  Pieces that might be ready for a new home.
+                </p>
+              </div>
+            </div>
+            <ChevronDown
+              className={`w-4 h-4 text-muted-foreground transition-transform ${purgeOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+          {purgeOpen && (
+            <div className="flex flex-col divide-y divide-border/20 border border-border/20">
+              {purgeSuggestions.map((p) => {
+                const garment = garmentById.get(p.garmentId);
+                return (
+                  <div key={p.garmentId} className="flex items-center gap-4 p-4">
+                    <div className="w-14 h-14 bg-[#fcf9f5] border border-border/20 flex items-center justify-center shrink-0 overflow-hidden">
+                      {garment && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={garment.imageUrl} alt={p.name} className="max-h-full max-w-full object-contain" />
+                      )}
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      <h4 className="font-serif text-sm font-medium">{p.name}</h4>
+                      <p className="font-sans text-xs text-muted-foreground">{p.reason}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
+      )}
+    </div>
+  );
+}
+
 export default function InsightsPage() {
   const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  const [activeTab, setActiveTab] = React.useState<"analytics" | "capsule">("analytics");
 
   const { data: garments = [], isLoading: fetchingGarments } = useGarments();
   const { data: outfits = [], isLoading: fetchingOutfits } = useOutfits();
   const { data: insightsRaw, isLoading: fetchingInsights } = useInsights();
   const insights = (insightsRaw as InsightsData | undefined) ?? null;
+  const { data: capsuleRaw, isLoading: fetchingCapsule } = useCapsuleAudit();
+  const capsule = (capsuleRaw as CapsuleAuditData | undefined) ?? null;
+  const garmentById = React.useMemo(
+    () => new Map(garments.map((g: Garment) => [g.id, g])),
+    [garments],
+  );
 
   const handleGarmentClick = (g: Garment) => {
     setIsSidebarOpen(false);
@@ -171,12 +445,35 @@ export default function InsightsPage() {
               </h1>
             </div>
             <p className="font-sans text-xs text-muted-foreground leading-relaxed max-w-[52ch]">
-              Reflective insights built from your styling patterns, wear frequency, and outfit history.
+              Built from your styling patterns, wear frequency, and outfit history.
             </p>
           </div>
         </section>
 
+        {/* ── Tab switcher ────────────────────────────────────── */}
+        <div className="flex items-center gap-1 -mt-10 animate-enter-1">
+          {(
+            [
+              { key: "analytics", label: "Wear Analytics" },
+              { key: "capsule", label: "Capsule Audit" },
+            ] as const
+          ).map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`px-4 py-2.5 text-[10px] font-bold uppercase tracking-widest font-sans transition-colors cursor-pointer border-b-2 ${
+                activeTab === tab.key
+                  ? "text-primary border-primary"
+                  : "text-muted-foreground border-transparent hover:text-foreground"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
         {/* ── Content ─────────────────────────────────────────── */}
+        {activeTab === "analytics" && (
         <div className="w-full flex-1">
           {fetchingInsights ? (
             <div className="flex flex-col gap-16 animate-pulse">
@@ -236,7 +533,7 @@ export default function InsightsPage() {
                   <SectionHeader
                     icon={<Award className="w-3.5 h-3.5" />}
                     title="Most Worn"
-                    subtitle="Your wardrobe staples — pieces you reach for time and again."
+                    subtitle="Pieces you reach for again and again."
                     tag="Staples"
                   />
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5">
@@ -373,10 +670,20 @@ export default function InsightsPage() {
             </div>
           )}
         </div>
+        )}
+
+        {activeTab === "capsule" && (
+          <CapsuleAuditTab
+            data={capsule}
+            isLoading={fetchingCapsule}
+            garmentById={garmentById}
+            onGarmentClick={handleGarmentClick}
+          />
+        )}
       </main>
 
       <footer className="border-t border-border/30 py-10 px-6 bg-card/10 text-center font-sans text-[11px] text-muted-foreground/60 mt-20 tracking-wide">
-        © 2026 StyleSync AI. Crafted with an editorial fashion perspective.
+        © 2026 StyleSync AI.
       </footer>
     </div>
   );

@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import * as React from "react";
-import { Heart, Sparkles, Download, Share2, Link2Off } from "lucide-react";
+import { Heart, Sparkles, Download, Share2, Link2Off, LayoutGrid } from "lucide-react";
 import { cn, getDisplayImageUrl } from "@/lib/utils";
 import { Outfit } from "@/types";
 
@@ -14,6 +14,7 @@ interface OutfitCardProps {
   onExport?: (outfit: Outfit) => void;
   onShare?: (outfit: Outfit) => void;
   onRevoke?: (outfit: Outfit) => void;
+  onFlatLay?: (outfit: Outfit) => void;
 }
 
 function formatLastWorn(wears?: { id: string; wornAt: string }[]) {
@@ -44,6 +45,7 @@ export function OutfitCard({
   onExport,
   onShare,
   onRevoke,
+  onFlatLay,
 }: OutfitCardProps) {
   const garmentsList = outfit.garments.map((g) => g.garment);
   const garmentCount = garmentsList.length;
@@ -66,6 +68,11 @@ export function OutfitCard({
   const handleRevokeClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onRevoke?.(outfit);
+  };
+
+  const handleFlatLayClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onFlatLay?.(outfit);
   };
 
   const renderCollage = () => {
@@ -163,8 +170,18 @@ export function OutfitCard({
         </button>
 
         {/* Export + Share actions — visible on hover */}
-        {(onExport || onShare || onRevoke) && (
+        {(onExport || onShare || onRevoke || onFlatLay) && (
           <div className="absolute top-4 right-14 z-20 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            {onFlatLay && (
+              <button
+                onClick={handleFlatLayClick}
+                className="w-8 h-8 rounded-none border border-border/60 bg-card/90 backdrop-blur-xs flex items-center justify-center hover:bg-accent/40 text-muted-foreground hover:text-foreground transition-all cursor-pointer shadow-sm"
+                aria-label="Open in Flat Lay Builder"
+                title="Open in Flat Lay Builder"
+              >
+                <LayoutGrid className="w-3.5 h-3.5" />
+              </button>
+            )}
             {onExport && (
               <button
                 onClick={handleExportClick}

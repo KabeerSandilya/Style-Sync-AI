@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     const occasion = genResult.data?.occasion ?? null;
 
     // 2. Rate limit — 1 generation per minute per user
-    if (isRateLimited(`${userId}:generate-outfits`, GENERATE_RATE_LIMIT)) {
+    if (await isRateLimited(`${userId}:generate-outfits`, GENERATE_RATE_LIMIT)) {
       return NextResponse.json(
         { success: false, error: "Please wait before generating again." },
         { status: 429 }

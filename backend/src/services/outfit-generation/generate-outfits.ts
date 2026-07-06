@@ -58,13 +58,13 @@ function extractJson(raw: string): string {
   return raw.trim();
 }
 
-export async function generateOutfits(garments: GarmentInput[], occasion?: string | null): Promise<GenerationResult> {
+export async function generateOutfits(garments: GarmentInput[], occasion?: string | null, keywords?: string[]): Promise<GenerationResult> {
   const ai = getGenAIClient();
   if (!ai) throw new Error("Gemini API key is not configured.");
 
   const garmentInputMap = new Map(garments.map((g) => [g.id, g]));
 
-  const prompt = buildGenerationPrompt(garments, occasion);
+  const prompt = buildGenerationPrompt(garments, occasion, keywords);
 
   // Try primary model; fall back to gemini-2.0-flash on 503 (capacity spikes).
   let response;

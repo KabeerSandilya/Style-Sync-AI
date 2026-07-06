@@ -1,6 +1,6 @@
 import { GarmentInput } from "./types";
 
-export function buildGenerationPrompt(garments: GarmentInput[], occasion?: string | null): string {
+export function buildGenerationPrompt(garments: GarmentInput[], occasion?: string | null, keywords?: string[]): string {
   const garmentList = JSON.stringify(
     garments.map((g) => ({
       id: g.id,
@@ -20,7 +20,11 @@ export function buildGenerationPrompt(garments: GarmentInput[], occasion?: strin
     ? `\nThe user is dressing for: ${occasion}.\nPrefer garment combinations appropriate for this context.\nName each outfit to reflect this occasion naturally.\n`
     : "";
 
-  return `You are a professional fashion stylist. Your task is to create stylish, wearable outfit combinations from a wardrobe of clothing items.${occasionLine}
+  const keywordLine = keywords && keywords.length > 0
+    ? `\nThe user's request specifically calls for these qualities: ${keywords.join(", ")}.\nPrioritize garments matching these attributes over any other consideration (including season metadata).\n`
+    : "";
+
+  return `You are a professional fashion stylist. Your task is to create stylish, wearable outfit combinations from a wardrobe of clothing items.${occasionLine}${keywordLine}
 
 WARDROBE:
 ${garmentList}

@@ -12,12 +12,16 @@ export function rankOutfits(
   wearsMap?: Record<string, Date>,
   feedbackMap?: Record<string, FeedbackType>,
   requestedOccasion?: string | null,
+  queryKeywords?: string[],
+  suggestionsMap?: Record<string, Date>,
+  seasonOverride?: string | null,
 ): ScoredOutfit[] {
   const scored = outfits.map((outfit) => {
     const lastWornAt = wearsMap ? wearsMap[outfit.id] : null;
     const feedbackType = feedbackMap ? feedbackMap[outfit.id] : null;
-    const score = scoreOutfit(outfit, weather, userPreference, lastWornAt, feedbackType, requestedOccasion);
-    const explanation = explainRecommendation(outfit, weather, score, userPreference, requestedOccasion);
+    const lastSuggestedAt = suggestionsMap ? suggestionsMap[outfit.id] : null;
+    const score = scoreOutfit(outfit, weather, userPreference, lastWornAt, feedbackType, requestedOccasion, queryKeywords, lastSuggestedAt, seasonOverride);
+    const explanation = explainRecommendation(outfit, weather, score, userPreference, requestedOccasion, queryKeywords);
     return {
       outfitId: outfit.id,
       score,

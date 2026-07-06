@@ -1,0 +1,19 @@
+model LookBookEntry {
+  id          String   @id @default(cuid())
+  userId      String
+
+  outfitId    String?
+  outfit      Outfit?  @relation(fields: [outfitId], references: [id], onDelete: SetNull)
+
+  photoUrl    String
+  date        DateTime
+  rating      Int
+  mood        String[]
+  notes       String?
+  isShareable Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([userId, date])
+}

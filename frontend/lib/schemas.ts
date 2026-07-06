@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { NextResponse } from "next/server";
+import { MOOD_TAGS, OCCASIONS } from "@style-sync/backend/types";
 
 export function zodError(error: z.ZodError) {
   return NextResponse.json(
@@ -8,9 +9,7 @@ export function zodError(error: z.ZodError) {
   );
 }
 
-const OccasionSchema = z.enum([
-  "Work", "Casual", "Smart Casual", "Formal", "Active", "Date Night",
-]).nullable().optional();
+const OccasionSchema = z.string().trim().min(1).max(50).nullable().optional();
 
 const CuidSchema = z.string().cuid();
 const CuidArraySchema = z.array(CuidSchema).min(1, "Select at least one garment.");
@@ -63,6 +62,14 @@ export const RecommendationsQuerySchema = z.object({
   occasion: OccasionSchema,
 });
 
+// POST /api/recommendations/query
+export const QueryRecommendationSchema = z.object({
+  query: z.string().min(3).max(200),
+  lat:   z.number().min(-90).max(90).optional(),
+  lon:   z.number().min(-180).max(180).optional(),
+  city:  z.string().max(100).optional(),
+});
+
 // POST /api/planner
 export const CreatePlanSchema = z.object({
   outfitId:    CuidSchema,
@@ -89,6 +96,29 @@ export const UpdatePlanSchema = z.object({
   note:     z.string().max(300).nullable().optional(),
 });
 
+// PATCH /api/lookbook/[id]
+export const UpdateLookBookEntrySchema = z.object({
+  outfitId:    CuidSchema.optional().nullable(),
+  date:        z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "date must be YYYY-MM-DD").optional(),
+  rating:      z.number().int().min(1).max(5).optional(),
+  mood:        z.array(z.enum(MOOD_TAGS)).max(MOOD_TAGS.length).optional(),
+  notes:       z.string().max(500).nullable().optional(),
+  isShareable: z.boolean().optional(),
+}).refine(
+  (data) => Object.keys(data).length > 0,
+  { message: "At least one field must be provided" }
+);
+
+// GET /api/lookbook — query params
+export const LookBookQuerySchema = z.object({
+  cursor:   z.string().optional(),
+  limit:    z.coerce.number().int().min(1).max(50).default(20),
+  month:    z.string().regex(/^\d{4}-\d{2}$/, "month must be YYYY-MM").optional(),
+  mood:     z.enum(MOOD_TAGS).optional(),
+  rating:   z.coerce.number().int().min(1).max(5).optional(),
+  occasion: OccasionSchema,
+});
+
 // POST /api/onboarding/complete
 export const OnboardingSchema = z.object({
   favoriteStyles:    z.array(z.string().min(1)).min(1).max(10),
@@ -97,4 +127,27 @@ export const OnboardingSchema = z.object({
   avoidedMaterials:  z.array(z.string()).max(10).optional(),
   preferredSeasons:  z.array(z.string()).max(4).optional(),
   favoriteOccasions: z.array(z.string()).max(6).optional(),
+});
+
+// POST /api/community/profile
+export const UpsertCommunityProfileSchema = z.object({
+  displayName: z.string().trim().min(1).max(40),
+  avatarUrl:   z.string().url(),
+  isPrivate:   z.boolean(),
+});
+
+// POST /api/community
+export const CreateCommunityPostSchema = z.object({
+  sourceLookBookEntryId: CuidSchema,
+  caption:               z.string().max(300).optional(),
+  occasion:              z.enum(OCCASIONS).optional(),
+});
+
+// GET /api/community — query params
+export const CommunityFeedQuerySchema = z.object({
+  cursor:   z.string().optional(),
+  limit:    z.coerce.number().int().min(1).max(30).default(12),
+  occasion: z.enum(OCCASIONS).optional(),
+  sort:     z.enum(["newest", "trending"]).default("newest"),
+  tab:      z.enum(["feed", "saved"]).default("feed"),
 });
