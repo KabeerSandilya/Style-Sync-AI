@@ -68,7 +68,6 @@ Do **not** build:
 * drag-and-drop
 * outfit scoring
 * weather logic
-* avatar preview
 * outfit sharing
 * outfit collaboration
 

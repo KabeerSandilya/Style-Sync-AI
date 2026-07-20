@@ -18,8 +18,7 @@ complete — every feature in the Phase 3 roadmap (F1–F7) is now built.
 
 ## Current Goal
 
-Phase 3 is fully shipped. No spec is queued yet for the next phase — see
-"Next Up" below.
+Phase 3 is fully shipped. No specced-but-unbuilt units remain.
 
 ---
 
@@ -522,13 +521,16 @@ Blockers:
 
 ---
 
-## Next Up
+### Unit 31 — Editor Navigation Restructure & Flat Lay → Look Book Bridge (Completed)
 
-No spec queued yet for the next phase.
-
-### Later — Phase 3 Avatar
-
-Avatar / Virtual Try-On remains deferred until the Sprint 3 expression layer and recommendation quality are solid (see Architecture Decisions below).
+- Restructured `EditorNavbar`: the daily-loop items (Wardrobe, Outfits) stay left of the title; Planner/History moved to a right-side row; Insights/Style DNA/Look Book/Community consolidated into a new `DiscoverMenu` dropdown (click-outside + Escape to close, active-state dot when any child route matches) instead of a flat scrolling link list.
+- Redesigned the `/editor` dashboard's quick-links section into an "In this issue" editorial list (icon tile, serif heading, dotted leader line, arrow affordance) replacing the old 3-column divided grid.
+- Restyled `<AskStylistDialog />`'s trigger button into a two-line pill (label + rotating italic example prompt, `prefers-reduced-motion`-aware) and centered it above the recommendation cards; widened `<TodaysRecommendations />`'s alternate-look list rows and switched the explanation line from a truncated single line to a 2-line clamp.
+- Extracted the drag/resize pointer-event logic shared by canvas-style builders into `frontend/components/canvas/composable-image-item.tsx` (`<ComposableImageItem />`); `<FlatLayItemView />` now wraps it instead of owning its own pointer handlers.
+- Generalized `findUnoccupiedPosition()` in `lib/export-flat-lay.ts` to accept an optional `region`/`gridSize` (defaults to the full 1200×1200 flat lay canvas) so the grid-placement algorithm can be reused against a sub-area by future canvas-based builders.
+- Split `exportFlatLay()` into a pure `renderFlatLay()` (rasterizes items/caption/watermark to a PNG `Blob`, no download side effect) plus a thin `exportFlatLay()` wrapper that renders and triggers the download — enabling reuse outside the download path.
+- Added a **Save to Look Book** button to the Flat Lay Builder page (`/editor/flat-lay/[outfitId]`): renders the current canvas via `renderFlatLay()`, wraps the blob in a `File`, and opens `<AddToLookBookDialog />` pre-filled via its new `initialFile` prop (outfit id carried through so the entry links back to the source outfit) — closes the loop opened by Unit 29 where flat lays could only be downloaded, not journaled.
+- `npx tsc --noEmit` — zero errors (frontend). Could not complete a full authenticated browser click-through: Clerk's `/sign-up` in this environment is gated by a Cloudflare Turnstile challenge that a headless driver cannot solve (same limitation noted in Unit 29). Verified instead via: unauthenticated route checks confirm no server crash (Clerk dev-browser handshake intercepts as expected, matching Unit 29's precedent), a Playwright pass through `/` and `/sign-up` with zero console errors, and full type-checking. Recommend a manual click-through of the Discover dropdown and the Save to Look Book flow in an already-logged-in browser session.
 
 ---
 
@@ -545,9 +547,6 @@ Avatar / Virtual Try-On remains deferred until the Sprint 3 expression layer and
 ### Technical Decisions
 
 - Should recommendations run synchronously or via queue jobs?
-- Which avatar provider is preferred for MVP:
-  - Ready Player Me
-  - Avaturn
 
 ---
 
@@ -599,16 +598,6 @@ Avoid blocking uploads and maintain fast UX.
 
 ---
 
-### 3D Avatar Scope
-
-Decision:
-Defer advanced virtual try-on until after MVP.
-
-Why:
-Avoid unnecessary complexity early.
-
----
-
 ## Session Notes
 
 Current product direction:
@@ -619,13 +608,10 @@ Current product direction:
 - Build wardrobes
 - Receive personalized outfit recommendations
 - Get weather-aware suggestions
-- Eventually create a scanned 3D avatar for virtual try-on
 
 Current engineering priority:
 
 **Ship the wardrobe + recommendation engine first.**
-
-Do not start avatar rendering before recommendation quality is strong.
 
 ---
 

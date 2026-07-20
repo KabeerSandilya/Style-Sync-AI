@@ -16,6 +16,7 @@ interface AddToLookBookDialogProps {
   onOpenChange: (open: boolean) => void;
   outfitId?: string | null;
   date?: string | null;
+  initialFile?: File | null;
   onSuccess?: (message: string) => void;
 }
 
@@ -29,6 +30,7 @@ export function AddToLookBookDialog({
   onOpenChange,
   outfitId = null,
   date = null,
+  initialFile = null,
   onSuccess,
 }: AddToLookBookDialogProps) {
   const [file, setFile] = React.useState<File | null>(null);
@@ -75,6 +77,13 @@ export function AddToLookBookDialog({
     setFile(selected);
     setPreviewUrl(URL.createObjectURL(selected));
   };
+
+  React.useEffect(() => {
+    if (open && initialFile && validateFile(initialFile)) {
+      selectFile(initialFile);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, initialFile]);
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();

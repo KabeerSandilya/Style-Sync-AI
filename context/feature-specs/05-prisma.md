@@ -20,8 +20,6 @@ The schema must support:
 * AI garment classification
 * outfit recommendation personalization
 * weather-aware suggestions
-* avatar onboarding
-* virtual try-on
 * wardrobe analytics
 
 The schema should remain **minimal but extensible**.
@@ -395,7 +393,6 @@ Do **not**:
 * duplicate Clerk users in database
 * over-normalize prematurely
 * add social/collaboration models
-* add avatar tables yet
 * add recommendation ML storage yet
 
 Keep MVP lean.

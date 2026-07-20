@@ -8,7 +8,7 @@
 
 ## §0. READ THIS FIRST — "Documented" vs "Built"
 
-Your `context/architecture.md` describes an ambitious target stack (NestJS, pgvector embeddings, Redis + BullMQ, Three.js avatars, Turborepo + pnpm, OpenAI Vision, an admin app, microservices). **Most of that is not in the code yet.** If you claim it in an interview and the interviewer probes, you will get exposed.
+Your `context/architecture.md` describes an ambitious target stack (NestJS, pgvector embeddings, Redis + BullMQ, Turborepo + pnpm, OpenAI Vision, an admin app, microservices). **Most of that is not in the code yet.** If you claim it in an interview and the interviewer probes, you will get exposed.
 
 Here is the **truth table** — memorize this distinction; it is your single biggest interview risk:
 
@@ -18,7 +18,6 @@ Here is the **truth table** — memorize this distinction; it is your single big
 | OpenAI Vision / FashionCLIP | **Google Gemini 2.5 Flash** (`@google/genai`), with `gemini-2.0-flash` as a 503 fallback | "I use Gemini 2.5 Flash for vision classification and outfit generation." |
 | Redis + BullMQ queues | **Next.js `after()`** (runs work after the response is flushed) | "Background work uses Next's `after()` primitive — no separate queue infra yet." |
 | pgvector + embeddings | **Not implemented.** Recommendation is a **deterministic rule engine** | "Recommendations are rule-based and explainable; embeddings are a planned upgrade." |
-| Three.js / Ready Player Me avatar | **Not implemented** (explicitly out of MVP scope) | "Future phase; the schema and architecture leave room for it." |
 | Turborepo + pnpm | **npm workspaces** (root `package.json` `workspaces`) | "npm workspaces monorepo, two packages: frontend + backend." |
 | Admin app, microservices | **Not built** | "Single deployable; designed so services could be extracted later." |
 
@@ -31,7 +30,7 @@ Everything below describes the **real, shipped system**.
 - **Project Name:** StyleSync AI
 - **Problem Statement:** Style-conscious people own more clothing than they wear and waste time each morning deciding what to put on. They over-buy and under-wear. There is no low-effort way to *use what you already own* intelligently.
 - **Target Users:** Style-conscious individuals roughly 20–40 who want to dress deliberately without spending time on it.
-- **Business Value:** Reduces decision fatigue, increases utilization of an owned wardrobe, and creates a data moat (per-user wear/feedback history) that improves recommendations over time. Natural expansion paths: resale, brand partnerships, virtual try-on.
+- **Business Value:** Reduces decision fatigue, increases utilization of an owned wardrobe, and creates a data moat (per-user wear/feedback history) that improves recommendations over time. Natural expansion paths: resale, brand partnerships.
 - **Key Features:**
   1. AI wardrobe digitization — upload a photo, Gemini auto-classifies category/color/style/season/material/confidence, background removed automatically.
   2. AI outfit generation — Gemini assembles 6–8 stylist-grade outfits from *your* garments under explicit fashion rules.
@@ -661,7 +660,6 @@ GROUP BY "outfitId" ORDER BY COUNT(*) DESC;
 5. **No automated route/integration tests + CI.** *Why:* quality gate. *Prep:* state what Vitest covers and what you'd add (Playwright, route tests, GH Actions).
 6. **pgvector/embeddings unbuilt.** *Why:* docs promise it. *Prep:* describe the hybrid rules+vector design and where it slots into `scoreOutfit`.
 7. **Cost modeling of AI.** *Why:* unit economics. *Prep:* per-classification/generation token cost, caching by image hash, quotas.
-8. **Avatar/3D feature.** *Why:* it's advertised. *Prep:* clearly label it future-phase; explain the decoupling invariant that keeps it possible.
 
 ---
 

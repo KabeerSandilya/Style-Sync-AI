@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Sparkles, Loader2, Check, ThumbsUp, ThumbsDown, MessageCircleQuestion } from "lucide-react";
+import { Sparkles, Loader2, Check, ThumbsUp, ThumbsDown, ArrowUpRight } from "lucide-react";
 import { EditorialDialog } from "@/components/editor/editorial-dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -36,15 +36,32 @@ interface AskStylistResponse {
   classifiedCount?: number;
 }
 
+const EXAMPLE_PROMPTS = [
+  "dinner date tonight",
+  "casual Sunday brunch",
+  "first day at a new job",
+  "a rainy commute",
+];
+
 export function AskStylistDialog({ location }: { location: AskStylistLocation }) {
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
   const [result, setResult] = React.useState<AskStylistResponse | null>(null);
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
+  const [promptIndex, setPromptIndex] = React.useState(0);
 
   const askStylist = useAskStylist();
   const wearMutation = useWearOutfit();
   const likeDislikeMutation = useLikeDislike();
+
+  React.useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(
+      () => setPromptIndex((i) => (i + 1) % EXAMPLE_PROMPTS.length),
+      2800
+    );
+    return () => clearInterval(id);
+  }, []);
 
   const handleOpenChange = (val: boolean) => {
     setOpen(val);
@@ -84,12 +101,21 @@ export function AskStylistDialog({ location }: { location: AskStylistLocation })
       onOpenChange={handleOpenChange}
       trigger={
         <Button
-          variant="outline"
-          size="sm"
-          className="rounded-none font-sans font-semibold text-[10px] tracking-widest uppercase px-3 border-border/60 flex items-center gap-1.5"
+          className="group h-auto rounded-none px-5 py-3 flex items-center gap-3 cursor-pointer shadow-[0_2px_16px_rgba(112,130,114,0.35)] hover:shadow-[0_4px_20px_rgba(112,130,114,0.45)] transition-shadow"
         >
-          <MessageCircleQuestion className="w-3.5 h-3.5" />
-          Ask the Stylist
+          <Sparkles className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:rotate-12" />
+          <span className="flex flex-col items-start leading-tight min-w-0">
+            <span className="font-sans text-[10px] font-bold uppercase tracking-widest">
+              Ask the Stylist
+            </span>
+            <span
+              key={promptIndex}
+              className="font-serif italic text-[13px] text-primary-foreground/85 animate-fade-in truncate max-w-48"
+            >
+              &ldquo;{EXAMPLE_PROMPTS[promptIndex]}?&rdquo;
+            </span>
+          </span>
+          <ArrowUpRight className="w-3.5 h-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Button>
       }
       title="Ask the Stylist"

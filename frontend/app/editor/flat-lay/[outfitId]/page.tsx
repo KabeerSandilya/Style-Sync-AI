@@ -4,14 +4,17 @@
 
 import * as React from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ChevronLeft, Plus, Download, Loader2, X, LayoutGrid } from "lucide-react";
+import { ChevronLeft, Plus, Download, BookOpen, Loader2, X, LayoutGrid } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { FlatLayItemView } from "@/components/flat-lay/flat-lay-item";
+import { AddToLookBookDialog } from "@/components/lookbook/add-to-lookbook-dialog";
 import {
   exportFlatLay,
+  renderFlatLay,
   loadFlatLayImage,
   itemHeight,
+  findUnoccupiedPosition,
   FLAT_LAY_CANVAS_SIZE,
   DEFAULT_FLAT_LAY_BACKGROUND,
   type FlatLayItem,
@@ -23,61 +26,6 @@ import { useOutfits } from "@/lib/hooks/use-outfits";
 import { useGarments } from "@/lib/hooks/use-garments";
 import { cn, getDisplayImageUrl } from "@/lib/utils";
 import { Garment } from "@/types";
-
-const GRID_SIZE = 3;
-const CELL = FLAT_LAY_CANVAS_SIZE / GRID_SIZE;
-
-interface Rect {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
-
-function rectsOverlap(a: Rect, b: Rect, margin = 6): boolean {
-  return (
-    a.x < b.x + b.width - margin &&
-    a.x + a.width > b.x + margin &&
-    a.y < b.y + b.height - margin &&
-    a.y + a.height > b.y + margin
-  );
-}
-
-function sizeForCell(aspectRatio: number, cell: number): { width: number; height: number } {
-  let width = cell * 0.72;
-  let height = width * aspectRatio;
-  const maxHeight = cell * 0.85;
-  if (height > maxHeight) {
-    height = maxHeight;
-    width = height / aspectRatio;
-  }
-  return { width, height };
-}
-
-function findUnoccupiedPosition(
-  existing: Rect[],
-  aspectRatio: number
-): { x: number; y: number; width: number } {
-  for (let row = 0; row < GRID_SIZE; row++) {
-    for (let col = 0; col < GRID_SIZE; col++) {
-      const { width, height } = sizeForCell(aspectRatio, CELL);
-      const x = col * CELL + (CELL - width) / 2;
-      const y = row * CELL + (CELL - height) / 2;
-      const candidate = { x, y, width, height };
-      if (!existing.some((item) => rectsOverlap(candidate, item))) {
-        return { x, y, width };
-      }
-    }
-  }
-  // Every grid cell is occupied — cascade from the top-left as a fallback.
-  const { width, height } = sizeForCell(aspectRatio, CELL * 0.8);
-  const offset = (existing.length % 6) * 24;
-  return {
-    x: Math.min(FLAT_LAY_CANVAS_SIZE - width, 60 + offset),
-    y: Math.min(FLAT_LAY_CANVAS_SIZE - height, 60 + offset),
-    width,
-  };
-}
 
 function FlatLaySkeleton() {
   return (
@@ -129,6 +77,9 @@ export default function FlatLayBuilderPage() {
   const [isExporting, setIsExporting] = React.useState(false);
   const [isWardrobeOpen, setIsWardrobeOpen] = React.useState(false);
   const [toast, setToast] = React.useState<string | null>(null);
+  const [isPreparingLookBook, setIsPreparingLookBook] = React.useState(false);
+  const [isLookBookOpen, setIsLookBookOpen] = React.useState(false);
+  const [lookBookFile, setLookBookFile] = React.useState<File | null>(null);
 
   const imagesRef = React.useRef<Map<string, HTMLImageElement>>(new Map());
   const seededOutfitIdRef = React.useRef<string | null>(null);
@@ -313,6 +264,25 @@ export default function FlatLayBuilderPage() {
     }
   };
 
+  const handleSaveToLookBook = async () => {
+    if (!outfit) return;
+    setIsPreparingLookBook(true);
+    try {
+      const blob = await renderFlatLay(items, imagesRef.current, caption.text.trim() ? caption : null, {
+        ratio,
+        background,
+        showWatermark,
+      });
+      const safeName = outfit.name.replace(/[^a-z0-9]/gi, "-").toLowerCase();
+      setLookBookFile(new File([blob], `${safeName}-flat-lay.png`, { type: "image/png" }));
+      setIsLookBookOpen(true);
+    } catch {
+      triggerToast("Couldn't prepare the flat lay. Please try again.");
+    } finally {
+      setIsPreparingLookBook(false);
+    }
+  };
+
   if (loadingOutfits) {
     return <FlatLaySkeleton />;
   }
@@ -402,6 +372,21 @@ export default function FlatLayBuilderPage() {
           >
             Watermark {showWatermark ? "On" : "Off"}
           </button>
+
+          <Button
+            variant="outline"
+            onClick={handleSaveToLookBook}
+            disabled={isPreparingLookBook}
+            size="sm"
+            className="rounded-none border-border/60 text-xs gap-1.5"
+          >
+            {isPreparingLookBook ? (
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+            ) : (
+              <BookOpen className="w-3.5 h-3.5" />
+            )}
+            Save to Look Book
+          </Button>
 
           <Button onClick={handleExport} disabled={isExporting} size="sm" className="rounded-none text-xs gap-1.5">
             {isExporting ? (
@@ -526,6 +511,15 @@ export default function FlatLayBuilderPage() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Save to Look Book */}
+      <AddToLookBookDialog
+        open={isLookBookOpen}
+        onOpenChange={setIsLookBookOpen}
+        outfitId={outfit.id}
+        initialFile={lookBookFile}
+        onSuccess={(message) => triggerToast(message)}
+      />
 
       {/* Toast */}
       {toast && (

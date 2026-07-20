@@ -27,10 +27,13 @@ const EXPORT_DIMENSIONS: Record<FlatLayRatio, { width: number; height: number }>
   "4:5": { width: 1080, height: 1350 },
 };
 
-export interface ExportFlatLayOptions {
+export interface RenderFlatLayOptions {
   ratio: FlatLayRatio;
   background: FlatLayBackground;
   showWatermark: boolean;
+}
+
+export interface ExportFlatLayOptions extends RenderFlatLayOptions {
   fileName: string;
 }
 
@@ -38,13 +41,79 @@ export function itemHeight(item: Pick<FlatLayItem, "width" | "aspectRatio">): nu
   return item.width * item.aspectRatio;
 }
 
-export async function exportFlatLay(
+export interface Rect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+const DEFAULT_GRID_SIZE = 3;
+
+export function rectsOverlap(a: Rect, b: Rect, margin = 6): boolean {
+  return (
+    a.x < b.x + b.width - margin &&
+    a.x + a.width > b.x + margin &&
+    a.y < b.y + b.height - margin &&
+    a.y + a.height > b.y + margin
+  );
+}
+
+export function sizeForCell(aspectRatio: number, cell: number): { width: number; height: number } {
+  let width = cell * 0.72;
+  let height = width * aspectRatio;
+  const maxHeight = cell * 0.85;
+  if (height > maxHeight) {
+    height = maxHeight;
+    width = height / aspectRatio;
+  }
+  return { width, height };
+}
+
+// Places a new item in the first unoccupied grid cell within `region`, falling
+// back to a cascading offset once every cell is taken. Defaults to the flat
+// lay canvas's full 3x3 grid; callers can pass a smaller region/gridSize to
+// search a sub-area instead.
+export function findUnoccupiedPosition(
+  existing: Rect[],
+  aspectRatio: number,
+  region: Rect = { x: 0, y: 0, width: FLAT_LAY_CANVAS_SIZE, height: FLAT_LAY_CANVAS_SIZE },
+  gridSize: number = DEFAULT_GRID_SIZE
+): { x: number; y: number; width: number } {
+  const cellW = region.width / gridSize;
+  const cellH = region.height / gridSize;
+  const cell = Math.min(cellW, cellH);
+
+  for (let row = 0; row < gridSize; row++) {
+    for (let col = 0; col < gridSize; col++) {
+      const { width, height } = sizeForCell(aspectRatio, cell);
+      const x = region.x + col * cellW + (cellW - width) / 2;
+      const y = region.y + row * cellH + (cellH - height) / 2;
+      const candidate = { x, y, width, height };
+      if (!existing.some((item) => rectsOverlap(candidate, item))) {
+        return { x, y, width };
+      }
+    }
+  }
+  // Every grid cell is occupied — cascade from the region's top-left as a fallback.
+  const { width, height } = sizeForCell(aspectRatio, cell * 0.8);
+  const offset = (existing.length % 6) * (cell * 0.2);
+  return {
+    x: Math.min(region.x + region.width - width, region.x + offset),
+    y: Math.min(region.y + region.height - height, region.y + offset),
+    width,
+  };
+}
+
+// Rasterizes the composition to a PNG Blob without triggering a download —
+// shared by exportFlatLay() (download) and the Save to Look Book flow (upload).
+export async function renderFlatLay(
   items: FlatLayItem[],
   images: Map<string, HTMLImageElement>,
   caption: CaptionLayer | null,
-  options: ExportFlatLayOptions
-): Promise<void> {
-  const { ratio, background, showWatermark, fileName } = options;
+  options: RenderFlatLayOptions
+): Promise<Blob> {
+  const { ratio, background, showWatermark } = options;
   const { width: outWidth, height: outHeight } = EXPORT_DIMENSIONS[ratio];
 
   const canvas = document.createElement("canvas");
@@ -120,9 +189,20 @@ export async function exportFlatLay(
   const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png"));
   if (!blob) throw new Error("Failed to export flat lay");
 
+  return blob;
+}
+
+export async function exportFlatLay(
+  items: FlatLayItem[],
+  images: Map<string, HTMLImageElement>,
+  caption: CaptionLayer | null,
+  options: ExportFlatLayOptions
+): Promise<void> {
+  const blob = await renderFlatLay(items, images, caption, options);
+
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
-  link.download = `${fileName.replace(/[^a-z0-9]/gi, "-").toLowerCase()}-flat-lay.png`;
+  link.download = `${options.fileName.replace(/[^a-z0-9]/gi, "-").toLowerCase()}-flat-lay.png`;
   link.href = url;
   link.click();
   URL.revokeObjectURL(url);

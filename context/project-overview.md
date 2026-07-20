@@ -6,8 +6,6 @@ StyleSync AI is an AI-powered digital wardrobe platform that helps users organiz
 
 The platform is designed for people who want to dress better using what they already own without wasting time deciding outfits every day. Users upload clothing pieces individually into a digital wardrobe where AI automatically categorizes, tags, and organizes garments. The platform then recommends personalized outfits using real-world contextual information such as weather, humidity, time of day, and style preferences.
 
-In later phases, users can generate a personalized 3D avatar through body scanning to preview outfits virtually.
-
 ---
 
 ## Goals
@@ -18,9 +16,7 @@ In later phases, users can generate a personalized 3D avatar through body scanni
 
 3. Reduce outfit decision fatigue through contextual AI suggestions.
 
-4. Create a scalable foundation for virtual try-on and 3D fashion experiences.
-
-5. Build an explainable AI stylist that provides transparent reasoning for outfit recommendations.
+4. Build an explainable AI stylist that provides transparent reasoning for outfit recommendations.
 
 ---
 
@@ -78,9 +74,6 @@ In later phases, users can generate a personalized 3D avatar through body scanni
 * favorites outfit
 * regenerates suggestions
 
-11. Future Phase:
-    User generates a scanned 3D avatar to preview outfits virtually.
-
 ---
 
 ## Features
@@ -127,13 +120,6 @@ In later phases, users can generate a personalized 3D avatar through body scanni
 * AQI-based suggestions
 * Seasonal adaptation
 
-### Avatar & Virtual Try-On (Future Phase)
-
-* Body scan onboarding
-* Personalized avatar generation
-* 3D outfit visualization
-* Virtual try-on experience
-
 ---
 
 ## Scope
@@ -155,7 +141,6 @@ In later phases, users can generate a personalized 3D avatar through body scanni
 
 ### Out of Scope (MVP)
 
-* Realistic physics-based virtual try-on
 * Real-time AR mirror
 * Marketplace/social features
 * Clothing purchasing integrations
@@ -181,5 +166,3 @@ In later phases, users can generate a personalized 3D avatar through body scanni
 6. Average recommendation generation time stays below 3 seconds.
 
 7. The wardrobe upload → recommendation flow works end-to-end without manual intervention.
-
-8. The system architecture supports future 3D avatar and virtual try-on expansion without major rewrites.
