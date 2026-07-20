@@ -4,6 +4,9 @@ import { prisma, generateOutfits, withRetry, isRateLimited } from "@style-sync/b
 import type { GarmentInput } from "@style-sync/backend";
 import { GenerateOutfitsSchema, zodError } from "@/lib/schemas";
 
+export const runtime = "nodejs";
+export const maxDuration = 60;
+
 const GENERATE_RATE_LIMIT = { limit: 1, windowMs: 60_000 };
 const MIN_CLASSIFIED_GARMENTS = 3;
 

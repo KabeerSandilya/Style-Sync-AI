@@ -3,6 +3,9 @@ import { after, NextResponse } from "next/server";
 import { cloudinary, prisma, classifyGarment, removeBackground, withRetry, isRateLimited } from "@style-sync/backend";
 import { getQStash, getAppUrl } from "@/lib/qstash";
 
+export const runtime = "nodejs";
+export const maxDuration = 60;
+
 const UPLOAD_RATE_LIMIT = { limit: 10, windowMs: 60_000 };
 
 export async function POST(req: Request) {

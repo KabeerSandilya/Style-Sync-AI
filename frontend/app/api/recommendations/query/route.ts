@@ -16,6 +16,9 @@ import {
 import type { GarmentInput } from "@style-sync/backend";
 import { QueryRecommendationSchema, zodError } from "@/lib/schemas";
 
+export const runtime = "nodejs";
+export const maxDuration = 60;
+
 const ASK_STYLIST_RATE_LIMIT = { limit: 5, windowMs: 60_000 };
 const MIN_CLASSIFIED_GARMENTS = 3;
 const GOOD_MATCH_THRESHOLD = 60;

@@ -73,6 +73,14 @@ export async function removeBackground(imageUrl: string): Promise<Buffer | null>
     if (process.env.REMOVE_BG_API_KEY) {
       return await removeBackgroundViaApi(imageUrl);
     }
+    if (process.env.VERCEL) {
+      // Fail loudly instead of letting the ONNX model attempt to load on a
+      // read-only, memory-constrained serverless filesystem.
+      throw new Error(
+        "REMOVE_BG_API_KEY is not set. The local @imgly ONNX fallback cannot run on Vercel " +
+          "(no persistent filesystem / model too large)."
+      );
+    }
     // Local dev fallback — not suitable for serverless/Vercel
     console.warn(
       "[removeBackground] REMOVE_BG_API_KEY not set — using local @imgly model. " +

@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server'
 import { cloudinary, prisma, removeBackground, withRetry } from '@style-sync/backend'
 import { Receiver } from '@upstash/qstash'
 
+export const runtime = 'nodejs'
+export const maxDuration = 60
+
 interface JobPayload {
   garmentId: string
   userId: string

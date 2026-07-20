@@ -2,6 +2,9 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { prisma, classifyGarment, withRetry, isRateLimited } from "@style-sync/backend";
 
+export const runtime = "nodejs";
+export const maxDuration = 60;
+
 const CLASSIFY_RATE_LIMIT = { limit: 5, windowMs: 60_000 };
 
 export async function POST(
