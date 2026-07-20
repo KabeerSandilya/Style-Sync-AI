@@ -19,7 +19,13 @@
       "Bash(curl -s -o /dev/null -w \"GET /editor -> %{http_code}\\\\n\" http://localhost:3000/editor)",
       "Bash(powershell -Command \"Get-Process -Id 32864 -ErrorAction SilentlyContinue | Stop-Process -Force\")",
       "Bash(git status *)",
-      "Bash(npm ls *)"
+      "Bash(npm ls *)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(xargs ls)",
+      "Bash(grep -Hm1 ^description: /d/Padhai/Style-Sync-AI/.claude/skills/*/SKILL.md)",
+      "Bash(ls /d/Padhai/Style-Sync-AI/.claude/skills)"
     ]
   },
   "hooks": {

@@ -8,7 +8,6 @@ These components act as the reusable shell for:
 * outfit builder
 * AI recommendations
 * profile/settings
-* future avatar experience
 
 They should be reusable and extended throughout future implementation units.
 

@@ -34,13 +34,6 @@ Development should prioritize **shipping a stable MVP first**, followed by progr
 - Occasion-aware suggestions
 - Smart wardrobe insights
 
-### Phase 3 — Avatar & Virtual Try-On
-
-- Body scan onboarding
-- Avatar generation
-- 3D wardrobe rendering
-- Virtual outfit previews
-
 ---
 
 ## Scoping Rules
@@ -61,8 +54,6 @@ Development should prioritize **shipping a stable MVP first**, followed by progr
 6. Recommendation engine
 7. Outfit builder
 8. AI stylist explanation layer
-9. Avatar onboarding
-10. Virtual try-on system
 
 ---
 
@@ -74,7 +65,6 @@ Split implementation if it combines:
 - Upload flows and recommendation logic
 - Multiple unrelated API routes
 - Frontend and infrastructure concerns in one step
-- Avatar rendering and recommendation systems
 - Behavior not explicitly defined in context files
 
 If a feature cannot be verified end-to-end quickly, split the scope.
@@ -97,7 +87,6 @@ Combining:
 
 - Clothing upload
 - Outfit recommendation engine
-- Avatar rendering
 - Weather system
 
 In one implementation cycle.
@@ -130,7 +119,6 @@ Do not modify the following unless explicitly instructed:
 - `packages/config/*` — Shared linting and TypeScript configs
 - Prisma migration history
 - Third-party library internals
-- Generated avatar assets
 
 Never directly edit generated files.
 
@@ -172,7 +160,6 @@ When:
 
 - Product requirements evolve
 - Recommendation logic changes
-- Avatar behavior changes
 - User flows are updated
 
 ---

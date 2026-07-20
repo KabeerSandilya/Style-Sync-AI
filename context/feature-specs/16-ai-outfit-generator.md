@@ -54,7 +54,6 @@ Build:
 Do **not** build:
 
 * image-based outfit collage generation
-* avatar rendering
 * social sharing of generated outfits
 * scheduled / automatic background generation
 * outfit embeddings or vector similarity

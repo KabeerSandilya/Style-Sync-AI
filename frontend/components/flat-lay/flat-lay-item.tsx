@@ -5,9 +5,8 @@
 import * as React from "react";
 import { ChevronsUp, ChevronsDown, FlipHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { FLAT_LAY_CANVAS_SIZE, itemHeight, type FlatLayItem } from "@/lib/export-flat-lay";
-
-const MIN_WIDTH = 60;
+import { ComposableImageItem } from "@/components/canvas/composable-image-item";
+import { FLAT_LAY_CANVAS_SIZE, type FlatLayItem } from "@/lib/export-flat-lay";
 
 interface FlatLayItemViewProps {
   item: FlatLayItem;
@@ -34,75 +33,19 @@ export function FlatLayItemView({
   onSendBack,
   onFlip,
 }: FlatLayItemViewProps) {
-  const dragState = React.useRef<{ startX: number; startY: number; itemX: number; itemY: number } | null>(null);
-  const resizeState = React.useRef<{ startX: number; startWidth: number } | null>(null);
-
-  const handleDragPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    onSelect();
-    e.currentTarget.setPointerCapture(e.pointerId);
-    dragState.current = { startX: e.clientX, startY: e.clientY, itemX: item.x, itemY: item.y };
-  };
-
-  const handleDragPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!dragState.current) return;
-    const { startX, startY, itemX, itemY } = dragState.current;
-    const dx = (e.clientX - startX) / scale;
-    const dy = (e.clientY - startY) / scale;
-    const height = itemHeight(item);
-    const nextX = Math.min(Math.max(0, itemX + dx), FLAT_LAY_CANVAS_SIZE - item.width);
-    const nextY = Math.min(Math.max(0, itemY + dy), FLAT_LAY_CANVAS_SIZE - height);
-    onChange({ x: nextX, y: nextY });
-  };
-
-  const handleDragPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
-      e.currentTarget.releasePointerCapture(e.pointerId);
-    }
-    dragState.current = null;
-  };
-
-  const handleResizePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    onSelect();
-    e.currentTarget.setPointerCapture(e.pointerId);
-    resizeState.current = { startX: e.clientX, startWidth: item.width };
-  };
-
-  const handleResizePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!resizeState.current) return;
-    e.stopPropagation();
-    const { startX, startWidth } = resizeState.current;
-    const dx = (e.clientX - startX) / scale;
-    const maxWidth = FLAT_LAY_CANVAS_SIZE - item.x;
-    const nextWidth = Math.min(Math.max(MIN_WIDTH, startWidth + dx), maxWidth);
-    onChange({ width: nextWidth });
-  };
-
-  const handleResizePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
-      e.currentTarget.releasePointerCapture(e.pointerId);
-    }
-    resizeState.current = null;
-  };
-
-  const height = itemHeight(item);
-
   return (
-    <div
-      className="absolute touch-none select-none"
-      style={{
-        left: item.x * scale,
-        top: item.y * scale,
-        width: item.width * scale,
-        height: height * scale,
-        zIndex: item.zIndex,
-      }}
-      onPointerDown={handleDragPointerDown}
-      onPointerMove={handleDragPointerMove}
-      onPointerUp={handleDragPointerUp}
-      onPointerCancel={handleDragPointerUp}
+    <ComposableImageItem
+      x={item.x}
+      y={item.y}
+      width={item.width}
+      aspectRatio={item.aspectRatio}
+      zIndex={item.zIndex}
+      selected={isSelected}
+      scale={scale}
+      canvasWidth={FLAT_LAY_CANVAS_SIZE}
+      canvasHeight={FLAT_LAY_CANVAS_SIZE}
+      onChange={onChange}
+      onSelect={onSelect}
     >
       {isSelected && (
         <div
@@ -161,17 +104,6 @@ export function FlatLayItemView({
           style={{ transform: item.flippedX ? "scaleX(-1)" : undefined }}
         />
       </div>
-
-      {isSelected && (
-        <div
-          onPointerDown={handleResizePointerDown}
-          onPointerMove={handleResizePointerMove}
-          onPointerUp={handleResizePointerUp}
-          onPointerCancel={handleResizePointerUp}
-          className="absolute -bottom-1.5 -right-1.5 w-4 h-4 bg-primary border border-card cursor-nwse-resize touch-none"
-          title="Resize"
-        />
-      )}
-    </div>
+    </ComposableImageItem>
   );
 }

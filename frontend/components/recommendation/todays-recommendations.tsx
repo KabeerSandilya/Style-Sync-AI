@@ -338,7 +338,7 @@ export function TodaysRecommendations({
   return (
     <div className="flex flex-col gap-6 w-full select-none">
       {/* Ask the Stylist entry point */}
-      <div className="flex justify-end">
+      <div className="flex justify-center">
         <AskStylistDialog location={location} />
       </div>
 
@@ -489,7 +489,7 @@ export function TodaysRecommendations({
               <div
                 key={scored.outfitId}
                 onClick={() => setActiveIndex(idx)}
-                className="group flex items-center bg-card border border-border/40 hover:border-border/80 transition-all duration-200 cursor-pointer p-2 gap-3"
+                className="group flex items-center bg-card border border-border/40 hover:border-border/80 transition-all duration-200 cursor-pointer p-3 gap-3"
                 title="Swap to spotlight this look"
               >
                 {/* Mini Collage Container */}
@@ -498,16 +498,16 @@ export function TodaysRecommendations({
                 </div>
 
                 {/* Details */}
-                <div className="flex-1 min-w-0 flex flex-col gap-0.5">
+                <div className="flex-1 min-w-0 flex flex-col gap-1">
                   <div className="flex justify-between items-baseline gap-2">
-                    <h4 className="font-serif text-xs font-medium truncate text-foreground group-hover:text-primary transition-colors">
+                    <h4 className="font-serif text-sm font-medium truncate text-foreground group-hover:text-primary transition-colors">
                       {scored.outfit.name}
                     </h4>
-                    <span className="text-[9px] font-sans font-bold text-primary tracking-wider shrink-0">
+                    <span className="text-[10px] font-sans font-bold text-primary tracking-wider shrink-0">
                       {scored.score}%
                     </span>
                   </div>
-                  <p className="text-[10px] text-muted-foreground truncate italic">
+                  <p className="text-xs text-foreground/70 leading-relaxed line-clamp-2">
                     {scored.explanation}
                   </p>
                 </div>

@@ -371,7 +371,6 @@ Sprint 4 (Social)
 
 ## What Phase 3 Does NOT Include
 
-- Three.js / Ready Player Me 3D avatar (remains future-phase).
 - Brand/product recommendations or e-commerce integrations.
 - Zod schema validation refactor (valuable but orthogonal — best done as a focused PR).
 - TanStack Query client-cache refactor (same).

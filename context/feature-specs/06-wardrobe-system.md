@@ -50,8 +50,6 @@ Do **not** build:
 * outfit builder
 * drag-and-drop outfits
 * garment editing modal
-* virtual try-on
-* avatar system
 
 ---
 

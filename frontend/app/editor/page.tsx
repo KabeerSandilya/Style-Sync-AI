@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Sparkles, ChevronRight, ArrowUpRight } from "lucide-react";
+import { Sparkles, ChevronRight, ArrowUpRight, CalendarDays, BarChart2, SlidersHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { EditorNavbar } from "@/components/editor/editor-navbar";
 import { ProjectSidebar } from "@/components/editor/project-sidebar";
@@ -107,31 +107,47 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Quick links row ───────────────────────────────────── */}
-        <div className="w-full border-b border-border/30">
-          <div className="max-w-3xl mx-auto px-6 md:px-8">
-            <div className="grid grid-cols-3 divide-x divide-border/20">
+        {/* ── In this issue ─────────────────────────────────────── */}
+        <section className="w-full border-b border-border/30">
+          <div className="max-w-3xl mx-auto px-6 md:px-8 py-12 flex flex-col gap-6">
+            <div className="flex flex-col gap-0.5">
+              <h2 className="font-serif text-2xl font-medium tracking-tight">
+                In this <span className="italic font-light text-primary">issue</span>.
+              </h2>
+              <p className="font-sans text-xs text-muted-foreground">
+                Deeper threads on how you dress — journal, analytics, and preferences.
+              </p>
+            </div>
+
+            <div className="border-t border-border/40">
               {[
-                { label: "History", href: "/history", desc: "Style journal" },
-                { label: "Insights", href: "/insights", desc: "Wear analytics" },
-                { label: "Preferences", href: "/preferences", desc: "Style profile" },
-              ].map(({ label, href, desc }) => (
+                { label: "History", href: "/history", desc: "Every outfit you've worn, in order.", icon: CalendarDays },
+                { label: "Insights", href: "/insights", desc: "What gets worn, what doesn't, and why.", icon: BarChart2 },
+                { label: "Preferences", href: "/preferences", desc: "The colors, styles, and cuts you gravitate to.", icon: SlidersHorizontal },
+              ].map(({ label, href, desc, icon: Icon }) => (
                 <button
                   key={href}
                   onClick={() => router.push(href)}
-                  className="flex flex-col gap-0.5 px-4 py-4 text-left hover:bg-accent/20 transition-colors duration-200 cursor-pointer group"
+                  className="group flex w-full items-center gap-5 border-b border-border/40 px-2 -mx-2 py-5 text-left transition-colors duration-200 hover:bg-accent/15 cursor-pointer"
                 >
-                  <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground/80 group-hover:text-primary transition-colors">
-                    {label}
-                  </span>
-                  <span className="font-sans text-[10px] text-muted-foreground hidden sm:block">
-                    {desc}
-                  </span>
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center bg-accent/40 text-primary transition-colors duration-200 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <Icon className="h-4.5 w-4.5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-serif text-xl font-medium tracking-tight text-foreground transition-colors group-hover:text-primary md:text-2xl">
+                      {label}
+                    </h3>
+                    <p className="font-sans text-xs text-muted-foreground mt-0.5 truncate">
+                      {desc}
+                    </p>
+                  </div>
+                  <div className="mx-4 hidden h-px flex-1 border-b border-dotted border-border/70 md:block" aria-hidden />
+                  <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
                 </button>
               ))}
             </div>
           </div>
-        </div>
+        </section>
 
         {/* ── Daily recommendations ─────────────────────────────── */}
         <div className="max-w-3xl w-full mx-auto px-6 md:px-8 py-12 flex flex-col gap-8 animate-enter-5">

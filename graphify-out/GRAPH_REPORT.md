@@ -1,16 +1,16 @@
-# Graph Report - Style-Sync-AI  (2026-07-06)
+# Graph Report - Style-Sync-AI  (2026-07-17)
 
 ## Corpus Check
-- 514 files · ~439,442 words
+- 515 files · ~439,722 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 6572 nodes · 9131 edges · 536 communities (451 shown, 85 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 138 edges (avg confidence: 0.82)
+- 6715 nodes · 9300 edges · 549 communities (464 shown, 85 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 138 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `fd7d5a8b`
+- Built from commit: `6740eeb5`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -509,23 +509,36 @@
 - [[_COMMUNITY_Community 524|Community 524]]
 - [[_COMMUNITY_Community 525|Community 525]]
 - [[_COMMUNITY_Community 526|Community 526]]
+- [[_COMMUNITY_Community 527|Community 527]]
+- [[_COMMUNITY_Community 528|Community 528]]
+- [[_COMMUNITY_Community 529|Community 529]]
 - [[_COMMUNITY_Community 530|Community 530]]
 - [[_COMMUNITY_Community 531|Community 531]]
+- [[_COMMUNITY_Community 532|Community 532]]
 - [[_COMMUNITY_Community 533|Community 533]]
+- [[_COMMUNITY_Community 534|Community 534]]
+- [[_COMMUNITY_Community 535|Community 535]]
 - [[_COMMUNITY_Community 536|Community 536]]
 - [[_COMMUNITY_Community 540|Community 540]]
 - [[_COMMUNITY_Community 541|Community 541]]
+- [[_COMMUNITY_Community 542|Community 542]]
+- [[_COMMUNITY_Community 543|Community 543]]
+- [[_COMMUNITY_Community 544|Community 544]]
+- [[_COMMUNITY_Community 545|Community 545]]
+- [[_COMMUNITY_Community 546|Community 546]]
+- [[_COMMUNITY_Community 547|Community 547]]
+- [[_COMMUNITY_Community 548|Community 548]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `cn()` - 83 edges
+1. `cn()` - 84 edges
 2. `_()` - 55 edges
-3. `Outfit` - 33 edges
-4. `zodError()` - 31 edges
-5. `skills` - 28 edges
-6. `handleClick()` - 26 edges
-7. `Button()` - 26 edges
-8. `Garment` - 25 edges
-9. `Progress Tracker` - 25 edges
+3. `Progress Tracker` - 42 edges
+4. `Outfit` - 33 edges
+5. `zodError()` - 31 edges
+6. `skills` - 28 edges
+7. `handleClick()` - 26 edges
+8. `Button()` - 26 edges
+9. `Garment` - 25 edges
 10. `handleKeyDown()` - 24 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -548,31 +561,31 @@
 - **Outfit Generation Flow: Generate Looks Button -> API -> Recommendations Refresh** — generate_looks_button, api_outfits_generate_endpoint, todays_recommendations [INFERRED 0.95]
 - **Onboarding Color+Style Seeding into Preferences** — onboarding_page, onboarding_color_style_selection, api_onboarding_complete_endpoint, api_preferences_endpoint [INFERRED 0.85]
 
-## Communities (536 total, 85 thin omitted)
+## Communities (549 total, 85 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.04
-Nodes (85): acceptedDomAlreadyClean(), averageRgb01(), buildAnnotationsForCapture(), buildCollapsible(), buildColorModels(), buildPinElement(), buildPlaceholderResizeHandles(), buildRadiiModels() (+77 more)
+Nodes (69): acceptedDomAlreadyClean(), averageRgb01(), captureAndEmit(), captureElementToBlob(), checkpointPayload(), clearSteerFocusRecoverTimer(), collectEditableTextRows(), collectFontCssText() (+61 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.05
-Nodes (70): acknowledgePendingEvent(), addOpToManualApplyChunk(), agentPollingConnected(), annotRoot, APPLY_EVENT_HARD_TIMEOUT_MS, APPLY_EVENT_SOFT_DEADLINE_MS, args, broadcast() (+62 more)
+Cohesion: 0.04
+Nodes (71): acknowledgePendingEvent(), addOpToManualApplyChunk(), agentPollingConnected(), annotRoot, APPLY_EVENT_HARD_TIMEOUT_MS, APPLY_EVENT_SOFT_DEADLINE_MS, args, broadcast() (+63 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.07
-Nodes (63): hasGeneratedHeader(), HEADER_MARKERS, isGeneratedFile(), isGitIgnored(), acceptCli(), argVal(), deindentContent(), detectCommentSyntax() (+55 more)
+Cohesion: 0.12
+Nodes (37): hasGeneratedHeader(), HEADER_MARKERS, isGeneratedFile(), isGitIgnored(), argVal(), buildInsertWrapperLines(), computeInsertLine(), INSERT_POSITIONS (+29 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.06
-Nodes (69): checkBorders(), checkClippedOverflow(), checkColors(), checkCreamPalette(), checkElementAIPaletteDOM(), checkElementBorders(), checkElementBordersDOM(), checkElementClippedOverflow() (+61 more)
+Cohesion: 0.07
+Nodes (60): borderWidthsFromStyle(), checkBorders(), checkColors(), checkCreamPalette(), checkElementAIPaletteDOM(), checkElementBorders(), checkElementBordersDOM(), checkElementColors() (+52 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.07
 Nodes (50): addBrowserFindings(), addVisualContrastFindings(), addVisualContrastResult(), analyzeVisualContrast(), analyzeVisualContrastCandidate(), blendRgba(), browserFindingsFromMap(), buildSelectorSegment() (+42 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.11
-Nodes (52): buildInsertPlaceholderSnapshotFromDom(), cancelEditing(), cancelEditingToPicking(), cancelInsertConfigure(), captureAndEmit(), checkpointPayload(), cleanup(), cleanupAcceptedSession() (+44 more)
+Cohesion: 0.10
+Nodes (57): buildInsertPlaceholderSnapshotFromDom(), cancelEditing(), cancelEditingToPicking(), cancelInsertConfigure(), cleanup(), cleanupAcceptedSession(), clearAnnotations(), clearInsertPicking() (+49 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.11
@@ -580,31 +593,31 @@ Nodes (53): _(), ae(), be(), bt(), Ce(), Ct(), de(), dt() (+45 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.09
-Nodes (49): allEntryIds(), argVal(), buildRepairBatch(), candidatesForEntry(), changedFilesSinceSnapshot(), clearAppliedEntries(), collectApplyOwnedFiles(), collectRollbackFiles() (+41 more)
+Nodes (50): allEntryIds(), argVal(), buildRepairBatch(), candidatesForEntry(), changedFilesSinceSnapshot(), clearAppliedEntries(), collectApplyOwnedFiles(), collectRollbackFiles() (+42 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.14
-Nodes (24): analyzeSourceHint(), buildCandidatesForOp(), buildContextHintsByRef(), collectSearchFiles(), countOps(), escapeRegExp(), findContextMatches(), findLiteralMatches() (+16 more)
+Cohesion: 0.15
+Nodes (23): analyzeSourceHint(), buildCandidatesForOp(), buildContextHintsByRef(), collectSearchFiles(), escapeRegExp(), findContextMatches(), findLiteralMatches(), findLocatorMatches() (+15 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.10
-Nodes (21): dependencies, @base-ui/react, class-variance-authority, @clerk/nextjs, @clerk/themes, @clerk/ui, clsx, html-to-image (+13 more)
+Cohesion: 0.08
+Nodes (25): dependencies, @avaturn/sdk, @base-ui/react, class-variance-authority, @clerk/nextjs, @clerk/themes, @clerk/ui, clsx (+17 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.10
-Nodes (29): checkElementHeroEyebrow(), checkElementQuality(), checkElementQualityDOM(), checkQuality(), resolveLengthPx(), resolveVarRefs(), applyStaticDeclaration(), buildBorderOverrideMap() (+21 more)
+Cohesion: 0.12
+Nodes (23): applyStaticDeclaration(), buildBorderOverrideMap(), buildStaticWindow(), compareStaticPriority(), cssPropToCamel(), expandStaticBoxValues(), expandStaticDeclaration(), extractStaticColor() (+15 more)
 
 ### Community 11 - "Community 11"
 Cohesion: 0.08
 Nodes (30): borderWidthsFromStyle(), buildSelectorSegment(), checkBorders(), checkElementBorders(), checkElementBordersDOM(), checkElementGptBorderShadow(), checkElementGptBorderShadowDOM(), checkElementItalicSerif() (+22 more)
 
 ### Community 12 - "Community 12"
-Cohesion: 0.08
-Nodes (30): API /api/garments Endpoint, API /api/onboarding/complete Endpoint, API /api/outfits Endpoint, API /api/outfits/generate Endpoint, API /api/preferences Endpoint, API /api/recommendations Endpoint, API /api/recommendations/:id/like Endpoint, API /api/recommendations/:id/wear Endpoint (+22 more)
+Cohesion: 0.16
+Nodes (26): acceptCli(), argVal(), deindentContent(), detectCommentSyntax(), escapeRegExp(), expandReplaceRange(), EXTENSIONS, extractCss() (+18 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.11
-Nodes (31): createBrowserDetector(), confirm(), detectCli(), formatFindings(), handleStdin(), printUsage(), buildImportGraph(), detectFrameworkConfig() (+23 more)
+Cohesion: 0.17
+Nodes (11): checkTypography(), BORDER_SAFE_TAGS, BRAND_FONT_DOMAINS, GENERIC_FONTS, GITHUB_DOMAINS, GOOGLE_DOMAINS, isBrandFontOnOwnDomain(), KNOWN_SERIF_FONTS (+3 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.10
@@ -623,16 +636,16 @@ Cohesion: 0.15
 Nodes (32): buildColor(), CANONICAL_SECTIONS, collectBullets(), collectColorValues(), collectParagraphs(), detectFormat(), extractColors(), extractComponents() (+24 more)
 
 ### Community 18 - "Community 18"
-Cohesion: 0.09
+Cohesion: 0.11
 Nodes (32): actionLabel(), applyParamDefaults(), applyParamValue(), buildConfigureRow(), buildConfirmedRow(), buildCyclingRow(), buildDots(), buildGeneratingRow() (+24 more)
 
 ### Community 19 - "Community 19"
-Cohesion: 0.10
-Nodes (29): addManualContextText(), applyEditing(), buildLocatorForLeaf(), canRestoreManualEditElement(), contextElementForManualEdit(), copyEditContainerContext(), copyEditLeafContext(), directMixedTextRestoreNodes() (+21 more)
+Cohesion: 0.09
+Nodes (32): addManualContextText(), applyEditing(), buildLocatorForLeaf(), canRestoreManualEditElement(), contextElementForManualEdit(), copyEditContainerContext(), copyEditLeafContext(), copyToClipboard() (+24 more)
 
 ### Community 20 - "Community 20"
 Cohesion: 0.05
-Nodes (43): 1. Cold-Start CTA (dashboard), 2. On-Demand (wardrobe studio), AI-Generated Badge on Outfit Cards, AI-Generated Badge on OutfitCard, AI Outfit Generator, API Endpoint, Authentication, Check When Done (+35 more)
+Nodes (44): 1. Cold-Start CTA (dashboard), 2. On-Demand (wardrobe studio), AI-Generated Badge on Outfit Cards, AI-Generated Badge on OutfitCard, AI Outfit Generator, API Endpoint, Authentication, Check When Done (+36 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.12
@@ -640,59 +653,63 @@ Nodes (14): Background Queue Invariant (No Blocking AI Jobs), Clerk Authenticati
 
 ### Community 22 - "Community 22"
 Cohesion: 0.13
-Nodes (31): applyMockWrites(), buildCopyEditBatchPrompt(), checkFrameworkSourceSyntax(), chooseCopyEditAgent(), COMMAND_AUTH_CACHE, commandAuthed(), commandExists(), compactBatchForPrompt() (+23 more)
+Nodes (30): applyMockWrites(), buildCopyEditBatchPrompt(), checkFrameworkSourceSyntax(), chooseCopyEditAgent(), COMMAND_AUTH_CACHE, commandAuthed(), commandExists(), compactBatchForPrompt() (+22 more)
 
 ### Community 23 - "Community 23"
-Cohesion: 0.15
-Nodes (19): applyPlaceholderDimensions(), clearHandled(), cycleVariant(), ensureInsertPlaceholder(), findInsertAnchorInDom(), isInsertGeneratingSession(), isSessionHandled(), loadSession() (+11 more)
+Cohesion: 0.14
+Nodes (16): clearHandled(), ensureInsertPlaceholder(), findInsertAnchorInDom(), isInsertGeneratingSession(), isSessionHandled(), loadSession(), pickVariantContent(), positionBar() (+8 more)
 
 ### Community 24 - "Community 24"
-Cohesion: 0.10
-Nodes (23): applyPlaceholderSizingStyles(), attachSteerFocusDebug(), createInsertPlaceholder(), cursorForInsertAxis(), detectInsertAxis(), detectInsertAxisFromStyle(), ensureInsertLine(), focusConfigureInput() (+15 more)
+Cohesion: 0.07
+Nodes (26): `/avatar` saved-avatar state, Avatar Snapshot Capture, Avatar snapshot capture — extend `<AvatarViewer />` with a fixed-camera, no-orbit capture mode that produces a front-facing backdrop image of the user's `.glb`, Check When Done, Constraints, Database Changes, Default per-category placement zones (Tops/Outerwear, Bottoms, Footwear singular; Accessories multiple) so adding a garment lands in a sensible spot before the user adjusts it, `EditorNavbar` (+18 more)
 
 ### Community 25 - "Community 25"
-Cohesion: 0.15
-Nodes (27): checkColors(), checkElementAIPaletteDOM(), checkElementColors(), checkElementColorsDOM(), checkElementGlow(), checkElementGlowDOM(), checkElementIconTile(), checkElementIconTileDOM() (+19 more)
+Cohesion: 0.20
+Nodes (19): checkElementColors(), checkElementColorsDOM(), checkElementGlowDOM(), checkElementIconTile(), checkElementIconTileDOM(), checkIconTile(), collectVisualContrastCandidates(), collectVisualContrastReasons() (+11 more)
 
 ### Community 26 - "Community 26"
-Cohesion: 0.16
-Nodes (28): clearStoredManualApplyState(), copyToClipboard(), handleManualEditActivity(), hidePendingApplyDock(), manualApplyLoadingText(), manualApplyStateKey(), manualEditEventForCurrentPage(), maybeShowFirstSaveToast() (+20 more)
+Cohesion: 0.18
+Nodes (26): confirm(), clearStoredManualApplyState(), handleManualEditActivity(), hidePendingApplyDock(), manualApplyLoadingText(), manualApplyStateKey(), manualEditEventForCurrentPage(), numberOrNull() (+18 more)
 
 ### Community 27 - "Community 27"
 Cohesion: 0.15
 Nodes (10): POST(), POST(), POST(), buildProfile(), BuildProfileResult, calculateScores(), WEIGHTS, PreferenceScoreData (+2 more)
 
 ### Community 28 - "Community 28"
-Cohesion: 0.16
-Nodes (23): EditorialDialog(), useAskStylist(), useLikeDislike(), useRecommendations(), useWearOutfit(), cn(), AskStylistDialog(), AskStylistLocation (+15 more)
+Cohesion: 0.13
+Nodes (27): EditorialDialog(), useAskStylist(), useLikeDislike(), useCreateLookBookEntry(), useRecommendations(), useWearOutfit(), cn(), AddToLookBookDialog() (+19 more)
 
 ### Community 29 - "Community 29"
-Cohesion: 0.11
-Nodes (26): clearSteerAwaitTimer(), collapsePageChat(), configureVoiceContext(), expandPageChat(), finishVoiceSession(), id8(), isEmbeddedPreviewBrowser(), lockSteerChat() (+18 more)
+Cohesion: 0.12
+Nodes (16): Check When Done, Constraints, Dynamic 3D Try-On — Live Orbitable Avatar with Projected Garments (Unit 34), Export + Save to Look Book — capture the WebGL canvas at the user's current camera angle, compose onto the fixed 900×1200 portrait canvas with the existing watermark rule, feeding both PNG download and the Unit 33 `AddToLookBookDialog` flow unchanged, Files to Create, Files to Delete, Files to Modify, `frontend/components/try-on/try-on-viewer.tsx` — the dedicated 3D component: loads the `.glb`, applies/updates projections when zone garments change, exposes a `capture()` handle for export (+8 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.10
-Nodes (36): attachSteerFocusGuard(), barPaletteForTheme(), brandMarkSvg(), buildDesignHeader(), buildParamsPanel(), buildSavingRow(), buildSteerProcessingDots(), connectSSE() (+28 more)
+Cohesion: 0.15
+Nodes (24): attachSteerFocusGuard(), barPaletteForTheme(), brandMarkSvg(), connectSSE(), defangOutsideHandlers(), designPanelCss(), detectPageTheme(), ensureAgentPollTooltip() (+16 more)
 
 ### Community 31 - "Community 31"
 Cohesion: 0.18
 Nodes (22): completionAckForAcceptResult(), completionTypeForAcceptResult(), augmentEventWithAcceptHandling(), buildAcceptScriptArgs(), buildPollReplyPayload(), EVENT_TYPES_NEEDING_AGENT_REPLY, fetchNextEvent(), fetchServerStatus() (+14 more)
 
 ### Community 32 - "Community 32"
-Cohesion: 0.11
-Nodes (23): explainRecommendation(), checkGarmentMatch(), getCurrentSeason(), matches(), OCCASION_GROUPS, scoreOutfit(), coldWeather, hotWeather (+15 more)
+Cohesion: 0.14
+Nodes (18): explainRecommendation(), checkGarmentMatch(), getCurrentSeason(), matches(), OCCASION_GROUPS, scoreOutfit(), coldWeather, hotWeather (+10 more)
 
 ### Community 33 - "Community 33"
 Cohesion: 0.09
 Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
 
 ### Community 34 - "Community 34"
-Cohesion: 0.19
-Nodes (15): getPurgeSuggestions(), PurgeSuggestion, GarmentScore, scoreGarments(), CapsuleTiers, tierGarments(), POST(), getFeedbackHistoryMap() (+7 more)
+Cohesion: 0.14
+Nodes (20): removeBackground(), removeBackgroundLocally(), removeBackgroundViaApi(), analyzeWardrobeGaps(), extractJson(), GapAnalysisResult, getGenAIClient(), WardrobeComposition (+12 more)
 
 ### Community 35 - "Community 35"
-Cohesion: 0.08
-Nodes (39): EditorialDialogProps, formatLastWorn(), GarmentCard(), GarmentCardProps, GarmentDetailsDialog(), GarmentDetailsDialogProps, SUGGESTED_TAGS, VALID_CATEGORIES (+31 more)
+Cohesion: 0.10
+Nodes (31): EditorialDialogProps, formatLastWorn(), GarmentCard(), GarmentCardProps, GarmentDetailsDialog(), GarmentDetailsDialogProps, SUGGESTED_TAGS, VALID_CATEGORIES (+23 more)
+
+### Community 36 - "Community 36"
+Cohesion: 0.13
+Nodes (3): collectStaticCssText(), StaticDocument, StaticElement
 
 ### Community 37 - "Community 37"
 Cohesion: 0.15
@@ -715,16 +732,16 @@ Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
 ### Community 42 - "Community 42"
-Cohesion: 0.16
-Nodes (19): analyzeVisualContrastCandidate(), blendRgba(), clampByte(), contrastRatio(), firstCssUrl(), getLayerValue(), loadVisualContrastImage(), parseObjectPosition() (+11 more)
+Cohesion: 0.18
+Nodes (17): analyzeVisualContrastCandidate(), blendRgba(), clampByte(), firstCssUrl(), getLayerValue(), loadVisualContrastImage(), parseObjectPosition(), parsePositionPair() (+9 more)
 
 ### Community 43 - "Community 43"
 Cohesion: 0.05
 Nodes (42): API, Categories, Check When Done, Clothing Types, Colors, Constraints, Data Sources, Database Model (+34 more)
 
 ### Community 44 - "Community 44"
-Cohesion: 0.18
-Nodes (17): buildUpdateDirective(), cli(), compareSemver(), computeUpdateDirective(), DESIGN_NAMES, extractRegister(), FALLBACK_DIRS, fetchLatestSkillVersion() (+9 more)
+Cohesion: 0.11
+Nodes (27): buildUpdateDirective(), cli(), compareSemver(), computeUpdateDirective(), DESIGN_NAMES, extractRegister(), FALLBACK_DIRS, fetchLatestSkillVersion() (+19 more)
 
 ### Community 45 - "Community 45"
 Cohesion: 0.11
@@ -743,8 +760,8 @@ Cohesion: 0.12
 Nodes (16): compilerOptions, esModuleInterop, isolatedModules, lib, module, moduleResolution, noEmit, paths (+8 more)
 
 ### Community 49 - "Community 49"
-Cohesion: 0.14
-Nodes (16): browserFindingsFromMap(), checkClippedOverflow(), checkCreamPalette(), checkElementClippedOverflow(), checkElementClippedOverflowDOM(), checkElementTextOverflowDOM(), checkHtmlPatterns(), checkPageQualityDOM() (+8 more)
+Cohesion: 0.18
+Nodes (13): browserFindingsFromMap(), checkClippedOverflow(), checkElementClippedOverflow(), checkElementClippedOverflowDOM(), checkElementTextOverflowDOM(), checkHtmlPatterns(), checkPageQualityDOM(), checkPageQualityFromDoc() (+5 more)
 
 ### Community 50 - "Community 50"
 Cohesion: 0.06
@@ -755,20 +772,20 @@ Cohesion: 0.12
 Nodes (16): dependencies, @clerk/react, react, react-dom, devDependencies, @types/react, @types/react-dom, typescript (+8 more)
 
 ### Community 52 - "Community 52"
-Cohesion: 0.18
-Nodes (14): appendOriginToDirective(), buildTagBlock(), commentClose(), commentOpen(), CONFIG_PATH, __dirname, findCspMetaTags(), getAttr() (+6 more)
+Cohesion: 0.13
+Nodes (21): __dirname, ensureServerRunning(), appendOriginToDirective(), buildTagBlock(), commentClose(), commentOpen(), CONFIG_PATH, __dirname (+13 more)
 
 ### Community 53 - "Community 53"
 Cohesion: 0.20
-Nodes (10): CuidArraySchema, CuidSchema, GARMENT_CATEGORIES, OccasionSchema, OnboardingSchema, QueryRecommendationSchema, RecommendationsQuerySchema, UpdateOutfitSchema (+2 more)
+Nodes (10): CuidArraySchema, CuidSchema, GARMENT_CATEGORIES, OccasionSchema, OnboardingSchema, QueryRecommendationSchema, RecommendationsQuerySchema, SaveAvatarSchema (+2 more)
 
 ### Community 54 - "Community 54"
 Cohesion: 0.12
 Nodes (15): dependencies, @clerk/react-router, react, react-dom, react-router, devDependencies, @react-router/dev, @react-router/node (+7 more)
 
 ### Community 55 - "Community 55"
-Cohesion: 0.22
-Nodes (13): beginEditPin(), cancelEditingPin(), clampPlaceholderSize(), finalizeEditingPin(), localCoords(), onAnnotDown(), onAnnotInputKey(), onAnnotMove() (+5 more)
+Cohesion: 0.09
+Nodes (32): buildCollapsible(), buildColorModels(), buildDesignHeader(), buildRadiiModels(), buildTypographyModels(), cssSafe(), escapeHtml(), fetchDesignSystem() (+24 more)
 
 ### Community 56 - "Community 56"
 Cohesion: 0.13
@@ -783,8 +800,8 @@ Cohesion: 0.12
 Nodes (15): name, private, scripts, build, dev, lint, postinstall, prisma:generate (+7 more)
 
 ### Community 59 - "Community 59"
-Cohesion: 0.08
-Nodes (43): firstExisting(), getDesignSidecarCandidates(), getDesignSidecarPath(), getImpeccableDir(), getLegacyLiveConfigPath(), getLegacyLiveServerPath(), getLegacyLiveSessionsDir(), getLiveAnnotationsDir() (+35 more)
+Cohesion: 0.12
+Nodes (27): getLegacyLiveSessionsDir(), isLiveServerPidReachable(), readLiveServerInfo(), completeCli(), completeThroughServer(), parseArgs(), readServerInfo(), collectManualApplyFiles() (+19 more)
 
 ### Community 60 - "Community 60"
 Cohesion: 0.14
@@ -795,12 +812,12 @@ Cohesion: 0.18
 Nodes (13): checkElementHeroEyebrow(), checkElementHeroEyebrowDOM(), checkElementOversizedH1(), checkElementOversizedH1DOM(), checkElementQuality(), checkElementQualityDOM(), checkHeroEyebrow(), checkOversizedH1() (+5 more)
 
 ### Community 62 - "Community 62"
-Cohesion: 0.31
-Nodes (11): kebab(), listSnapshotsForSlug(), main(), nowFilenameStamp(), parseFrontmatter(), readLatestSnapshot(), readTrend(), serializeFrontmatter() (+3 more)
+Cohesion: 0.13
+Nodes (14): `<AddToLookBookDialog />` — Accept a Pre-Supplied Photo, Check When Done, Constraints, Database Changes, Extract a Reusable Rasterizer, Extraction of `/try-on`'s canvas-to-`Blob` rasterization into a reusable function shared by the existing "Export" (download) and the new "Save to Look Book" path, Files to Modify, New Dependencies (+6 more)
 
 ### Community 63 - "Community 63"
-Cohesion: 0.17
-Nodes (15): FlatLayItemView(), FlatLayItemViewProps, CaptionLayer, EXPORT_DIMENSIONS, exportFlatLay(), ExportFlatLayOptions, FLAT_LAY_BACKGROUND_COLORS, FlatLayBackground (+7 more)
+Cohesion: 0.12
+Nodes (21): ComposableImageItem(), ComposableImageItemProps, composableItemHeight(), FlatLayItemView(), FlatLayItemViewProps, CaptionLayer, EXPORT_DIMENSIONS, exportFlatLay() (+13 more)
 
 ### Community 64 - "Community 64"
 Cohesion: 0.07
@@ -815,8 +832,8 @@ Cohesion: 0.26
 Nodes (12): Clerk Authentication (@clerk/nextjs/server), Outfit Duplicate Fingerprint Detection, GarmentInput Type, Gemini AI Outfit Generation (generateOutfits), Outfit Generate API Route (POST), Outfit [id] API Route (PATCH/DELETE), Outfit Wardrobe Validation Rules, updatePreferenceProfile Service (+4 more)
 
 ### Community 67 - "Community 67"
-Cohesion: 0.24
-Nodes (10): cli(), COMMON_DEV_PORTS, devServerSignals(), gatherSignals(), gitSignals(), hasCode(), latestCritique(), SCANNABLE_EXT (+2 more)
+Cohesion: 0.20
+Nodes (8): ColorStory, daysAgoLabel(), DNACard(), getHoursUntilRegen(), SignaturePieceThumbProps, Skeleton(), StyleDNAPage(), StyleDNARecord
 
 ### Community 68 - "Community 68"
 Cohesion: 0.30
@@ -839,8 +856,8 @@ Cohesion: 0.20
 Nodes (10): detectCsp(), INLINE_HEADER_SIGNALS, LAYOUT_EXTS, MONOREPO_HELPER_SIGNALS, NUXT_ROUTE_RULES_SIGNALS, NUXT_SECURITY_SIGNALS, SCAN_EXTS, SKIP_DIRS (+2 more)
 
 ### Community 73 - "Community 73"
-Cohesion: 0.42
-Nodes (7): __dirname, ensureServerRunning(), resolveFiles(), liveCli(), runScript(), safeParse(), scanForDrift()
+Cohesion: 0.07
+Nodes (27): Addendum (2026-07-09) — Provider Swap: RPM → Avaturn, API Route, "Avatar" nav link in `EditorNavbar`, Avatar Onboarding — Provider-Based Avatar Creation (Unit 31), `/avatar` page — empty state (launch creator) and saved state (viewer + "Recreate" action), `<AvatarCreator />` — embeds the RPM iframe, listens for the exported model URL, `<AvatarViewer />` — isolated React Three Fiber component that renders a `.glb` on a turntable, no clothing logic, Backend Types (+19 more)
 
 ### Community 74 - "Community 74"
 Cohesion: 0.24
@@ -863,8 +880,8 @@ Cohesion: 0.20
 Nodes (9): compilerOptions, esModuleInterop, jsx, module, moduleResolution, skipLibCheck, strict, target (+1 more)
 
 ### Community 79 - "Community 79"
-Cohesion: 0.14
-Nodes (10): EditorNavbarProps, NavLink(), ColorStory, daysAgoLabel(), DNACard(), getHoursUntilRegen(), SignaturePieceThumbProps, Skeleton() (+2 more)
+Cohesion: 0.25
+Nodes (9): extractJson(), getGenAIClient(), interpretStyleQuery(), QUERY_CLIMATES, QueryClimate, QueryInterpretation, queryClimateToSeasonOverride(), queryClimateToWeatherContext() (+1 more)
 
 ### Community 80 - "Community 80"
 Cohesion: 0.05
@@ -887,8 +904,8 @@ Cohesion: 0.22
 Nodes (8): dependencies, @clerk/nuxt, nuxt, name, private, scripts, build, dev
 
 ### Community 85 - "Community 85"
-Cohesion: 0.38
-Nodes (5): formatLastWorn(), OutfitCard(), OutfitCardProps, OutfitGrid(), OutfitGridProps
+Cohesion: 0.31
+Nodes (11): kebab(), listSnapshotsForSlug(), main(), nowFilenameStamp(), parseFrontmatter(), readLatestSnapshot(), readTrend(), serializeFrontmatter() (+3 more)
 
 ### Community 86 - "Community 86"
 Cohesion: 0.24
@@ -899,8 +916,8 @@ Cohesion: 0.36
 Nodes (5): IndexPage(), FEATURES, LandingPage(), LandingPageProps, MARQUEE_ITEMS
 
 ### Community 88 - "Community 88"
-Cohesion: 0.10
-Nodes (34): detectUrl(), runVisualContrastFallback(), finding(), getAP(), createDetectorProfile(), extractFindingIds(), profileFindings(), profileFindingsAsync() (+26 more)
+Cohesion: 0.08
+Nodes (42): createBrowserDetector(), detectCli(), formatFindings(), handleStdin(), printUsage(), finding(), getAP(), buildImportGraph() (+34 more)
 
 ### Community 89 - "Community 89"
 Cohesion: 0.39
@@ -983,8 +1000,8 @@ Cohesion: 0.40
 Nodes (5): Clerk React Protected Routes, Clerk TanStack Loaders, Clerk TanStack Router Guards, Clerk TanStack Server Functions, Clerk TanStack Patterns Skill
 
 ### Community 110 - "Community 110"
-Cohesion: 0.19
-Nodes (8): POST(), VALID_COLORS, VALID_STYLES, PATCH(), FAVORITE_RATE_LIMIT, zodError(), PATCH(), POST()
+Cohesion: 0.17
+Nodes (9): POST(), VALID_COLORS, VALID_STYLES, PATCH(), FAVORITE_RATE_LIMIT, UpdatePreferencesSchema, zodError(), PATCH() (+1 more)
 
 ### Community 111 - "Community 111"
 Cohesion: 0.40
@@ -1103,8 +1120,8 @@ Cohesion: 0.40
 Nodes (4): apiKeysUrl, claimUrl, publishableKey, secretKey
 
 ### Community 140 - "Community 140"
-Cohesion: 0.43
-Nodes (6): ProjectSidebarProps, Tabs(), TabsContent(), TabsList(), tabsListVariants, TabsTrigger()
+Cohesion: 0.20
+Nodes (16): firstExisting(), getDesignSidecarCandidates(), getDesignSidecarPath(), getImpeccableDir(), getLegacyLiveConfigPath(), getLegacyLiveServerPath(), getLiveAnnotationsDir(), getLiveConfigPath() (+8 more)
 
 ### Community 141 - "Community 141"
 Cohesion: 0.05
@@ -1127,15 +1144,15 @@ Cohesion: 0.05
 Nodes (41): 1. Read the screenshot (if present), 2. Wrap the element, 3. Load the action's reference, 4. Plan three variants: identity first, then mode, then axes, 5. Apply the freeform prompt (if present), 6. Write all variants in a single edit, 7. Parameters (composition-sized, 0–4 per variant), 8. Signal done (+33 more)
 
 ### Community 146 - "Community 146"
-Cohesion: 0.08
-Nodes (31): API /api/wear-history Endpoint, EditorNavbar(), OutfitExportCard, OutfitExportCardProps, ProjectSidebar(), formatWornDate(), HistoryItem(), HistoryItemProps (+23 more)
+Cohesion: 0.10
+Nodes (18): formatLastWorn(), OutfitCard(), OutfitCardProps, OutfitExportCard, OutfitExportCardProps, OutfitGrid(), OutfitGridProps, AskStylistBody (+10 more)
 
 ### Community 147 - "Community 147"
 Cohesion: 0.67
 Nodes (4): Contextual Signal Widget (Weather Card), Stylist Suggestion (AI Reasoning Text), Weather-Aware Recommendation Principle, Weather Data — Chittaranjan Park, 35°C, Humidity 39%, Clouds
 
 ### Community 149 - "Community 149"
-Cohesion: 0.67
+Cohesion: 0.50
 Nodes (3): adapt, argumentHint, description
 
 ### Community 150 - "Community 150"
@@ -1191,7 +1208,7 @@ Cohesion: 0.13
 Nodes (14): Prisma Postgres Console & Connections, Prisma Postgres Management API, 1. Console-first workflow, 2. Quick provisioning with create-db, 3. Link an existing local project, 4. Programmatic provisioning with Management API, 5. Type-safe integration with Management API SDK, Core Workflows (+6 more)
 
 ### Community 186 - "Community 186"
-Cohesion: 0.50
+Cohesion: 0.67
 Nodes (3): animate, argumentHint, description
 
 ### Community 187 - "Community 187"
@@ -1355,12 +1372,12 @@ Cohesion: 0.07
 Nodes (27): aggregate, Aggregation Operations, Atomic operations, count, create, Create Operations, createMany, createManyAndReturn (+19 more)
 
 ### Community 305 - "Community 305"
-Cohesion: 0.43
-Nodes (6): extractJson(), getGenAIClient(), interpretStyleQuery(), QUERY_CLIMATES, QueryInterpretation, Occasion
+Cohesion: 0.18
+Nodes (12): applyPlaceholderSizingStyles(), buildPlaceholderResizeHandles(), createInsertPlaceholder(), cursorForPlaceholderEdge(), detectInsertAxis(), detectInsertAxisFromStyle(), finalizeInsertSession(), placeholderSizing() (+4 more)
 
 ### Community 306 - "Community 306"
-Cohesion: 0.07
-Nodes (26): Add Clothing Button, Basic Filtering, Check When Done, Constraints, Desktop, Digital Wardrobe UI & Data Integration, Editor Page, Empty State (+18 more)
+Cohesion: 0.09
+Nodes (28): Add Clothing Button, Basic Filtering, Check When Done, Constraints, Desktop, Digital Wardrobe UI & Data Integration, Editor Page, Empty State (+20 more)
 
 ### Community 307 - "Community 307"
 Cohesion: 0.07
@@ -1403,8 +1420,8 @@ Cohesion: 0.08
 Nodes (23): Alternatives, Auto-generate after migrate, Auto-seed after migrate, Automatic Behaviors Removed, CLI Flags Removed, Client Middleware, Common Middleware Patterns, Custom counter with extensions (+15 more)
 
 ### Community 317 - "Community 317"
-Cohesion: 0.09
-Nodes (22): Add Clothing, App Navbar, Center Section, Check When Done, Close Button, Constraints, Dialog Pattern, Editor Shell Requirements (+14 more)
+Cohesion: 0.08
+Nodes (23): Add Clothing, App Navbar, Center Section, Check When Done, Close Button, Constraints, Dialog Pattern, Editor Shell Requirements (+15 more)
 
 ### Community 318 - "Community 318"
 Cohesion: 0.09
@@ -1468,7 +1485,7 @@ Nodes (19): Command, Common Workflow, Custom port, Don't open browser, Edit Reco
 
 ### Community 333 - "Community 333"
 Cohesion: 0.19
-Nodes (18): args, buffer, cwd, pageUrlFilter, remaining, buildManualEditEvidence(), countByPage(), getBufferPath() (+10 more)
+Nodes (18): args, buffer, cwd, pageUrlFilter, remaining, buildManualEditEvidence(), countOps(), countByPage() (+10 more)
 
 ### Community 334 - "Community 334"
 Cohesion: 0.11
@@ -1575,8 +1592,8 @@ Cohesion: 0.13
 Nodes (14): 1. root.tsx, 2. Middleware (root route or entry.server.ts), Auth in Actions, Auth in Loaders, Client Components, Common Pitfalls, Docs, Import Map (+6 more)
 
 ### Community 360 - "Community 360"
-Cohesion: 0.16
-Nodes (15): Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Sprint 1 Infrastructure, Completed — Sprint 1 Infrastructure (+7 more)
+Cohesion: 0.14
+Nodes (21): Completed — Phase 1.5 Hardening, Completed — Phase 1.5 Hardening, Completed — Phase 1.5 Hardening, Completed — Phase 1.5 Hardening, Completed — Phase 1.5 Hardening, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature (+13 more)
 
 ### Community 361 - "Community 361"
 Cohesion: 0.13
@@ -1631,8 +1648,8 @@ Cohesion: 0.15
 Nodes (12): Activation Rules, Clerk Swift (Native iOS), Common Pitfalls, Decision Tree, Execution Gates (Do Not Skip), Flow References, Interaction Contract, Quick Start (+4 more)
 
 ### Community 374 - "Community 374"
-Cohesion: 0.11
-Nodes (18): AI Workflow Rules, Approach, `architecture.md`, Bad Example, Before Moving to the Next Unit, `code-standards.md`, Feature Specs, Good Example (+10 more)
+Cohesion: 0.15
+Nodes (13): AI Workflow Rules, Approach, Bad Example, Before Moving to the Next Unit, Good Example, Handling Missing Requirements, Phase 1 — MVP, Phase 2 — Intelligence Layer (+5 more)
 
 ### Community 375 - "Community 375"
 Cohesion: 0.15
@@ -1667,8 +1684,8 @@ Cohesion: 0.17
 Nodes (11): 1. Create Sign-Up, 2. Prepare Verification, 3. Attempt Verification, 4. Finalize, Complete Example: Email/Password with Email Verification, Custom Sign-Up Flow (Core 2), Docs, Error Handling (+3 more)
 
 ### Community 383 - "Community 383"
-Cohesion: 0.17
-Nodes (12): 4. Backend Deep Dive, APIs — Next.js Route Handlers, Authentication — Clerk, Authorization, Background Jobs, Caching / Message Queues / WebSockets, Error Handling, Logging (+4 more)
+Cohesion: 0.15
+Nodes (13): 4. Backend Deep Dive, APIs — Next.js Route Handlers, Authentication — Clerk, Authorization, Background Jobs, Caching / Message Queues / WebSockets, Error Handling, Error Handling (+5 more)
 
 ### Community 384 - "Community 384"
 Cohesion: 0.17
@@ -1775,8 +1792,8 @@ Cohesion: 0.20
 Nodes (9): Completed Features, Core Wardrobe, Key Files, Open Questions / Next Steps, Other, Outfit Export & Share ✅ (June 2026), Outfit System, Current Phase (+1 more)
 
 ### Community 410 - "Community 410"
-Cohesion: 0.20
-Nodes (10): devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, @types/node, @types/react, @types/react-dom (+2 more)
+Cohesion: 0.18
+Nodes (11): devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, @types/node, @types/react, @types/react-dom (+3 more)
 
 ### Community 411 - "Community 411"
 Cohesion: 0.20
@@ -1815,8 +1832,8 @@ Cohesion: 0.20
 Nodes (9): Command, Common Errors, Examples, Options, prisma validate, Use in CI, Validate default schema, Validate specific schema (+1 more)
 
 ### Community 420 - "Community 420"
-Cohesion: 0.43
-Nodes (5): extractJson(), generateStyleDNA(), getGenAIClient(), StyleDNAResult, WardrobeSummary
+Cohesion: 0.23
+Nodes (11): POST(), getFeedbackHistoryMap(), getRecentSuggestionsMap(), getRecentWearsMap(), rankOutfits(), GET(), CacheEntry, fetchWeather() (+3 more)
 
 ### Community 421 - "Community 421"
 Cohesion: 0.22
@@ -2079,8 +2096,8 @@ Cohesion: 0.33
 Nodes (5): CRITICAL, Global Before Guard, Org-Gated Route, Per-Route Guard with In-Component Guard, Vue Router Guards
 
 ### Community 487 - "Community 487"
-Cohesion: 0.10
-Nodes (17): API /api/garments/:id/status Endpoint, API /api/insights Endpoint, Background Removal Polling Pattern, Garment Card Component, GarmentCard Component (Insights Local), useCapsuleAudit(), useInsights(), CapsuleAuditData (+9 more)
+Cohesion: 0.08
+Nodes (36): API /api/garments Endpoint, API /api/insights Endpoint, API /api/outfits Endpoint, API /api/wear-history Endpoint, Clerk Authentication Provider, Deep-Link URL Parameter Handling, EditorNavbar(), Editor Navbar Component (+28 more)
 
 ### Community 488 - "Community 488"
 Cohesion: 0.40
@@ -2119,8 +2136,8 @@ Cohesion: 0.40
 Nodes (4): Basic Protection, Org + Role Check (B2B), Permission Check (RBAC), Server Actions
 
 ### Community 497 - "Community 497"
-Cohesion: 0.67
-Nodes (3): Completed — Phase 1.5 Hardening, Completed — Phase 1.5 Hardening, Unit 21 — TanStack Query Migration (Completed)
+Cohesion: 0.13
+Nodes (20): applyPlaceholderDimensions(), beginEditPin(), buildAnnotationsForCapture(), buildPinElement(), cancelEditingPin(), clampPlaceholderSize(), finalizeEditingPin(), localCoords() (+12 more)
 
 ### Community 498 - "Community 498"
 Cohesion: 0.50
@@ -2139,48 +2156,56 @@ Cohesion: 0.50
 Nodes (4): Heuristics Scoring Guide, Issue Severity (P0–P3), Reference Material, Score Summary
 
 ### Community 502 - "Community 502"
-Cohesion: 0.47
-Nodes (5): analyzeWardrobeGaps(), extractJson(), GapAnalysisResult, getGenAIClient(), WardrobeComposition
+Cohesion: 0.12
+Nodes (24): attachSteerFocusDebug(), buildSteerProcessingDots(), clearSteerAwaitTimer(), collapsePageChat(), expandPageChat(), focusConfigureInput(), focusSteerChat(), id8() (+16 more)
 
 ### Community 503 - "Community 503"
 Cohesion: 0.67
 Nodes (3): exports, ./planner, ./types
 
 ### Community 504 - "Community 504"
-Cohesion: 0.67
-Nodes (3): 2026-06-02 — Auth (Clerk) restyle, 2026-06-02 — Backend extracted into a workspace package, Session Notes
+Cohesion: 0.32
+Nodes (8): checkElementOversizedH1(), checkElementOversizedH1DOM(), checkElementQuality(), checkElementQualityDOM(), checkOversizedH1(), checkQuality(), resolveFontSizePx(), resolveLengthPx()
 
 ### Community 507 - "Community 507"
 Cohesion: 0.40
 Nodes (5): Avatar / Virtual Try-On (Phase 3), F4 Flat Lay Builder / F5 Community Feed (Phase 3, Sprint 3 "Expression"), F5 Community Feed (Phase 3, Sprint 3 "Expression"), Later — Phase 3 Avatar, Next Up
+
+### Community 508 - "Community 508"
+Cohesion: 0.08
+Nodes (20): API /api/onboarding/complete Endpoint, API /api/preferences Endpoint, DISCOVER_ITEMS, DiscoverMenu(), EditorNavbarProps, NavLink(), WardrobeGrid(), WardrobeGridProps (+12 more)
 
 ### Community 509 - "Community 509"
 Cohesion: 0.40
 Nodes (4): DELETE(), PATCH(), extractCloudinaryPublicId(), UpdateLookBookEntrySchema
 
 ### Community 510 - "Community 510"
-Cohesion: 0.67
-Nodes (3): Completed — Phase 1.5 Hardening, Completed — Phase 1.5 Hardening, Unit 22 — Tests & CI (Completed)
+Cohesion: 0.17
+Nodes (17): CommunityPostCard(), CommunityPostCardProps, CommunityProfileSetup(), CommunityProfileSetupProps, CommunityPage(), PublishToCommunityDialog(), PublishToCommunityDialogProps, CommunityFeedFilters (+9 more)
 
 ### Community 511 - "Community 511"
-Cohesion: 0.16
-Nodes (16): getCachedCapsuleAudit(), invalidateCapsuleAuditCache(), setCachedCapsuleAudit(), getCachedStyleDNA(), invalidateStyleDNACache(), setCachedStyleDNA(), GET(), getRedis() (+8 more)
+Cohesion: 0.25
+Nodes (10): getCachedCapsuleAudit(), invalidateCapsuleAuditCache(), setCachedCapsuleAudit(), getCachedStyleDNA(), invalidateStyleDNACache(), setCachedStyleDNA(), GET(), getRedis() (+2 more)
 
 ### Community 512 - "Community 512"
 Cohesion: 0.29
 Nodes (7): Completed — Sprint 2 Intelligence, Unit 25 — Style DNA Profile (Completed), Unit 26 — Capsule Wardrobe Auditor (Completed), Unit 27 — Ask the Stylist (Free-Text Query Recommendations) (Completed), Unit 28 — Look Book / Style Journal (Completed), Unit 29 — Flat Lay Builder (Completed), Unit 30 — Community Style Feed (Completed)
 
 ### Community 513 - "Community 513"
-Cohesion: 0.10
-Nodes (27): CommunityPostCard(), CommunityPostCardProps, CommunityProfileSetup(), CommunityProfileSetupProps, CommunityPage(), PublishToCommunityDialog(), PublishToCommunityDialogProps, CommunityFeedFilters (+19 more)
+Cohesion: 0.16
+Nodes (12): useCommunityPostBySource(), LookBookFilters, LookBookPage, useDeleteLookBookEntry(), useLookBookEntries(), useLookBookEntry(), LookBookEntryPage(), LookBookCard() (+4 more)
 
 ### Community 519 - "Community 519"
-Cohesion: 0.40
-Nodes (3): PATCH(), VALID_CATEGORIES, UpdateGarmentSchema
+Cohesion: 0.29
+Nodes (8): ProjectSidebarProps, ScrollArea(), ScrollBar(), Tabs(), TabsContent(), TabsList(), tabsListVariants, TabsTrigger()
 
 ### Community 520 - "Community 520"
 Cohesion: 0.08
 Nodes (25): CLASSIFY_RATE_LIMIT, getReceiver(), handleClassify(), JobPayload, POST(), POST(), POST(), POST() (+17 more)
+
+### Community 521 - "Community 521"
+Cohesion: 0.17
+Nodes (12): checkClippedOverflow(), checkElementClippedOverflow(), checkElementClippedOverflowDOM(), checkElementTextOverflowDOM(), checkRepeatedSectionKickers(), checkRepeatedSectionKickersDOM(), checkRepeatedSectionKickersFromDoc(), classSelector() (+4 more)
 
 ### Community 522 - "Community 522"
 Cohesion: 0.50
@@ -2190,45 +2215,85 @@ Nodes (3): CreateOutfitSchema, generateOutfitName(), POST()
 Cohesion: 0.40
 Nodes (4): LookBookQuerySchema, GET(), LOOKBOOK_UPLOAD_RATE_LIMIT, POST()
 
-### Community 525 - "Community 525"
-Cohesion: 0.50
-Nodes (3): GENERATE_RATE_LIMIT, POST(), GenerateOutfitsSchema
+### Community 524 - "Community 524"
+Cohesion: 0.29
+Nodes (10): checkColors(), checkElementAIPaletteDOM(), checkElementGlow(), checkGlow(), colorToHex(), contrastRatio(), getHue(), hasChroma() (+2 more)
 
-### Community 530 - "Community 530"
+### Community 525 - "Community 525"
+Cohesion: 0.40
+Nodes (5): `architecture.md`, `code-standards.md`, Feature Specs, Keeping Docs in Sync, `progress-tracker.md`
+
+### Community 526 - "Community 526"
+Cohesion: 0.33
+Nodes (6): Completed — Phase 1.5 Hardening, Completed — Phase 1.5 Hardening, Completed — Phase 1.5 Hardening, Completed — Phase 1.5 Hardening, Completed — Phase 1.5 Hardening, Unit 22 — Tests & CI (Completed)
+
+### Community 527 - "Community 527"
+Cohesion: 0.40
+Nodes (3): PATCH(), VALID_CATEGORIES, UpdateGarmentSchema
+
+### Community 528 - "Community 528"
+Cohesion: 0.22
+Nodes (9): API /api/outfits/generate Endpoint, API /api/recommendations Endpoint, API /api/recommendations/:id/like Endpoint, API /api/recommendations/:id/wear Endpoint, GenerateLooksButton Component, Browser Geolocation for Weather, ScoredOutfit Type, Todays Recommendations Component (+1 more)
+
+### Community 529 - "Community 529"
 Cohesion: 0.67
 Nodes (3): Open Questions, Product Decisions, Technical Decisions
 
-### Community 531 - "Community 531"
-Cohesion: 0.83
-Nodes (3): removeBackground(), removeBackgroundLocally(), removeBackgroundViaApi()
+### Community 530 - "Community 530"
+Cohesion: 0.25
+Nodes (7): ScoredOutfit, CommunityProfile, MOOD_TAGS, MoodTag, OutfitGarment, OutfitWear, UserAvatar
 
-### Community 540 - "Community 540"
+### Community 531 - "Community 531"
+Cohesion: 0.67
+Nodes (3): 2026-06-02 — Auth (Clerk) restyle, 2026-06-02 — Backend extracted into a workspace package, Session Notes
+
+### Community 532 - "Community 532"
+Cohesion: 0.29
+Nodes (7): Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Completed — Phase 2 Feature, Unit 18 — Weekly Outfit Planner (Completed)
+
+### Community 534 - "Community 534"
 Cohesion: 0.50
-Nodes (5): borderWidthsFromStyle(), checkElementGptBorderShadow(), checkElementGptBorderShadowDOM(), checkGptThinBorderWideShadow(), shadowMaxBlurPx()
+Nodes (4): API /api/garments/:id/status Endpoint, Background Removal Polling Pattern, Garment Card Component, GarmentCard Component (Insights Local)
+
+### Community 535 - "Community 535"
+Cohesion: 0.67
+Nodes (3): Completed — Sprint — Avatar Onboarding, Unit 31 — Avatar Onboarding (Completed), Unit 31 — Provider Swap: Ready Player Me → Avaturn (2026-07-09)
 
 ### Community 541 - "Community 541"
-Cohesion: 0.83
-Nodes (3): captureVisualContrastCandidate(), compareScreenshotContrast(), sanitizeScreenshotClip()
+Cohesion: 0.29
+Nodes (13): detectUrl(), runVisualContrastFallback(), extractFindingIds(), profileFindings(), profileFindingsAsync(), profileNow(), profileStep(), profileStepAsync() (+5 more)
+
+### Community 543 - "Community 543"
+Cohesion: 0.50
+Nodes (3): GENERATE_RATE_LIMIT, POST(), GenerateOutfitsSchema
+
+### Community 545 - "Community 545"
+Cohesion: 1.00
+Nodes (3): checkCreamPalette(), creamFromClassList(), isCreamColor()
+
+### Community 546 - "Community 546"
+Cohesion: 0.17
+Nodes (12): Bug Fix — `SaveAvatarSchema` rejected every real Avaturn export (2026-07-15), Bug Fix — Try-On capture framing too tight (head/feet cropped) (2026-07-15), Bug Fix — `/try-on` stuck on a blank backdrop after a lost WebGL context (2026-07-15), Bug Fix — WebGL context lost deterministically, every retry (2026-07-15), Bug Fix — WebGL context lost even with Strict Mode off (2026-07-15), Bug Fix — WebGL context lost every load, even off-screen at `opacity: 0` (2026-07-15), Bug Fix — WebGL context lost persisted after the on-screen-canvas fix (2026-07-15), Completed — Sprint — Virtual Try-On (+4 more)
 
 ## Knowledge Gaps
-- **3527 isolated node(s):** `allow`, `PreToolUse`, `allow`, `DEPRECATED_NAMES`, `HARNESS_DIRS` (+3522 more)
+- **3621 isolated node(s):** `allow`, `PreToolUse`, `allow`, `DEPRECATED_NAMES`, `HARNESS_DIRS` (+3616 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **85 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `confirm()` connect `Community 13` to `Community 26`, `Community 19`?**
+- **Why does `confirm()` connect `Community 26` to `Community 88`?**
   _High betweenness centrality (0.015) - this node is a cross-community bridge._
 - **Why does `pickVariantContent()` connect `Community 23` to `Community 0`, `Community 16`?**
-  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
 - **Why does `resolveInsertSessionAnchor()` connect `Community 16` to `Community 23`?**
-  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
 - **Are the 4 inferred relationships involving `zodError()` (e.g. with `PATCH()` and `PATCH()`) actually correct?**
   _`zodError()` has 4 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `allow`, `PreToolUse`, `allow` to the rest of the system?**
-  _3596 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _3690 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.03737373737373737 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.04360298336201951 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.04537037037037037 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.044564890093345376 - nodes in this community are weakly interconnected._

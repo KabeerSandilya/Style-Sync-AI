@@ -230,7 +230,6 @@ Priority order:
 1. Wardrobe browsing
 2. Outfit recommendations
 3. Outfit builder
-4. Avatar interaction
 
 Rules:
 
@@ -250,16 +249,3 @@ Rules:
 - Typography should prioritize readability over decoration.
 
 Serif fonts are for emphasis, never readability-critical UI.
-
----
-
-## Future 3D / Avatar Guidelines
-
-When avatar systems are introduced:
-
-- Maintain the same editorial aesthetic.
-- Avoid gaming-style UI.
-- Avatar viewers should feel premium and fashion-oriented.
-- Keep controls minimal and intuitive.
-
-The experience should feel closer to luxury retail than a game character editor.
