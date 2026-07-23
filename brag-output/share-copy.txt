@@ -1,0 +1,1 @@
+Introducing StyleSync AI: your wardrobe, intelligently curated. It digitizes your closet with AI vision and turns each morning's weather into a match-scored outfit call. Built with Next.js, Gemini 2.5 Flash, and pgvector.

@@ -5,7 +5,7 @@ export default function SignInPage() {
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-background px-6 py-12 text-foreground">
       <div className="w-full max-w-[26rem] flex flex-col items-center">
         {/* Wordmark */}
-        <span className="font-serif text-base tracking-[0.18em] uppercase text-foreground mb-8 select-none">
+        <span className="font-serif text-base font-semibold tracking-[0.22em] uppercase text-foreground mb-8 select-none">
           StyleSync AI
         </span>
 

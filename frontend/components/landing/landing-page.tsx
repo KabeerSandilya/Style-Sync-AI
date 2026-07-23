@@ -87,12 +87,9 @@ export function LandingPage({ isSignedIn = false }: LandingPageProps) {
                 Enter Wardrobe <ArrowUpRight className="lp-icon-sm" />
               </Link>
             ) : (
-              <>
-                <Link href="/sign-in" className="lp-nav-link">Sign In</Link>
-                <Link href="/sign-up" className="lp-nav-cta">
-                  Get Started <ArrowUpRight className="lp-icon-sm" />
-                </Link>
-              </>
+              <Link href="/sign-up" className="lp-nav-cta">
+                Start Styling <ArrowUpRight className="lp-icon-sm" />
+              </Link>
             )}
           </div>
         </nav>
@@ -256,8 +253,11 @@ export function LandingPage({ isSignedIn = false }: LandingPageProps) {
         <footer className="lp-footer">
           <span className="lp-footer-wordmark">StyleSync AI</span>
           <div className="lp-footer-links">
-            <Link href="/sign-in" className="lp-footer-link">Sign In</Link>
-            <Link href="/sign-up" className="lp-footer-link">Get Started</Link>
+            {isSignedIn ? (
+              <Link href="/editor" className="lp-footer-link">Enter Wardrobe</Link>
+            ) : (
+              <Link href="/sign-up" className="lp-footer-link">Start Styling</Link>
+            )}
           </div>
           <span className="lp-footer-copy">© 2026 StyleSync AI</span>
         </footer>
@@ -335,8 +335,8 @@ export function LandingPage({ isSignedIn = false }: LandingPageProps) {
         .lp-nav-wordmark {
           font-family: var(--lp-serif);
           font-size: 1rem;
-          font-weight: 300;
-          letter-spacing: 0.24em;
+          font-weight: 600;
+          letter-spacing: 0.22em;
           text-transform: uppercase;
           color: var(--lp-fg);
           text-decoration: none;
@@ -344,6 +344,9 @@ export function LandingPage({ isSignedIn = false }: LandingPageProps) {
           transition: color 0.2s;
         }
         .lp-nav-wordmark:hover { color: var(--lp-sage); }
+        @media (min-width: 768px) {
+          .lp-nav-wordmark { font-size: 1.25rem; }
+        }
         .lp-nav-cta {
           display: inline-flex;
           align-items: center;
