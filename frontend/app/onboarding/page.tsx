@@ -120,7 +120,7 @@ export default function OnboardingPage() {
 
         {/* Wordmark */}
         <div className="relative z-10">
-          <span className="font-serif text-sm font-light tracking-[0.32em] uppercase text-white/80 select-none">
+          <span className="font-serif text-sm font-semibold tracking-[0.32em] uppercase text-white/80 select-none">
             StyleSync AI
           </span>
         </div>
@@ -177,7 +177,7 @@ export default function OnboardingPage() {
       <main className="flex-1 bg-[#faf6f0] flex flex-col min-h-screen md:min-h-0 overflow-y-auto">
         {/* Mobile wordmark */}
         <div className="md:hidden px-8 pt-8 pb-0">
-          <span className="font-serif text-sm font-light tracking-[0.32em] uppercase text-foreground/70 select-none">
+          <span className="font-serif text-sm font-semibold tracking-[0.32em] uppercase text-foreground/70 select-none">
             StyleSync AI
           </span>
         </div>

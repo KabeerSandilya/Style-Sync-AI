@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>StyleSync AI — Brag</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="assets/audio-data/audio-data.js"></script>
+    <style>
+      :root {
+        --sand: #faf6f0;
+        --card: #fffefb;
+        --dark: #121210;
+        --cream: #fcfbf9;
+        --fg: #1c1917;
+        --muted: #5e5854;
+        --sage: #708272;
+        --border: #ebdcd0;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "Geist", system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--dark);
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        font-family: var(--sans);
+      }
+      .clip {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      .scene-fade {
+        position: absolute;
+        inset: 0;
+      }
+      .scene-bg {
+        position: absolute;
+        inset: 0;
+      }
+      .scene-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ── Shared text primitives ───────────────────────────── */
+      .eyebrow {
+        font-family: var(--sans);
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        color: var(--sage);
+      }
+      .line-wrap {
+        display: block;
+        overflow: hidden;
+      }
+      .line-inner {
+        display: block;
+        will-change: transform;
+      }
+
+      /* ── Scene 1 — Hook ───────────────────────────────────── */
+      #scene1 .scene-bg {
+        background: var(--sand);
+      }
+      #s1-glow {
+        position: absolute;
+        left: 50%;
+        top: 46%;
+        width: 1400px;
+        height: 900px;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+          ellipse at center,
+          rgba(112, 130, 114, 0.35) 0%,
+          rgba(112, 130, 114, 0) 68%
+        );
+        opacity: 0.2;
+        pointer-events: none;
+      }
+      #corner-tl,
+      #corner-br {
+        position: absolute;
+        font-family: var(--sans);
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        color: var(--muted);
+        opacity: 0.5;
+        text-transform: uppercase;
+      }
+      #corner-tl {
+        top: 56px;
+        left: 72px;
+      }
+      #corner-br {
+        bottom: 56px;
+        right: 72px;
+      }
+      #hero-rule {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--border);
+        transform-origin: left center;
+      }
+      #hero-block {
+        position: absolute;
+        left: 168px;
+        top: 300px;
+        width: 1600px;
+      }
+      #eyebrow-1 {
+        margin-bottom: 44px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      #headline-1 {
+        margin: 0;
+      }
+      .h1-line {
+        font-family: var(--serif);
+        font-size: 132px;
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--fg);
+        letter-spacing: -0.01em;
+      }
+      .h1-line.accent {
+        font-style: italic;
+        font-weight: 300;
+        color: var(--sage);
+        padding-left: 190px;
+        font-size: 116px;
+      }
+
+      /* ── Scene 2 — The claim ──────────────────────────────── */
+      #scene2 .scene-bg {
+        background: var(--dark);
+      }
+      #quote-wrap {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 260px;
+        text-align: center;
+      }
+      #quote-inner {
+        max-width: 1420px;
+      }
+      .quote-line {
+        font-family: var(--serif);
+        font-size: 82px;
+        font-weight: 300;
+        line-height: 1.32;
+        color: rgba(252, 251, 249, 0.72);
+        margin: 0;
+      }
+      .quote-line.accent {
+        font-style: italic;
+        color: var(--cream);
+        margin-top: 6px;
+      }
+
+      /* ── Scene 3 — Product in use ─────────────────────────── */
+      #scene3 .scene-bg {
+        background: var(--sand);
+      }
+      #s3-glow {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 1300px;
+        height: 800px;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+          ellipse at center,
+          rgba(112, 130, 114, 0.28) 0%,
+          rgba(112, 130, 114, 0) 70%
+        );
+        opacity: 0.15;
+        pointer-events: none;
+      }
+      .beat-group {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      /* Beat A — classification */
+      #beatA-inner {
+        display: flex;
+        align-items: center;
+        gap: 96px;
+      }
+      #garment-card {
+        width: 340px;
+        height: 420px;
+        background: linear-gradient(160deg, #e3e8e4 0%, #c9d2ca 55%, #9fb2a1 100%);
+        border: 1px solid var(--border);
+        position: relative;
+      }
+      #garment-card::after {
+        content: "";
+        position: absolute;
+        inset: 40px;
+        border: 1px solid rgba(28, 25, 23, 0.12);
+      }
+      #garment-label {
+        position: absolute;
+        left: 32px;
+        bottom: 28px;
+        font-family: var(--sans);
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--fg);
+      }
+      #beatA-text {
+        max-width: 640px;
+      }
+      #beatA-eyebrow {
+        margin-bottom: 22px;
+      }
+      #beatA-title {
+        font-family: var(--serif);
+        font-size: 58px;
+        font-weight: 400;
+        color: var(--fg);
+        margin: 0 0 40px;
+        line-height: 1.1;
+      }
+      .pill-row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .pill {
+        display: inline-block;
+        border: 1px solid var(--muted);
+        color: var(--fg);
+        font-family: var(--sans);
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        padding: 12px 22px;
+        background: var(--card);
+      }
+      /* Beat B — recommendation */
+      #rec-card {
+        width: 1080px;
+        height: 560px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 56px 64px;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+      #rec-eyebrow {
+        margin-bottom: -8px;
+      }
+      #weather-row {
+        display: flex;
+        align-items: baseline;
+        gap: 18px;
+      }
+      #weather-icon {
+        font-size: 40px;
+        line-height: 1;
+      }
+      #weather-text {
+        font-family: var(--sans);
+        font-size: 22px;
+        color: var(--muted);
+        letter-spacing: 0.02em;
+      }
+      #match-row {
+        display: flex;
+        align-items: baseline;
+        gap: 20px;
+      }
+      #match-num-wrap {
+        font-family: var(--serif);
+        font-size: 148px;
+        font-weight: 400;
+        color: var(--fg);
+        line-height: 1;
+        display: flex;
+        align-items: baseline;
+      }
+      #match-percent {
+        font-family: var(--serif);
+        font-size: 72px;
+        color: var(--fg);
+      }
+      #match-label {
+        font-family: var(--sans);
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--sage);
+      }
+      #collage-row {
+        display: flex;
+        gap: 18px;
+        margin-top: auto;
+      }
+      .collage-swatch {
+        width: 120px;
+        height: 96px;
+        border: 1px solid var(--border);
+      }
+      #swatch-1 {
+        background: linear-gradient(160deg, #e3e8e4, #9fb2a1);
+      }
+      #swatch-2 {
+        background: linear-gradient(160deg, #f5ece3, #d8c4b0);
+      }
+      #swatch-3 {
+        background: linear-gradient(160deg, #dfe3df, #46553d);
+      }
+
+      /* ── Scene 4 — Outro ──────────────────────────────────── */
+      #scene4 .scene-bg {
+        background: var(--dark);
+      }
+      #outro-inner {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 56px;
+      }
+      #outro-headline {
+        text-align: center;
+      }
+      .outro-line {
+        font-family: var(--serif);
+        font-size: 158px;
+        font-weight: 400;
+        line-height: 1.0;
+        color: var(--cream);
+        margin: 0;
+      }
+      .outro-line.accent {
+        font-style: italic;
+        font-weight: 300;
+        color: var(--sage);
+      }
+      #outro-cta {
+        font-family: var(--sans);
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--dark);
+        background: var(--cream);
+        padding: 22px 52px;
+      }
+      #outro-wordmark {
+        font-family: var(--serif);
+        font-size: 26px;
+        font-weight: 300;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(252, 251, 249, 0.55);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="stylesync-brag"
+      data-start="0"
+      data-width="1920"
+      data-height="1080"
+      data-duration="20"
+    >
+      <!-- ══════════════ SCENE 1 — HOOK ══════════════ -->
+      <div id="scene1" class="clip" data-start="0" data-duration="3.65" data-track-index="1">
+        <div id="scene1-fade" class="scene-fade">
+          <div class="scene-bg"></div>
+          <div class="scene-content">
+            <div id="s1-glow"></div>
+            <span id="corner-tl">SS.AI</span>
+            <span id="corner-br">001</span>
+            <div id="hero-rule"></div>
+            <div id="hero-block">
+              <div id="eyebrow-1" class="eyebrow">
+                <span>AI-Powered Wardrobe Intelligence</span>
+              </div>
+              <h1 id="headline-1">
+                <span class="line-wrap"
+                  ><span id="h1-l1" class="line-inner h1-line">Your wardrobe,</span></span
+                >
+                <span class="line-wrap"
+                  ><span id="h1-l2" class="line-inner h1-line accent">intelligently</span></span
+                >
+                <span class="line-wrap"
+                  ><span id="h1-l3" class="line-inner h1-line">curated.</span></span
+                >
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════ SCENE 2 — THE CLAIM ══════════════ -->
+      <div id="scene2" class="clip" data-start="3.35" data-duration="3.85" data-track-index="2">
+        <div id="scene2-fade" class="scene-fade">
+          <div class="scene-bg"></div>
+          <div class="scene-content">
+            <div id="quote-wrap">
+              <div id="quote-inner">
+                <p id="quote-a" class="quote-line">The average wardrobe holds 77 items.</p>
+                <p id="quote-b" class="quote-line accent">Most people wear 20% of them.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════ SCENE 3 — PRODUCT IN USE ══════════════ -->
+      <div id="scene3" class="clip" data-start="6.9" data-duration="8.3" data-track-index="3">
+        <div id="scene3-fade" class="scene-fade">
+          <div class="scene-bg"></div>
+          <div class="scene-content">
+            <div id="s3-glow"></div>
+
+            <!-- Beat A: garment classification -->
+            <div id="beatA-group" class="beat-group">
+              <div id="beatA-inner">
+                <div id="garment-card">
+                  <span id="garment-label">Wool Knit — Sage</span>
+                </div>
+                <div id="beatA-text">
+                  <div id="beatA-eyebrow" class="eyebrow">AI Vision</div>
+                  <h2 id="beatA-title">Classifying your wardrobe.</h2>
+                  <div class="pill-row">
+                    <span id="pill-1" class="pill">Wool</span>
+                    <span id="pill-2" class="pill">Sage</span>
+                    <span id="pill-3" class="pill">Tailored</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Beat B: today's recommendation -->
+            <div id="beatB-group" class="beat-group">
+              <div id="rec-card">
+                <div id="rec-eyebrow" class="eyebrow">Today's Recommendation</div>
+                <div id="weather-row">
+                  <span id="weather-icon">☀</span>
+                  <span id="weather-text">Sunny, 21°C · Paris</span>
+                </div>
+                <div id="match-row">
+                  <div id="match-num-wrap">
+                    <span id="match-num">0</span><span id="match-percent">%</span>
+                  </div>
+                  <span id="match-label">Match Score</span>
+                </div>
+                <div id="collage-row">
+                  <div id="swatch-1" class="collage-swatch"></div>
+                  <div id="swatch-2" class="collage-swatch"></div>
+                  <div id="swatch-3" class="collage-swatch"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════ SCENE 4 — OUTRO ══════════════ -->
+      <div id="scene4" class="clip" data-start="14.9" data-duration="5.1" data-track-index="4">
+        <div id="scene4-fade" class="scene-fade">
+          <div class="scene-bg"></div>
+          <div class="scene-content">
+            <div id="outro-inner">
+              <div id="outro-headline">
+                <p id="outro-l1" class="outro-line">Dress with</p>
+                <p id="outro-l2" class="outro-line accent">intention.</p>
+              </div>
+              <div id="outro-cta">Create Your Wardrobe</div>
+              <div id="outro-wordmark">StyleSync AI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════ AUDIO ══════════════ -->
+      <audio
+        id="bgm"
+        data-start="0"
+        data-duration="20"
+        data-track-index="10"
+        data-volume="0.3"
+        src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3"
+      ></audio>
+      <audio
+        id="sfx-pill"
+        data-start="7.6"
+        data-duration="0.11"
+        data-track-index="11"
+        data-volume="0.55"
+        src="assets/sfx/interface/drop_001.ogg"
+      ></audio>
+      <audio
+        id="sfx-badge"
+        data-start="13.11"
+        data-duration="1.2"
+        data-track-index="12"
+        data-volume="0.6"
+        src="assets/sfx/impact/impactBell_heavy_000.ogg"
+      ></audio>
+      <audio
+        id="sfx-cta"
+        data-start="17.42"
+        data-duration="0.19"
+        data-track-index="13"
+        data-volume="0.5"
+        src="assets/sfx/interface/drop_002.ogg"
+      ></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      /* ── Scene 1 — Hook (0 – 3.65s) ─────────────────────────── */
+      tl.from("#corner-tl, #corner-br", { opacity: 0, duration: 0.5, ease: "power1.out" }, 0.1);
+      tl.from(
+        "#hero-rule",
+        { scaleX: 0, duration: 0.9, ease: "power3.out" },
+        0.15
+      );
+      tl.from("#eyebrow-1", { y: 10, opacity: 0, duration: 0.5, ease: "power2.out" }, 0.3);
+      tl.from("#h1-l1", { y: "105%", opacity: 0, duration: 0.9, ease: "power3.out" }, 0.55);
+      tl.from("#h1-l2", { y: "105%", opacity: 0, duration: 0.9, ease: "power3.out" }, 0.68);
+      tl.from("#h1-l3", { y: "105%", opacity: 0, duration: 0.9, ease: "power3.out" }, 0.82);
+
+      /* crossfade: scene1 -> scene2 */
+      tl.to("#scene1-fade", { opacity: 0, duration: 0.3, ease: "power1.inOut" }, 3.35);
+      tl.set("#scene1-fade", { visibility: "hidden" }, 3.65);
+      tl.from("#scene2-fade", { opacity: 0, duration: 0.3, ease: "power1.inOut" }, 3.35);
+
+      /* ── Scene 2 — The claim (3.35 – 7.20s) ─────────────────── */
+      tl.from("#quote-a", { y: 16, opacity: 0, duration: 0.7, ease: "power2.out" }, 3.75);
+      tl.from("#quote-b", { y: 16, opacity: 0, duration: 0.7, ease: "power2.out" }, 4.75);
+
+      /* crossfade: scene2 -> scene3 */
+      tl.to("#scene2-fade", { opacity: 0, duration: 0.3, ease: "power1.inOut" }, 6.9);
+      tl.set("#scene2-fade", { visibility: "hidden" }, 7.2);
+      tl.from("#scene3-fade", { opacity: 0, duration: 0.3, ease: "power1.inOut" }, 6.9);
+
+      /* ── Scene 3 — Product in use (6.9 – 15.2s) ─────────────── */
+      /* Beat A: classification */
+      tl.from(
+        "#garment-card, #beatA-eyebrow, #beatA-title",
+        { opacity: 0, scale: 0.96, duration: 0.5, ease: "power2.out" },
+        7.09
+      );
+      tl.from("#pill-1", { y: 10, opacity: 0, duration: 0.4, ease: "power2.out" }, 7.64); // beat-grid: pill 1 at 7.64s
+      tl.from("#pill-2", { y: 10, opacity: 0, duration: 0.4, ease: "power2.out" }, 8.19); // beat-grid: pill 2 at 8.19s
+      tl.from("#pill-3", { y: 10, opacity: 0, duration: 0.4, ease: "power2.out" }, 8.74); // beat-locked: pill 3 at 8.74s (strongCue 0.99)
+
+      /* internal crossfade: beat A -> beat B */
+      tl.to("#beatA-group", { opacity: 0, duration: 0.4, ease: "power1.inOut" }, 10.93); // beat-locked: 10.93s (strongCue 0.97)
+      tl.from("#beatB-group", { opacity: 0, duration: 0.4, ease: "power1.inOut" }, 10.93);
+
+      /* Beat B: today's recommendation */
+      tl.from(
+        "#rec-eyebrow, #weather-row",
+        { y: 10, opacity: 0, duration: 0.5, ease: "power2.out" },
+        10.93
+      );
+      tl.from(
+        "#match-row",
+        { opacity: 0, duration: 0.4, ease: "power2.out" },
+        11.1
+      );
+      var matchCounter = { value: 0 };
+      tl.to(
+        matchCounter,
+        {
+          value: 94,
+          duration: 1.8,
+          ease: "power1.out",
+          snap: { value: 1 },
+          onUpdate: function () {
+            document.getElementById("match-num").textContent = Math.round(matchCounter.value);
+          },
+        },
+        11.31 // ends at 13.11s — beat-locked (strongCue 0.98)
+      );
+      tl.from(
+        "#swatch-1",
+        { y: 12, opacity: 0, duration: 0.35, ease: "power2.out" },
+        11.6
+      );
+      tl.from(
+        "#swatch-2",
+        { y: 12, opacity: 0, duration: 0.35, ease: "power2.out" },
+        11.75
+      );
+      tl.from(
+        "#swatch-3",
+        { y: 12, opacity: 0, duration: 0.35, ease: "power2.out" },
+        11.9
+      );
+
+      /* crossfade: scene3 -> scene4 */
+      tl.to("#scene3-fade", { opacity: 0, duration: 0.3, ease: "power1.inOut" }, 14.9);
+      tl.set("#scene3-fade", { visibility: "hidden" }, 15.2);
+      tl.from("#scene4-fade", { opacity: 0, duration: 0.3, ease: "power1.inOut" }, 14.9);
+
+      /* ── Scene 4 — Outro (14.9 – 20.0s) ──────────────────────── */
+      tl.from("#outro-l1", { y: 20, opacity: 0, duration: 0.7, ease: "power2.out" }, 15.1);
+      tl.from("#outro-l2", { y: 20, opacity: 0, duration: 0.7, ease: "power2.out" }, 15.35);
+      tl.from(
+        "#outro-cta",
+        { y: 14, opacity: 0, scale: 0.94, duration: 0.5, ease: "back.out(1.5)" },
+        17.47 // beat-locked: 17.47s (strongCue 0.99)
+      );
+      tl.from(
+        "#outro-wordmark",
+        { opacity: 0, duration: 0.6, ease: "power2.out" },
+        18.56 // beat-locked: 18.56s (strongCue 0.99)
+      );
+
+      /* music fade under the final hold */
+      tl.to("#bgm", { volume: 0, duration: 1 }, 19.0);
+
+      /* ── Subtle audio-reactive glow (bass-driven, restrained) ── */
+      if (window.AUDIO_DATA) {
+        var glow1 = document.getElementById("s1-glow");
+        var glow3 = document.getElementById("s3-glow");
+        var fps = AUDIO_DATA.fps;
+        for (var f = 0; f < AUDIO_DATA.totalFrames; f++) {
+          (function (bass) {
+            tl.call(
+              function () {
+                if (glow1) glow1.style.opacity = (0.16 + bass * 0.22).toFixed(3);
+                if (glow3) glow3.style.opacity = (0.12 + bass * 0.18).toFixed(3);
+              },
+              [],
+              f / fps
+            );
+          })(AUDIO_DATA.frames[f].bands[0]);
+        }
+      }
+
+      window.__timelines["stylesync-brag"] = tl;
+    </script>
+  </body>
+</html>
